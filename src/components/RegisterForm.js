@@ -3,7 +3,15 @@ import { Form, Input, FormGroup } from "reactstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 class FormRegister extends Component {
+  state = {
+    isPasswordShown: false,
+  };
+  togglePasswordVisibility = () => {
+    const { isPasswordShown } = this.state;
+    this.setState({ isPasswordShown: !isPasswordShown });
+  };
   render() {
+    const { isPasswordShown } = this.state;
     return (
       <div>
         <div className="row" style={{ "justify-content": "center" }}>
@@ -29,17 +37,17 @@ class FormRegister extends Component {
                 <FormGroup style={{ position: "relative" }}>
                   <select
                     type="select"
-                    name="village"
-                    id="village"
+                    name="province"
+                    id="province"
                     className="form-select"
                     required
                   >
                     <option disabled selected style={{ color: "#828181" }}>
-                      Choose Village
+                      Choose Province
                     </option>
-                    <option>V1</option>
-                    <option>V2</option>
-                    <option>V3</option>
+                    <option>LD</option>
+                    <option>BT</option>
+                    <option>TP Hồ Chí Minh</option>
                   </select>
                 </FormGroup>
               </div>
@@ -65,17 +73,17 @@ class FormRegister extends Component {
                 <FormGroup style={{ position: "relative" }}>
                   <select
                     type="select"
-                    name="province"
-                    id="province"
+                    name="village"
+                    id="village"
                     className="form-select"
                     required
                   >
                     <option disabled selected style={{ color: "#828181" }}>
-                      Choose Province
+                      Choose Village
                     </option>
-                    <option>LD</option>
-                    <option>BT</option>
-                    <option>TP Hồ Chí Minh</option>
+                    <option>V1</option>
+                    <option>V2</option>
+                    <option>V3</option>
                   </select>
                 </FormGroup>
               </div>
@@ -98,22 +106,23 @@ class FormRegister extends Component {
               className="form-control"
               required
             />
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
-              className="form-control"
-              required
-            />
-            <Input
-              type="password"
-              name="confirm-password"
-              id="confirm-password"
-              placeholder="Confirm Password"
-              className="form-control"
-              required
-            />
+            <div className="div-password">
+              <Input
+                type={isPasswordShown ? "text" : "password"}
+                name="password"
+                id="password"
+                placeholder="Password"
+                className="form-control"
+                required
+              />
+              <i
+                className={`bi ${
+                  isPasswordShown ? "bi-eye-fill" : "bi-eye-slash-fill"
+                }  password-icon`}
+                onClick={this.togglePasswordVisibility}
+              ></i>
+            </div>
+
             <div className="row" style={{ "justify-content": "center" }}>
               <button class="btnSubmit" type="submit">
                 REGISTER

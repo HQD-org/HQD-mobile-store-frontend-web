@@ -54,3 +54,20 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+
+.div-password {
+    position: relative;
+}
+
+.password-icon {
+    position: absolute;
+    top: 13px;
+    right: 20px;
+}
+
+.txtForgot {
+    color: #3fa5ef;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-left: 3px;
+}

@@ -3,7 +3,15 @@ import { Form, Input } from "reactstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 class FormRegister extends Component {
+  state = {
+    isPasswordShown: false,
+  };
+  togglePasswordVisibility = () => {
+    const { isPasswordShown } = this.state;
+    this.setState({ isPasswordShown: !isPasswordShown });
+  };
   render() {
+    const { isPasswordShown } = this.state;
     return (
       <div>
         <div className="row" style={{ "justify-content": "center" }}>
@@ -17,15 +25,25 @@ class FormRegister extends Component {
               className="form-control"
               required
             />
-
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
-              className="form-control"
-              required
-            />
+            <div className="div-password">
+              <Input
+                type={isPasswordShown ? "text" : "password"}
+                name="password"
+                id="password"
+                placeholder="Password"
+                className="form-control"
+                required
+              />
+              <i
+                className={`bi ${
+                  isPasswordShown ? "bi-eye-fill" : "bi-eye-slash-fill"
+                }  password-icon`}
+                onClick={this.togglePasswordVisibility}
+              ></i>
+            </div>
+            <div>
+              <p className="txtForgot">Forgot Password?</p>
+            </div>
             <div className="row" style={{ "justify-content": "center" }}>
               <button class="btnSubmit" type="submit">
                 LOGIN

@@ -1,18 +1,16 @@
+import React from "react";
+import { ToastContainer } from "react-toastify";
 import "./App.css";
+import Routers from "./routers";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Route, Switch } from "react-router-dom";
-import Login from "./constants/Login";
-import Register from "./constants/Register";
-
-function App() {
+const App = () => {
   return (
     <>
-      <Switch>
-        <Route path="/login" component={Login} exact />
-        <Route path="/signup" component={Register} />
-      </Switch>
+      <Routers />
+      <ToastContainer />
     </>
   );
-}
+};
 
 export default App;

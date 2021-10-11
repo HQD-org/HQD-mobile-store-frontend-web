@@ -1,11 +1,10 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import "../css/FormRegister.css";
-import LoginForm from "../components/LoginForm";
-import login2 from "../images/login2.png";
+import React from "react";
 import { Link } from "react-router-dom";
+import "../../common/css/Form.Style.css";
+import login2 from "../../common/images/login2.png";
+import LoginForm from "./components/LoginForm";
 
-function Login() {
+const LoginPage = () => {
   return (
     <div className="container">
       <div className="row">
@@ -13,7 +12,7 @@ function Login() {
           <img className="img-fluid" src={login2} alt="bg" width="100%"></img>
         </div>
         <div className="col" style={{ marginTop: "150px" }}>
-          <div className="row" style={{ "justify-content": "center" }}>
+          <div className="row" style={{ justifyContent: "center" }}>
             <p className="txtStart">WELCOME BACK</p>
             <h3 className="txtSignup">Login to HQD Mobile</h3>
           </div>
@@ -22,7 +21,7 @@ function Login() {
             Don't have any account?{" "}
             <span>
               <Link
-                to="/signup"
+                to="/register"
                 style={{ color: "#3fa5ef", textDecoration: "none" }}
               >
                 Sign up now
@@ -33,6 +32,6 @@ function Login() {
       </div>
     </div>
   );
-}
+};
 
-export default Login;
+export default LoginPage;

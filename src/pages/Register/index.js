@@ -1,11 +1,10 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import FormRegister from "../components/RegisterForm";
-import login2 from "../images/login2.png";
-import "../css/FormRegister.css";
+import React from "react";
 import { Link } from "react-router-dom";
+import "../../common/css/Form.Style.css";
+import login2 from "../../common/images/login2.png";
+import FormRegister from "./components/RegisterForm";
 
-function Register() {
+const RegisterPage = () => {
   return (
     <div className="container">
       <div className="row">
@@ -13,7 +12,7 @@ function Register() {
           <img className="img-fluid" src={login2} alt="bg" width="100%"></img>
         </div>
         <div className="col">
-          <div className="row" style={{ "justify-content": "center" }}>
+          <div className="row" style={{ justifyContent: "center" }}>
             <p className="txtStart">START FOR FREE</p>
             <h3 className="txtSignup">Sign up to HQD Mobile</h3>
           </div>
@@ -33,6 +32,6 @@ function Register() {
       </div>
     </div>
   );
-}
+};
 
-export default Register;
+export default RegisterPage;

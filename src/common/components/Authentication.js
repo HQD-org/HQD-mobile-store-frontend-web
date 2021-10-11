@@ -13,7 +13,6 @@ const Authentication = (SpecificComponent, option, adminRoute = null) => {
     useEffect(() => {
       const fetchAuth = async () => {
         const res = await dispatch(getAuthAction());
-        console.log(`log at: => Authentication.js => line 16 => res: `, res);
         if (res && !res.isAuth) {
           if (option) {
             history.push("/login");

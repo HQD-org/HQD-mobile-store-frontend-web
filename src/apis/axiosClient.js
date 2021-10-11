@@ -1,6 +1,6 @@
 import axios from "axios";
-import queryString from "query-string";
 import Cookie from "js-cookie";
+import queryString from "query-string";
 
 const axiosClient = axios.create({
   baseURL: "https://hqd-mobile-store-api.herokuapp.com",

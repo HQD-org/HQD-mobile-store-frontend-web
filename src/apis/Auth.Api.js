@@ -7,7 +7,7 @@ const url = "/auth";
 const getAuth = async () => {
   try {
     const res = await axiosClient.get(`${url}/get-auth`);
-    if (res && res.access) return { data: res, success: true };
+    if (res && res.data) return { data: res.data, success: true };
     return { success: false };
   } catch (error) {
     return {

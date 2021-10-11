@@ -1,4 +1,6 @@
+import Cookies from "js-cookie";
 import authAPI from "../../../apis/Auth.Api";
+import { changeLoading } from "../System/systemAction";
 import {
   GET_USER_FAIL,
   GET_USER_SUCCESS,
@@ -8,8 +10,6 @@ import {
   REGISTER_FAIL,
   REGISTER_SUCCESS,
 } from "./types";
-import { changeLoading } from "../System/systemAction";
-import Cookies from "js-cookie";
 
 const loading =
   (loading = false) =>
@@ -74,12 +74,10 @@ export const getAuthAction = () => async (dispatch) => {
       dispatch(loading());
       dispatch(getUserSuccess(res.data));
       return { ...res.data, isAuth: true };
-    } else {
-      dispatch(loading());
-      dispatch(getUserFail());
-
-      return { isAuth: false };
     }
+    dispatch(loading());
+    dispatch(getUserFail());
+    return { isAuth: false };
   } catch {
     dispatch(loading());
     dispatch(getUserFail());

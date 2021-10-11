@@ -1,7 +1,7 @@
 import React from "react";
-import { Form, Input } from "reactstrap";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import { Form, Input } from "reactstrap";
 import { loginAction } from "../../../redux/actions/Auth/authActions";
 import validate from "../hooks/validate";
 

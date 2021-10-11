@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Form, FormGroup, Input } from "reactstrap";
 import SelectComponent from "../../../common/components/SelectSearch";
 import { registerAction } from "../../../redux/actions/Auth/authActions";
-import validate from "../hooks/validate";
 import {
   getDistrict,
   getProvince,
   getVillage,
 } from "../../../redux/actions/Location/locationAction";
+import validate from "../hooks/validate";
 
 const FormRegister = () => {
   const dispatch = useDispatch();

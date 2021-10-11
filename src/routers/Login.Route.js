@@ -1,8 +1,7 @@
-import { PATH } from "../common/constants/RoutePath";
-import { Switch, Route } from "react-router-dom";
-import { lazy } from "react";
+import React, { lazy } from "react";
+import { Route, Switch } from "react-router-dom";
 import Auth from "../common/components/Authentication";
-import React from "react";
+import { PATH } from "../common/constants/RoutePath";
 
 const LoginPage = lazy(() => import("../pages/Login"));
 

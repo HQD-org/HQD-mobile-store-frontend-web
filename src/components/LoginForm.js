@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Input } from "reactstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { Link } from "react-router-dom";
 
 class FormRegister extends Component {
   state = {
@@ -42,7 +43,14 @@ class FormRegister extends Component {
               ></i>
             </div>
             <div>
-              <p className="txtForgot">Forgot Password?</p>
+              <p className="txtForgot">
+                <Link
+                  to="/forgot-password"
+                  style={{ color: "#3fa5ef", textDecoration: "none" }}
+                >
+                  Forgot Password?
+                </Link>
+              </p>
             </div>
             <div className="row" style={{ "justify-content": "center" }}>
               <button class="btnSubmit" type="submit">

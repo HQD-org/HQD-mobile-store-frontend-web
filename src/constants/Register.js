@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import "../css/FormRegister.css";
 import FormRegister from "../components/RegisterForm";
 import login2 from "../images/login2.png";
 import "../css/FormRegister.css";

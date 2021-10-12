@@ -1,0 +1,56 @@
+.txtSignup {
+  color: #3fa5ef;
+  max-width: 88%;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.txtStart {
+  max-width: 88%;
+  font-size: 16px;
+  color: #c4c4c4;
+  font-weight: bold;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+.form-control {
+  margin-top: 20px;
+  height: 50px;
+}
+
+.form-select {
+  margin-top: 20px;
+  height: 50px;
+}
+
+.btnSubmit {
+  width: 95%;
+  height: 50px;
+  margin-top: 20px;
+  color: white;
+  border: none;
+  font-size: 20px;
+  font-style: bold;
+  font-style: 600;
+  background: #3fa5ef;
+  padding: 10px;
+  border-radius: 20px;
+  filter: drop-shadow(0 4px 4px #0000003b);
+}
+
+.img-fluid {
+  margin-top: 80px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}

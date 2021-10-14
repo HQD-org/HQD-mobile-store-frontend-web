@@ -11,7 +11,7 @@ const LoginPage = () => {
         <div className="col-md-6">
           <img className="img-fluid" src={login2} alt="bg" width="100%"></img>
         </div>
-        <div className="col" style={{ marginTop: "150px" }}>
+        <div className="col" style={{ marginTop: "100px" }}>
           <div className="row" style={{ justifyContent: "center" }}>
             <p className="txtStart">WELCOME BACK</p>
             <h3 className="txtSignup">Login to HQD Mobile</h3>

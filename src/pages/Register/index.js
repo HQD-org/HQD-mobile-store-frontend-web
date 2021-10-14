@@ -9,7 +9,13 @@ const RegisterPage = () => {
     <div className="container">
       <div className="row">
         <div className="col-md-6">
-          <img className="img-fluid" src={login2} alt="bg" width="100%"></img>
+          <img
+            className="img-fluid"
+            style={{ marginTop: "80px" }}
+            src={login2}
+            alt="bg"
+            width="100%"
+          ></img>
         </div>
         <div className="col">
           <div className="row" style={{ justifyContent: "center" }}>

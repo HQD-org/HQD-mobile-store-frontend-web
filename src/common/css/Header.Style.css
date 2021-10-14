@@ -1,0 +1,60 @@
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.name-store {
+    color: #3fa5ef !important;
+    font-style: italic;
+    font-family: PT serif;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.nav-link {
+    color: black !important;
+    font-weight: bold;
+}
+
+.nav-link:focus,
+nav-link:hover {
+    color: red !important;
+}
+
+.search-header {
+    position: relative;
+    height: 30px !important;
+    border-radius: 10px;
+}
+
+.icon-search {
+    position: absolute;
+    top: 32px;
+    right: 15.5%;
+}
+
+.icon-cart {
+    color: white;
+    margin-right: 5px;
+}
+
+.btn-cart {
+    color: white !important;
+    background: #de7311 !important;
+    margin-left: 10px;
+}
+
+.btnGet {
+    width: 50%;
+    height: 50px;
+    margin-top: 20px;
+    color: white;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    background: #3fa5ef;
+    padding: 10px;
+    border-radius: 10px;
+    filter: drop-shadow(0 4px 4px #282828);
+}

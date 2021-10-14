@@ -20,6 +20,7 @@ const FormRegister = () => {
   const [province, setProvince] = useState(defaultObj);
   const [district, setDistrict] = useState(defaultObj);
   const [village, setVillage] = useState(defaultObj);
+  const [isPasswordShown, setIsPasswordShown] = useState(false);
 
   const provinceList = useSelector((state) => state.location.provinces) || [];
   const districtList = useSelector((state) => state.location.districts) || [];
@@ -85,15 +86,7 @@ const FormRegister = () => {
       province: province.name,
     };
     const password = e.target.password.value;
-    const confirmPassword = e.target.confirmPassword.value;
-    const isValidData = validate(
-      address,
-      email,
-      name,
-      password,
-      phone,
-      confirmPassword
-    );
+    const isValidData = validate(address, email, name, password, phone);
     if (!isValidData) return;
     const res = await dispatch(
       registerAction({ address, email, name, password, phone })
@@ -166,18 +159,20 @@ const FormRegister = () => {
             placeholder="Mobile number"
             className="form-control"
           />
-          <Input
-            type="password"
-            name="password"
-            placeholder="Password"
-            className="form-control"
-          />
-          <Input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            className="form-control"
-          />
+          <div className="div-password">
+            <Input
+              type={isPasswordShown ? "text" : "password"}
+              name="password"
+              placeholder="Password"
+              className="form-control"
+            />
+            <i
+              className={`bi ${
+                isPasswordShown ? "bi-eye-fill" : "bi-eye-slash-fill"
+              }  password-icon`}
+              onClick={() => setIsPasswordShown(!isPasswordShown)}
+            ></i>
+          </div>
           <div className="row" style={{ justifyContent: "center" }}>
             <button className="btnSubmit" type="submit">
               REGISTER

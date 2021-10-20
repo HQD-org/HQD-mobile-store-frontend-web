@@ -17,6 +17,14 @@ const HomePage = () => {
           Login now
         </Link>
       </span>
+      <span>
+        <Link
+          to="/dashboard"
+          style={{ color: "#3fa5ef", textDecoration: "none" }}
+        >
+          Dashboard
+        </Link>
+      </span>
     </div>
   );
 };

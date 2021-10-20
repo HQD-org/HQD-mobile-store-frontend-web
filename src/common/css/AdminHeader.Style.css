@@ -1,0 +1,39 @@
+.name-store {
+    text-align: center;
+    background-color: #263544;
+    color: white !important;
+    font-family: PT serif;
+    font-weight: bold;
+    filter: drop-shadow(0 0px 2px black);
+}
+
+.ava-admin {
+    border-radius: 50px;
+    border: 1px solid white;
+    filter: drop-shadow(0px 1px 2px black);
+}
+
+.nav-header {
+    background-color: #3fa5ef;
+    padding: 0 !important;
+}
+
+.mr-auto {
+    align-items: center;
+}
+
+.input-search {
+    margin-right: 10px;
+}
+
+.announce {
+    margin-right: 10px;
+}
+
+.bi-bell-fill {
+    color: white;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: white !important;
+}

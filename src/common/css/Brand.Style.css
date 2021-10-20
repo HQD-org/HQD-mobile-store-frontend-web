@@ -90,6 +90,12 @@
     color: #3fa5ef;
 }
 
+.form-filter-brand {
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+}
+
 
 /* .thumbsContainer {
     display: flex;

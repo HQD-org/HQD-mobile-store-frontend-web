@@ -96,6 +96,14 @@
     align-items: baseline;
 }
 
+.modal-footer {
+    margin-top: 20px;
+}
+
+.col-3 {
+    width: 32% !important;
+}
+
 
 /* .thumbsContainer {
     display: flex;

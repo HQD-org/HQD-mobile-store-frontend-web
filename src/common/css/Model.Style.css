@@ -1,0 +1,114 @@
+.icon-modelheader {
+    font-size: 25px;
+}
+
+.name-management {
+    font-size: 20px;
+}
+
+.choosenHQD {
+    font-size: 12px;
+    margin-left: 31px;
+}
+
+.form-label {
+    width: 170px;
+}
+
+.mb-3 {
+    display: flex;
+    align-items: baseline;
+}
+
+.body-form {
+    padding: 50px;
+    box-shadow: 0 0 5px 0 rgb(43 43 43 / 10%), 0 11px 6px -7px rgb(43 43 43 / 10%);
+}
+
+.form-label-description {
+    width: 137px;
+}
+
+.btnAddModel {
+    border: none;
+    font-weight: bold;
+    padding: 10px;
+    width: 25%;
+    border-radius: 5px;
+    background: #3fa5ef;
+    border: 1px solid #3fa5ef;
+    color: white;
+    filter: drop-shadow(0 2px 2px #707070);
+}
+
+.btnAddModel:hover {
+    background-color: #2f8ed1;
+}
+
+.btndanger {
+    color: white;
+    filter: drop-shadow(0 2px 2px #707070);
+    border-radius: 5px;
+    padding: 10px;
+    font-weight: bold;
+    margin-left: 10px;
+    border: 1px solid #ef3f3f;
+    background-color: #ef3f3f;
+    width: 25%;
+}
+
+.btndanger:hover {
+    background-color: #cc2f2f;
+}
+
+.icon-model {
+    font-size: 25px;
+}
+
+.btn-filter {
+    padding: 10px 20px 10px 20px;
+    border: none;
+    background-color: #3fa5ef;
+    color: white;
+    border-radius: 4px;
+    filter: drop-shadow(0 2px 2px #707070);
+    float: right;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    --bs-table-accent-bg: #d1e7f8 !important;
+}
+
+tbody>tr:hover {
+    filter: drop-shadow(2px 4px 6px #bab9b9);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.bi-x-circle-fill {
+    color: rgb(248, 52, 52) !important;
+}
+
+.modal-dialog {
+    max-width: 900px !important;
+}
+
+.modal-header {
+    color: #3fa5ef;
+}
+
+.close-x button {
+    border: 1px solid white;
+    background: #cacaca;
+    border-radius: 3px;
+    color: white;
+}
+
+.modal-content {
+    padding: 30px;
+}
+
+
+/* .table-striped > tbody > tr:nth-of-type(even) {
+  --bs-table-accent-bg: #d1e7f8 !important;
+} */

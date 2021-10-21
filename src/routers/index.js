@@ -8,6 +8,8 @@ import LoginRoute from "./Login.Route";
 import OTPRoute from "./OTP.Route";
 import BrandRoute from "./Brand.Route";
 import RegisterRoute from "./Register.Route";
+import AddModelRoute from "./AddModel.Route";
+import ModelRoute from "./Model.Route";
 
 const Routers = () => {
   return (
@@ -15,6 +17,8 @@ const Routers = () => {
       <Suspense fallback={<Loading />}>
         <DashboardRoute />
         <BrandRoute />
+        <AddModelRoute />
+        <ModelRoute />
         <HomeRoute />
         <LoginRoute />
         <RegisterRoute />

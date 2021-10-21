@@ -6,6 +6,8 @@ export const PATH = {
   OTPCODE: "/otp",
   ADMIN: "/dashboard",
   BRAND: "/dashboard/brand",
+  MODEL: "/dashboard/model",
+  ADDMODEL: "/dashboard/add-model",
 };
 
 export const PATH_API = {};

@@ -4,7 +4,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import Upload from "../components/Upload";
 import AddBtn from "../../../common/images/add-button.png";
-import { FormGroup, Input } from "reactstrap";
+import { FormGroup } from "reactstrap";
 
 const HeaderBrand = (props) => {
   const { buttonLabel, className } = props;
@@ -37,18 +37,17 @@ const HeaderBrand = (props) => {
           <div className="col-3">
             {" "}
             <FormGroup>
-              <Input type="select" name="select" id="filter-status">
+              <select class="form-select">
                 <option selected disabled>
                   Filter by Status
                 </option>
-                <option>Tất cả</option>
-                <option>Hoạt động</option>
-                <option>Ngưng kinh doanh</option>
-              </Input>
+                <option value="1">Hoạt động</option>
+                <option value="2">Ngừng kinh doanh</option>
+              </select>
             </FormGroup>
           </div>
           <div className="col-4">
-            <button type="button" className="btn-addBrand">
+            <button type="search" className="btn-addBrand">
               <span>Search</span>
             </button>
           </div>
@@ -80,7 +79,12 @@ const HeaderBrand = (props) => {
                   Tên thương hiệu
                 </label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="input-name" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="input-name"
+                    required
+                  />
                 </div>
               </div>
               <div class="row mb-3">
@@ -88,10 +92,7 @@ const HeaderBrand = (props) => {
                   Trạng thái
                 </label>
                 <div className="col-sm-8">
-                  <select
-                    class="form-select"
-                    aria-label="Default select example"
-                  >
+                  <select class="form-select">
                     <option selected disabled>
                       Choose..
                     </option>
@@ -109,19 +110,20 @@ const HeaderBrand = (props) => {
                     class="form-control"
                     id="input-introduce"
                     rows="4"
+                    required
                   ></textarea>
                 </div>
               </div>
               <Upload />
             </div>
+            <ModalFooter>
+              <Button color="primary">Submit</Button>{" "}
+              <Button color="secondary" onClick={toggle}>
+                Cancel
+              </Button>
+            </ModalFooter>
           </form>
         </ModalBody>
-        <ModalFooter>
-          <Button color="primary">Submit</Button>{" "}
-          <Button color="secondary" onClick={toggle}>
-            Cancel
-          </Button>
-        </ModalFooter>
       </Modal>
     </div>
   );

@@ -56,12 +56,12 @@ const AdminMenu = () => {
           <div className="txtheader">Model</div>
           <ul className="list-menu">
             <li>
-              <Link to="# ">
+              <Link to="/dashboard/model">
                 <i class="bi bi-front icon-admin"></i>Models
               </Link>
             </li>
             <li>
-              <Link to="# ">
+              <Link to="/dashboard/add-model">
                 <i class="bi bi-plus-square-fill icon-admin"></i>Add Model
               </Link>
             </li>

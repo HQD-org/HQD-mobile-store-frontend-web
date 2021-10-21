@@ -70,8 +70,8 @@ const UpLoad = (props) => {
       </label>
       <div className="border-img">
         <div {...getRootProps({ className: "dropzone" })}>
-          <input {...getInputProps()} />
-          <p className="txtSelectImg">Select one or "n" images</p>
+          <input {...getInputProps()} required />
+          <p className="txtSelectImg">Select one image for your brand</p>
         </div>
         <aside style={thumbsContainer}>{thumbs}</aside>
       </div>

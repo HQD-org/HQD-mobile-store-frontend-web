@@ -113,7 +113,12 @@ const Brands = (props) => {
                   Tên thương hiệu
                 </label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" id="input-name" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="input-name"
+                    required
+                  />
                 </div>
               </div>
               <div class="row mb-3">
@@ -121,10 +126,7 @@ const Brands = (props) => {
                   Trạng thái
                 </label>
                 <div className="col-sm-8">
-                  <select
-                    class="form-select"
-                    aria-label="Default select example"
-                  >
+                  <select class="form-select" required>
                     <option selected disabled>
                       Choose..
                     </option>
@@ -142,20 +144,21 @@ const Brands = (props) => {
                     class="form-control"
                     id="input-introduce"
                     rows="4"
+                    required
                   ></textarea>
                 </div>
               </div>
               <Upload />
             </div>
+            <ModalFooter>
+              <Button color="primary">Submit</Button>{" "}
+              <Button color="danger">Delete</Button>
+              <Button color="secondary" onClick={toggle}>
+                Cancel
+              </Button>
+            </ModalFooter>
           </form>
         </ModalBody>
-        <ModalFooter>
-          <Button color="primary">Submit</Button>{" "}
-          <Button color="danger">Delete</Button>
-          <Button color="secondary" onClick={toggle}>
-            Cancel
-          </Button>
-        </ModalFooter>
       </Modal>
     </div>
   );

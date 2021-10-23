@@ -1,7 +1,101 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import modelImg from "../../../common/images/3d-modeling.png";
+import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+import { useDropzone } from "react-dropzone";
+import "../../../common/css/Brand.Style.css";
 
-const AddModelForm = () => {
+const thumbsContainer = {
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap",
+  marginTop: 16,
+};
+
+const thumb = {
+  display: "inline-flex",
+  borderRadius: 2,
+  border: "1px solid #eaeaea",
+  marginBottom: 8,
+  marginRight: 8,
+  width: 100,
+  height: 100,
+  padding: 4,
+  boxSizing: "border-box",
+};
+
+const thumbInner = {
+  display: "flex",
+  minWidth: 0,
+  overflow: "hidden",
+};
+
+const img = {
+  display: "block",
+  width: "auto",
+  height: "100%",
+};
+
+const AddModelForm = (props) => {
+  const { buttonLabel, className } = props;
+  const [files, setFiles] = useState([]);
+  const [modal, setModal] = useState(false);
+  const [formColor, setFormColor] = useState([]);
+
+  const toggle = () => setModal(!modal);
+  const handleAddColor = (e) => {
+    e.preventDefault();
+    const inputColor = {
+      ColorInput: "",
+      Upload: "",
+    };
+    setFormColor((prev) => [...prev, inputColor]);
+  };
+
+  const onChange = (index, event) => {
+    event.preventDefault();
+
+    setFormColor((prev) => {
+      return prev.map((item, i) => {
+        if (i !== index) {
+          return item;
+        }
+        return {
+          ...item,
+          [event.target.name]: event.target.value,
+        };
+      });
+    });
+  };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+    onDrop: (acceptedFiles) => {
+      setFiles(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+    },
+  });
+
+  const thumbs = files.map((file) => (
+    <div style={thumb} key={file.name}>
+      <div style={thumbInner}>
+        <img src={file.preview} style={img} alt="" />
+      </div>
+    </div>
+  ));
+
+  useEffect(
+    () => () => {
+      // Make sure to revoke the data uris to avoid memory leaks
+      files.forEach((file) => URL.revokeObjectURL(file.preview));
+    },
+    [files]
+  );
+
   return (
     <div class="row" style={{ marginTop: "50px" }}>
       <div className="col-sm-12 body-form">
@@ -203,6 +297,76 @@ const AddModelForm = () => {
               </label>
               <input type="text" class="form-control" id="timeStart" required />
             </div>
+            <div class="col-5 mb-3">
+              <button className="btnColor" onClick={toggle} type="button">
+                {buttonLabel}
+                Thêm màu
+              </button>
+            </div>
+            <Modal isOpen={modal} toggle={toggle} className={className}>
+              <ModalBody>
+                <form>
+                  <div className="container">
+                    {formColor.map((item, index) => (
+                      <div className="row" key={`item-${index}`}>
+                        <div className="col-4">
+                          <label for="ColorModel" class="form-label">
+                            Màu
+                          </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="ColorInput"
+                            value={item.ColorInput}
+                            onChange={(e) => onChange(index, e)}
+                            id="ColorModel"
+                            required
+                          />
+                        </div>
+                        <div className="col">
+                          <section>
+                            <label for="input-img" class="col-sm-4 form-label">
+                              Hình ảnh
+                            </label>
+                            <div className="border-img">
+                              <div {...getRootProps({ className: "dropzone" })}>
+                                <input
+                                  {...getInputProps()}
+                                  required
+                                  name="Upload"
+                                  value={item.Upload}
+                                />
+                                <p className="txtSelectImg">
+                                  Select one or "n" image for your model
+                                </p>
+                              </div>
+                              <aside style={thumbsContainer}>{thumbs}</aside>
+                            </div>
+                          </section>
+                        </div>
+                      </div>
+                    ))}
+                    <div className="row">
+                      <div className="col-4">
+                        <button
+                          className="btnColor"
+                          onClick={handleAddColor}
+                          style={{ width: "125px" }}
+                        >
+                          Thêm màu
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <ModalFooter>
+                    <Button color="primary">Submit</Button>{" "}
+                    <Button color="secondary" onClick={toggle}>
+                      Cancel
+                    </Button>
+                  </ModalFooter>
+                </form>
+              </ModalBody>
+            </Modal>
           </div>
 
           <div className="row mb-3" style={{ marginTop: "100px" }}>

@@ -41,6 +41,19 @@
     filter: drop-shadow(0 2px 2px #707070);
 }
 
+.btnColor {
+    border: none;
+    font-weight: bold;
+    padding: 10px;
+    width: 25%;
+    border-radius: 5px;
+    background: #3fa5ef;
+    border: 1px solid #3fa5ef;
+    color: white;
+    filter: drop-shadow(0 2px 2px #707070);
+}
+
+.btnColor:hover,
 .btnAddModel:hover {
     background-color: #2f8ed1;
 }

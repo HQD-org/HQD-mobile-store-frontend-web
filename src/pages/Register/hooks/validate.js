@@ -1,8 +1,8 @@
 import validator from "validator";
 import toastNotify from "../../../common/toastify";
-import { REGEX } from "../../../common/utils/Regex";
+import { REGEX } from "../../../common/constants/Regex";
 
-const validate = (address, email, name, password, phone, confirmPassword) => {
+const validate = (address, email, name, password, phone) => {
   const isEmail = validator.isEmail(email);
   if (!isEmail) {
     toastNotify("Email không hợp lệ");
@@ -19,11 +19,6 @@ const validate = (address, email, name, password, phone, confirmPassword) => {
     toastNotify(
       "Mật khẩu phải chứa ít nhất một số và một chữ cái, có độ dài từ 8 đến 16 ký tự"
     );
-    return false;
-  }
-
-  if (password !== confirmPassword) {
-    toastNotify("Mật khẩu không khớp với nhau");
     return false;
   }
 

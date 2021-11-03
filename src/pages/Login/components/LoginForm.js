@@ -29,7 +29,6 @@ const FormLogin = () => {
           <Input
             type="email"
             name="username"
-            id="username"
             placeholder="E-mail Address"
             className="form-control"
           />

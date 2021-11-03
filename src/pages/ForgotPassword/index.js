@@ -1,9 +1,9 @@
 import React from "react";
+import { Form, Input } from "reactstrap";
+import AppFooter from "../../common/components/AppFooter";
+import AppHeader from "../../common/components/AppHeader";
 import "../../common/css/Form.Style.css";
 import login2 from "../../common/images/login2.png";
-import { Form, Input } from "reactstrap";
-import AppHeader from "../../common/components/AppHeader";
-import AppFooter from "../../common/components/AppFooter";
 
 const ForgotPasswordPage = () => {
   return (

@@ -8,7 +8,7 @@ const ModelPage = lazy(() => import("../pages/Model"));
 const ModelRoute = () => {
   return (
     <Switch>
-      <Route exact path={PATH.MODEL} component={Auth(ModelPage, false)} />
+      <Route exact path={PATH.MODEL} component={Auth(ModelPage, true, true)} />
     </Switch>
   );
 };

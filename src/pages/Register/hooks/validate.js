@@ -1,6 +1,6 @@
 import validator from "validator";
 import toastNotify from "../../../common/toastify";
-import { REGEX } from "../../../common/utils/Regex";
+import { REGEX } from "../../../common/constants/Regex";
 
 const validate = (address, email, name, password, phone) => {
   const isEmail = validator.isEmail(email);

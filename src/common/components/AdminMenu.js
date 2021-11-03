@@ -15,7 +15,7 @@ const AdminMenu = () => {
             <li>
               <Link to="# ">
                 <span>
-                  <i class="bi bi-lightning-charge-fill icon-admin"></i>
+                  <i className="bi bi-lightning-charge-fill icon-admin"></i>
                 </span>
                 <span>Dashboard</span>
               </Link>
@@ -27,7 +27,7 @@ const AdminMenu = () => {
             <li>
               <Link to="# ">
                 <span>
-                  <i class="fab fa-product-hunt icon-admin"></i>
+                  <i className="fab fa-product-hunt icon-admin"></i>
                 </span>
                 <span>Products</span>
               </Link>{" "}
@@ -35,7 +35,7 @@ const AdminMenu = () => {
 
             <li>
               <Link to="# ">
-                <i class="bi bi-plus-square-fill icon-admin"></i>Add Product
+                <i className="bi bi-plus-square-fill icon-admin"></i>Add Product
               </Link>{" "}
             </li>
           </ul>
@@ -44,12 +44,12 @@ const AdminMenu = () => {
           <ul className="list-menu">
             <li>
               <Link to="/dashboard/brand">
-                <i class="fab fa-react icon-admin"></i>Brands
+                <i className="fab fa-react icon-admin"></i>Brands
               </Link>
             </li>
             <li>
               <Link to="# ">
-                <i class="bi bi-plus-square-fill icon-admin"></i>Add Brand
+                <i className="bi bi-plus-square-fill icon-admin"></i>Add Brand
               </Link>
             </li>
           </ul>
@@ -57,12 +57,12 @@ const AdminMenu = () => {
           <ul className="list-menu">
             <li>
               <Link to="/dashboard/model">
-                <i class="bi bi-front icon-admin"></i>Models
+                <i className="bi bi-front icon-admin"></i>Models
               </Link>
             </li>
             <li>
               <Link to="/dashboard/add-model">
-                <i class="bi bi-plus-square-fill icon-admin"></i>Add Model
+                <i className="bi bi-plus-square-fill icon-admin"></i>Add Model
               </Link>
             </li>
           </ul>
@@ -70,7 +70,7 @@ const AdminMenu = () => {
           <ul className="list-menu">
             <li>
               <Link to="# ">
-                <i class="bi bi-geo-alt-fill icon-admin"></i>Branchs
+                <i className="bi bi-geo-alt-fill icon-admin"></i>Branchs
               </Link>
             </li>
           </ul>
@@ -78,12 +78,12 @@ const AdminMenu = () => {
           <ul className="list-menu">
             <li>
               <Link to="# ">
-                <i class="bi bi-person-fill icon-admin"></i>Users
+                <i className="bi bi-person-fill icon-admin"></i>Users
               </Link>
             </li>
             <li>
               <Link to="# ">
-                <i class="fas fa-file-invoice icon-admin"></i>Invoices
+                <i className="fas fa-file-invoice icon-admin"></i>Invoices
               </Link>
             </li>
           </ul>
@@ -91,12 +91,12 @@ const AdminMenu = () => {
           <ul className="list-menu">
             <li>
               <Link to="# ">
-                <i class="fas fa-chart-line icon-admin"></i>Profit
+                <i className="fas fa-chart-line icon-admin"></i>Profit
               </Link>
             </li>
             <li>
               <Link to="# ">
-                <i class="bi bi-bar-chart-fill icon-admin"></i>Product
+                <i className="bi bi-bar-chart-fill icon-admin"></i>Product
               </Link>
             </li>
           </ul>
@@ -105,12 +105,12 @@ const AdminMenu = () => {
           <ul className="list-menu">
             <li>
               <Link to="# ">
-                <i class="bi bi-gear-fill icon-admin"></i>Setting
+                <i className="bi bi-gear-fill icon-admin"></i>Setting
               </Link>
             </li>
             <li>
               <Link to="# ">
-                <i class="bi bi-box-arrow-left icon-admin"></i>Log out
+                <i className="bi bi-box-arrow-left icon-admin"></i>Log out
               </Link>
             </li>
           </ul>

@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import AppHeader from "../../common/components/AppHeader";
-import AppFooter from "../../common/components/AppFooter";
 import "../../common/css/Form.Style.css";
 import login2 from "../../common/images/login2.png";
 import FormRegister from "./components/RegisterForm";
@@ -9,7 +7,6 @@ import FormRegister from "./components/RegisterForm";
 const RegisterPage = () => {
   return (
     <div>
-      <AppHeader />
       <div className="container">
         <div className="row">
           <div className="col-md-6">
@@ -41,7 +38,6 @@ const RegisterPage = () => {
           </div>
         </div>
       </div>
-      <AppFooter />
     </div>
   );
 };

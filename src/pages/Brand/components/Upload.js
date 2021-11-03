@@ -65,12 +65,12 @@ const UpLoad = (props) => {
 
   return (
     <section>
-      <label for="input-img" class="col-sm-4 form-label">
+      <label htmlFor="input-img" className="col-sm-4 form-label">
         Hình ảnh
       </label>
       <div className="border-img">
         <div {...getRootProps({ className: "dropzone" })}>
-          <input {...getInputProps()} required />
+          <input {...getInputProps()} />
           <p className="txtSelectImg">Select one images for your brand</p>
         </div>
         <aside style={thumbsContainer}>{thumbs}</aside>

@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import AppFooter from "../../common/components/AppFooter";
-import AppHeader from "../../common/components/AppHeader";
 import "../../common/css/Form.Style.css";
 import login2 from "../../common/images/login2.png";
 import LoginForm from "./components/LoginForm";
@@ -9,7 +7,6 @@ import LoginForm from "./components/LoginForm";
 const LoginPage = () => {
   return (
     <div>
-      <AppHeader />
       <div className="container">
         <div className="row">
           <div className="col-md-6">
@@ -35,7 +32,6 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-      <AppFooter />
     </div>
   );
 };

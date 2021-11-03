@@ -1,11 +1,9 @@
 import React from "react";
-import AdminHeader from "../../common/components/AdminHeader";
 import AdminMenu from "../../common/components/AdminMenu";
 
 const Admin = () => {
   return (
-    <div>
-      <AdminHeader />
+    <>
       <div className="row">
         <div className="col-2" style={{ paddingRight: "4.5px" }}>
           <AdminMenu />
@@ -16,7 +14,7 @@ const Admin = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

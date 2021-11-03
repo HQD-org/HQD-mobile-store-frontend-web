@@ -1,6 +1,5 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
-import "./App.css";
 import Routers from "./routers";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";

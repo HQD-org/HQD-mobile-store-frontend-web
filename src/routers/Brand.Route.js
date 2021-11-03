@@ -8,7 +8,7 @@ const BrandPage = lazy(() => import("../pages/Brand"));
 const BrandRoute = () => {
   return (
     <Switch>
-      <Route path={PATH.BRAND} exact component={Auth(BrandPage, false)} />
+      <Route path={PATH.BRAND} exact component={Auth(BrandPage, true, true)} />
     </Switch>
   );
 };

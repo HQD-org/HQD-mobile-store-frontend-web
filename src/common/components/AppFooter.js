@@ -41,21 +41,24 @@ const AppFooter = () => {
             <div className="row">
               <h4 className="txtContact">Contact us</h4>
               <div className="icon-mxh">
-                <i class="bi bi-facebook"></i>
-                <i class="bi bi-instagram" style={{ marginLeft: "10px" }}></i>
+                <i className="bi bi-facebook"></i>
+                <i
+                  className="bi bi-instagram"
+                  style={{ marginLeft: "10px" }}
+                ></i>
               </div>
             </div>
             <div style={{ marginTop: "10px" }}>
               <p className="contact-mail">
                 <i
-                  class="bi bi-envelope-fill"
+                  className="bi bi-envelope-fill"
                   style={{ marginRight: "5px" }}
                 ></i>
                 hqdmobilecontact@gmail.com
               </p>
               <p className="contact-phone">
                 <i
-                  class="bi bi-telephone-fill"
+                  className="bi bi-telephone-fill"
                   style={{ marginRight: "5px" }}
                 ></i>
                 1800.0125

@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../common/css/Model.Style.css";
+import "../../../../../common/css/Model.Style.css";
 import { FormGroup } from "reactstrap";
 
 const ModelHeader = () => {
@@ -90,4 +90,4 @@ const ModelHeader = () => {
   );
 };
 
-export default ModelHeader;
+export default React.memo(ModelHeader);

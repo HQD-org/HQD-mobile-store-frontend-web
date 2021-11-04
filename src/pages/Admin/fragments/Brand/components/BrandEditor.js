@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import AddBtn from "../../../common/images/add-button.png";
+import AddBtn from "../../../../../common/images/add-button.png";
 import {
   addBrandAction,
   updateBrandAction,
-} from "../../../redux/actions/Brand/brandAction";
+} from "../../../../../redux/actions/Brand/brandAction";
 import { validateAddBrand, validateUpdateBrand } from "../hooks/validate";
 import { useDropzone } from "react-dropzone";
-import { storage } from "../../../common/config/firebase";
-import UpdateBtn from "../../../common/images/add-button.png";
+import { storage } from "../../../../../common/config/firebase";
+import UpdateBtn from "../../../../../common/images/add-button.png";
 const thumbsContainer = {
   display: "flex",
   flexDirection: "row",

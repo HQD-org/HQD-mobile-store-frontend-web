@@ -1,16 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import AdminMenu from "../../common/components/AdminMenu";
-import Pagination from "../../common/components/Pagination";
+import Pagination from "../../../../common/components/Pagination";
 import {
   filterBrandAction,
   getAllBrandAction,
-} from "../../redux/actions/Brand/brandAction";
+} from "../../../../redux/actions/Brand/brandAction";
 import Brands from "./components/Brands";
 import HeaderBrand from "./components/HeaderBrand";
 
-const BrandPage = () => {
+const BrandFragment = React.memo(() => {
   const dispatch = useDispatch();
   let brands = useSelector((state) => state.brands.list) || [];
   let totalBrand = useSelector((state) => state.brands.totalBrand) || 0;
@@ -69,36 +68,20 @@ const BrandPage = () => {
 
   return (
     <>
-      <div>
-        <div className="row">
-          <div className="col-2" style={{ paddingRight: "4.5px" }}>
-            <AdminMenu />
-          </div>
-          <div className="col">
-            <div className="container-fluid">
-              <div className="container">
-                <HeaderBrand
-                  getListBrand={getListBrand}
-                  pagination={pagination}
-                  onFilterValueChange={onFilterValueChange}
-                  status={status}
-                />
-                <Brands
-                  getListBrand={getListBrand}
-                  listBrand={brands}
-                  pagination={pagination}
-                />
-                <Pagination
-                  pagination={pagination}
-                  onPageChange={onPageChange}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <HeaderBrand
+        getListBrand={getListBrand}
+        pagination={pagination}
+        onFilterValueChange={onFilterValueChange}
+        status={status}
+      />
+      <Brands
+        getListBrand={getListBrand}
+        listBrand={brands}
+        pagination={pagination}
+      />
+      <Pagination pagination={pagination} onPageChange={onPageChange} />
     </>
   );
-};
+});
 
-export default BrandPage;
+export default BrandFragment;

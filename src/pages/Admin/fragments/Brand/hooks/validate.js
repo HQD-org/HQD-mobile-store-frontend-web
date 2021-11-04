@@ -1,5 +1,5 @@
 import validator from "validator";
-import toastNotify from "../../../common/toastify";
+import toastNotify from "../../../../../common/toastify";
 
 const validateAddBrand = (data) => {
   const isBrandName = validator.isEmpty(data.name);

@@ -1,8 +1,8 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import React, { useState } from "react";
-import "../../../common/css/Brand.Style.css";
+import "../../../../../common/css/Brand.Style.css";
 import BrandEditor from "./BrandEditor";
-const Brands = (props) => {
+const Brands = React.memo((props) => {
   const { buttonLabel, getListBrand, listBrand, pagination } = props;
   const { page, itemPerPage } = pagination;
   const [currentBrand, setCurrentBrand] = useState({});
@@ -12,7 +12,7 @@ const Brands = (props) => {
     setModal(!modal);
   };
 
-  const BrandCard = (props) => {
+  const BrandCard = React.memo((props) => {
     return props.list.map((value, index) => {
       return (
         <div className="col" key={value._id}>
@@ -37,7 +37,7 @@ const Brands = (props) => {
         </div>
       );
     });
-  };
+  });
 
   return (
     <div
@@ -56,6 +56,6 @@ const Brands = (props) => {
       />
     </div>
   );
-};
+});
 
 export default Brands;

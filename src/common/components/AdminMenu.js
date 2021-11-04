@@ -34,7 +34,7 @@ const AdminMenu = () => {
             </li>
 
             <li>
-              <Link to="# ">
+              <Link to="/dashboard/add-product">
                 <i class="bi bi-plus-square-fill icon-admin"></i>Add Product
               </Link>{" "}
             </li>

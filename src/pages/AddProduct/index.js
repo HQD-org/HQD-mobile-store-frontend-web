@@ -1,10 +1,10 @@
 import React from "react";
 import AdminHeader from "../../common/components/AdminHeader";
 import AdminMenu from "../../common/components/AdminMenu";
-import Model from "./components/Model";
-import ModelHeader from "./components/ModelHeader";
+import AddProductForm from "./components/AddProductForm";
+import AddProductHeader from "./components/AddProductHeader";
 
-const ModelPage = () => {
+const AddProductPage = () => {
   return (
     <div>
       <AdminHeader />
@@ -14,8 +14,8 @@ const ModelPage = () => {
         </div>
         <div className="col">
           <div className="container-fluid">
-            <ModelHeader />
-            <Model />
+            <AddProductHeader />
+            <AddProductForm />
           </div>
         </div>
       </div>
@@ -23,4 +23,4 @@ const ModelPage = () => {
   );
 };
 
-export default ModelPage;
+export default AddProductPage;

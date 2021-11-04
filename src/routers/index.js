@@ -10,6 +10,7 @@ import BrandRoute from "./Brand.Route";
 import RegisterRoute from "./Register.Route";
 import AddModelRoute from "./AddModel.Route";
 import ModelRoute from "./Model.Route";
+import AddProductRoute from "./AddProduct.Route";
 
 const Routers = () => {
   return (
@@ -19,6 +20,7 @@ const Routers = () => {
         <BrandRoute />
         <AddModelRoute />
         <ModelRoute />
+        <AddProductRoute />
         <HomeRoute />
         <LoginRoute />
         <RegisterRoute />

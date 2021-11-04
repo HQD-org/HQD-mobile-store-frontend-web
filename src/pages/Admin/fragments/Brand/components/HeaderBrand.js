@@ -1,9 +1,9 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import React, { useState, useRef } from "react";
 import { FormGroup } from "reactstrap";
-import "../../../common/css/Brand.Style.css";
+import "../../../../../common/css/Brand.Style.css";
 import BrandEditor from "./BrandEditor";
-const HeaderBrand = (props) => {
+const HeaderBrand = React.memo((props) => {
   const { buttonLabel, getListBrand, pagination, onFilterValueChange, status } =
     props;
   const { page, itemPerPage } = pagination;
@@ -94,6 +94,6 @@ const HeaderBrand = (props) => {
       />
     </div>
   );
-};
+});
 
 export default HeaderBrand;

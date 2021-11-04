@@ -1,131 +1,116 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "../../common/css/AdminMenu.Style.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import React from "react";
+import "../../common/css/AdminMenu.Style.css";
 // import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import FragmentBrandPage from "../../pages/Brand";
 
-const AdminMenu = () => {
+const AdminMenu = (props) => {
+  const { toggle } = props;
   return (
-    // <Router>
     <div>
       <div style={{ background: "#263544" }}>
         <div style={{ padding: "5px" }}>
           <ul className="list-menu">
             <li>
-              <Link to="# ">
+              <div>
                 <span>
                   <i className="bi bi-lightning-charge-fill icon-admin"></i>
                 </span>
                 <span>Dashboard</span>
-              </Link>
+              </div>
             </li>
           </ul>
 
           <div className="txtheader">Product</div>
           <ul className="list-menu">
             <li>
-              <Link to="# ">
+              <div>
                 <span>
                   <i className="fab fa-product-hunt icon-admin"></i>
                 </span>
                 <span>Products</span>
-              </Link>{" "}
+              </div>{" "}
             </li>
-
             <li>
-              <Link to="# ">
+              <div to="# ">
                 <i className="bi bi-plus-square-fill icon-admin"></i>Add Product
-              </Link>{" "}
+              </div>{" "}
             </li>
           </ul>
 
           <div className="txtheader">Brand</div>
           <ul className="list-menu">
-            <li>
-              <Link to="/dashboard/brand">
-                <i className="fab fa-react icon-admin"></i>Brands
-              </Link>
-            </li>
-            <li>
-              <Link to="# ">
-                <i className="bi bi-plus-square-fill icon-admin"></i>Add Brand
-              </Link>
+            <li onClick={() => toggle("brand")}>
+              <div>
+                <i className="fab fa-react icon-admin"></i>
+                Brands
+              </div>
             </li>
           </ul>
           <div className="txtheader">Model</div>
           <ul className="list-menu">
-            <li>
-              <Link to="/dashboard/model">
+            <li onClick={() => toggle("model")}>
+              <div>
                 <i className="bi bi-front icon-admin"></i>Models
-              </Link>
+              </div>
             </li>
             <li>
-              <Link to="/dashboard/add-model">
+              <div>
                 <i className="bi bi-plus-square-fill icon-admin"></i>Add Model
-              </Link>
+              </div>
             </li>
           </ul>
           <div className="txtheader">Branch</div>
           <ul className="list-menu">
             <li>
-              <Link to="# ">
+              <div>
                 <i className="bi bi-geo-alt-fill icon-admin"></i>Branchs
-              </Link>
+              </div>
             </li>
           </ul>
           <div className="txtheader">Manage</div>
           <ul className="list-menu">
             <li>
-              <Link to="# ">
+              <div>
                 <i className="bi bi-person-fill icon-admin"></i>Users
-              </Link>
+              </div>
             </li>
             <li>
-              <Link to="# ">
+              <div>
                 <i className="fas fa-file-invoice icon-admin"></i>Invoices
-              </Link>
+              </div>
             </li>
           </ul>
           <div className="txtheader">Statistical</div>
           <ul className="list-menu">
             <li>
-              <Link to="# ">
+              <div>
                 <i className="fas fa-chart-line icon-admin"></i>Profit
-              </Link>
+              </div>
             </li>
             <li>
-              <Link to="# ">
+              <div>
                 <i className="bi bi-bar-chart-fill icon-admin"></i>Product
-              </Link>
+              </div>
             </li>
           </ul>
           <hr style={{ color: "#C4C4C4" }} />
           <div className="txtheader">Other</div>
           <ul className="list-menu">
             <li>
-              <Link to="# ">
+              <div>
                 <i className="bi bi-gear-fill icon-admin"></i>Setting
-              </Link>
+              </div>
             </li>
             <li>
-              <Link to="# ">
+              <div>
                 <i className="bi bi-box-arrow-left icon-admin"></i>Log out
-              </Link>
+              </div>
             </li>
           </ul>
         </div>
       </div>
-
-      {/* <div className="col">
-        <Switch>
-            <Route exact path="/dashboard/brand">
-              <FragmentBrandPage />
-            </Route>
-          </Switch>
-      </div> */}
     </div>
-    // </Router>
   );
 };
 

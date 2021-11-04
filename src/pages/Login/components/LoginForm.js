@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { Form, Input } from "reactstrap";
 import { loginAction } from "../../../redux/actions/Auth/authActions";
-import { Link } from "react-router-dom";
 import validate from "../hooks/validate";
 
 const FormLogin = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isPasswordShown, setIsPasswordShown] = useState(false);
+
   const login = async (e) => {
     e.preventDefault();
     const username = e.target.username.value;
@@ -18,6 +19,10 @@ const FormLogin = () => {
     if (!isValidData) return;
     const res = await dispatch(loginAction(isValidData));
     if (res) {
+      if (history.location.pathname === "/login") {
+        history.push("/");
+        return;
+      }
       history.goBack();
       return;
     }

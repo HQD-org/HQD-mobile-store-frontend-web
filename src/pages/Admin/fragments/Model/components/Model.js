@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
-import modelImg from "../../../common/images/3d-modeling.png";
+import modelImg from "../../../../../common/images/3d-modeling.png";
 
 const Model = (props) => {
   const { buttonLabel, className } = props;
@@ -341,4 +341,4 @@ const Model = (props) => {
   );
 };
 
-export default Model;
+export default React.memo(Model);

@@ -13,7 +13,7 @@ import {
   DropdownItem,
 } from "reactstrap";
 
-const AdminHeader = () => {
+const AdminHeader = (props) => {
   return (
     <div>
       <Navbar className="nav-header" light expand="md">

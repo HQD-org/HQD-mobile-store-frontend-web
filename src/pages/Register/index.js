@@ -6,28 +6,36 @@ import FormRegister from "./components/RegisterForm";
 
 const RegisterPage = () => {
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-6">
-          <img className="img-fluid" src={login2} alt="bg" width="100%"></img>
-        </div>
-        <div className="col">
-          <div className="row" style={{ justifyContent: "center" }}>
-            <p className="txtStart">START FOR FREE</p>
-            <h3 className="txtSignup">Sign up to HQD Mobile</h3>
+    <div>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6">
+            <img
+              className="img-fluid"
+              style={{ marginTop: "80px" }}
+              src={login2}
+              alt="bg"
+              width="100%"
+            ></img>
           </div>
-          <FormRegister />
-          <p className="text-center mt-2">
-            Have an account?{" "}
-            <span>
-              <Link
-                to="/login"
-                style={{ color: "#3fa5ef", textDecoration: "none" }}
-              >
-                Login now
-              </Link>
-            </span>
-          </p>
+          <div className="col">
+            <div className="row" style={{ justifyContent: "center" }}>
+              <p className="txtStart">START FOR FREE</p>
+              <h3 className="txtSignup">Sign up to HQD Mobile</h3>
+            </div>
+            <FormRegister />
+            <p className="text-center mt-2">
+              Have an account?{" "}
+              <span>
+                <Link
+                  to="/login"
+                  style={{ color: "#3fa5ef", textDecoration: "none" }}
+                >
+                  Login now
+                </Link>
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </div>

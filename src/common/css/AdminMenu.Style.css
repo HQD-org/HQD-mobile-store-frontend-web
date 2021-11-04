@@ -1,0 +1,48 @@
+.list-menu {
+  list-style-type: none;
+  margin-top: 10px;
+  padding-left: 0px;
+}
+
+.list-menu li div {
+  font-weight: bold;
+  color: #c4c4c4;
+  text-decoration: none;
+  display: block;
+  padding-left: 32px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.txtheader {
+  color: #727272;
+  margin-left: 15px;
+}
+
+.icon-admin {
+  color: #3fa5ef;
+  margin-right: 5px;
+}
+
+.list-menu li {
+  height: 50px;
+  line-height: 50px;
+}
+
+.list-menu > li > div:focus {
+  background-color: black;
+  color: white;
+}
+
+.list-menu li::after {
+  content: "";
+  width: 50px;
+  border-width: 50px;
+  background-color: #3fa5ef;
+}
+
+/* span {
+    position: relative;
+    top: 2px;
+    left: 4px;
+} */

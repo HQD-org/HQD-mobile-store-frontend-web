@@ -1,0 +1,34 @@
+.infor-HQD {
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.icon-mxh {
+    display: flex;
+    margin-left: 29px;
+    color: white;
+    font-size: 20px;
+}
+
+.contact-mail,
+.contact-phone {
+    color: white;
+}
+
+.txtContact {
+    color: white;
+    font-weight: bold;
+}
+
+.footer {
+    margin-top: 30px;
+    color: white;
+}
+
+.footer-bottom {
+    color: aliceblue;
+    text-align: center;
+    padding: 5px;
+    background-color: #000000;
+}

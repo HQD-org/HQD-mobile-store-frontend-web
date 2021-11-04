@@ -5,11 +5,10 @@ import { useHistory } from "react-router-dom";
 import { getAuthAction } from "../../redux/actions/Auth/authActions";
 
 const Authentication = (SpecificComponent, option, adminRoute = null) => {
-  function AuthenticationCheck(props) {
-    const user = useSelector((state) => state.user);
+  function CheckAuthentication(props) {
+    const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
     const history = useHistory();
-
     useEffect(() => {
       const fetchAuth = async () => {
         const res = await dispatch(getAuthAction());
@@ -19,8 +18,16 @@ const Authentication = (SpecificComponent, option, adminRoute = null) => {
           }
         } else {
           //đã đăng nhập
-          if (adminRoute && !res.payload.isAdmin) {
-            //Kiểm tra khong phai admin
+          console.log(
+            "log at ==> Authentication.js ==> line 22 ===> res: ",
+            res
+          );
+          if (
+            adminRoute &&
+            res.role !== "admin" &&
+            res.role !== "manager branch"
+          ) {
+            //khong phai admin
             history.push("/");
           } else {
             if (option === false) {
@@ -30,11 +37,9 @@ const Authentication = (SpecificComponent, option, adminRoute = null) => {
         }
       };
       fetchAuth();
-      //To know my current status, send Auth request
     }, []);
-    //Đã có login
     return <SpecificComponent {...props} user={user} />;
   }
-  return AuthenticationCheck;
+  return CheckAuthentication;
 };
 export default Authentication;

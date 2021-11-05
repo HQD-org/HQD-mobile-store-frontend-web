@@ -29,10 +29,12 @@ const login = async (body) => {
   } catch (error) {
     toastNotify("Đăng nhập thất bại");
     return {
+      isVerify: false,
       success: false,
     };
   }
 };
+
 const register = async (body) => {
   try {
     const res = await axiosClient.post(`${url}/register`, body);
@@ -48,6 +50,36 @@ const register = async (body) => {
   }
 };
 
-const Auth = { getAuth, login, register };
+const verify = async (body) => {
+  try {
+    const res = await axiosClient.post(`${url}/verify`, body);
+    toastNotify(res ? res.message.VN : "Xác minh thất bại");
+    return res && res.data
+      ? { data: res || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    toastNotify("Xác minh thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const sendOTP = async (body) => {
+  try {
+    const res = await axiosClient.post(`${url}/forgot-password`, body);
+    toastNotify(res ? res.message.VN : "Gửi otp thất bại");
+    return res && res.data
+      ? { data: res || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    toastNotify("Gửi otp thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const Auth = { getAuth, login, register, verify, sendOTP };
 
 export default Auth;

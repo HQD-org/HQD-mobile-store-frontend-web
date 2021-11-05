@@ -6,8 +6,10 @@ import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOGOUT,
-  REGISTER_FAIL,
-  REGISTER_SUCCESS,
+  // REGISTER_FAIL,
+  // REGISTER_SUCCESS,
+  // VERIFY_FAIL,
+  // VERIFY_SUCCESS,
 } from "../../actions/Auth/types";
 
 const initState = {
@@ -28,10 +30,10 @@ export default function (state = initState, action) {
       return { ...state, user: action.payload, isLogin: true };
     case LOGOUT:
       return { ...state, user: action.payload, isLogin: false };
-    case REGISTER_FAIL:
-      return { ...state, user: action.payload };
-    case REGISTER_SUCCESS:
-      return { ...state, user: action.payload };
+    // case REGISTER_FAIL:
+    // case REGISTER_SUCCESS:
+    // case VERIFY_FAIL:
+    // case VERIFY_SUCCESS:
     default:
       return state;
   }

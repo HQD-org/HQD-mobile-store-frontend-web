@@ -93,7 +93,7 @@ const FormRegister = () => {
     );
     if (res) {
       e.target.reset();
-      history.goBack();
+      history.push(`/verify?email=${email}`);
       return;
     }
   };

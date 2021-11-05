@@ -9,7 +9,7 @@ const ForgotPasswordRoute = () => {
   return (
     <Switch>
       <Route
-        path={PATH.FORGOTPASSWORD}
+        path={PATH.FORGOT_PASSWORD}
         exact
         component={Auth(ForgotPasswordPage, false)}
       />

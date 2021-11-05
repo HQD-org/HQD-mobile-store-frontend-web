@@ -3,14 +3,14 @@ import { Route, Switch } from "react-router-dom";
 import Auth from "../common/components/Authentication";
 import { PATH } from "../common/constants/RoutePath";
 
-const OTPPage = lazy(() => import("../pages/OTP"));
+const VerifyPage = lazy(() => import("../pages/Verify"));
 
-const OTPRoute = () => {
+const VerifyRoute = () => {
   return (
     <Switch>
-      <Route path={PATH.OTPCODE} exact component={Auth(OTPPage, false)} />
+      <Route path={PATH.VERIFY} exact component={Auth(VerifyPage, false)} />
     </Switch>
   );
 };
 
-export default OTPRoute;
+export default VerifyRoute;

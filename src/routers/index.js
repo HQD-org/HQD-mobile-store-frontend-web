@@ -7,9 +7,8 @@ import DashboardRoute from "./Dashboard.Route";
 import ForgotPasswordRoute from "./ForgotPassword.Route";
 import HomeRoute from "./Home.Route";
 import LoginRoute from "./Login.Route";
-import OTPRoute from "./OTP.Route";
 import RegisterRoute from "./Register.Route";
-
+import VerifyRoute from "./Verify.Route";
 const Routers = () => {
   return (
     <Router>
@@ -20,7 +19,7 @@ const Routers = () => {
         <LoginRoute />
         <RegisterRoute />
         <ForgotPasswordRoute />
-        <OTPRoute />
+        <VerifyRoute />
         <AppFooter />
       </Suspense>
       <Loading />

@@ -36,6 +36,7 @@ const FormLogin = () => {
             name="username"
             placeholder="E-mail Address"
             className="form-control"
+            autoFocus
           />
 
           <div className="div-password">

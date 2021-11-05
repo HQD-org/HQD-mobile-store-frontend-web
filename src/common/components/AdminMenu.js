@@ -54,7 +54,7 @@ const AdminMenu = (props) => {
                 <i className="bi bi-front icon-admin"></i>Models
               </div>
             </li>
-            <li>
+            <li onClick={() => toggle("add model")}>
               <div>
                 <i className="bi bi-plus-square-fill icon-admin"></i>Add Model
               </div>

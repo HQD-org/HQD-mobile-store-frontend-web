@@ -90,4 +90,4 @@ const ModelHeader = () => {
   );
 };
 
-export default React.memo(ModelHeader);
+export default ModelHeader;

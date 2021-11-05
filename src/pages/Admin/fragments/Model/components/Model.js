@@ -341,4 +341,4 @@ const Model = (props) => {
   );
 };
 
-export default React.memo(Model);
+export default Model;

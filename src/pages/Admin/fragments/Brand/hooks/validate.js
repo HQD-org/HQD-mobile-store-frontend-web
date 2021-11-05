@@ -2,13 +2,14 @@ import validator from "validator";
 import toastNotify from "../../../../../common/toastify";
 
 const validateAddBrand = (data) => {
+  console.log("log at ==> validate.js ==> line 5==> data: ", data);
   const isBrandName = validator.isEmpty(data.name);
   if (isBrandName) {
     toastNotify("Tên thương hiệu không được để trống");
     return false;
   }
 
-  if (!data.status) {
+  if (data.status === "0") {
     toastNotify("Vui lòng chọn trạng thái");
     return false;
   }
@@ -19,7 +20,7 @@ const validateAddBrand = (data) => {
     return false;
   }
 
-  if (!data.image) {
+  if (data.images.length === 0) {
     toastNotify("Hình không được bỏ trống");
     return false;
   }

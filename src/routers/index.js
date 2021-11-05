@@ -3,7 +3,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import AppFooter from "../common/components/AppFooter";
 import AppHeader from "../common/components/AppHeader";
 import Loading from "../common/components/Loading";
-import AddModelRoute from "./AddModel.Route";
 import DashboardRoute from "./Dashboard.Route";
 import ForgotPasswordRoute from "./ForgotPassword.Route";
 import HomeRoute from "./Home.Route";
@@ -17,7 +16,6 @@ const Routers = () => {
       <Suspense fallback={<Loading />}>
         <AppHeader />
         <DashboardRoute />
-        <AddModelRoute />
         <HomeRoute />
         <LoginRoute />
         <RegisterRoute />

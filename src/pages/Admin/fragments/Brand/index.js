@@ -9,22 +9,16 @@ import {
 import Brands from "./components/Brands";
 import HeaderBrand from "./components/HeaderBrand";
 
-const BrandFragment = React.memo(() => {
+const BrandFragment = () => {
   const dispatch = useDispatch();
-  let brands = useSelector((state) => state.brands.list) || [];
-  let totalBrand = useSelector((state) => state.brands.totalBrand) || 0;
+  let brands = useSelector((state) => state.brands.list);
+  let totalBrand = useSelector((state) => state.brands.totalBrand);
+  let updateFlag = useSelector((state) => state.brands.updateFlag);
   const [searchTerm, setSearchTerm] = useState(undefined);
   const [status, setStatus] = useState(undefined);
-  const getListBrand = async (page, itemPerPage) => {
-    await dispatch(getAllBrandAction(page, itemPerPage));
-  };
-
-  useEffect(() => {
-    getListBrand(1, 4);
-  }, []);
   const [pagination, setPagination] = useState({
     page: 1,
-    itemPerPage: 4,
+    itemPerPage: 8,
     totalItem: totalBrand,
   });
 
@@ -36,12 +30,24 @@ const BrandFragment = React.memo(() => {
     }
   };
 
+  const onPageChange = async (page) => {
+    setPagination({ ...pagination, page });
+  };
+
+  useEffect(() => {
+    const getListBrand = async (page, itemPerPage) => {
+      await dispatch(getAllBrandAction(page, itemPerPage));
+    };
+    getListBrand(1, 8);
+  }, []);
+
   useEffect(() => {
     setPagination({
       ...pagination,
       page: 1,
     });
   }, [status, searchTerm]);
+
   useEffect(() => {
     const filter = async () => {
       let query = {
@@ -53,35 +59,24 @@ const BrandFragment = React.memo(() => {
       if (status) query.status = status;
       await dispatch(filterBrandAction(query));
     };
+
     filter();
   }, [pagination]);
+
   useEffect(() => {
     setPagination({
       ...pagination,
       totalItem: totalBrand,
     });
-  }, [totalBrand]);
-
-  const onPageChange = async (page) => {
-    setPagination({ ...pagination, page });
-  };
+  }, [updateFlag, totalBrand]);
 
   return (
     <>
-      <HeaderBrand
-        getListBrand={getListBrand}
-        pagination={pagination}
-        onFilterValueChange={onFilterValueChange}
-        status={status}
-      />
-      <Brands
-        getListBrand={getListBrand}
-        listBrand={brands}
-        pagination={pagination}
-      />
+      <HeaderBrand onFilterValueChange={onFilterValueChange} status={status} />
+      <Brands listBrand={brands} />
       <Pagination pagination={pagination} onPageChange={onPageChange} />
     </>
   );
-});
+};
 
 export default BrandFragment;

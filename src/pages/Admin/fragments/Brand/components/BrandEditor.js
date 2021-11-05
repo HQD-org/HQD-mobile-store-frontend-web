@@ -1,117 +1,110 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
 import { useDispatch } from "react-redux";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import AddBtn from "../../../../../common/images/add-button.png";
+import {
+  img,
+  thumb,
+  thumbInner,
+  thumbsContainer,
+} from "../../../../../common/components/Thumb";
+import { storage } from "../../../../../common/config/firebase";
+import { default as AddBtn } from "../../../../../common/images/add-button.png";
 import {
   addBrandAction,
   updateBrandAction,
 } from "../../../../../redux/actions/Brand/brandAction";
+import { changeLoading } from "../../../../../redux/actions/System/systemAction";
 import { validateAddBrand, validateUpdateBrand } from "../hooks/validate";
-import { useDropzone } from "react-dropzone";
-import { storage } from "../../../../../common/config/firebase";
-import UpdateBtn from "../../../../../common/images/add-button.png";
-const thumbsContainer = {
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  marginTop: 16,
-};
 
-const thumb = {
-  display: "inline-flex",
-  borderRadius: 2,
-  border: "1px solid #eaeaea",
-  marginBottom: 8,
-  marginRight: 8,
-  width: 100,
-  height: 100,
-  padding: 4,
-  boxSizing: "border-box",
-};
+const loading =
+  (loading = false) =>
+  (dispatch) => {
+    dispatch(changeLoading(loading));
+  };
 
-const thumbInner = {
-  display: "flex",
-  minWidth: 0,
-  overflow: "hidden",
-};
-
-const img = {
-  display: "block",
-  width: "auto",
-  height: "100%",
-};
 const BrandEditor = (props) => {
-  const { className, toggle, getListBrand, option, brand, page, itemPerPage } =
-    props;
+  const { className, toggle, option, brand } = props;
   let { modal } = props;
   const dispatch = useDispatch();
 
-  const [files, setFiles] = useState([]);
+  const [images, setImages] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
-      );
+      if (acceptedFiles) {
+        setImages(
+          acceptedFiles.map((file) =>
+            Object.assign(file, {
+              preview: URL.createObjectURL(file),
+            })
+          )
+        );
+      }
     },
   });
 
-  const thumbs = files.map((file) => (
-    <div style={thumb} key={file.name}>
+  useEffect(() => {
+    if (!option && modal) {
+      console.log("log at ==> BrandEditor ==> image change: ", images);
+
+      setImages([{ preview: brand.image }]);
+    }
+  }, [modal]);
+
+  const thumbs = images.map((image) => (
+    <div style={thumb} key={image.name}>
       <div style={thumbInner}>
-        <img src={file.preview} style={img} alt="" />
+        <img src={image.preview} style={img} alt="" />
       </div>
     </div>
   ));
 
+  const onToggle = () => {
+    setImages([]);
+    toggle(false);
+  };
+
   useEffect(
     () => () => {
-      // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
+      images.forEach((image) => URL.revokeObjectURL(image.preview));
     },
-    [files]
+    [images]
   );
-
-  const [image, setImage] = useState(null);
-  const onImageChange = (e) => {
-    if (e.target.files[0]) {
-      setImage(e.target.files[0]);
-    }
-  };
 
   const addBrand = (e) => {
     e.preventDefault();
     const name = e.target.brandName.value;
     const description = e.target.description.value;
     const status = e.target.status.value;
-    const isValidData = validateAddBrand({ name, status, image, description });
+    const isValidData = validateAddBrand({
+      name,
+      status,
+      images,
+      description,
+    });
     if (!isValidData) return;
-    const uploadTask = storage.ref(`Brand/${image.name}`).put(image);
+    dispatch(loading(true));
+    const uploadTask = storage.ref(`Brand/${images[0].name}`).put(images[0]);
     uploadTask.on(
       "state_changed",
       (snapshot) => {},
       (error) => {
+        dispatch(loading());
         console.log(error);
       },
       async () => {
         const url = await storage
           .ref("Brand")
-          .child(image.name)
+          .child(images[0].name)
           .getDownloadURL();
+        dispatch(loading());
         if (url) {
-          console.log("log at ==> AddBrand.js ===> line 102 ==> url: ", url);
           const res = await dispatch(
             addBrandAction({ name, image: url, status, description })
           );
-          if (res) {
-            toggle(false);
-            if (!getListBrand) return;
-            getListBrand(page, itemPerPage);
-          }
+          if (res) onToggle();
         }
       }
     );
@@ -128,29 +121,27 @@ const BrandEditor = (props) => {
     });
     const id = brand._id;
     if (!isValidData) return;
-    if (image) {
-      const uploadTask = storage.ref(`Brand/${image.name}`).put(image);
+    if (images.length > 0) {
+      dispatch(loading(true));
+      const uploadTask = storage.ref(`Brand/${images[0].name}`).put(images[0]);
       uploadTask.on(
         "state_changed",
         (snapshot) => {},
         (error) => {
+          dispatch(loading());
           console.log(error);
         },
         async () => {
           const url = await storage
             .ref("Brand")
-            .child(image.name)
+            .child(images[0].name)
             .getDownloadURL();
           if (url) {
-            console.log("log at ==> AddBrand.js ===> line 102 ==> url: ", url);
+            dispatch(loading());
             const res = await dispatch(
               updateBrandAction({ id, name, image: url, status, description })
             );
-            if (res) {
-              toggle(false);
-              if (!getListBrand) return;
-              getListBrand(page, itemPerPage);
-            }
+            if (res) onToggle();
           }
         }
       );
@@ -158,19 +149,15 @@ const BrandEditor = (props) => {
       const res = await dispatch(
         updateBrandAction({ id, name, status, description })
       );
-      if (res) {
-        toggle(false);
-        if (!getListBrand) return;
-        getListBrand(page, itemPerPage);
-      }
+      if (res) onToggle();
     }
   };
 
   return (
-    <Modal isOpen={modal} toggle={() => toggle(false)} className={className}>
-      <ModalHeader className="close-x" toggle={() => toggle(false)}>
+    <Modal isOpen={modal} toggle={onToggle} className={className}>
+      <ModalHeader className="close-x" toggle={onToggle}>
         <img
-          src={option ? AddBtn : UpdateBtn}
+          src={AddBtn}
           alt={option ? "add icon" : "update icon"}
           style={{ width: "30px", marginRight: "5px" }}
         />
@@ -230,11 +217,7 @@ const BrandEditor = (props) => {
               </label>
               <div className="border-img">
                 <div {...getRootProps({ className: "dropzone" })}>
-                  <input
-                    {...getInputProps()}
-                    name="image"
-                    onChange={onImageChange}
-                  />
+                  <input {...getInputProps()} name="image" />
                   <p className="txtSelectImg">
                     Select one images for your brand
                   </p>
@@ -247,18 +230,7 @@ const BrandEditor = (props) => {
             <Button type="submit" color="primary">
               Submit
             </Button>{" "}
-            {/* {option ? (
-              <></>
-            ) : (
-              <Button type="button" color="danger" onClick={deleteBrand}>
-                Delete
-              </Button>
-            )} */}
-            <Button
-              type="button"
-              color="secondary"
-              onClick={() => toggle(false)}
-            >
+            <Button type="button" color="secondary" onClick={onToggle}>
               Cancel
             </Button>
           </ModalFooter>

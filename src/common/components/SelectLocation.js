@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const SelectComponent = (props) => {
+const SelectLocation = (props) => {
   const { options, name, placeholder, onSelectChange } = props;
   const [selectedOption, setSelectedOption] = useState(-1);
 
@@ -44,4 +44,4 @@ const SelectComponent = (props) => {
   );
 };
 
-export default SelectComponent;
+export default SelectLocation;

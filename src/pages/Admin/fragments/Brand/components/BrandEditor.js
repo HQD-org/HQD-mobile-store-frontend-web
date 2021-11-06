@@ -1,15 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { useDropzone } from "react-dropzone";
 import { useDispatch } from "react-redux";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import {
-  img,
-  thumb,
-  thumbInner,
-  thumbsContainer,
-} from "../../../../../common/components/Thumb";
+import InputImage from "../../../../../common/components/InputImage";
+import SelectCustom from "../../../../../common/components/SelectCustom";
 import { storage } from "../../../../../common/config/firebase";
+import { statusBrand } from "../../../../../common/constants/ListSelect";
 import { default as AddBtn } from "../../../../../common/images/add-button.png";
 import {
   addBrandAction,
@@ -17,7 +13,6 @@ import {
 } from "../../../../../redux/actions/Brand/brandAction";
 import { changeLoading } from "../../../../../redux/actions/System/systemAction";
 import { validateAddBrand, validateUpdateBrand } from "../hooks/validate";
-
 const loading =
   (loading = false) =>
   (dispatch) => {
@@ -28,50 +23,18 @@ const BrandEditor = (props) => {
   const { className, toggle, option, brand } = props;
   let { modal } = props;
   const dispatch = useDispatch();
-
   const [images, setImages] = useState([]);
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: "image/*",
-    onDrop: (acceptedFiles) => {
-      if (acceptedFiles) {
-        setImages(
-          acceptedFiles.map((file) =>
-            Object.assign(file, {
-              preview: URL.createObjectURL(file),
-            })
-          )
-        );
-      }
-    },
-  });
 
   useEffect(() => {
     if (!option && modal) {
-      console.log("log at ==> BrandEditor ==> image change: ", images);
-
       setImages([{ preview: brand.image }]);
     }
   }, [modal]);
-
-  const thumbs = images.map((image) => (
-    <div style={thumb} key={image.name}>
-      <div style={thumbInner}>
-        <img src={image.preview} style={img} alt="" />
-      </div>
-    </div>
-  ));
 
   const onToggle = () => {
     setImages([]);
     toggle(false);
   };
-
-  useEffect(
-    () => () => {
-      images.forEach((image) => URL.revokeObjectURL(image.preview));
-    },
-    [images]
-  );
 
   const addBrand = (e) => {
     e.preventDefault();
@@ -121,7 +84,7 @@ const BrandEditor = (props) => {
     });
     const id = brand._id;
     if (!isValidData) return;
-    if (images.length > 0) {
+    if (images[0].preview !== brand.image) {
       dispatch(loading(true));
       const uploadTask = storage.ref(`Brand/${images[0].name}`).put(images[0]);
       uploadTask.on(
@@ -184,17 +147,11 @@ const BrandEditor = (props) => {
                 Trạng thái
               </label>
               <div className="col-sm-8">
-                <select
+                <SelectCustom
                   defaultValue={option ? 0 : brand.status}
                   name="status"
-                  className="form-select"
-                >
-                  <option value={0} disabled={true}>
-                    Chọn trạng thái
-                  </option>
-                  <option value="active">Hoạt động</option>
-                  <option value="stop selling">Ngưng kinh doanh</option>
-                </select>
+                  list={statusBrand}
+                />
               </div>
             </div>
             <div className="row mb-3">
@@ -211,20 +168,11 @@ const BrandEditor = (props) => {
                 ></textarea>
               </div>
             </div>
-            <section>
-              <label htmlFor="input-img" className="col-sm-4 form-label">
-                Hình ảnh
-              </label>
-              <div className="border-img">
-                <div {...getRootProps({ className: "dropzone" })}>
-                  <input {...getInputProps()} name="image" />
-                  <p className="txtSelectImg">
-                    Select one images for your brand
-                  </p>
-                </div>
-                <aside style={thumbsContainer}>{thumbs}</aside>
-              </div>
-            </section>
+            <InputImage
+              images={images}
+              setImages={setImages}
+              multiple={false}
+            />
           </div>
           <ModalFooter>
             <Button type="submit" color="primary">

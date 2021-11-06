@@ -19,7 +19,7 @@ const FormLogin = () => {
     if (!isValidData) return;
     const res = await dispatch(loginAction(isValidData));
     if (res) {
-      if (!res.isVerify) {
+      if (res.needVerify) {
         history.push(`/verify?email=${username}`);
         return;
       }

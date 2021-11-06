@@ -5,8 +5,8 @@ import BrandFragment from "./fragments/Brand";
 import ModelFragment from "./fragments/Model";
 
 const AdminPage = () => {
-  const [toggleBrand, setToggleBrand] = useState(true);
-  const [toggleModel, setToggleModel] = useState(false);
+  const [toggleBrand, setToggleBrand] = useState(false);
+  const [toggleModel, setToggleModel] = useState(true);
   const [toggleAddModel, setToggleAddModel] = useState(false);
   const toggle = (type) => {
     switch (type) {
@@ -15,14 +15,12 @@ const AdminPage = () => {
         setToggleBrand(true);
         setToggleModel(false);
         setToggleAddModel(false);
-
         break;
       case "model":
         if (toggleModel) break;
         setToggleBrand(false);
         setToggleModel(true);
         setToggleAddModel(false);
-
         break;
       case "add model":
         if (toggleAddModel) break;

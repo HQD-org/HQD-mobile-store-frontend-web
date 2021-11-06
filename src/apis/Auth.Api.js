@@ -80,6 +80,21 @@ const sendOTP = async (body) => {
   }
 };
 
-const Auth = { getAuth, login, register, verify, sendOTP };
+const forgotPassword = async (body) => {
+  try {
+    const res = await axiosClient.post(`${url}/forgot-password/verify`, body);
+    toastNotify(res ? res.message.VN : "Lấy lại mật khẩu thất bại");
+    return res && res.data
+      ? { data: res || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    toastNotify("Lấy lại mật khẩu thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const Auth = { getAuth, login, register, verify, sendOTP, forgotPassword };
 
 export default Auth;

@@ -124,7 +124,7 @@ const BrandEditor = (props) => {
           alt={option ? "add icon" : "update icon"}
           style={{ width: "30px", marginRight: "5px" }}
         />
-        Add Brand
+        {option ? "Add Brand" : "Update Brand"}
       </ModalHeader>
       <ModalBody>
         <form onSubmit={option ? addBrand : updateBrand}>

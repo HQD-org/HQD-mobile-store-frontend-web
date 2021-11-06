@@ -8,6 +8,7 @@ import login2 from "../../common/images/login2.png";
 import {
   sendOTPAction,
   verifyAction,
+  forgotPasswordAction,
 } from "../../redux/actions/Auth/authActions";
 import toastNotify from "../../common/toastify";
 
@@ -17,17 +18,22 @@ const VerifyPage = () => {
   const [otp, setOtp] = useState("");
   const [disabled, setDisabled] = useState(false);
   const [time, setTime] = useState(0);
-  const email = queryString.parse(history.location.search).email;
+  const search = queryString.parse(history.location.search);
+  const { email, type } = search;
   const handleChange = (otp) => setOtp(otp);
   const verify = async () => {
     if (otp.length < 4) {
       toastNotify("Vui lòng nhập đủ 4 ký tự", "error");
       return;
     }
-    const res = await dispatch(verifyAction({ otp, username: email }));
-    if (res) {
-      history.push("/login");
+    let res = false;
+    if (type === "password") {
+      res = await dispatch(forgotPasswordAction({ otp, username: email }));
+    } else {
+      res = await dispatch(verifyAction({ otp, username: email }));
     }
+    if (res) history.push("/login");
+    return;
   };
   const resendOTP = async () => {
     await dispatch(sendOTPAction({ username: email }));

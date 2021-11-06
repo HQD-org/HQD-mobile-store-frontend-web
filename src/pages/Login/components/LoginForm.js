@@ -20,7 +20,7 @@ const FormLogin = () => {
     const res = await dispatch(loginAction(isValidData));
     if (res) {
       if (res.needVerify) {
-        history.push(`/verify?email=${username}`);
+        history.push(`/verify?email=${username}&type=active`);
         return;
       }
       if (history.location.pathname === "/login") {

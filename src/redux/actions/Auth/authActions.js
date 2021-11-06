@@ -184,3 +184,16 @@ export const sendOTPAction = (body) => async (dispatch) => {
     return false;
   }
 };
+
+export const forgotPasswordAction = (body) => async (dispatch) => {
+  try {
+    dispatch(loading(true));
+    const res = await authAPI.forgotPassword(body);
+    dispatch(loading());
+    return res.success;
+  } catch (err) {
+    console.log(err);
+    dispatch(loading());
+    return false;
+  }
+};

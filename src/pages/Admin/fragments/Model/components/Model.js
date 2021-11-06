@@ -10,7 +10,6 @@ const Model = (props) => {
   const toggle = () => setModal(!modal);
   return (
     <div className="container-fluid">
-      {" "}
       <div className="row">
         <table className="table table-striped" style={{ marginTop: "30px" }}>
           <thead>
@@ -34,7 +33,7 @@ const Model = (props) => {
               <td>2020</td>
               <td>Hoạt động</td>
               <td>
-                <i class="bi bi-x-circle-fill"></i>
+                <i className="bi bi-x-circle-fill"></i>
               </td>
             </tr>
             <tr onClick={toggle}>
@@ -46,7 +45,7 @@ const Model = (props) => {
               <td>2020</td>
               <td>Hoạt động</td>
               <td>
-                <i class="bi bi-x-circle-fill"></i>
+                <i className="bi bi-x-circle-fill"></i>
               </td>
             </tr>
             <tr onClick={toggle}>
@@ -58,11 +57,10 @@ const Model = (props) => {
               <td>2020</td>
               <td>Hoạt động</td>
               <td>
-                <i class="bi bi-x-circle-fill"></i>
+                <i className="bi bi-x-circle-fill"></i>
               </td>
             </tr>
             <tr onClick={toggle}>
-              {" "}
               {buttonLabel}
               <td>4</td>
               <td>Oppo A31</td>
@@ -71,7 +69,7 @@ const Model = (props) => {
               <td>2020</td>
               <td>Hoạt động</td>
               <td>
-                <i class="bi bi-x-circle-fill"></i>
+                <i className="bi bi-x-circle-fill"></i>
               </td>
             </tr>
           </tbody>
@@ -92,30 +90,30 @@ const Model = (props) => {
             <form>
               <div className="row mb-3">
                 <div className="col-5">
-                  <div class="mb-3">
+                  <div className="mb-3">
                     <label
                       for="name-model"
-                      class="form-label"
+                      className="form-label"
                       style={{ width: "223px" }}
                     >
                       Tên mẫu
                     </label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="name-model"
                       required
                     />
                   </div>
                 </div>
                 <div className="col" style={{ width: "58%" }}>
-                  <div class="mb-3">
-                    <label for="screen" class="form-label">
+                  <div className="mb-3">
+                    <label for="screen" className="form-label">
                       Màn hình
                     </label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="screen"
                       required
                     />
@@ -124,43 +122,43 @@ const Model = (props) => {
               </div>
               <div className="row mb-3">
                 <div className="col" style={{ width: "33.5%" }}>
-                  <div class="mb-3">
+                  <div className="mb-3">
                     <label
                       for="operating-system"
-                      class="form-label"
+                      className="form-label"
                       style={{ width: "288px" }}
                     >
                       Hệ điều hành
                     </label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="operating-system"
                       required
                     />
                   </div>
                 </div>
                 <div className="col" style={{ width: "33%" }}>
-                  <div class="mb-3">
-                    <label for="rear-camera" class="form-label">
+                  <div className="mb-3">
+                    <label for="rear-camera" className="form-label">
                       Camera sau
                     </label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="raer-camera"
                       required
                     />
                   </div>
                 </div>
                 <div className="col" style={{ width: "33%" }}>
-                  <div class="mb-3">
-                    <label for="front-camera" class="form-label">
+                  <div className="mb-3">
+                    <label for="front-camera" className="form-label">
                       Camera trước
                     </label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="front-camera"
                       required
                     />
@@ -169,15 +167,15 @@ const Model = (props) => {
               </div>
               <div className="row mb-3">
                 <div className="col-5">
-                  <div class="mb-3">
+                  <div className="mb-3">
                     <label
                       for="name-model"
-                      class="form-label"
+                      className="form-label"
                       style={{ width: "236px" }}
                     >
                       Thương hiệu
                     </label>
-                    <select class="form-select">
+                    <select className="form-select">
                       <option selected disabled>
                         Choose..
                       </option>
@@ -187,29 +185,34 @@ const Model = (props) => {
                   </div>
                 </div>
                 <div className="col" style={{ width: "30%" }}>
-                  <div class="mb-3">
+                  <div className="mb-3">
                     <label
                       for="sim"
-                      class="form-label"
+                      className="form-label"
                       style={{ width: "50px" }}
                     >
                       Sim
                     </label>
-                    <input type="text" class="form-control" id="sim" required />
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="sim"
+                      required
+                    />
                   </div>
                 </div>
                 <div className="col" style={{ width: "27.8%" }}>
-                  <div class="mb-3">
+                  <div className="mb-3">
                     <label
                       for="chip"
-                      class="form-label"
+                      className="form-label"
                       style={{ width: "50px" }}
                     >
                       Chip
                     </label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="chip"
                       required
                     />
@@ -218,62 +221,62 @@ const Model = (props) => {
               </div>
               <div className="row mb-3">
                 <div className="col" style={{ width: "30%" }}>
-                  <div class="mb-3">
+                  <div className="mb-3">
                     <label
                       for="menmory"
-                      class="form-label"
+                      className="form-label"
                       style={{ width: "343px" }}
                     >
                       Thẻ nhớ
                     </label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="memory"
                       required
                     />
                   </div>
                 </div>
                 <div className="col" style={{ width: "20%" }}>
-                  <div class="mb-3">
+                  <div className="mb-3">
                     <label
                       for="battery"
-                      class="form-label"
+                      className="form-label"
                       style={{ width: "50px" }}
                     >
                       Pin
                     </label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="battery"
                       required
                     />
                   </div>
                 </div>
                 <div className="col" style={{ width: "20%" }}>
-                  <div class="mb-3">
+                  <div className="mb-3">
                     <label
                       for="charging"
-                      class="form-label"
+                      className="form-label"
                       style={{ width: "50px" }}
                     >
                       Sạc
                     </label>
                     <input
                       type="text"
-                      class="form-control"
+                      className="form-control"
                       id="charging"
                       required
                     />
                   </div>
                 </div>
                 <div className="col" style={{ width: "29.3%" }}>
-                  <div class="mb-3">
-                    <label for="status" class="form-label">
+                  <div className="mb-3">
+                    <label for="status" className="form-label">
                       Trạng thái
                     </label>
-                    <select class="form-select">
+                    <select className="form-select">
                       <option selected disabled>
                         Choose..
                       </option>
@@ -284,19 +287,19 @@ const Model = (props) => {
                   </div>
                 </div>
               </div>
-              <div class="row mb-3">
+              <div className="row mb-3">
                 <div className="col" style={{ width: "99.2%" }}>
                   <div className="mb-3">
                     <label
                       for="input-description"
-                      class="form-label"
+                      className="form-label"
                       style={{ width: "153px" }}
                     >
                       Mô tả
                     </label>
 
                     <textarea
-                      class="form-control"
+                      className="form-control"
                       id="input-description"
                       rows="4"
                       required
@@ -305,17 +308,17 @@ const Model = (props) => {
                 </div>
               </div>
               <div className="row mb-3">
-                <div class="col-5 mb-3">
+                <div className="col-5 mb-3">
                   <label
                     for="timeStart"
-                    class="form-label"
+                    className="form-label"
                     style={{ width: "227px" }}
                   >
                     Thời gian ra mắt
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="timeStart"
                     required
                   />

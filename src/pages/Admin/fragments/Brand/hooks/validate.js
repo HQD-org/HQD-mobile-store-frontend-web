@@ -2,7 +2,6 @@ import validator from "validator";
 import toastNotify from "../../../../../common/toastify";
 
 const validateAddBrand = (data) => {
-  console.log("log at ==> validate.js ==> line 5==> data: ", data);
   const isBrandName = validator.isEmpty(data.name);
   if (isBrandName) {
     toastNotify("Tên thương hiệu không được để trống");

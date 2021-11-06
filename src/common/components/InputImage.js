@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 
 const thumbsContainer = {
@@ -32,25 +32,29 @@ const img = {
   height: "100%",
 };
 
-const UpLoad = (props) => {
-  const [files, setFiles] = useState([]);
+const InputImage = (props) => {
+  const { images, setImages, multiple } = props;
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
-    onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
-      );
+    onDrop: async (acceptedImages) => {
+      const previews = await acceptedImages.map((image) => {
+        Object.assign(image, {
+          preview: URL.createObjectURL(image),
+        });
+        return image;
+      });
+      if (multiple) {
+        setImages(Array.from([...images, ...previews]));
+      } else {
+        setImages(previews);
+      }
     },
   });
 
-  const thumbs = files.map((file) => (
-    <div style={thumb} key={file.name}>
+  const thumbs = images.map((image, index) => (
+    <div style={thumb} key={index}>
       <div style={thumbInner}>
-        <img src={file.preview} style={img} alt="" />
+        <img src={image.preview} style={img} alt="" />
       </div>
     </div>
   ));
@@ -58,20 +62,20 @@ const UpLoad = (props) => {
   useEffect(
     () => () => {
       // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
+      images.forEach((image) => URL.revokeObjectURL(image.preview));
     },
-    [files]
+    [images]
   );
 
   return (
     <section>
-      <label for="input-img" class="col-sm-4 form-label">
+      <label htmlFor="input-img" className="col-sm-4 form-label">
         Hình ảnh
       </label>
       <div className="border-img">
         <div {...getRootProps({ className: "dropzone" })}>
-          <input {...getInputProps()} required />
-          <p className="txtSelectImg">Select one or "n" image for your model</p>
+          <input {...getInputProps()} />
+          <p className="txtSelectImg">Select one or "n" image</p>
         </div>
         <aside style={thumbsContainer}>{thumbs}</aside>
       </div>
@@ -79,4 +83,4 @@ const UpLoad = (props) => {
   );
 };
 
-export default UpLoad;
+export default InputImage;

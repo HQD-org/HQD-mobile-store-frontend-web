@@ -19,6 +19,10 @@ const FormLogin = () => {
     if (!isValidData) return;
     const res = await dispatch(loginAction(isValidData));
     if (res) {
+      if (res.needVerify) {
+        history.push(`/verify?email=${username}`);
+        return;
+      }
       if (history.location.pathname === "/login") {
         history.push("/");
         return;
@@ -36,6 +40,7 @@ const FormLogin = () => {
             name="username"
             placeholder="E-mail Address"
             className="form-control"
+            autoFocus
           />
 
           <div className="div-password">

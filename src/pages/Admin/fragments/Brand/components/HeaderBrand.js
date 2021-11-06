@@ -3,10 +3,8 @@ import React, { useState, useRef } from "react";
 import { FormGroup } from "reactstrap";
 import "../../../../../common/css/Brand.Style.css";
 import BrandEditor from "./BrandEditor";
-const HeaderBrand = React.memo((props) => {
-  const { buttonLabel, getListBrand, pagination, onFilterValueChange, status } =
-    props;
-  const { page, itemPerPage } = pagination;
+const HeaderBrand = (props) => {
+  const { buttonLabel, onFilterValueChange, status } = props;
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const typingTimeoutRef = useRef(null);
@@ -86,14 +84,11 @@ const HeaderBrand = React.memo((props) => {
       <BrandEditor
         modal={modal}
         toggle={toggle}
-        getListBrand={getListBrand}
         option={true}
         brand={undefined}
-        page={page}
-        itemPerPage={itemPerPage}
       />
     </div>
   );
-});
+};
 
 export default HeaderBrand;

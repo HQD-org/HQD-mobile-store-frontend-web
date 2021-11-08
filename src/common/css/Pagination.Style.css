@@ -1,0 +1,18 @@
+.div-pagination {
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.btn-Prev,
+.btn-Next {
+    border: none;
+    padding: 5px 15px 5px 15px;
+    border-radius: 3px;
+}
+
+.btn-Prev:hover,
+.btn-Next:hover {
+    color: white;
+    background-color: #3fa5ef;
+    cursor: pointer;
+}

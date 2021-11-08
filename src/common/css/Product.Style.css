@@ -132,6 +132,58 @@ tbody>tr:hover {
     cursor: pointer;
 }
 
+.icon-product {
+    font-size: 25px;
+}
+
+.col-RAM {
+    width: 15%;
+}
+
+.col-Capacity {
+    width: 17%;
+}
+
+.img-productList {
+    width: 50% !important;
+    padding: 10px;
+}
+
+.img-top-text {
+    display: flex;
+}
+
+.txt-product {
+    margin: 10px;
+}
+
+.name-pro {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.price-pro {
+    padding: 10px;
+    background-color: #de7311;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.list-branch {
+    color: #2f8ed1;
+}
+
+.txt-status {
+    color: green;
+    font-weight: bold;
+}
+
+.card-product:hover {
+    filter: drop-shadow(1px 4px 3px #949393);
+    cursor: pointer;
+}
+
 
 /* .table-striped > tbody > tr:nth-of-type(even) {
   --bs-table-accent-bg: #d1e7f8 !important;

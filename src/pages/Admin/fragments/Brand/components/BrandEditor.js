@@ -78,6 +78,7 @@ const BrandEditor = (props) => {
 
   const [image, setImage] = useState(null);
   const onImageChange = (e) => {
+    ////Function sai
     if (e.target.files[0]) {
       setImage(e.target.files[0]);
     }
@@ -174,7 +175,7 @@ const BrandEditor = (props) => {
           alt={option ? "add icon" : "update icon"}
           style={{ width: "30px", marginRight: "5px" }}
         />
-        Add Brand
+        Add or Update Brand
       </ModalHeader>
       <ModalBody>
         <form onSubmit={option ? addBrand : updateBrand}>

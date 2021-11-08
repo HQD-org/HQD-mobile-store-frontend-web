@@ -28,7 +28,7 @@ const Brands = React.memo((props) => {
 
             <div className="card-body">
               <h5 className="card-title"> {value.name}</h5>
-              <p className="card-text">{value.description}</p>
+              <p className="card-text card-description">{value.description}</p>
             </div>
             <div className="card-footer">
               <small className="text-muted">{value.status}</small>

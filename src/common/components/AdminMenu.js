@@ -23,7 +23,7 @@ const AdminMenu = (props) => {
 
           <div className="txtheader">Product</div>
           <ul className="list-menu">
-            <li>
+            <li onClick={() => toggle("product")}>
               <div>
                 <span>
                   <i className="fab fa-product-hunt icon-admin"></i>

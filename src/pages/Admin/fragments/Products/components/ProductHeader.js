@@ -2,7 +2,7 @@ import React from "react";
 import "../../../../../common/css/Model.Style.css";
 import { FormGroup } from "reactstrap";
 
-const ModelHeader = () => {
+const ProductHeader = () => {
   return (
     <div className="container-fluid">
       <div
@@ -11,15 +11,15 @@ const ModelHeader = () => {
       >
         <div className="col">
           <div>
-            <i className="bi bi-front icon-admin icon-model" />
-            <span className="name-management">Model</span>
+            <i className="fab fa-product-hunt icon-admin icon-product" />
+            <span className="name-management">Product</span>
           </div>
           <p className="choosenHQD"> Choosing HQD mobile is a good ideal</p>
         </div>
       </div>
       <hr />
       <div className="row">
-        <div className="col-2">
+        <div className="col-4">
           <form>
             <input
               className="form-control me-2"
@@ -39,32 +39,43 @@ const ModelHeader = () => {
               <FormGroup>
                 <select className="form-select">
                   <option selected disabled>
+                    Filter by Branch
+                  </option>
+                  <option value="1">Q1</option>
+                  <option value="2">Q2</option>
+                </select>
+              </FormGroup>
+            </div>
+            <div className="col-2">
+              <FormGroup>
+                <select className="form-select">
+                  <option selected disabled>
                     Filter by Brand
                   </option>
-                  <option value="1">OPPO</option>
-                  <option value="2">SAMSUNG</option>
+                  <option value="1">SAMSUNG</option>
+                  <option value="2">OPPO</option>
                 </select>
               </FormGroup>
             </div>
-            <div className="col-2">
+            <div className="col-Capacity">
               <FormGroup>
                 <select className="form-select">
                   <option selected disabled>
-                    Filter by Operating System
+                    Filter by Capacity
                   </option>
-                  <option value="1">iOS</option>
-                  <option value="2">Android</option>
+                  <option value="1">32 GB</option>
+                  <option value="2">64 GB</option>
                 </select>
               </FormGroup>
             </div>
-            <div className="col-2">
+            <div className="col-RAM">
               <FormGroup>
                 <select className="form-select">
                   <option selected disabled>
-                    Filter by Time
+                    Filter by RAM
                   </option>
-                  <option value="1">2021</option>
-                  <option value="2">2020</option>
+                  <option value="1">2 GB</option>
+                  <option value="2">8 GB</option>
                 </select>
               </FormGroup>
             </div>
@@ -90,4 +101,4 @@ const ModelHeader = () => {
   );
 };
 
-export default React.memo(ModelHeader);
+export default React.memo(ProductHeader);

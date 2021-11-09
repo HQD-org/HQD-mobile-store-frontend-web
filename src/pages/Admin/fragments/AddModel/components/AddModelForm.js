@@ -16,7 +16,7 @@ const AddModelForm = (props) => {
   const [images, setImages] = useState([]);
   const [modal, setModal] = useState(false);
   const [formColor, setFormColor] = useState([]);
-  const brands = useSelector((state) => state.brands.list);
+  const brands = useSelector((state) => state.brand.list);
   useEffect(() => {
     dispatch(getAllBrandAction(1, 1000));
   }, []);

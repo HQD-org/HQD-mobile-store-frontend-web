@@ -27,11 +27,14 @@ const login = async (body) => {
     toastNotify(res.message.VN);
     return { data: {}, success: false };
   } catch (error) {
-    toastNotify("Đăng nhập thất bại");
-    return {
-      isVerify: false,
-      success: false,
-    };
+    console.log("log at ==> Auth Api ==> error login: ", error);
+    toastNotify(error.message.VN || "Đăng nhập thất bại");
+    if (error.status === 401)
+      return {
+        needVerify: true,
+        success: false,
+      };
+    return { success: false };
   }
 };
 

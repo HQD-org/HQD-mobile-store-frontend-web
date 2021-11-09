@@ -65,11 +65,11 @@ export function getAllBrandSuccess(data) {
   };
 }
 
-export function getAllBrandAction(page, itemPerPage) {
+export function getAllBrandAction() {
   return async (dispatch) => {
     try {
       dispatch(loading(true));
-      const res = await brandAPI.getAll(page, itemPerPage);
+      const res = await brandAPI.getAll();
       if (res.success) {
         dispatch(loading());
         dispatch(getAllBrandSuccess(res.data));

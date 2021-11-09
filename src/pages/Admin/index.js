@@ -5,8 +5,8 @@ import BrandFragment from "./fragments/Brand";
 import ModelFragment from "./fragments/Model";
 
 const AdminPage = () => {
-  const [toggleBrand, setToggleBrand] = useState(false);
-  const [toggleModel, setToggleModel] = useState(true);
+  const [toggleBrand, setToggleBrand] = useState(true);
+  const [toggleModel, setToggleModel] = useState(false);
   const [toggleAddModel, setToggleAddModel] = useState(false);
   const toggle = (type) => {
     switch (type) {

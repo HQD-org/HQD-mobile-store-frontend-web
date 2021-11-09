@@ -16,11 +16,9 @@ const insert = async (body) => {
   }
 };
 
-const getAll = async (page, itemPerPage) => {
+const getAll = async () => {
   try {
-    const res = await axiosClient.get(
-      `/mobile-brand/get-all?page=${page}&itemPerPage=${itemPerPage}`
-    );
+    const res = await axiosClient.get(`/mobile-brand/get-all`);
     // toastNotify(res ? res.message.VN : "Lấy thương hiệu thất bại");
     return res && res.data
       ? { data: res.data || {}, success: true }

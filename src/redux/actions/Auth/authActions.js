@@ -45,7 +45,7 @@ export function loginAction(dataSubmit) {
         dispatch(loginSuccess(res.data));
         return true;
       }
-      if (!res.isVerify) {
+      if (res.needVerify) {
         dispatch(loading());
         dispatch(loginFail());
         return { needVerify: true };

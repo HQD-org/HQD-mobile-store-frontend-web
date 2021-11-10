@@ -27,12 +27,17 @@ const login = async (body) => {
     toastNotify(res.message.VN);
     return { data: {}, success: false };
   } catch (error) {
-    toastNotify("Đăng nhập thất bại");
-    return {
-      success: false,
-    };
+    console.log("log at ==> Auth Api ==> error login: ", error);
+    toastNotify(error.message.VN || "Đăng nhập thất bại");
+    if (error.status === 401)
+      return {
+        needVerify: true,
+        success: false,
+      };
+    return { success: false };
   }
 };
+
 const register = async (body) => {
   try {
     const res = await axiosClient.post(`${url}/register`, body);
@@ -48,6 +53,51 @@ const register = async (body) => {
   }
 };
 
-const Auth = { getAuth, login, register };
+const verify = async (body) => {
+  try {
+    const res = await axiosClient.post(`${url}/verify`, body);
+    toastNotify(res ? res.message.VN : "Xác minh thất bại");
+    return res && res.data
+      ? { data: res || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    toastNotify("Xác minh thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const sendOTP = async (body) => {
+  try {
+    const res = await axiosClient.post(`${url}/forgot-password`, body);
+    toastNotify(res ? res.message.VN : "Gửi otp thất bại");
+    return res && res.data
+      ? { data: res || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    toastNotify("Gửi otp thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const forgotPassword = async (body) => {
+  try {
+    const res = await axiosClient.post(`${url}/forgot-password/verify`, body);
+    toastNotify(res ? res.message.VN : "Lấy lại mật khẩu thất bại");
+    return res && res.data
+      ? { data: res || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    toastNotify("Lấy lại mật khẩu thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const Auth = { getAuth, login, register, verify, sendOTP, forgotPassword };
 
 export default Auth;

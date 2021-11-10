@@ -4,9 +4,11 @@ import AddProductFragment from "./fragments/AddProduct";
 import BrandFragment from "./fragments/Brand";
 import ModelFragment from "./fragments/Model";
 import ProductFragment from "./fragments/Products";
+import AddModelFragment from "./fragments/AddModel";
 const Admin = () => {
   const [toggleBrand, setToggleBrand] = useState(true);
   const [toggleModel, setToggleModel] = useState(false);
+  const [toggleAddModel, setToggleAddModel] = useState(false);
   const [toggleAddProduct, setToggleAddProduct] = useState(false);
   const [toggleProduct, setToggleProduct] = useState(false);
   const toggle = (type) => {
@@ -15,6 +17,7 @@ const Admin = () => {
         if (toggleBrand) break;
         setToggleBrand(true);
         setToggleModel(false);
+        setToggleAddModel(false);
         setToggleAddProduct(false);
         setToggleProduct(false);
         break;
@@ -22,6 +25,15 @@ const Admin = () => {
         if (toggleModel) break;
         setToggleBrand(false);
         setToggleModel(true);
+        setToggleAddModel(false);
+        setToggleAddProduct(false);
+        setToggleProduct(false);
+        break;
+      case "add model":
+        if (toggleAddModel) break;
+        setToggleBrand(false);
+        setToggleModel(false);
+        setToggleAddModel(true);
         setToggleAddProduct(false);
         setToggleProduct(false);
         break;
@@ -29,6 +41,7 @@ const Admin = () => {
         if (toggleAddProduct) break;
         setToggleBrand(false);
         setToggleModel(false);
+        setToggleAddModel(false);
         setToggleAddProduct(true);
         setToggleProduct(false);
         break;
@@ -36,6 +49,7 @@ const Admin = () => {
         if (toggleProduct) break;
         setToggleBrand(false);
         setToggleModel(false);
+        setToggleAddModel(false);
         setToggleAddProduct(false);
         setToggleProduct(true);
         break;
@@ -46,7 +60,10 @@ const Admin = () => {
   return (
     <>
       <div className="row">
-        <div className="col-2" style={{ paddingRight: "4.5px" }}>
+        <div
+          className="col-2"
+          style={{ paddingRight: "4.5px", background: "rgb(38, 53, 68)" }}
+        >
           <AdminMenu toggle={toggle} />
         </div>
         <div className="col">
@@ -54,6 +71,7 @@ const Admin = () => {
             <div className="container">
               {toggleBrand && <BrandFragment />}
               {toggleModel && <ModelFragment />}
+              {toggleAddModel && <AddModelFragment />}
               {toggleAddProduct && <AddProductFragment />}
               {toggleProduct && <ProductFragment />}
             </div>

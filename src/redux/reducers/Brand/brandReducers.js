@@ -12,39 +12,47 @@ import {
 
 const initState = {
   list: [],
-  totalBrand: 0,
+  pagination: {
+    page: 1,
+    itemPerPage: 8,
+    totalItem: 0,
+  },
+  updateFlag: false,
 };
 export default function (state = initState, action) {
+  const payload = action.payload;
   switch (action.type) {
     case ADD_BRAND_FAIL:
       return { ...state };
     case ADD_BRAND_SUCCESS:
-      state.list.push(action.payload);
-      return { ...state };
+      return { ...state, updateFlag: !state.updateFlag };
     case GET_ALL_BRAND_FAIL:
-      return { ...state, list: [], totalBrand: 0 };
-    case GET_ALL_BRAND_SUCCESS:
       return {
         ...state,
-        list: action.payload.brands,
-        totalBrand: action.payload.totalBrand,
+        list: [],
+        pagination: { page: 1, itemPerPage: 8, totalItem: 0 },
+      };
+    case GET_ALL_BRAND_SUCCESS:
+      state.pagination.totalItem = payload.pagination.totalItem;
+      return {
+        ...state,
+        list: payload.brands,
       };
     case UPDATE_BRAND_FAIL:
       return { ...state };
     case UPDATE_BRAND_SUCCESS:
-      // update new brand in list
-      return { ...state };
+      return { ...state, updateFlag: !state.updateFlag };
     case FILTER_BRAND_FAIL:
-      return { ...state, list: [], totalBrand: 0 };
-    case FILTER_BRAND_SUCCESS:
-      console.log(
-        "log at ==> brandReducers.js ==> line 42 ==> payload: ",
-        action.payload
-      );
       return {
         ...state,
-        list: action.payload.brands,
-        totalBrand: action.payload.totalBrand,
+        list: [],
+        pagination: { page: 1, itemPerPage: 8, totalItem: 0 },
+      };
+    case FILTER_BRAND_SUCCESS:
+      return {
+        ...state,
+        list: payload.brands,
+        pagination: payload.pagination,
       };
     default:
       return state;

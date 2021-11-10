@@ -8,7 +8,7 @@ const validateAddBrand = (data) => {
     return false;
   }
 
-  if (!data.status) {
+  if (data.status === "0") {
     toastNotify("Vui lòng chọn trạng thái");
     return false;
   }
@@ -19,7 +19,7 @@ const validateAddBrand = (data) => {
     return false;
   }
 
-  if (!data.image) {
+  if (data.images.length === 0) {
     toastNotify("Hình không được bỏ trống");
     return false;
   }

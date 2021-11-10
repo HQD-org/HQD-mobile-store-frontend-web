@@ -1,94 +1,98 @@
 .logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .name-store {
-  color: #3fa5ef !important;
-  font-style: italic;
-  font-family: PT serif;
-  margin-left: 10px;
-  font-weight: bold;
+    color: #3fa5ef !important;
+    font-style: italic;
+    font-family: PT serif;
+    margin-left: 10px;
+    font-weight: bold;
 }
 
 .nav-link {
-  color: black !important;
-  font-weight: bold;
+    color: black !important;
+    font-weight: bold;
+}
+
+.navbar-light {
+    background-color: aliceblue;
 }
 
 .nav-link:focus,
 nav-link:hover {
-  color: red !important;
+    color: red !important;
 }
 
 .search-header {
-  height: 30px !important;
-  border-radius: 10px;
+    height: 30px !important;
+    border-radius: 10px;
 }
 
 .icon-search {
-  position: absolute;
-  top: 42%;
-  left: 86%;
+    position: absolute;
+    top: 37%;
+    left: 85.5%;
 }
 
 .icon-cart {
-  color: white;
-  margin-right: 5px;
+    color: white;
+    margin-right: 5px;
 }
 
 .btn-cart {
-  color: white !important;
-  background: #de7311 !important;
-  margin-left: 10px;
+    color: white !important;
+    background: #de7311 !important;
+    margin-left: 10px;
 }
 
 .btnWelcome {
-  width: 50%;
-  height: 50px;
-  margin-top: 20px;
-  color: white;
-  border: none;
-  font-size: 20px;
-  font-weight: bold;
-  background: #3fa5ef;
-  padding: 10px;
-  border-radius: 10px;
-  filter: drop-shadow(0 4px 4px #282828);
-  text-decoration: none;
+    width: 50%;
+    height: 50px;
+    margin-top: 20px;
+    color: white;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    background: #3fa5ef;
+    padding: 10px;
+    border-radius: 10px;
+    filter: drop-shadow(0 4px 4px #282828);
+    text-decoration: none;
 }
 
 .icon-header {
-  margin: 0 10px;
-  cursor: pointer;
+    margin: 0 10px;
+    cursor: pointer;
 }
 
 .dropdown .dropdown-menu {
-  transition: all 0.5s;
-  overflow: hidden;
-  transform-origin: top center;
-  transform: scale(1, 0);
-  display: block;
-  border: 0px solid transparent;
-  background-color: #3fa5ef;
+    transition: all 0.5s;
+    overflow: hidden;
+    transform-origin: top center;
+    transform: scale(1, 0);
+    display: block;
+    border: 0px solid transparent;
+    background-color: #3fa5ef;
 }
 
 .dropdown .dropdown-menu .dropdown-item {
-  font-size: 14px;
-  padding: 8px 20px !important;
-  color: #fff !important;
-  background-color: #3fa5ef;
-  text-transform: capitalize;
+    font-size: 14px;
+    padding: 8px 20px !important;
+    color: #fff !important;
+    background-color: #3fa5ef;
+    text-transform: capitalize;
 }
 
 .dropdown:hover .dropdown-menu {
-  transform: scale(1);
-  display: block;
+    transform: scale(1);
+    display: block;
 }
 
 @media screen and (max-width: 768px) {
-  .btnWelcome {
-    width: 100%;
-  }
+    .btnWelcome {
+        width: 100%;
+    }
 }

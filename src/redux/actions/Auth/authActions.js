@@ -7,8 +7,12 @@ import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOGOUT,
-  REGISTER_FAIL,
-  REGISTER_SUCCESS,
+  // REGISTER_FAIL,
+  // REGISTER_SUCCESS,
+  // VERIFY_FAIL,
+  // VERIFY_SUCCESS,
+  // SEND_OTP_FAIL,
+  // SEND_OTP_SUCCESS,
 } from "./types";
 
 const loading =
@@ -40,6 +44,11 @@ export function loginAction(dataSubmit) {
         dispatch(loading());
         dispatch(loginSuccess(res.data));
         return true;
+      }
+      if (res.needVerify) {
+        dispatch(loading());
+        dispatch(loginFail());
+        return { needVerify: true };
       }
       dispatch(loading());
       dispatch(loginFail());
@@ -93,56 +102,98 @@ export function logoutAction() {
   };
 }
 
-export const registerSuccess = (data) => {
-  return {
-    type: REGISTER_SUCCESS,
-    payload: data,
-  };
-};
+// export const registerSuccess = (data) => {
+//   return {
+//     type: REGISTER_SUCCESS,
+//     payload: data,
+//   };
+// };
 
-export const registerFail = () => {
-  return {
-    type: REGISTER_FAIL,
-    payload: {},
-  };
-};
+// export const registerFail = () => {
+//   return {
+//     type: REGISTER_FAIL,
+//     payload: {},
+//   };
+// };
 
 export const registerAction = (body) => async (dispatch) => {
   try {
     dispatch(loading(true));
     const res = await authAPI.register(body);
-    if (!res.success) {
-      dispatch(loading());
-      dispatch(registerFail());
-    } else {
-      dispatch(loading());
-      dispatch(registerSuccess(res.data));
-    }
+    // if (!res.success) {
+    //   dispatch(loading());
+    //   dispatch(registerFail());
+    // } else {
+    //   dispatch(loading());
+    //   dispatch(registerSuccess(res.data));
+    // }
+    dispatch(loading());
     return res.success;
   } catch (err) {
     console.log(err);
     dispatch(loading());
-    dispatch(registerFail());
+    // dispatch(registerFail());
     return false;
   }
 };
 
+// export const verifySuccess = (data) => {
+//   return {
+//     type: VERIFY_SUCCESS,
+//     payload: data,
+//   };
+// };
+
+// export const verifyFail = () => {
+//   return {
+//     type: VERIFY_FAIL,
+//     payload: {},
+//   };
+// };
+
 export const verifyAction = (body) => async (dispatch) => {
   try {
-    // dispatch(loading(true));
+    dispatch(loading(true));
     const res = await authAPI.verify(body);
-    if (!res.success) {
-      //   dispatch(loading());
-      dispatch(registerFail());
-    } else {
-      //   dispatch(loading());
-      dispatch(registerSuccess(res.data));
-    }
+    // if (!res.success) {
+    //   dispatch(loading());
+    //   dispatch(verifyFail());
+    // } else {
+    //   dispatch(loading());
+    //   dispatch(verifySuccess(res.data));
+    // }
+    dispatch(loading());
     return res.success;
   } catch (err) {
     console.log(err);
-    // dispatch(loading());
-    dispatch(registerFail());
+    dispatch(loading());
+    // dispatch(verifyFail());
+    return false;
+  }
+};
+
+export const sendOTPAction = (body) => async (dispatch) => {
+  try {
+    dispatch(loading(true));
+    const res = await authAPI.sendOTP(body);
+    dispatch(loading());
+    return res.success;
+  } catch (err) {
+    console.log(err);
+    dispatch(loading());
+    return false;
+  }
+};
+
+export const forgotPasswordAction = (body) => async (dispatch) => {
+  try {
+    dispatch(loading(true));
+    const res = await authAPI.forgotPassword(body);
+    dispatch(loading());
+    return res.success;
+  } catch (err) {
+    console.log(err);
+    dispatch(loading());
     return false;
   }
 };

@@ -1,105 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import { useDropzone } from "react-dropzone";
 import modelImg from "../../../../../common/images/3d-modeling.png";
-import "../../../../../common/css/Brand.Style.css";
-
-const thumbsContainer = {
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  marginTop: 16,
-};
-
-const thumb = {
-  display: "inline-flex",
-  borderRadius: 2,
-  border: "1px solid #eaeaea",
-  marginBottom: 8,
-  marginRight: 8,
-  width: 100,
-  height: 100,
-  padding: 4,
-  boxSizing: "border-box",
-};
-
-const thumbInner = {
-  display: "flex",
-  minWidth: 0,
-  overflow: "hidden",
-};
-
-const img = {
-  display: "block",
-  width: "auto",
-  height: "100%",
-};
+import InputImage from "../../../../../common/components/InputImage";
 
 const Model = (props) => {
   const { buttonLabel, className } = props;
-  const [files, setFiles] = useState([]);
-  const [modal, setModal] = useState(false);
-  const [modalColor, setModalColor] = useState(false);
   const [formColor, setFormColor] = useState([]);
+  const [images, setImages] = useState([]);
+  const [modalColor, setModalColor] = useState(false);
+  const [modal, setModal] = useState(false);
 
-  const toggle = () => setModal(!modal);
   const toggleColor = () => setModalColor(!modalColor);
-  const handleAddColor = (e) => {
-    e.preventDefault();
-    const inputColor = {
-      ColorInput: "",
-      Upload: "",
-    };
-    setFormColor((prev) => [...prev, inputColor]);
-  };
-
-  const onChange = (index, event) => {
-    event.preventDefault();
-
-    setFormColor((prev) => {
-      return prev.map((item, i) => {
-        if (i !== index) {
-          return item;
-        }
-        return {
-          ...item,
-          [event.target.name]: event.target.value,
-        };
-      });
-    });
-  };
-
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: "image/*",
-    onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
-      );
-    },
-  });
-
-  const thumbs = files.map((file) => (
-    <div style={thumb} key={file.name}>
-      <div style={thumbInner}>
-        <img src={file.preview} style={img} alt="" />
-      </div>
-    </div>
-  ));
-
-  useEffect(
-    () => () => {
-      // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
-    },
-    [files]
-  );
+  const toggle = () => setModal(!modal);
   return (
     <div className="container-fluid">
-      {" "}
       <div className="row">
         <table className="table table-striped" style={{ marginTop: "30px" }}>
           <thead>
@@ -123,7 +37,7 @@ const Model = (props) => {
               <td>2020</td>
               <td>Hoạt động</td>
               <td>
-                <i class="bi bi-x-circle-fill"></i>
+                <i className="bi bi-x-circle-fill"></i>
               </td>
             </tr>
             <tr onClick={toggle}>
@@ -135,7 +49,7 @@ const Model = (props) => {
               <td>2020</td>
               <td>Hoạt động</td>
               <td>
-                <i class="bi bi-x-circle-fill"></i>
+                <i className="bi bi-x-circle-fill"></i>
               </td>
             </tr>
             <tr onClick={toggle}>
@@ -147,11 +61,10 @@ const Model = (props) => {
               <td>2020</td>
               <td>Hoạt động</td>
               <td>
-                <i class="bi bi-x-circle-fill"></i>
+                <i className="bi bi-x-circle-fill"></i>
               </td>
             </tr>
             <tr onClick={toggle}>
-              {" "}
               {buttonLabel}
               <td>4</td>
               <td>Oppo A31</td>
@@ -160,7 +73,7 @@ const Model = (props) => {
               <td>2020</td>
               <td>Hoạt động</td>
               <td>
-                <i class="bi bi-x-circle-fill"></i>
+                <i className="bi bi-x-circle-fill"></i>
               </td>
             </tr>
           </tbody>
@@ -179,322 +92,299 @@ const Model = (props) => {
           </ModalHeader>
           <ModalBody>
             <form>
-              <div className="row mb-3">
-                <div className="col-5">
-                  <div class="mb-3">
-                    <label
-                      for="name-model"
-                      class="form-label"
-                      style={{ width: "223px" }}
-                    >
-                      Tên mẫu
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="name-model"
-                      required
-                    />
+              <div className="row">
+                <div className="col-7 infor-left">
+                  <div className="row">
+                    <div className="col-3">
+                      <label htmlFor="name-model" className="form-label">
+                        Tên mẫu
+                      </label>
+                    </div>
+                    <div className="col-7 mb-3">
+                      <input
+                        autoFocus
+                        type="text"
+                        name="name"
+                        className="form-control"
+                        id="name-model"
+                      />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-3">
+                      <label htmlFor="screen" className="form-label">
+                        Màn hình
+                      </label>
+                    </div>
+                    <div className="col-7 mb-3">
+                      <input
+                        type="text"
+                        name="screen"
+                        className="form-control"
+                        id="screen"
+                      />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-3 mb-3">
+                      <label htmlFor="name-model" className="form-label">
+                        Thương hiệu
+                      </label>
+                    </div>
+                    <div className="col-7">
+                      <select className="form-select">
+                        <option selected disabled>
+                          Choose..
+                        </option>
+                        <option value="1">iPhone</option>
+                        <option value="2">OPPO</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-3">
+                      <label htmlFor="input-description" className="form-label">
+                        Mô tả
+                      </label>
+                    </div>
+                    <div className="col-7 mb-3">
+                      <textarea
+                        className="form-control"
+                        id="input-description"
+                        rows="4"
+                        name="description"
+                      ></textarea>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-3">
+                      <label htmlFor="timeDebut" className="form-label">
+                        Thời gian ra mắt
+                      </label>
+                    </div>
+                    <div className="col-7 mb-3">
+                      <input
+                        type="text"
+                        name="timeDebut"
+                        className="form-control"
+                        id="timeDebut"
+                      />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-3">
+                      <label htmlFor="status" className="form-label">
+                        Trạng thái
+                      </label>
+                    </div>
+                    <div className="col-7 mb-3">
+                      <select className="form-select">
+                        <option selected disabled>
+                          Choose..
+                        </option>
+                        <option value="1">Hoạt động</option>
+                        <option value="2">Ngừng kinh doanh</option>
+                        <option value="3">Hết hàng</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
-                <div className="col" style={{ width: "58%" }}>
-                  <div class="mb-3">
-                    <label for="screen" class="form-label">
-                      Màn hình
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="screen"
-                      required
-                    />
+                <div className="col ">
+                  <div className="row infor-right-top">
+                    {" "}
+                    <div className="row">
+                      <div className="col-4">
+                        <label
+                          htmlFor="operating-system"
+                          className="form-label"
+                        >
+                          Hệ điều hành
+                        </label>
+                      </div>
+                      <div className="col-7 mb-3">
+                        <input
+                          type="text"
+                          name="os"
+                          className="form-control"
+                          id="operating-system"
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-4">
+                        <label htmlFor="front-camera" className="form-label">
+                          Camera trước
+                        </label>
+                      </div>
+                      <div className="col-7 mb-3">
+                        <input
+                          type="text"
+                          name="frontCamera"
+                          className="form-control"
+                          id="front-camera"
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-4">
+                        <label htmlFor="rear-camera" className="form-label">
+                          Camera sau
+                        </label>
+                      </div>
+                      <div className="col-7 mb-3">
+                        <input
+                          type="text"
+                          name="rearCamera"
+                          className="form-control"
+                          id="rear-camera"
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-4">
+                        <label htmlFor="memoryStick" className="form-label">
+                          Thẻ nhớ
+                        </label>
+                      </div>
+                      <div className="col-7 mb-3">
+                        <input
+                          type="text"
+                          name="memoryStick"
+                          className="form-control"
+                          id="memoryStick"
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-4">
+                        <label htmlFor="battery" className="form-label">
+                          Pin
+                        </label>
+                      </div>
+                      <div className="col-7 mb-3">
+                        <input
+                          type="text"
+                          name="battery"
+                          className="form-control"
+                          id="battery"
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-4">
+                        <label htmlFor="charger" className="form-label">
+                          Sạc
+                        </label>
+                      </div>
+                      <div className="col-7 mb-3">
+                        <input
+                          type="text"
+                          name="charger"
+                          className="form-control"
+                          id="charger"
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-4">
+                        <label htmlFor="sim" className="form-label">
+                          Sim
+                        </label>
+                      </div>
+                      <div className="col-7 mb-3">
+                        <input
+                          type="text"
+                          name="sim"
+                          className="form-control"
+                          id="sim"
+                        />
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-4">
+                        <label htmlFor="chip" className="form-label">
+                          Chip
+                        </label>
+                      </div>
+                      <div className="col-7 mb-3">
+                        <input
+                          type="text"
+                          name="chip"
+                          className="form-control"
+                          id="chip"
+                        />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="row mb-3">
-                <div className="col" style={{ width: "33.5%" }}>
-                  <div class="mb-3">
-                    <label
-                      for="operating-system"
-                      class="form-label"
-                      style={{ width: "288px" }}
-                    >
-                      Hệ điều hành
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="operating-system"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="col" style={{ width: "33%" }}>
-                  <div class="mb-3">
-                    <label for="rear-camera" class="form-label">
-                      Camera sau
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="raer-camera"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="col" style={{ width: "33%" }}>
-                  <div class="mb-3">
-                    <label for="front-camera" class="form-label">
-                      Camera trước
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="front-camera"
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="row mb-3">
-                <div className="col-5">
-                  <div class="mb-3">
-                    <label
-                      for="name-model"
-                      class="form-label"
-                      style={{ width: "236px" }}
-                    >
-                      Thương hiệu
-                    </label>
-                    <select class="form-select">
-                      <option selected disabled>
-                        Choose..
-                      </option>
-                      <option value="1">iPhone</option>
-                      <option value="2">OPPO</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="col" style={{ width: "30%" }}>
-                  <div class="mb-3">
-                    <label
-                      for="sim"
-                      class="form-label"
-                      style={{ width: "50px" }}
-                    >
-                      Sim
-                    </label>
-                    <input type="text" class="form-control" id="sim" required />
-                  </div>
-                </div>
-                <div className="col" style={{ width: "27.8%" }}>
-                  <div class="mb-3">
-                    <label
-                      for="chip"
-                      class="form-label"
-                      style={{ width: "50px" }}
-                    >
-                      Chip
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="chip"
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="row mb-3">
-                <div className="col" style={{ width: "30%" }}>
-                  <div class="mb-3">
-                    <label
-                      for="menmory"
-                      class="form-label"
-                      style={{ width: "343px" }}
-                    >
-                      Thẻ nhớ
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="memory"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="col" style={{ width: "20%" }}>
-                  <div class="mb-3">
-                    <label
-                      for="battery"
-                      class="form-label"
-                      style={{ width: "50px" }}
-                    >
-                      Pin
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="battery"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="col" style={{ width: "20%" }}>
-                  <div class="mb-3">
-                    <label
-                      for="charging"
-                      class="form-label"
-                      style={{ width: "50px" }}
-                    >
-                      Sạc
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="charging"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="col" style={{ width: "29.3%" }}>
-                  <div class="mb-3">
-                    <label for="status" class="form-label">
-                      Trạng thái
-                    </label>
-                    <select class="form-select">
-                      <option selected disabled>
-                        Choose..
-                      </option>
-                      <option value="1">Hoạt động</option>
-                      <option value="2">Ngừng kinh doanh</option>
-                      <option value="3">Hết hàng</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div className="col" style={{ width: "99.2%" }}>
-                  <div className="mb-3">
-                    <label
-                      for="input-description"
-                      class="form-label"
-                      style={{ width: "153px" }}
-                    >
-                      Mô tả
-                    </label>
 
-                    <textarea
-                      class="form-control"
-                      id="input-description"
-                      rows="4"
-                      required
-                    ></textarea>
+                  <div className="row infor-right-bottom">
+                    <button
+                      className="btnColor"
+                      onClick={toggleColor}
+                      type="button"
+                    >
+                      {buttonLabel}
+                      Thêm màu
+                    </button>
+                    <div>
+                      {/* {formColor.map((item, index) => (
+                <div className="row" key={`item-${index}`}></div>
+              ))} */}
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="row mb-3">
-                <div class="col-5 mb-3">
-                  <label
-                    for="timeStart"
-                    class="form-label"
-                    style={{ width: "227px" }}
+                  <Modal
+                    isOpen={modalColor}
+                    toggle={toggleColor}
+                    className={className}
                   >
-                    Thời gian ra mắt
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="timeStart"
-                    required
-                  />
-                </div>
-                <div class="col-5 mb-3">
-                  <button
-                    className="btnColor"
-                    onClick={toggleColor}
-                    type="button"
-                    style={{ width: "32%" }}
-                  >
-                    {buttonLabel}
-                    Thêm màu
-                  </button>
-                </div>
-                <Modal
-                  isOpen={modalColor}
-                  toggle={toggleColor}
-                  className={className}
-                >
-                  <ModalBody>
-                    <form>
-                      <div className="container">
-                        {formColor.map((item, index) => (
-                          <div className="row" key={`item-${index}`}>
+                    <ModalBody>
+                      <form>
+                        <div className="container">
+                          <div className="row">
+                            {/* {formColor.map((item, index) => (*/}
+                            {/*<div className="row" key={`item-${index}`}>*/}
                             <div className="col-4">
-                              <label for="ColorModel" class="form-label">
+                              <label
+                                htmlFor="ColorModel"
+                                className="form-label"
+                              >
                                 Màu
                               </label>
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 name="ColorInput"
-                                value={item.ColorInput}
-                                onChange={(e) => onChange(index, e)}
+                                // value={item.ColorInput}
+                                // onChange={(e) => onChange(index, e)}
                                 id="ColorModel"
-                                required
                               />
                             </div>
                             <div className="col">
-                              <section>
-                                <label
-                                  for="input-img"
-                                  class="col-sm-4 form-label"
-                                >
-                                  Hình ảnh
-                                </label>
-                                <div className="border-img">
-                                  <div
-                                    {...getRootProps({ className: "dropzone" })}
-                                  >
-                                    <input
-                                      {...getInputProps()}
-                                      required
-                                      name="Upload"
-                                      value={item.Upload}
-                                    />
-                                    <p className="txtSelectImg">
-                                      Select one or "n" image for your model
-                                    </p>
-                                  </div>
-                                  <aside style={thumbsContainer}>
-                                    {thumbs}
-                                  </aside>
-                                </div>
-                              </section>
+                              <InputImage
+                                images={images}
+                                setImages={setImages}
+                                multiple={true}
+                              />
                             </div>
                           </div>
-                        ))}
-                        <div className="row">
-                          <div className="col-4">
-                            <button
-                              className="btnColor"
-                              onClick={handleAddColor}
-                              style={{ width: "125px" }}
-                            >
-                              Thêm màu
-                            </button>
-                          </div>
+                          {/* ))} */}
                         </div>
-                      </div>
-                      <ModalFooter>
-                        <Button color="primary">Submit</Button>{" "}
-                        <Button color="secondary" onClick={toggleColor}>
-                          Cancel
-                        </Button>
-                      </ModalFooter>
-                    </form>
-                  </ModalBody>
-                </Modal>
+                        <ModalFooter>
+                          <Button type="submit" color="primary">
+                            Submit
+                          </Button>{" "}
+                          <Button
+                            type="button"
+                            color="secondary"
+                            onClick={toggleColor}
+                          >
+                            Cancel
+                          </Button>
+                        </ModalFooter>
+                      </form>
+                    </ModalBody>
+                  </Modal>
+                </div>
               </div>
 
               <div className="row mb-3" style={{ marginTop: "100px" }}>
@@ -516,4 +406,4 @@ const Model = (props) => {
   );
 };
 
-export default React.memo(Model);
+export default Model;

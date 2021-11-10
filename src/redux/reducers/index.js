@@ -5,7 +5,7 @@ import systemReducer from "./System/systemReducers";
 
 const rootReducers = {
   auth: authReducer,
-  brands: brandReducer,
+  brand: brandReducer,
   location: locationReducer,
   system: systemReducer,
 };

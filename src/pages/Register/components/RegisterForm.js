@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Form, FormGroup, Input } from "reactstrap";
-import SelectComponent from "../../../common/components/SelectSearch";
+import SelectLocation from "../../../common/components/SelectLocation";
 import { registerAction } from "../../../redux/actions/Auth/authActions";
 import {
   getDistrict,
@@ -93,7 +93,7 @@ const FormRegister = () => {
     );
     if (res) {
       e.target.reset();
-      history.goBack();
+      history.push(`/verify?email=${email}&type=active`);
       return;
     }
   };
@@ -115,9 +115,9 @@ const FormRegister = () => {
             className="form-control"
           />
           <div className="row">
-            <div className="col">
+            <div className="col" style={{ width: "36.7%" }}>
               <FormGroup style={{ position: "relative" }}>
-                <SelectComponent
+                <SelectLocation
                   onSelectChange={onSelectChange}
                   options={provinceList}
                   name={"province"}
@@ -125,9 +125,9 @@ const FormRegister = () => {
                 />
               </FormGroup>
             </div>
-            <div className="col">
+            <div className="col" style={{ width: "33%" }}>
               <FormGroup style={{ position: "relative" }}>
-                <SelectComponent
+                <SelectLocation
                   onSelectChange={onSelectChange}
                   options={districtList}
                   name={"district"}
@@ -137,7 +137,7 @@ const FormRegister = () => {
             </div>
             <div className="col">
               <FormGroup style={{ position: "relative" }}>
-                <SelectComponent
+                <SelectLocation
                   onSelectChange={onSelectChange}
                   options={villageList}
                   name={"village"}

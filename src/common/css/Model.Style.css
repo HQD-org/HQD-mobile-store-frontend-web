@@ -103,7 +103,7 @@ tbody>tr:hover {
 }
 
 .modal-model {
-    max-width: 900px !important;
+    max-width: 1220px !important;
 }
 
 .modal-header {
@@ -119,6 +119,30 @@ tbody>tr:hover {
 
 .modal-content {
     padding: 30px;
+}
+
+.infor-left {
+    box-shadow: 0 0 5px 0 rgb(43 43 43 / 10%), 0 11px 6px -7px rgb(43 43 43 / 10%);
+    border: none;
+    border-radius: 5px;
+    padding: 25px;
+}
+
+.infor-right-top,
+.infor-right-bottom {
+    box-shadow: 0 0 5px 0 rgb(43 43 43 / 10%), 0 11px 6px -7px rgb(43 43 43 / 10%);
+    border: none;
+    padding: 25px;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.infor-right-bottom {
+    margin-top: 10px;
+}
+
+#input-description {
+    height: 260px;
 }
 
 

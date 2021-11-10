@@ -9,7 +9,7 @@ import Advertise from "./components/Advertise";
 const HomePage = () => {
   return (
     <div>
-      <nav id="navbar-HQDlist" class="navbar navbar-light bg-light px-3">
+      <nav id="navbar-HQDlist" class="navbar px-3">
         <ul class="nav nav-pills">
           <li class="nav-item">
             <a class="nav-link nav-home" href="#introduction">

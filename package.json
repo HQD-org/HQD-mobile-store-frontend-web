@@ -11,6 +11,7 @@
         "@testing-library/jest-dom": "^5.11.4",
         "@testing-library/react": "^11.1.0",
         "@testing-library/user-event": "^12.1.10",
+        "@tinymce/tinymce-react": "^3.13.0",
         "axios": "^0.22.0",
         "bootstrap": "^5.1.1",
         "bootstrap-icons": "^1.5.0",
@@ -35,6 +36,7 @@
         "redux-thunk": "^2.3.0",
         "styled": "^1.0.0",
         "styled-components": "^5.3.1",
+        "uuid": "^8.3.2",
         "validator": "^13.6.0",
         "web-vitals": "^1.0.1"
     },

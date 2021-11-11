@@ -22,7 +22,7 @@ const login = async (body) => {
     if (res && res.data) {
       Cookie.set("accessToken", res.data.accessToken);
       toastNotify(res.message.VN);
-      return { data: {}, success: true };
+      return { data: res.data, success: true };
     }
     toastNotify(res.message.VN);
     return { data: {}, success: false };

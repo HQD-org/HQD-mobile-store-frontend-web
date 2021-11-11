@@ -20,7 +20,6 @@ const AddModelForm = (props) => {
   useEffect(() => {
     dispatch(getAllBrandAction(1, 1000));
   }, []);
-
   const toggle = () => setModal(!modal);
   const handleAddColor = (e) => {
     e.preventDefault();

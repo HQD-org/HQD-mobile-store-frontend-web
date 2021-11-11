@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getAuthAction } from "../../redux/actions/Auth/authActions";
 
-const Authentication = (SpecificComponent, option, adminRoute = null) => {
+const Authentication = (SpecificComponent, option, adminRoute = false) => {
   function CheckAuthentication(props) {
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
@@ -16,25 +16,22 @@ const Authentication = (SpecificComponent, option, adminRoute = null) => {
           if (option) {
             history.push("/login");
           }
-        } else {
-          //đã đăng nhập
-          console.log(
-            "log at ==> Authentication.js ==> line 22 ===> res: ",
-            res
-          );
-          if (
-            adminRoute &&
-            res.role !== "admin" &&
-            res.role !== "manager branch"
-          ) {
-            //khong phai admin
-            history.push("/");
-          } else {
-            if (option === false) {
-              history.push("/");
-            }
-          }
+          return;
         }
+        //đã đăng nhập
+        console.log("log at ==> Authentication.js ==> line 22 ===> res: ", res);
+        if (res.role !== "admin" && res.role !== "manager branch") {
+          //khong phai admin
+          if (adminRoute) {
+            history.push("/");
+          }
+          return;
+        }
+        //la admin
+        if (!adminRoute) {
+          history.push("/dashboard");
+        }
+        return;
       };
       fetchAuth();
     }, []);

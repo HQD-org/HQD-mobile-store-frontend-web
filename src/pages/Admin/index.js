@@ -11,6 +11,7 @@ const Admin = () => {
   const [toggleAddModel, setToggleAddModel] = useState(false);
   const [toggleAddProduct, setToggleAddProduct] = useState(false);
   const [toggleProduct, setToggleProduct] = useState(false);
+
   const toggle = (type) => {
     switch (type) {
       case "brand":
@@ -82,4 +83,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default AdminPage;

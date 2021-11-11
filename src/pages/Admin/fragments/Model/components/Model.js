@@ -386,7 +386,6 @@ const Model = (props) => {
                   </Modal>
                 </div>
               </div>
-
               <div className="row mb-3" style={{ marginTop: "100px" }}>
                 <hr style={{ color: "#cfcfcf" }} />
                 <div className="col-12" style={{ textAlign: "center" }}>

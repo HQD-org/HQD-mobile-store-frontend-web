@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "../../../../common/components/Pagination";
 import { filterBrandAction } from "../../../../redux/actions/Brand/brandAction";
@@ -8,6 +8,7 @@ import HeaderBrand from "./components/HeaderBrand";
 
 const BrandFragment = () => {
   const dispatch = useDispatch();
+  const componentDidMountRef = useRef(false);
   const pagination = useSelector((state) => state.brand.pagination);
   const brands = useSelector((state) => state.brand.list);
   const updateFlag = useSelector((state) => state.brand.updateFlag);
@@ -42,6 +43,18 @@ const BrandFragment = () => {
   }, []);
 
   useEffect(() => {
+    if (componentDidMountRef.current) {
+      filter(1, pagination.itemPerPage);
+      return;
+    }
+  }, [status, searchTerm]);
+
+  useEffect(() => {
+    if (componentDidMountRef.current) {
+      filter(pagination.page, pagination.itemPerPage);
+      return;
+    }
+    componentDidMountRef.current = true;
     filter(1, pagination.itemPerPage);
   }, [status, searchTerm]);
 

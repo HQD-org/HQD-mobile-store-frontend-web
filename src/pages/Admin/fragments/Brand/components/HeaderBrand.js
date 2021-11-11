@@ -65,11 +65,6 @@ const HeaderBrand = (props) => {
               </select>
             </FormGroup>
           </div>
-          {/* <div className="col-4">
-            <button type="submit" className="btn-addBrand">
-              <span>Search</span>
-            </button>
-          </div> */}
         </div>
       </div>
 

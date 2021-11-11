@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import Introduction from "./components/Introduction";
 import Trending from "./components/Trending";
@@ -5,6 +6,7 @@ import Sale from "./components/Sale";
 import NewProduct from "./components/NewProduct";
 import Product from "./components/Product";
 import Advertise from "./components/Advertise";
+
 
 const HomePage = () => {
   return (

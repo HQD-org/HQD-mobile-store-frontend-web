@@ -10,7 +10,6 @@ const FormLogin = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isPasswordShown, setIsPasswordShown] = useState(false);
-
   const login = async (e) => {
     e.preventDefault();
     const username = e.target.username.value;
@@ -19,6 +18,10 @@ const FormLogin = () => {
     if (!isValidData) return;
     const res = await dispatch(loginAction(isValidData));
     if (res) {
+      if (res.role === "admin" || res.role === "manager branch") {
+        history.push("/dashboard");
+        return;
+      }
       if (res.needVerify) {
         history.push(`/verify?email=${username}&type=active`);
         return;

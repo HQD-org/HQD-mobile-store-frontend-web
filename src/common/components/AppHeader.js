@@ -78,7 +78,7 @@ const AppHeader = () => {
             className="col-4"
             style={{
               display: "flex",
-              alignItems: "baseline",
+              alignItems: "center",
               justifyContent: "center",
             }}
           >
@@ -92,15 +92,22 @@ const AppHeader = () => {
               />
             </div>
 
-            <FaShoppingCart className="icon-header" onClick={onClickCart} />
+            <FaShoppingCart
+              className="icon-header"
+              onClick={onClickCart}
+              style={{ color: "#3FA5EF", transform: "scaleX(-1)" }}
+            />
             <div className="dropdown icon-header">
-              <FaUser onClick={onClickUser} />
+              <FaUser
+                onClick={onClickUser}
+                style={{ marginTop: "-4px", color: "#3FA5EF" }}
+              />
               {isLogin && <DropdownMenu />}
             </div>
           </div>
         </div>
       </div>
-      <hr />
+      {/* <hr /> */}
     </nav>
   ) : (
     <> </>

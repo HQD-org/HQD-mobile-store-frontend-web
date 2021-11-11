@@ -115,7 +115,7 @@ const FormRegister = () => {
             className="form-control"
           />
           <div className="row">
-            <div className="col">
+            <div className="col" style={{ width: "36.7%" }}>
               <FormGroup style={{ position: "relative" }}>
                 <SelectLocation
                   onSelectChange={onSelectChange}
@@ -125,7 +125,7 @@ const FormRegister = () => {
                 />
               </FormGroup>
             </div>
-            <div className="col">
+            <div className="col" style={{ width: "33%" }}>
               <FormGroup style={{ position: "relative" }}>
                 <SelectLocation
                   onSelectChange={onSelectChange}

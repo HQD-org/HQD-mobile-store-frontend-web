@@ -50,6 +50,11 @@ export function loginAction(dataSubmit) {
         dispatch(loginFail());
         return { needVerify: true };
       }
+      if (res.needVerify) {
+        dispatch(loading());
+        dispatch(loginFail());
+        return { needVerify: true };
+      }
       dispatch(loading());
       dispatch(loginFail());
       return false;

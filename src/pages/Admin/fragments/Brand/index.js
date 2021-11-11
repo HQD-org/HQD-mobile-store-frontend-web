@@ -55,6 +55,11 @@ const BrandFragment = () => {
       return;
     }
     componentDidMountRef.current = true;
+    filter(1, pagination.itemPerPage);
+  }, [status, searchTerm]);
+
+  useEffect(() => {
+    filter(pagination.page, pagination.itemPerPage);
   }, [updateFlag]);
 
   return (

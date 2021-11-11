@@ -79,8 +79,9 @@ const AddModelForm = (props) => {
   };
 
   return (
-    <div className="row" style={{ marginTop: "50px" }}>
-      <div className="col-sm-12 body-form">
+    <form onSubmit={addModel}>
+      <div className="row">
+        <hr style={{ color: "#cfcfcf" }} />
         <p style={{ display: "flex", alignItems: "center" }}>
           <img
             src={modelImg}
@@ -92,47 +93,101 @@ const AddModelForm = (props) => {
             New Model
           </strong>
         </p>
-        <hr style={{ color: "#cfcfcf" }} />
-        <form onSubmit={addModel}>
-          <div className="row mb-3">
-            <div className="col-5">
-              <div className="mb-3">
-                <label htmlFor="name-model" className="form-label">
-                  Tên mẫu
-                </label>
-                <input
-                  autoFocus
-                  type="text"
-                  name="name"
-                  className="form-control"
-                  id="name-model"
-                />
-              </div>
+      </div>
+      <div className="row">
+        <div className="col-7 infor-left">
+          <div className="row">
+            <div className="col-3">
+              <label htmlFor="name-model" className="form-label">
+                Tên mẫu
+              </label>
             </div>
-            <div className="col" style={{ width: "58%" }}>
-              <div className="mb-3">
-                <label htmlFor="screen" className="form-label">
-                  Màn hình
-                </label>
-                <input
-                  type="text"
-                  name="screen"
-                  className="form-control"
-                  id="screen"
-                />
-              </div>
+            <div className="col-7 mb-3">
+              <input
+                autoFocus
+                type="text"
+                name="name"
+                className="form-control"
+                id="name-model"
+              />
             </div>
           </div>
-          <div className="row mb-3">
-            <div className="col" style={{ width: "33.5%" }}>
-              <div className="mb-3">
-                <label
-                  htmlFor="operating-system"
-                  className="form-label"
-                  style={{ width: "190px" }}
-                >
+          <div className="row">
+            <div className="col-3">
+              <label htmlFor="screen" className="form-label">
+                Màn hình
+              </label>
+            </div>
+            <div className="col-7 mb-3">
+              <input
+                type="text"
+                name="screen"
+                className="form-control"
+                id="screen"
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-3 mb-3">
+              <label htmlFor="name-model" className="form-label">
+                Thương hiệu
+              </label>
+            </div>
+            <div className="col-7">
+              <SelectCustom defaultValue={0} name="brand" list={brands} />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-3">
+              <label htmlFor="input-description" className="form-label">
+                Mô tả
+              </label>
+            </div>
+            <div className="col-7 mb-3">
+              <textarea
+                className="form-control"
+                id="input-description"
+                rows="4"
+                name="description"
+              ></textarea>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-3">
+              <label htmlFor="timeDebut" className="form-label">
+                Thời gian ra mắt
+              </label>
+            </div>
+            <div className="col-7 mb-3">
+              <input
+                type="text"
+                name="timeDebut"
+                className="form-control"
+                id="timeDebut"
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-3">
+              <label htmlFor="status" className="form-label">
+                Trạng thái
+              </label>
+            </div>
+            <div className="col-7 mb-3">
+              <SelectCustom defaultValue={0} name="status" list={statusModel} />
+            </div>
+          </div>
+        </div>
+        <div className="col ">
+          <div className="row infor-right-top">
+            {" "}
+            <div className="row">
+              <div className="col-4">
+                <label htmlFor="operating-system" className="form-label">
                   Hệ điều hành
                 </label>
+              </div>
+              <div className="col-7 mb-3">
                 <input
                   type="text"
                   name="os"
@@ -141,24 +196,13 @@ const AddModelForm = (props) => {
                 />
               </div>
             </div>
-            <div className="col" style={{ width: "33%" }}>
-              <div className="mb-3">
-                <label htmlFor="rear-camera" className="form-label">
-                  Camera sau
-                </label>
-                <input
-                  type="text"
-                  name="rearCamera"
-                  className="form-control"
-                  id="rear-camera"
-                />
-              </div>
-            </div>
-            <div className="col" style={{ width: "33%" }}>
-              <div className="mb-3">
+            <div className="row">
+              <div className="col-4">
                 <label htmlFor="front-camera" className="form-label">
                   Camera trước
                 </label>
+              </div>
+              <div className="col-7 mb-3">
                 <input
                   type="text"
                   name="frontCamera"
@@ -167,25 +211,73 @@ const AddModelForm = (props) => {
                 />
               </div>
             </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-5">
-              <div className="mb-3">
-                <label htmlFor="name-model" className="form-label">
-                  Thương hiệu
+            <div className="row">
+              <div className="col-4">
+                <label htmlFor="rear-camera" className="form-label">
+                  Camera sau
                 </label>
-                <SelectCustom defaultValue={0} name="brand" list={brands} />
+              </div>
+              <div className="col-7 mb-3">
+                <input
+                  type="text"
+                  name="rearCamera"
+                  className="form-control"
+                  id="rear-camera"
+                />
               </div>
             </div>
-            <div className="col" style={{ width: "30%" }}>
-              <div className="mb-3">
-                <label
-                  htmlFor="sim"
-                  className="form-label"
-                  style={{ width: "50px" }}
-                >
+            <div className="row">
+              <div className="col-4">
+                <label htmlFor="memoryStick" className="form-label">
+                  Thẻ nhớ
+                </label>
+              </div>
+              <div className="col-7 mb-3">
+                <input
+                  type="text"
+                  name="memoryStick"
+                  className="form-control"
+                  id="memoryStick"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-4">
+                <label htmlFor="battery" className="form-label">
+                  Pin
+                </label>
+              </div>
+              <div className="col-7 mb-3">
+                <input
+                  type="text"
+                  name="battery"
+                  className="form-control"
+                  id="battery"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-4">
+                <label htmlFor="charger" className="form-label">
+                  Sạc
+                </label>
+              </div>
+              <div className="col-7 mb-3">
+                <input
+                  type="text"
+                  name="charger"
+                  className="form-control"
+                  id="charger"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-4">
+                <label htmlFor="sim" className="form-label">
                   Sim
                 </label>
+              </div>
+              <div className="col-7 mb-3">
                 <input
                   type="text"
                   name="sim"
@@ -194,15 +286,13 @@ const AddModelForm = (props) => {
                 />
               </div>
             </div>
-            <div className="col" style={{ width: "27.8%" }}>
-              <div className="mb-3">
-                <label
-                  htmlFor="chip"
-                  className="form-label"
-                  style={{ width: "50px" }}
-                >
+            <div className="row">
+              <div className="col-4">
+                <label htmlFor="chip" className="form-label">
                   Chip
                 </label>
+              </div>
+              <div className="col-7 mb-3">
                 <input
                   type="text"
                   name="chip"
@@ -212,163 +302,70 @@ const AddModelForm = (props) => {
               </div>
             </div>
           </div>
-          <div className="row mb-3">
-            <div className="col" style={{ width: "30%" }}>
-              <div className="mb-3">
-                <label
-                  htmlFor="memoryStick"
-                  className="form-label"
-                  style={{ width: "239px" }}
-                >
-                  Thẻ nhớ
-                </label>
-                <input
-                  type="text"
-                  name="memoryStick"
-                  className="form-control"
-                  id="memoryStick"
-                />
-              </div>
-            </div>
-            <div className="col" style={{ width: "20%" }}>
-              <div className="mb-3">
-                <label
-                  htmlFor="battery"
-                  className="form-label"
-                  style={{ width: "50px" }}
-                >
-                  Pin
-                </label>
-                <input
-                  type="text"
-                  name="battery"
-                  className="form-control"
-                  id="battery"
-                />
-              </div>
-            </div>
-            <div className="col" style={{ width: "20%" }}>
-              <div className="mb-3">
-                <label
-                  htmlFor="charger"
-                  className="form-label"
-                  style={{ width: "50px" }}
-                >
-                  Sạc
-                </label>
-                <input
-                  type="text"
-                  name="charger"
-                  className="form-control"
-                  id="charger"
-                />
-              </div>
-            </div>
-            <div className="col" style={{ width: "29.3%" }}>
-              <div className="mb-3">
-                <label htmlFor="status" className="form-label">
-                  Trạng thái
-                </label>
-                <SelectCustom
-                  defaultValue={0}
-                  name="status"
-                  list={statusModel}
-                />
-              </div>
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col" style={{ width: "99.2%" }}>
-              <div className="mb-3">
-                <label
-                  htmlFor="input-description"
-                  className="form-label"
-                  style={{ width: "137px" }}
-                >
-                  Mô tả
-                </label>
 
-                <textarea
-                  className="form-control"
-                  id="input-description"
-                  rows="4"
-                  name="description"
-                ></textarea>
-              </div>
+          <div className="row infor-right-bottom">
+            <button className="btnColor" onClick={toggle} type="button">
+              {buttonLabel}
+              Thêm màu
+            </button>
+            <div>
+              {/* {formColor.map((item, index) => (
+                <div className="row" key={`item-${index}`}></div>
+              ))} */}
             </div>
           </div>
-          <div className="row mb-3">
-            <div className="col-5 mb-3">
-              <label htmlFor="timeDebut" className="form-label">
-                Thời gian ra mắt
-              </label>
-              <input
-                type="text"
-                name="timeDebut"
-                className="form-control"
-                id="timeDebut"
-              />
-            </div>
-            <div className="col-5 mb-3">
-              <button className="btnColor" onClick={toggle} type="button">
-                {buttonLabel}
-                Thêm màu
-              </button>
-            </div>
-            <Modal isOpen={modal} toggle={toggle} className={className}>
-              <ModalBody>
-                <form onSubmit={addColor}>
-                  <div className="container">
-                    {/* {formColor.map((item, index) => ( */}
-                    {/* <div className="row" key={`item-${index}`}> */}
-                    <div className="row">
-                      <div className="col-4">
-                        <label htmlFor="ColorModel" className="form-label">
-                          Màu
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          name="ColorInput"
-                          // value={item.ColorInput}
-                          // onChange={(e) => onChange(index, e)}
-                          id="ColorModel"
-                        />
-                      </div>
-                      <div className="col">
-                        <InputImage
-                          images={images}
-                          setImages={setImages}
-                          multiple={true}
-                        />
-                      </div>
+          <Modal isOpen={modal} toggle={toggle} className={className}>
+            <ModalBody>
+              <form onSubmit={addColor}>
+                <div className="container">
+                  <div className="row">
+                    {/* {formColor.map((item, index) => (
+                <div className="row" key={`item-${index}`}>*/}
+                    <div className="col-4">
+                      <label htmlFor="ColorModel" className="form-label">
+                        Màu
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="ColorInput"
+                        // value={item.ColorInput}
+                        // onChange={(e) => onChange(index, e)}
+                        id="ColorModel"
+                      />
                     </div>
-                    {/* ))} */}
+                    <div className="col">
+                      <InputImage
+                        images={images}
+                        setImages={setImages}
+                        multiple={true}
+                      />
+                    </div>
                   </div>
-                  <ModalFooter>
-                    <Button type="submit" color="primary">
-                      Submit
-                    </Button>{" "}
-                    <Button type="button" color="secondary" onClick={toggle}>
-                      Cancel
-                    </Button>
-                  </ModalFooter>
-                </form>
-              </ModalBody>
-            </Modal>
-          </div>
-
-          <div className="row mb-3" style={{ marginTop: "100px" }}>
-            <hr style={{ color: "#cfcfcf" }} />
-            <div className="col-12" style={{ textAlign: "center" }}>
-              <button type="submit" className="btnAddModel">
-                SAVE
-              </button>
-            </div>
-          </div>
-        </form>
+                  {/* ))} */}
+                </div>
+                <ModalFooter>
+                  <Button type="submit" color="primary">
+                    Submit
+                  </Button>{" "}
+                  <Button type="button" color="secondary" onClick={toggle}>
+                    Cancel
+                  </Button>
+                </ModalFooter>
+              </form>
+            </ModalBody>
+          </Modal>
+        </div>
       </div>
-    </div>
+      <div className="row mb-3" style={{ marginTop: "100px" }}>
+        <hr style={{ color: "#cfcfcf" }} />
+        <div className="col-12" style={{ textAlign: "center" }}>
+          <button type="submit" className="btnAddModel">
+            SAVE
+          </button>
+        </div>
+      </div>
+    </form>
   );
 };
 

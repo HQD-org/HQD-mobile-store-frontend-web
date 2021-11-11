@@ -31,7 +31,7 @@ const AdminMenu = (props) => {
 
           <div className="txtheader">Product</div>
           <ul className="list-menu">
-            <li>
+            <li onClick={() => toggle("product")}>
               <div>
                 <span>
                   <i className="fab fa-product-hunt icon-admin"></i>
@@ -39,7 +39,7 @@ const AdminMenu = (props) => {
                 <span>Products</span>
               </div>{" "}
             </li>
-            <li>
+            <li onClick={() => toggle("add product")}>
               <div to="# ">
                 <i className="bi bi-plus-square-fill icon-admin"></i>Add Product
               </div>{" "}

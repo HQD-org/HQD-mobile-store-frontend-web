@@ -6,7 +6,7 @@ const Introduction = () => {
   return (
     <div style={{ marginTop: "20px" }}>
       <div className="row" style={{ textAlign: "center" }}>
-        <i class="bi bi-flower1"></i>
+        <i className="bi bi-flower1"></i>
       </div>
       <div className="row">
         <div className="col-5">

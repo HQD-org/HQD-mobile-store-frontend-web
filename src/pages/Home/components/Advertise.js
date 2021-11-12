@@ -10,21 +10,21 @@ const Advertise = () => {
       <div className="row" style={{ paddingBottom: "20px" }}>
         <div
           id="carouselSlidesOnly"
-          class="carousel slide"
+          className="carousel slide"
           data-bs-ride="carousel"
         >
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src={Adv1} class="d-block w-100" alt="..." />
+          <div className="carousel-inner">
+            <div className="carousel-item active">
+              <img src={Adv1} className="d-block w-100" alt="..." />
             </div>
-            <div class="carousel-item">
-              <img src={Adv2} class="d-block w-100" alt="..." />
+            <div className="carousel-item">
+              <img src={Adv2} className="d-block w-100" alt="..." />
             </div>
-            <div class="carousel-item">
-              <img src={Adv3} class="d-block w-100" alt="..." />
+            <div className="carousel-item">
+              <img src={Adv3} className="d-block w-100" alt="..." />
             </div>
-            <div class="carousel-item">
-              <img src={Adv4} class="d-block w-100" alt="..." />
+            <div className="carousel-item">
+              <img src={Adv4} className="d-block w-100" alt="..." />
             </div>
           </div>
         </div>

@@ -12,7 +12,7 @@ const ProductList = () => {
             <div className="img-top-text">
               <img
                 src={imgPro}
-                class="card-img-top img-productList"
+                className="card-img-top img-productList"
                 alt="..."
               />
               <div className="txt-product">

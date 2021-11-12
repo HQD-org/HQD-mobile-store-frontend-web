@@ -1,35 +1,40 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import Advertise from "./components/Advertise";
 import Introduction from "./components/Introduction";
-import Trending from "./components/Trending";
-import Sale from "./components/Sale";
 import NewProduct from "./components/NewProduct";
 import Product from "./components/Product";
-import Advertise from "./components/Advertise";
+import Sale from "./components/Sale";
+import Trending from "./components/Trending";
 
-
-const HomePage = () => {
+const HomePage = (props) => {
+  const { showHeaderAndFooter } = props;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(showHeaderAndFooter(true));
+  }, []);
   return (
     <div>
-      <nav id="navbar-HQDlist" class="navbar px-3">
-        <ul class="nav nav-pills">
-          <li class="nav-item">
-            <a class="nav-link nav-home" href="#introduction">
+      <nav id="navbar-HQDlist" className="navbar px-3">
+        <ul className="nav nav-pills">
+          <li className="nav-item">
+            <a className="nav-link nav-home" href="#introduction">
               Introduction
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link nav-home" href="#trending">
+          <li className="nav-item">
+            <a className="nav-link nav-home" href="#trending">
               Trending
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link nav-home" href="#promotion">
+          <li className="nav-item">
+            <a className="nav-link nav-home" href="#promotion">
               Promotion
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link nav-home" href="#products">
+          <li className="nav-item">
+            <a className="nav-link nav-home" href="#products">
               Products
             </a>
           </li>
@@ -39,8 +44,8 @@ const HomePage = () => {
         data-bs-spy="scroll"
         data-bs-target="#navbar-HQDlist"
         data-bs-offset="0"
-        class="scrollspy"
-        tabindex="0"
+        className="scrollspy"
+        tabIndex="0"
       >
         <div className="container">
           <div id="introduction">

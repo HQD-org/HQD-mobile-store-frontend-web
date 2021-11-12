@@ -82,7 +82,7 @@ export const getAuthFail = () => {
 
 export const getAuthAction = () => async (dispatch) => {
   try {
-    dispatch(loading());
+    dispatch(loading(true));
     const res = await authAPI.getAuth();
     if (res.success) {
       dispatch(loading());

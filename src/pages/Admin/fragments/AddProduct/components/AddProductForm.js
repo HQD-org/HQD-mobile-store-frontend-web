@@ -119,7 +119,6 @@ const AddProductForm = (props) => {
               </td>
             </tr>
             <tr onClick={toggle}>
-              {" "}
               {buttonLabel}
               <td>4</td>
               <td>Oppo A31</td>

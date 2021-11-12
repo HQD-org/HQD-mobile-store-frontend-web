@@ -11,7 +11,7 @@ const AddProductHeader = () => {
       >
         <div className="col">
           <div>
-            <i class="bi bi-plus-square-fill icon-admin icon-modelheader"></i>
+            <i className="bi bi-plus-square-fill icon-admin icon-modelheader"></i>
             <span className="name-management">Add Product</span>
           </div>
           <p className="choosenHQD"> Choosing HQD mobile is a good ideal</p>
@@ -25,7 +25,7 @@ const AddProductHeader = () => {
         <div className="col-2">
           <form>
             <input
-              class="form-control me-2"
+              className="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
@@ -40,7 +40,7 @@ const AddProductHeader = () => {
             {" "}
             <div className="col-2">
               <FormGroup>
-                <select class="form-select">
+                <select className="form-select">
                   <option selected disabled>
                     Filter by Brand
                   </option>
@@ -51,7 +51,7 @@ const AddProductHeader = () => {
             </div>
             <div className="col-2">
               <FormGroup>
-                <select class="form-select">
+                <select className="form-select">
                   <option selected disabled>
                     Filter by Operating System
                   </option>
@@ -62,7 +62,7 @@ const AddProductHeader = () => {
             </div>
             <div className="col-2">
               <FormGroup>
-                <select class="form-select">
+                <select className="form-select">
                   <option selected disabled>
                     Filter by Time
                   </option>
@@ -73,7 +73,7 @@ const AddProductHeader = () => {
             </div>
             <div className="col-2">
               <FormGroup>
-                <select class="form-select">
+                <select className="form-select">
                   <option selected disabled>
                     Filter by Status
                   </option>

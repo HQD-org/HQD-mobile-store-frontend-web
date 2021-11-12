@@ -11,7 +11,7 @@ const ForgotPasswordRoute = () => {
       <Route
         path={PATH.FORGOT_PASSWORD}
         exact
-        component={Auth(ForgotPasswordPage, false)}
+        component={Auth(ForgotPasswordPage, false, false, true)}
       />
     </Switch>
   );

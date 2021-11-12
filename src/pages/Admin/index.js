@@ -1,58 +1,70 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import AdminMenu from "../../common/components/AdminMenu";
+import AddModelFragment from "./fragments/AddModel";
 import AddProductFragment from "./fragments/AddProduct";
 import BrandFragment from "./fragments/Brand";
 import ModelFragment from "./fragments/Model";
 import ProductFragment from "./fragments/Products";
-import AddModelFragment from "./fragments/AddModel";
-const Admin = () => {
-  const [toggleBrand, setToggleBrand] = useState(true);
+
+const AdminPage = (props) => {
+  const [toggleBrand, setToggleBrand] = useState(false);
   const [toggleModel, setToggleModel] = useState(false);
-  const [toggleAddModel, setToggleAddModel] = useState(false);
+  const [toggleAddModel, setToggleAddModel] = useState(true);
   const [toggleAddProduct, setToggleAddProduct] = useState(false);
   const [toggleProduct, setToggleProduct] = useState(false);
-
-  const toggle = (type) => {
-    switch (type) {
+  const toggleRef = useRef("add model");
+  const { showHeaderAndFooter } = props;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(showHeaderAndFooter(false));
+  }, []);
+  const disabledToggle = (ref) => {
+    switch (ref) {
       case "brand":
-        if (toggleBrand) break;
-        setToggleBrand(true);
-        setToggleModel(false);
-        setToggleAddModel(false);
-        setToggleAddProduct(false);
-        setToggleProduct(false);
+        setToggleBrand(false);
         break;
       case "model":
-        if (toggleModel) break;
-        setToggleBrand(false);
-        setToggleModel(true);
-        setToggleAddModel(false);
-        setToggleAddProduct(false);
-        setToggleProduct(false);
+        setToggleModel(false);
         break;
       case "add model":
-        if (toggleAddModel) break;
-        setToggleBrand(false);
-        setToggleModel(false);
-        setToggleAddModel(true);
-        setToggleAddProduct(false);
-        setToggleProduct(false);
-        break;
-      case "add-product":
-        if (toggleAddProduct) break;
-        setToggleBrand(false);
-        setToggleModel(false);
         setToggleAddModel(false);
-        setToggleAddProduct(true);
-        setToggleProduct(false);
+        break;
+      case "add product":
+        setToggleAddProduct(false);
         break;
       case "product":
-        if (toggleProduct) break;
-        setToggleBrand(false);
-        setToggleModel(false);
-        setToggleAddModel(false);
-        setToggleAddProduct(false);
+        setToggleProduct(false);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const toggle = (type) => {
+    if (toggleRef.current === type) return;
+    disabledToggle(toggleRef.current);
+    switch (type) {
+      case "brand":
+        setToggleBrand(true);
+        toggleRef.current = "brand";
+        break;
+      case "model":
+        setToggleModel(true);
+        toggleRef.current = "model";
+        break;
+      case "add model":
+        setToggleAddModel(true);
+        toggleRef.current = "add model";
+        break;
+      case "add product":
+        setToggleAddProduct(true);
+        toggleRef.current = "add product";
+        break;
+      case "product":
         setToggleProduct(true);
+        toggleRef.current = "product";
         break;
       default:
         break;

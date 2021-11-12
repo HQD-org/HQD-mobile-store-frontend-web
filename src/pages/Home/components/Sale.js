@@ -6,7 +6,7 @@ const Sale = () => {
   return (
     <div style={{ marginTop: "20px" }}>
       <div className="row" style={{ textAlign: "center" }}>
-        <i class="bi bi-brightness-alt-high-fill"></i>
+        <i className="bi bi-brightness-alt-high-fill"></i>
       </div>
       <div className="row" style={{ alignItems: "center" }}>
         <div className="col-5">
@@ -27,57 +27,57 @@ const Sale = () => {
           <h2 className="txtSale">Shopping everyday</h2>
         </div>
 
-        <div class="row row-cols-1 row-cols-md-4 g-4 group-promotion">
-          <div class="col">
-            <div class="card h-100 card-sale">
+        <div className="row row-cols-1 row-cols-md-4 g-4 group-promotion">
+          <div className="col">
+            <div className="card h-100 card-sale">
               <div className="img-pro">
-                <img src={imgXiaomi} class="card-img-top" alt="..." />
+                <img src={imgXiaomi} className="card-img-top" alt="..." />
               </div>
 
-              <div class="card-body">
-                <h5 class="card-title">Xiaomi Redmi Note 9 4GB-128GB</h5>
-                <h5 class="card-text now-price">4.940.000 ₫</h5>
-                <h5 class="card-text pre-price">5.940.000 ₫</h5>
+              <div className="card-body">
+                <h5 className="card-title">Xiaomi Redmi Note 9 4GB-128GB</h5>
+                <h5 className="card-text now-price">4.940.000 ₫</h5>
+                <h5 className="card-text pre-price">5.940.000 ₫</h5>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card h-100 card-sale">
+          <div className="col">
+            <div className="card h-100 card-sale">
               <div className="img-pro">
-                <img src={imgXiaomi} class="card-img-top" alt="..." />
+                <img src={imgXiaomi} className="card-img-top" alt="..." />
               </div>
 
-              <div class="card-body">
-                <h5 class="card-title">Xiaomi Redmi Note 9 4GB-128GB</h5>
-                <h5 class="card-text now-price">4.940.000 ₫</h5>
-                <h5 class="card-text pre-price">5.940.000 ₫</h5>
+              <div className="card-body">
+                <h5 className="card-title">Xiaomi Redmi Note 9 4GB-128GB</h5>
+                <h5 className="card-text now-price">4.940.000 ₫</h5>
+                <h5 className="card-text pre-price">5.940.000 ₫</h5>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card h-100 card-sale">
+          <div className="col">
+            <div className="card h-100 card-sale">
               <div className="img-pro">
                 {" "}
-                <img src={imgXiaomi} class="card-img-top" alt="..." />
+                <img src={imgXiaomi} className="card-img-top" alt="..." />
               </div>
 
-              <div class="card-body">
-                <h5 class="card-title">Xiaomi Redmi Note 9 4GB-128GB</h5>
-                <h5 class="card-text now-price">4.940.000 ₫</h5>
-                <h5 class="card-text pre-price">5.940.000 ₫</h5>
+              <div className="card-body">
+                <h5 className="card-title">Xiaomi Redmi Note 9 4GB-128GB</h5>
+                <h5 className="card-text now-price">4.940.000 ₫</h5>
+                <h5 className="card-text pre-price">5.940.000 ₫</h5>
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card h-100 card-sale">
+          <div className="col">
+            <div className="card h-100 card-sale">
               <div className="img-pro">
-                <img src={imgXiaomi} class="card-img-top" alt="..." />
+                <img src={imgXiaomi} className="card-img-top" alt="..." />
               </div>
 
-              <div class="card-body">
-                <h5 class="card-title">Xiaomi Redmi Note 9 4GB-128GB</h5>
-                <h5 class="card-text now-price">4.940.000 ₫</h5>
-                <h5 class="card-text pre-price">5.940.000 ₫</h5>
+              <div className="card-body">
+                <h5 className="card-title">Xiaomi Redmi Note 9 4GB-128GB</h5>
+                <h5 className="card-text now-price">4.940.000 ₫</h5>
+                <h5 className="card-text pre-price">5.940.000 ₫</h5>
               </div>
             </div>
           </div>

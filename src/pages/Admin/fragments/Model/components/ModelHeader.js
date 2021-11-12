@@ -46,6 +46,7 @@ const ModelHeader = () => {
     }
   };
   const options = (list) => {
+    console.log("log at ==> ModelHeader ==> line 49 ==> list: ", list);
     return list.map((element) => {
       return (
         <option key={element._id} value={element._id}>

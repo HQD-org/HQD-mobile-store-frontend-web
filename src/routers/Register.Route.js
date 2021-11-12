@@ -8,7 +8,11 @@ const RegisterPage = lazy(() => import("../pages/Register"));
 const RegisterRoute = () => {
   return (
     <Switch>
-      <Route path={PATH.REGISTER} exact component={Auth(RegisterPage, false)} />
+      <Route
+        path={PATH.REGISTER}
+        exact
+        component={Auth(RegisterPage, false, false, true)}
+      />
     </Switch>
   );
 };

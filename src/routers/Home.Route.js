@@ -8,7 +8,7 @@ const HomePage = lazy(() => import("../pages/Home"));
 const HomeRoute = () => {
   return (
     <Switch>
-      <Route path={PATH.HOME} exact component={Auth(HomePage, false)} />
+      <Route path={PATH.HOME} exact component={Auth(HomePage, false, false)} />
     </Switch>
   );
 };

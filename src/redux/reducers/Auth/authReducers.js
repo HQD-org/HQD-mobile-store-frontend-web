@@ -19,6 +19,10 @@ const initState = {
 export default function (state = initState, action) {
   switch (action.type) {
     case GET_AUTH_SUCCESS:
+      console.log(
+        "log at ==> authReducer ==> get auth sucess: ,",
+        action.payload
+      );
       return {
         ...state,
         user: action.payload,
@@ -30,6 +34,7 @@ export default function (state = initState, action) {
     case LOGIN_FAIL:
       return { ...state, user: {}, isLogin: false, role: "guest" };
     case LOGIN_SUCCESS:
+      console.log("log at ==> authReducer ==> loginsucess: ,", action.payload);
       return { ...state, isLogin: true, role: action.payload.role };
     case LOGOUT:
       return { ...state, user: {}, isLogin: false, role: "guest" };

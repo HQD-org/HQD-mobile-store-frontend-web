@@ -8,7 +8,11 @@ const LoginPage = lazy(() => import("../pages/Login"));
 const LoginRoute = () => {
   return (
     <Switch>
-      <Route path={PATH.LOGIN} exact component={Auth(LoginPage, false)} />
+      <Route
+        path={PATH.LOGIN}
+        exact
+        component={Auth(LoginPage, false, false, true)}
+      />
     </Switch>
   );
 };

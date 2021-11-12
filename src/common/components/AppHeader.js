@@ -9,9 +9,9 @@ import { useHistory } from "react-router";
 import { logoutAction } from "../../redux/actions/Auth/authActions";
 
 const AppHeader = () => {
+  const show = useSelector((state) => state.system.showHeaderAndFooter);
   const dispatch = useDispatch();
   const history = useHistory();
-  const role = useSelector((state) => state.auth.role);
   const isLogin = useSelector((state) => state.auth.isLogin);
   const user = useSelector((state) => state.auth.user);
   const handleLogout = async () => {
@@ -52,8 +52,7 @@ const AppHeader = () => {
   const onClickSearch = () => {
     console.log("log at ==> AppHeader.js ==> line 27 ==> search");
   };
-  console.log("log at ==> AppHeader ==> role: ", role);
-  return role !== "admin" && role !== "manager branch" ? (
+  return show ? (
     <nav>
       <div className="navbar navbar-light">
         <div className="container-fluid" style={{ alignItems: "baseline" }}>
@@ -107,7 +106,6 @@ const AppHeader = () => {
           </div>
         </div>
       </div>
-      {/* <hr /> */}
     </nav>
   ) : (
     <> </>

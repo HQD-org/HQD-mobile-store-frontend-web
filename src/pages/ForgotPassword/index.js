@@ -1,21 +1,38 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Form, Input } from "reactstrap";
-import AppFooter from "../../common/components/AppFooter";
-import AppHeader from "../../common/components/AppHeader";
 import "../../common/css/Form.Style.css";
 import login2 from "../../common/images/login2.png";
+import { sendOTPAction } from "../../redux/actions/Auth/authActions";
+import validate from "./hooks/validate";
 
-const ForgotPasswordPage = () => {
+const ForgotPasswordPage = (props) => {
+  const { showHeaderAndFooter } = props;
+  const dispatch = useDispatch();
+  const history = useHistory();
+  useEffect(() => {
+    dispatch(showHeaderAndFooter(true));
+  }, []);
+  const forgotPassword = async (e) => {
+    e.preventDefault();
+    const username = e.target.email.value;
+    const isValidData = validate(username);
+    if (!isValidData) return;
+    const res = await dispatch(sendOTPAction({ username }));
+    if (res) history.push(`/verify?email=${username}&type=password`);
+    return;
+  };
   return (
     <div>
-      <AppHeader />
       <div className="container">
         <div className="row">
           <div className="col-md-6">
             <img className="img-fluid" src={login2} alt="bg" width="100%"></img>
           </div>
           <div className="col" style={{ marginTop: "100px" }}>
-            <div className="row" style={{ "justify-content": "center" }}>
+            <div className="row" style={{ justifyContent: "center" }}>
               <h3 className="txtStart">FORGOT PASSWORD?</h3>
               <p className="txtSignup">
                 Enter the Email address associated with your account
@@ -23,17 +40,17 @@ const ForgotPasswordPage = () => {
               <p style={{ maxWidth: "88%" }}>
                 We will send you a verification code to check your authenticity
               </p>
-              <Form style={{ maxWidth: "88%" }}>
+              <Form style={{ maxWidth: "88%" }} onSubmit={forgotPassword}>
                 <Input
                   type="text"
-                  name="e-mail"
+                  name="email"
                   id="e-mail"
                   placeholder="Email"
                   className="form-control"
-                  required
+                  autoFocus
                 />
-                <div className="row" style={{ "justify-content": "center" }}>
-                  <button class="btnSubmit" type="submit">
+                <div className="row" style={{ justifyContent: "center" }}>
+                  <button className="btnSubmit" type="submit">
                     SEND
                   </button>
                 </div>
@@ -42,7 +59,6 @@ const ForgotPasswordPage = () => {
           </div>
         </div>
       </div>
-      <AppFooter />
     </div>
   );
 };

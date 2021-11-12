@@ -49,6 +49,7 @@ const InputImage = (props) => {
         setImages(previews);
       }
     },
+    multiple: multiple,
   });
 
   const thumbs = images.map((image, index) => (
@@ -75,7 +76,9 @@ const InputImage = (props) => {
       <div className="border-img">
         <div {...getRootProps({ className: "dropzone" })}>
           <input {...getInputProps()} />
-          <p className="txtSelectImg">Select one or "n" image</p>
+          <p className="txtSelectImg">
+            {multiple ? "Select one or multiple images" : "Select one image"}
+          </p>
         </div>
         <aside style={thumbsContainer}>{thumbs}</aside>
       </div>

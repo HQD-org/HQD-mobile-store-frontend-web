@@ -1,33 +1,41 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import queryString from "query-string";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import OtpInput from "react-otp-input";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import "../../common/css/Form.Style.css";
 import login2 from "../../common/images/login2.png";
+import toastNotify from "../../common/toastify";
 import {
+  forgotPasswordAction,
   sendOTPAction,
   verifyAction,
 } from "../../redux/actions/Auth/authActions";
-import toastNotify from "../../common/toastify";
 
-const VerifyPage = () => {
+const VerifyPage = (props) => {
+  const { showHeaderAndFooter } = props;
   const dispatch = useDispatch();
   const history = useHistory();
   const [otp, setOtp] = useState("");
   const [disabled, setDisabled] = useState(false);
   const [time, setTime] = useState(0);
-  const email = queryString.parse(history.location.search).email;
+  const search = queryString.parse(history.location.search);
+  const { email, type } = search;
   const handleChange = (otp) => setOtp(otp);
   const verify = async () => {
     if (otp.length < 4) {
       toastNotify("Vui lòng nhập đủ 4 ký tự", "error");
       return;
     }
-    const res = await dispatch(verifyAction({ otp, username: email }));
-    if (res) {
-      history.push("/login");
+    let res = false;
+    if (type === "password") {
+      res = await dispatch(forgotPasswordAction({ otp, username: email }));
+    } else {
+      res = await dispatch(verifyAction({ otp, username: email }));
     }
+    if (res) history.push("/login");
+    return;
   };
   const resendOTP = async () => {
     await dispatch(sendOTPAction({ username: email }));
@@ -38,6 +46,10 @@ const VerifyPage = () => {
       setDisabled(false);
     }, 60000);
   };
+
+  useEffect(() => {
+    dispatch(showHeaderAndFooter(true));
+  }, []);
   useEffect(() => {
     if (time > 0)
       setTimeout(() => {

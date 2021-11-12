@@ -8,9 +8,9 @@ import { statusModel } from "../../../../../common/constants/ListSelect";
 
 const ModelHeader = () => {
   const dispatch = useDispatch();
-  const brands = useSelector((state) => state.brands.list);
+  const brands = useSelector((state) => state.brand.list);
   useEffect(() => {
-    dispatch(getAllBrandAction(1, 1000));
+    dispatch(getAllBrandAction());
   }, []);
   const [brand, setBrand] = useState("all");
   const [status, setStatus] = useState("all");
@@ -46,6 +46,7 @@ const ModelHeader = () => {
     }
   };
   const options = (list) => {
+    console.log("log at ==> ModelHeader ==> line 49 ==> list: ", list);
     return list.map((element) => {
       return (
         <option key={element._id} value={element._id}>
@@ -148,7 +149,9 @@ const ModelHeader = () => {
               </FormGroup>
             </div>
             <div className="col-2">
-              <button type="submit" className="btn-filter">Filter</button>
+              <button type="submit" className="btn-filter">
+                Filter
+              </button>
             </div>
           </div>
         </form>

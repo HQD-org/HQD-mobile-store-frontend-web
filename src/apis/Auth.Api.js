@@ -22,16 +22,19 @@ const login = async (body) => {
     if (res && res.data) {
       Cookie.set("accessToken", res.data.accessToken);
       toastNotify(res.message.VN);
-      return { data: {}, success: true };
+      return { data: res.data, success: true };
     }
     toastNotify(res.message.VN);
     return { data: {}, success: false };
   } catch (error) {
-    toastNotify("Đăng nhập thất bại");
-    return {
-      isVerify: false,
-      success: false,
-    };
+    console.log("log at ==> Auth Api ==> error login: ", error);
+    toastNotify(error.message.VN || "Đăng nhập thất bại");
+    if (error.status === 401)
+      return {
+        needVerify: true,
+        success: false,
+      };
+    return { success: false };
   }
 };
 
@@ -80,6 +83,21 @@ const sendOTP = async (body) => {
   }
 };
 
-const Auth = { getAuth, login, register, verify, sendOTP };
+const forgotPassword = async (body) => {
+  try {
+    const res = await axiosClient.post(`${url}/forgot-password/verify`, body);
+    toastNotify(res ? res.message.VN : "Lấy lại mật khẩu thất bại");
+    return res && res.data
+      ? { data: res || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    toastNotify("Lấy lại mật khẩu thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const Auth = { getAuth, login, register, verify, sendOTP, forgotPassword };
 
 export default Auth;

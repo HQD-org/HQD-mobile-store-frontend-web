@@ -9,26 +9,17 @@ import { useHistory } from "react-router";
 import { logoutAction } from "../../redux/actions/Auth/authActions";
 
 const AppHeader = () => {
+  const show = useSelector((state) => state.system.showHeaderAndFooter);
   const dispatch = useDispatch();
   const history = useHistory();
-  const isLogin = useSelector((state) => state.auth.isLogin) || false;
-  const user = useSelector((state) => state.auth.user) || {};
-
-  const handleLogout = () => {
-    dispatch(logoutAction());
+  const isLogin = useSelector((state) => state.auth.isLogin);
+  const user = useSelector((state) => state.auth.user);
+  const handleLogout = async () => {
+    await dispatch(logoutAction());
     history.push("/login");
   };
 
   const DropdownMenu = () => {
-    const Dashboard = () => {
-      if (user.role === "admin" || user.role === "manager branch")
-        return (
-          <Link className="dropdown-item " to="/dashboard">
-            Dashboard
-          </Link>
-        );
-      return <></>;
-    };
     return (
       <div className="dropdown-menu">
         <Link className="dropdown-item " to="/profile">
@@ -37,13 +28,13 @@ const AppHeader = () => {
         <Link className="dropdown-item " to="/bills">
           Bills
         </Link>
-        <Dashboard />
         <Link className="dropdown-item " to="#" onClick={handleLogout}>
           Logout
         </Link>
       </div>
     );
   };
+
   const onClickUser = () => {
     if (isLogin) {
       history.push("/profile");
@@ -61,11 +52,10 @@ const AppHeader = () => {
   const onClickSearch = () => {
     console.log("log at ==> AppHeader.js ==> line 27 ==> search");
   };
-  return (
+  return show ? (
     <nav>
       <div className="navbar navbar-light">
         <div className="container-fluid" style={{ alignItems: "baseline" }}>
-          {" "}
           <div className="col-8 logo">
             <NavLink className="navbar-brand name-store" to="/">
               <img src={logoHQD} alt="logo" width="20%" /> HQD Mobile
@@ -87,7 +77,7 @@ const AppHeader = () => {
             className="col-4"
             style={{
               display: "flex",
-              alignItems: "baseline",
+              alignItems: "center",
               justifyContent: "center",
             }}
           >
@@ -100,25 +90,25 @@ const AppHeader = () => {
                 aria-label="Search"
               />
             </div>
-            {/* <button type="button" className="btn">
-              <i className="bi bi-person-circle icon-user"></i>
-            </button> */}
 
-            {/* <button type="button" className="btn btn-cart">
-              {" "}
-              <i className="bi bi-cart-fill icon-cart"></i>Cart
-            </button> */}
-
-            <FaShoppingCart className="icon-header" onClick={onClickCart} />
+            <FaShoppingCart
+              className="icon-header"
+              onClick={onClickCart}
+              style={{ color: "#3FA5EF", transform: "scaleX(-1)" }}
+            />
             <div className="dropdown icon-header">
-              <FaUser onClick={onClickUser} />
+              <FaUser
+                onClick={onClickUser}
+                style={{ marginTop: "-4px", color: "#3FA5EF" }}
+              />
               {isLogin && <DropdownMenu />}
             </div>
           </div>
         </div>
       </div>
-      <hr />
     </nav>
+  ) : (
+    <> </>
   );
 };
 

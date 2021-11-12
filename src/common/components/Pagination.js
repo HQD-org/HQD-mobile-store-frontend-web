@@ -1,4 +1,5 @@
 import React from "react";
+import "../../common/css/Pagination.Style.css";
 
 const Pagination = (props) => {
   const { pagination, onPageChange } = props;
@@ -10,16 +11,25 @@ const Pagination = (props) => {
     }
   };
   return (
-    <div>
-      <button disabled={page <= 1} onClick={() => handleOnPageChange(page - 1)}>
-        Prev
-      </button>
-      <button
-        disabled={page >= totalPage}
-        onClick={() => handleOnPageChange(page + 1)}
-      >
-        Next
-      </button>
+    <div className="row div-pagination">
+      <div className="col-1">
+        <button
+          className="btn-Prev"
+          disabled={page <= 1}
+          onClick={() => handleOnPageChange(page - 1)}
+        >
+          Prev
+        </button>
+      </div>
+      <div className="col-1">
+        <button
+          className="btn-Next"
+          disabled={page >= totalPage}
+          onClick={() => handleOnPageChange(page + 1)}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

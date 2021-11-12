@@ -1,11 +1,19 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import React from "react";
-import "../../common/css/AdminMenu.Style.css";
 // import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import FragmentBrandPage from "../../pages/Brand";
-
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
+import "../../common/css/AdminMenu.Style.css";
+import { logoutAction } from "../../redux/actions/Auth/authActions";
 const AdminMenu = (props) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const { toggle } = props;
+  const handleLogout = async () => {
+    await dispatch(logoutAction());
+    history.push("/login");
+  };
   return (
     <div>
       <div style={{ background: "#263544" }}>
@@ -23,7 +31,7 @@ const AdminMenu = (props) => {
 
           <div className="txtheader">Product</div>
           <ul className="list-menu">
-            <li>
+            <li onClick={() => toggle("product")}>
               <div>
                 <span>
                   <i className="fab fa-product-hunt icon-admin"></i>
@@ -31,7 +39,7 @@ const AdminMenu = (props) => {
                 <span>Products</span>
               </div>{" "}
             </li>
-            <li>
+            <li onClick={() => toggle("add product")}>
               <div to="# ">
                 <i className="bi bi-plus-square-fill icon-admin"></i>Add Product
               </div>{" "}
@@ -102,9 +110,10 @@ const AdminMenu = (props) => {
                 <i className="bi bi-gear-fill icon-admin"></i>Setting
               </div>
             </li>
-            <li>
+            <li onClick={handleLogout}>
               <div>
-                <i className="bi bi-box-arrow-left icon-admin"></i>Log out
+                <i className="bi bi-box-arrow-left icon-admin"></i>
+                Log out
               </div>
             </li>
           </ul>

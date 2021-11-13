@@ -70,7 +70,7 @@ const AdminMenu = (props) => {
           </ul>
           <div className="txtheader">Branch</div>
           <ul className="list-menu">
-            <li>
+            <li onClick={() => toggle("branch")}>
               <div>
                 <i className="bi bi-geo-alt-fill icon-admin"></i>Branchs
               </div>
@@ -78,7 +78,7 @@ const AdminMenu = (props) => {
           </ul>
           <div className="txtheader">Manage</div>
           <ul className="list-menu">
-            <li>
+            <li onClick={() => toggle("user")}>
               <div>
                 <i className="bi bi-person-fill icon-admin"></i>Users
               </div>

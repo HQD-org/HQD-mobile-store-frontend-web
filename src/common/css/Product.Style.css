@@ -29,7 +29,8 @@
     width: 137px;
 }
 
-.btnAddModel {
+.btnAddModel,
+.btnAddPro {
     border: none;
     font-weight: bold;
     padding: 10px;

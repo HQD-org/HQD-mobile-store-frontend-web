@@ -7,6 +7,8 @@ import AddProductFragment from "./fragments/AddProduct";
 import BrandFragment from "./fragments/Brand";
 import ModelFragment from "./fragments/Model";
 import ProductFragment from "./fragments/Products";
+import UserFragment from "./fragments/User";
+import BranchFragment from "./fragments/Branch";
 
 const AdminPage = (props) => {
   const [toggleBrand, setToggleBrand] = useState(false);
@@ -14,6 +16,8 @@ const AdminPage = (props) => {
   const [toggleAddModel, setToggleAddModel] = useState(true);
   const [toggleAddProduct, setToggleAddProduct] = useState(false);
   const [toggleProduct, setToggleProduct] = useState(false);
+  const [toggleUser, setToggleUser] = useState(false);
+  const [toggleBranch, setToggleBranch] = useState(false);
   const toggleRef = useRef("add model");
   const { showHeaderAndFooter } = props;
   const dispatch = useDispatch();
@@ -36,6 +40,12 @@ const AdminPage = (props) => {
         break;
       case "product":
         setToggleProduct(false);
+        break;
+      case "user":
+        setToggleUser(false);
+        break;
+      case "branch":
+        setToggleBranch(false);
         break;
       default:
         break;
@@ -66,6 +76,14 @@ const AdminPage = (props) => {
         setToggleProduct(true);
         toggleRef.current = "product";
         break;
+      case "user":
+        setToggleUser(true);
+        toggleRef.current = "user";
+        break;
+      case "branch":
+        setToggleBranch(true);
+        toggleRef.current = "branch";
+        break;
       default:
         break;
     }
@@ -87,6 +105,8 @@ const AdminPage = (props) => {
               {toggleAddModel && <AddModelFragment />}
               {toggleAddProduct && <AddProductFragment />}
               {toggleProduct && <ProductFragment />}
+              {toggleUser && <UserFragment />}
+              {toggleBranch && <BranchFragment />}
             </div>
           </div>
         </div>

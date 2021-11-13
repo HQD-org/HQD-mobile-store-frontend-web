@@ -3,7 +3,7 @@ import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import productImg from "../../../../../common/images/addProduct.png";
 import "../../../../../common/css/Product.Style.css";
 
-const AddProductForm = (props) => {
+const BranchForm = (props) => {
   const { buttonLabel } = props;
   const [modal, setModal] = useState(false);
   const [formAddproduct, setFormAddproduct] = useState([]);
@@ -297,4 +297,4 @@ const AddProductForm = (props) => {
   );
 };
 
-export default AddProductForm;
+export default BranchForm;

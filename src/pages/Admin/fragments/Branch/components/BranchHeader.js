@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FormGroup } from "reactstrap";
 import "../../../../../common/css/Branch.Style.css";
 import { IoAddCircleOutline } from "react-icons/io5";
 import BranchEditor from "./BranchEditor";
@@ -21,15 +20,7 @@ const BranchHeader = (props) => {
           </div>
           <p className="choosenHQD"> Choosing HQD mobile is a good ideal</p>
         </div>
-        <div className="col-4">
-          <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            name="search"
-          />
-        </div>
+
         <div className="col-2">
           <button type="button" className="btn-addBrand" onClick={toggle}>
             {buttonLabel}

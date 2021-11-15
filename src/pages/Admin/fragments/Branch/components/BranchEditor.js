@@ -13,7 +13,7 @@ import Select from "@mui/material/Select";
 const BranchEditor = (props) => {
   const [value, setValue] = useState(new Date());
 
-  const { className, toggle } = props;
+  const { toggle } = props;
   let { modal } = props;
 
   const onToggle = () => {
@@ -94,6 +94,12 @@ const BranchEditor = (props) => {
               <InputLabel>Quản trị viên</InputLabel>
               <Select label="Quản trị viên">
                 <MenuItem value="1">Id/Tên</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth sx={{ m: 1 }}>
+              <InputLabel>Trạng thái</InputLabel>
+              <Select label="Trạng thái">
+                <MenuItem value="1">Hoạt động</MenuItem>
               </Select>
             </FormControl>
           </div>

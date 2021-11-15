@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import modelImg from "../../../../../common/images/3d-modeling.png";
 import InputImage from "../../../../../common/components/InputImage";
+import "../../../../../common/css/Model.Style.css";
 
 const Model = (props) => {
   const { buttonLabel, className } = props;

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import productImg from "../../../../../common/images/addProduct.png";
 import "../../../../../common/css/Product.Style.css";
+import { FaHandPointRight } from "react-icons/fa";
+import CurrencyInput from "react-currency-input-field";
 
 const AddProductForm = (props) => {
   const { buttonLabel } = props;
@@ -77,16 +79,23 @@ const AddProductForm = (props) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <table className="table table-striped" style={{ marginTop: "30px" }}>
-          <thead>
+        <div style={{ color: "#a60000", fontSize: "11px" }}>
+          <FaHandPointRight style={{ marginRight: "10px" }} />
+          Guide: Chọn Model muốn thêm sản phẩm
+        </div>
+      </div>
+      <div className="row">
+        <table
+          className="table table-striped"
+          style={{ marginTop: "30px", borderCollapse: "inherit" }}
+        >
+          <thead className="thead-addpro">
             <tr>
               <th>STT</th>
               <th>Tên Model</th>
               <th>Thương hiệu</th>
               <th>Hệ điều hành</th>
               <th>Thời gian ra mắt</th>
-              <th>Trạng thái</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -97,10 +106,6 @@ const AddProductForm = (props) => {
               <td>OPPO</td>
               <td>Android</td>
               <td>2020</td>
-              <td>Hoạt động</td>
-              <td>
-                <i className="bi bi-x-circle-fill"></i>
-              </td>
             </tr>
             <tr onClick={toggle}>
               {buttonLabel}
@@ -109,10 +114,6 @@ const AddProductForm = (props) => {
               <td>OPPO</td>
               <td>Android</td>
               <td>2020</td>
-              <td>Hoạt động</td>
-              <td>
-                <i className="bi bi-x-circle-fill"></i>
-              </td>
             </tr>
             <tr onClick={toggle}>
               {buttonLabel}
@@ -121,10 +122,6 @@ const AddProductForm = (props) => {
               <td>OPPO</td>
               <td>Android</td>
               <td>2020</td>
-              <td>Hoạt động</td>
-              <td>
-                <i className="bi bi-x-circle-fill"></i>
-              </td>
             </tr>
             <tr onClick={toggle}>
               {" "}
@@ -134,10 +131,6 @@ const AddProductForm = (props) => {
               <td>OPPO</td>
               <td>Android</td>
               <td>2020</td>
-              <td>Hoạt động</td>
-              <td>
-                <i className="bi bi-x-circle-fill"></i>
-              </td>
             </tr>
           </tbody>
         </table>
@@ -199,6 +192,36 @@ const AddProductForm = (props) => {
                       </td>
                       <td>
                         <div className="input-group">
+                          {/* <CurrencyInput
+                            id="price"
+                            className={
+                              item.error.Price
+                                ? "form-control is-invalid"
+                                : "form-control "
+                            }
+                            name="Price"
+                            maxLength={1000000000000}
+                            value={item.Price}
+                            onChange={(e) => onChange(index, e)}
+                            onValueChange={(value, name) =>
+                              console.log(value, name)
+                            }
+                          /> */}
+                          {/* <CurrencyInput
+                            id="price"
+                            className={
+                              item.error.Price
+                                ? "form-control is-invalid"
+                                : "form-control "
+                            }
+                            value={item.Price}
+                            name="price"
+                            onChange={(e) => onChange(index, e)}
+                            maxLength={1000000000000}
+                            onValueChange={(value, name) =>
+                              console.log(value, name)
+                            }
+                          /> */}
                           <input
                             type="text"
                             className={

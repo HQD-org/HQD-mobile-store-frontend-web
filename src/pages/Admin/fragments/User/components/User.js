@@ -20,13 +20,13 @@ import {
   Switch,
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
 import PrintIcon from "@mui/icons-material/Print";
 import { visuallyHidden } from "@mui/utils";
+import "../../../../../common/css/User.Style.css";
 
 const createData = (name, role, phone, address, email) => {
   return {
@@ -52,7 +52,7 @@ const rows = [
   createData("Amee", "user", "012345689", "HCM", "user@gmail.com"),
 ];
 
-function descendingComparator(a, b, orderBy) {
+const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -60,17 +60,17 @@ function descendingComparator(a, b, orderBy) {
     return 1;
   }
   return 0;
-}
+};
 
-function getComparator(order, orderBy) {
+const getComparator = (order, orderBy) => {
   return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
-}
+};
 
 // This method is created for cross-browser compatibility, if you don't
 // need to support IE11, you can use Array.prototype.sort() directly
-function stableSort(array, comparator) {
+const stableSort = (array, comparator) => {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
@@ -80,36 +80,31 @@ function stableSort(array, comparator) {
     return a[1] - b[1];
   });
   return stabilizedThis.map((el) => el[0]);
-}
+};
 
 const headCells = [
   {
     id: "name",
-    numeric: false,
     disablePadding: true,
     label: "Tên",
   },
   {
     id: "role",
-    numeric: true,
     disablePadding: false,
     label: "Vai trò",
   },
   {
     id: "phone",
-    numeric: true,
     disablePadding: false,
     label: "Số điện thoại",
   },
   {
     id: "address",
-    numeric: true,
     disablePadding: false,
     label: "Địa chỉ",
   },
   {
     id: "email",
-    numeric: true,
     disablePadding: false,
     label: "Email",
   },
@@ -252,7 +247,7 @@ EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
+const Users = () => {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("calories");
   const [selected, setSelected] = useState([]);
@@ -368,10 +363,10 @@ export default function EnhancedTable() {
                       >
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.role}</TableCell>
-                      <TableCell align="right">{row.phone}</TableCell>
-                      <TableCell align="right">{row.address}</TableCell>
-                      <TableCell align="right">{row.email}</TableCell>
+                      <TableCell align="left">{row.role}</TableCell>
+                      <TableCell align="left">{row.phone}</TableCell>
+                      <TableCell align="left">{row.address}</TableCell>
+                      <TableCell align="left">{row.email}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -403,4 +398,6 @@ export default function EnhancedTable() {
       />
     </Box>
   );
-}
+};
+
+export default Users;

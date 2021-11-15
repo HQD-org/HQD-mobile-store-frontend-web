@@ -1,300 +1,404 @@
 import React, { useState } from "react";
-import { Modal, ModalBody, ModalHeader } from "reactstrap";
-import productImg from "../../../../../common/images/addProduct.png";
-import "../../../../../common/css/Product.Style.css";
+import PropTypes from "prop-types";
+import { alpha } from "@mui/material/styles";
+import {
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  TableSortLabel,
+  Toolbar,
+  Typography,
+  Paper,
+  Checkbox,
+  Tooltip,
+  FormControlLabel,
+  Switch,
+} from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import ViewColumnIcon from "@mui/icons-material/ViewColumn";
+import PrintIcon from "@mui/icons-material/Print";
+import { visuallyHidden } from "@mui/utils";
+import "../../../../../common/css/Branch.Style.css";
 
-const BranchForm = (props) => {
-  const { buttonLabel } = props;
-  const [modal, setModal] = useState(false);
-  const [formAddproduct, setFormAddproduct] = useState([]);
-  const prevIsValid = () => {
-    if (formAddproduct.length === 0) {
-      return true;
+const createData = (branchName, address, adminName, timeDebut, status) => {
+  return {
+    branchName,
+    address,
+    adminName,
+    timeDebut,
+    status,
+  };
+};
+
+const rows = [
+  createData("HQD Mobile Thủ Đức", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
+  createData("HQD Mobile Q9", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
+  createData("HQD Mobile Q1", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
+  createData("HQD Mobile Q2", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
+];
+
+const descendingComparator = (a, b, orderBy) => {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+};
+
+const getComparator = (order, orderBy) => {
+  return order === "desc"
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+};
+
+// This method is created for cross-browser compatibility, if you don't
+// need to support IE11, you can use Array.prototype.sort() directly
+const stableSort = (array, comparator) => {
+  const stabilizedThis = array.map((el, index) => [el, index]);
+  stabilizedThis.sort((a, b) => {
+    const order = comparator(a[0], b[0]);
+    if (order !== 0) {
+      return order;
     }
-    const someEmpty = formAddproduct.some((item) => item.Price === "");
-    if (someEmpty) {
-      formAddproduct.map((item, index) => {
-        const allPrev = [...formAddproduct];
-        if (formAddproduct[index].Price === "") {
-          allPrev[index].error.Price = "Please enter Price";
-        }
-        return setFormAddproduct(allPrev);
-      });
-    }
-    return !someEmpty;
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map((el) => el[0]);
+};
+
+const headCells = [
+  {
+    id: "branchName",
+    disablePadding: true,
+    label: "Tên chi nhánh",
+  },
+  {
+    id: "address",
+    disablePadding: false,
+    label: "Địa chỉ",
+  },
+  {
+    id: "adminName",
+    disablePadding: false,
+    label: "Quản trị viên",
+  },
+  {
+    id: "timeDebut",
+    disablePadding: false,
+    label: "Thời gian khai trương",
+  },
+  {
+    id: "status",
+    disablePadding: false,
+    label: "Trạng thái",
+  },
+];
+
+const EnhancedTableHead = (props) => {
+  const {
+    onSelectAllClick,
+    order,
+    orderBy,
+    numSelected,
+    rowCount,
+    onRequestSort,
+  } = props;
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
   };
-
-  const handleAddProduct = (e) => {
-    e.preventDefault();
-    const inputState = {
-      Color: "",
-      Price: "",
-      RAM: "",
-      Capacity: "",
-      Status: "",
-
-      error: {
-        Price: null,
-      },
-    };
-    if (prevIsValid()) {
-      setFormAddproduct((prev) => [...prev, inputState]);
-    }
-  };
-
-  const onChange = (index, event) => {
-    event.preventDefault();
-    event.persist();
-
-    setFormAddproduct((prev) => {
-      return prev.map((item, i) => {
-        if (i !== index) {
-          return item;
-        }
-        return {
-          ...item,
-          [event.target.name]: event.target.value,
-
-          error: {
-            ...item.error,
-            [event.target.name]:
-              event.target.value.length > 0
-                ? null
-                : [event.target.name] + " Is required",
-          },
-        };
-      });
-    });
-  };
-
-  const handleRemove = (e, index) => {
-    e.preventDefault();
-
-    setFormAddproduct((prev) => prev.filter((item) => item !== prev[index]));
-  };
-  const toggle = () => setModal(!modal);
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <table className="table table-striped" style={{ marginTop: "30px" }}>
-          <thead>
-            <tr>
-              <th>STT</th>
-              <th>Tên Model</th>
-              <th>Thương hiệu</th>
-              <th>Hệ điều hành</th>
-              <th>Thời gian ra mắt</th>
-              <th>Trạng thái</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr onClick={toggle}>
-              {buttonLabel}
-              <td>1</td>
-              <td>Oppo A31</td>
-              <td>OPPO</td>
-              <td>Android</td>
-              <td>2020</td>
-              <td>Hoạt động</td>
-              <td>
-                <i className="bi bi-x-circle-fill"></i>
-              </td>
-            </tr>
-            <tr onClick={toggle}>
-              {buttonLabel}
-              <td>2</td>
-              <td>Oppo A31</td>
-              <td>OPPO</td>
-              <td>Android</td>
-              <td>2020</td>
-              <td>Hoạt động</td>
-              <td>
-                <i className="bi bi-x-circle-fill"></i>
-              </td>
-            </tr>
-            <tr onClick={toggle}>
-              {buttonLabel}
-              <td>3</td>
-              <td>Oppo A31</td>
-              <td>OPPO</td>
-              <td>Android</td>
-              <td>2020</td>
-              <td>Hoạt động</td>
-              <td>
-                <i className="bi bi-x-circle-fill"></i>
-              </td>
-            </tr>
-            <tr onClick={toggle}>
-              {" "}
-              {buttonLabel}
-              <td>4</td>
-              <td>Oppo A31</td>
-              <td>OPPO</td>
-              <td>Android</td>
-              <td>2020</td>
-              <td>Hoạt động</td>
-              <td>
-                <i className="bi bi-x-circle-fill"></i>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div>
-        <Modal isOpen={modal} toggle={toggle} className="modal-product">
-          <ModalHeader className="close-x" toggle={toggle}>
-            <img
-              src={productImg}
-              alt=""
-              width="5%"
-              style={{ marginRight: "5px" }}
-            />
-            Add Product
-          </ModalHeader>
-          <ModalBody>
-            <form>
-              <table
-                className="table table-add-product"
-                style={{ marginTop: "30px" }}
-              >
-                <thead>
-                  <tr>
-                    <th>Tên Model</th>
-                    <th>Thương hiệu</th>
-                    <th>Màu</th>
-                    <th>Giá</th>
-                    <th>RAM</th>
-                    <th>Dung lượng</th>
-                    <th>Trạng thái</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {formAddproduct.map((item, index) => (
-                    <tr key={`item-${index}`}>
-                      <td>Oppo A31</td>
-                      <td>
-                        <input
-                          className="form-control"
-                          type="text"
-                          placeholder="OPPO"
-                          disabled
-                        />
-                      </td>
-                      <td>
-                        <select
-                          className="form-select"
-                          name="Color"
-                          value={item.Color}
-                          onChange={(e) => onChange(index, e)}
-                        >
-                          <option value="1" selected>
-                            Đỏ
-                          </option>
-                          <option value="2">Nâu</option>
-                          <option value="3">Xanh</option>
-                        </select>
-                      </td>
-                      <td>
-                        <div className="input-group">
-                          <input
-                            type="text"
-                            className={
-                              item.error.Price
-                                ? "form-control is-invalid"
-                                : "form-control "
-                            }
-                            name="Price"
-                            value={item.Price}
-                            onChange={(e) => onChange(index, e)}
-                          />
-                          <span className="input-group-text">VNĐ</span>
-                        </div>
-                        {item.error.Price && (
-                          <div className="invalid-feedback">
-                            {item.error.Price}
-                          </div>
-                        )}
-                      </td>
-                      <td>
-                        <select
-                          className="form-select"
-                          name="RAM"
-                          value={item.RAM}
-                          onChange={(e) => onChange(index, e)}
-                        >
-                          <option value="1" selected>
-                            1 GB
-                          </option>
-                          <option value="2">2 GB</option>
-                          <option value="3">3 GB</option>
-                          <option value="4">4 GB</option>
-                          <option value="5">6 GB</option>
-                          <option value="6">8 GB</option>
-                          <option value="7">12 GB</option>
-                        </select>
-                      </td>
-                      <td>
-                        <select
-                          className="form-select"
-                          name="Capacity"
-                          value={item.Capacity}
-                          onChange={(e) => onChange(index, e)}
-                        >
-                          <option value="1" selected>
-                            8 GB
-                          </option>
-                          <option value="2">16 GB</option>
-                          <option value="3">32 GB</option>
-                          <option value="4">64 GB</option>
-                          <option value="5">128 GB</option>
-                          <option value="6">256 GB</option>
-                          <option value="7">512 GB</option>
-                        </select>
-                      </td>
-                      <td>
-                        <select
-                          className="form-select"
-                          name="Status"
-                          value={item.Status}
-                          onChange={(e) => onChange(index, e)}
-                        >
-                          <option value="1" selected>
-                            Còn hàng
-                          </option>
-                          <option value="2">Hết hàng</option>
-                          <option value="3">Ngưng kinh doanh</option>
-                        </select>
-                      </td>
-                      <td>
-                        <i
-                          className="bi bi-x-circle-fill"
-                          onClick={(e) => handleRemove(e, index)}
-                        ></i>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <div className="row">
-                <div className="col-3">
-                  <div></div>
-                  <i className="bi bi-plus" onClick={handleAddProduct}></i>
-                </div>
-              </div>
-              <div className="row" style={{ textAlign: "center" }}>
-                <div>
-                  <button className="btnAddPro">Submit</button>
-                </div>
-              </div>
-            </form>
-          </ModalBody>
-        </Modal>
-      </div>
-    </div>
+    <TableHead>
+      <TableRow>
+        <TableCell padding="checkbox">
+          <Checkbox
+            color="primary"
+            indeterminate={numSelected > 0 && numSelected < rowCount}
+            checked={rowCount > 0 && numSelected === rowCount}
+            onChange={onSelectAllClick}
+            inputProps={{
+              "aria-label": "select all desserts",
+            }}
+          />
+        </TableCell>
+        {headCells.map((headCell) => (
+          <TableCell
+            key={headCell.id}
+            align={headCell.numeric ? "right" : "left"}
+            padding={headCell.disablePadding ? "none" : "normal"}
+            sortDirection={orderBy === headCell.id ? order : false}
+          >
+            <TableSortLabel
+              active={orderBy === headCell.id}
+              direction={orderBy === headCell.id ? order : "asc"}
+              onClick={createSortHandler(headCell.id)}
+            >
+              {headCell.label}
+              {orderBy === headCell.id ? (
+                <Box component="span" sx={visuallyHidden}>
+                  {order === "desc" ? "sorted descending" : "sorted ascending"}
+                </Box>
+              ) : null}
+            </TableSortLabel>
+          </TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
   );
 };
 
-export default BranchForm;
+EnhancedTableHead.propTypes = {
+  numSelected: PropTypes.number.isRequired,
+  onRequestSort: PropTypes.func.isRequired,
+  onSelectAllClick: PropTypes.func.isRequired,
+  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
+  orderBy: PropTypes.string.isRequired,
+  rowCount: PropTypes.number.isRequired,
+};
+
+const EnhancedTableToolbar = (props) => {
+  const { numSelected } = props;
+
+  return (
+    <Toolbar
+      style={{ backgroundColor: "#3FA5EF" }}
+      sx={{
+        pl: { sm: 2 },
+        pr: { xs: 1, sm: 1 },
+        ...(numSelected > 0 && {
+          bgcolor: (theme) =>
+            alpha(
+              theme.palette.primary.main,
+              theme.palette.action.activatedOpacity
+            ),
+        }),
+      }}
+    >
+      {numSelected > 0 ? (
+        <Typography
+          sx={{ flex: "1 1 100%" }}
+          color="inherit"
+          variant="subtitle1"
+          component="div"
+        >
+          {numSelected} selected
+        </Typography>
+      ) : (
+        <Typography
+          sx={{ flex: "1 1 100%", color: "white" }}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+        >
+          Branchs
+        </Typography>
+      )}
+
+      {numSelected > 0 ? (
+        <Tooltip title="Delete">
+          <IconButton>
+            <DeleteIcon style={{ color: "white" }} />
+          </IconButton>
+        </Tooltip>
+      ) : (
+        <div style={{ display: "flex" }}>
+          <input
+            className="form-control me-2 search-branch"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            name="search"
+          />
+          <Tooltip title="Download">
+            <IconButton>
+              <CloudDownloadIcon style={{ color: "white" }} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Print">
+            <IconButton>
+              <PrintIcon style={{ color: "white" }} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="View Column">
+            <IconButton>
+              <ViewColumnIcon style={{ color: "white" }} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Filter list">
+            <IconButton>
+              <FilterListIcon style={{ color: "white" }} />
+            </IconButton>
+          </Tooltip>
+        </div>
+      )}
+    </Toolbar>
+  );
+};
+
+EnhancedTableToolbar.propTypes = {
+  numSelected: PropTypes.number.isRequired,
+};
+
+const Branchs = () => {
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("calories");
+  const [selected, setSelected] = useState([]);
+  const [page, setPage] = useState(0);
+  const [dense, setDense] = useState(false);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
+
+  const handleSelectAllClick = (event) => {
+    if (event.target.checked) {
+      const newSelecteds = rows.map((n) => n.branchName);
+      setSelected(newSelecteds);
+      return;
+    }
+    setSelected([]);
+  };
+
+  const handleClick = (event, branchName) => {
+    const selectedIndex = selected.indexOf(branchName);
+    let newSelected = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, branchName);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      );
+    }
+
+    setSelected(newSelected);
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const handleChangeDense = (event) => {
+    setDense(event.target.checked);
+  };
+
+  const isSelected = (branchName) => selected.indexOf(branchName) !== -1;
+
+  // Avoid a layout jump when reaching the last page with empty rows.
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
+  return (
+    <Box sx={{ width: "100%" }}>
+      <Paper sx={{ width: "100%", mb: 2 }}>
+        <EnhancedTableToolbar numSelected={selected.length} title="Users" />
+        <TableContainer>
+          <Table
+            sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+            size={dense ? "small" : "medium"}
+          >
+            <EnhancedTableHead
+              numSelected={selected.length}
+              order={order}
+              orderBy={orderBy}
+              onSelectAllClick={handleSelectAllClick}
+              onRequestSort={handleRequestSort}
+              rowCount={rows.length}
+            />
+            <TableBody>
+              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
+                 rows.slice().sort(getComparator(order, orderBy)) */}
+              {stableSort(rows, getComparator(order, orderBy))
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => {
+                  const isItemSelected = isSelected(row.branchName);
+                  const labelId = `enhanced-table-checkbox-${index}`;
+
+                  return (
+                    <TableRow
+                      hover
+                      onClick={(event) => handleClick(event, row.branchName)}
+                      role="checkbox"
+                      aria-checked={isItemSelected}
+                      tabIndex={-1}
+                      key={row.branchName}
+                      selected={isItemSelected}
+                    >
+                      <TableCell padding="checkbox">
+                        <Checkbox
+                          color="primary"
+                          checked={isItemSelected}
+                          inputProps={{
+                            "aria-labelledby": labelId,
+                          }}
+                        />
+                      </TableCell>
+                      <TableCell
+                        component="th"
+                        id={labelId}
+                        scope="row"
+                        padding="none"
+                      >
+                        {row.branchName}
+                      </TableCell>
+                      <TableCell align="left">{row.address}</TableCell>
+                      <TableCell align="left">{row.adminName}</TableCell>
+                      <TableCell align="left">{row.timeDebut}</TableCell>
+                      <TableCell align="left">{row.status}</TableCell>
+                    </TableRow>
+                  );
+                })}
+              {emptyRows > 0 && (
+                <TableRow
+                  style={{
+                    height: (dense ? 33 : 53) * emptyRows,
+                  }}
+                >
+                  <TableCell colSpan={6} />
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Paper>
+      <FormControlLabel
+        control={<Switch checked={dense} onChange={handleChangeDense} />}
+        label="Dense padding"
+      />
+    </Box>
+  );
+};
+
+export default Branchs;

@@ -5,6 +5,7 @@ import { FormGroup } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBrandAction } from "../../../../../redux/actions/Brand/brandAction";
 import { statusModel } from "../../../../../common/constants/ListSelect";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 const ModelHeader = () => {
   const dispatch = useDispatch();
@@ -152,6 +153,16 @@ const ModelHeader = () => {
               <button type="submit" className="btn-filter">
                 Filter
               </button>
+            </div>
+            <div className="col-2">
+              <ReactHTMLTableToExcel
+                id="test-table-xls-button"
+                className="btnDownload-model"
+                table="table-to-xls"
+                filename="tablexls"
+                sheet="tablexls"
+                buttonText="Export"
+              />
             </div>
           </div>
         </form>

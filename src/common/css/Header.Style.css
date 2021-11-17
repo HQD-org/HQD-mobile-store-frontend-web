@@ -33,8 +33,9 @@ nav-link:hover {
 
 .icon-search {
     position: absolute;
-    top: 43%;
+    top: 37%;
     left: 85.5%;
+    color: #c8c6c6;
 }
 
 .icon-cart {

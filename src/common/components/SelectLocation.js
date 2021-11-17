@@ -33,7 +33,7 @@ const SelectLocation = (props) => {
   return (
     <select
       value={selectedOption}
-      className="form-select"
+      className="form-select mt-4"
       onChange={onChangeSelectOption}
     >
       <option value={-1} disabled={true}>

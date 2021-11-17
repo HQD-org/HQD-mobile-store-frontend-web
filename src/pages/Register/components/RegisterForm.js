@@ -106,13 +106,13 @@ const FormRegister = () => {
             type="text"
             name="fullName"
             placeholder="Fullname"
-            className="form-control"
+            className="form-control mt-4"
           />
           <Input
             type="text"
             name="addressDetail"
             placeholder="Address"
-            className="form-control"
+            className="form-control mt-4"
           />
           <div className="row">
             <div className="col" style={{ width: "36.7%" }}>
@@ -151,20 +151,20 @@ const FormRegister = () => {
             type="email"
             name="email"
             placeholder="E-mail Address"
-            className="form-control"
+            className="form-control mt-4"
           />
           <Input
             type="number"
             name="phone"
             placeholder="Mobile number"
-            className="form-control"
+            className="form-control mt-4"
           />
           <div className="div-password">
             <Input
               type={isPasswordShown ? "text" : "password"}
               name="password"
               placeholder="Password"
-              className="form-control"
+              className="form-control mt-4"
             />
             <i
               className={`bi ${

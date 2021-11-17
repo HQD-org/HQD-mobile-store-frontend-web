@@ -16,7 +16,11 @@ const Model = (props) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <table className="table table-striped" style={{ marginTop: "30px" }}>
+        <table
+          id="table-to-xls"
+          className="table table-striped"
+          style={{ marginTop: "30px" }}
+        >
           <thead>
             <tr>
               <th>STT</th>
@@ -25,7 +29,6 @@ const Model = (props) => {
               <th>Hệ điều hành</th>
               <th>Thời gian ra mắt</th>
               <th>Trạng thái</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -37,9 +40,6 @@ const Model = (props) => {
               <td>Android</td>
               <td>2020</td>
               <td>Hoạt động</td>
-              <td>
-                <i className="bi bi-x-circle-fill"></i>
-              </td>
             </tr>
             <tr onClick={toggle}>
               {buttonLabel}
@@ -49,9 +49,6 @@ const Model = (props) => {
               <td>Android</td>
               <td>2020</td>
               <td>Hoạt động</td>
-              <td>
-                <i className="bi bi-x-circle-fill"></i>
-              </td>
             </tr>
             <tr onClick={toggle}>
               {buttonLabel}
@@ -61,9 +58,6 @@ const Model = (props) => {
               <td>Android</td>
               <td>2020</td>
               <td>Hoạt động</td>
-              <td>
-                <i className="bi bi-x-circle-fill"></i>
-              </td>
             </tr>
             <tr onClick={toggle}>
               {buttonLabel}
@@ -73,9 +67,6 @@ const Model = (props) => {
               <td>Android</td>
               <td>2020</td>
               <td>Hoạt động</td>
-              <td>
-                <i className="bi bi-x-circle-fill"></i>
-              </td>
             </tr>
           </tbody>
         </table>
@@ -392,9 +383,6 @@ const Model = (props) => {
                 <div className="col-12" style={{ textAlign: "center" }}>
                   <button type="submit" className="btnAddModel">
                     SAVE
-                  </button>
-                  <button type="button" className="btndanger">
-                    DELETE
                   </button>
                 </div>
               </div>

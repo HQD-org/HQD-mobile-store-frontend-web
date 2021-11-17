@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import {
   Box,
   Table,
@@ -20,7 +21,7 @@ import {
   Switch,
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
@@ -43,6 +44,11 @@ const rows = [
   createData("HQD Mobile Q9", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
   createData("HQD Mobile Q1", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
   createData("HQD Mobile Q2", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
+  createData("HQD Mobile Q3", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
+  createData("HQD Mobile Q4", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
+  createData("HQD Mobile Q5", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
+  createData("HQD Mobile Q6", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
+  createData("HQD Mobile Q7", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
 ];
 
 const descendingComparator = (a, b, orderBy) => {
@@ -185,12 +191,12 @@ const EnhancedTableToolbar = (props) => {
     >
       {numSelected > 0 ? (
         <Typography
-          sx={{ flex: "1 1 100%" }}
+          sx={{ flex: "1 1 100%", color: "white" }}
           color="inherit"
           variant="subtitle1"
           component="div"
         >
-          {numSelected} selected
+          {numSelected} Branchs
         </Typography>
       ) : (
         <Typography
@@ -206,21 +212,29 @@ const EnhancedTableToolbar = (props) => {
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton>
-            <DeleteIcon style={{ color: "white" }} />
+            <EmojiEmotionsIcon style={{ color: "white" }} />
           </IconButton>
         </Tooltip>
       ) : (
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", alignItems: "center" }}>
           <input
             className="form-control me-2 search-branch"
             type="search"
             placeholder="Search"
             aria-label="Search"
             name="search"
+            style={{ height: "35px" }}
           />
           <Tooltip title="Download">
             <IconButton>
-              <CloudDownloadIcon style={{ color: "white" }} />
+              <ReactHTMLTableToExcel
+                id="test-table-xls-button"
+                className="btnDownload-User MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+                table="table-to-xls"
+                filename="Branch-table"
+                sheet="tablexls"
+                buttonText={<CloudDownloadIcon style={{ color: "white" }} />}
+              />
             </IconButton>
           </Tooltip>
           <Tooltip title="Print">
@@ -316,6 +330,7 @@ const Branchs = () => {
         <EnhancedTableToolbar numSelected={selected.length} title="Users" />
         <TableContainer>
           <Table
+            id="table-to-xls"
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
@@ -347,14 +362,14 @@ const Branchs = () => {
                       key={row.branchName}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
-                        <Checkbox
+                      <TableCell>
+                        {/* <Checkbox
                           color="primary"
                           checked={isItemSelected}
                           inputProps={{
                             "aria-labelledby": labelId,
                           }}
-                        />
+                        /> */}
                       </TableCell>
                       <TableCell
                         component="th"

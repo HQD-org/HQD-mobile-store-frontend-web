@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import {
   Box,
   Table,
@@ -20,7 +21,7 @@ import {
   Switch,
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
@@ -212,14 +213,21 @@ const EnhancedTableToolbar = (props) => {
       {numSelected > 0 ? (
         <Tooltip title="Delete">
           <IconButton>
-            <DeleteIcon />
+            <EmojiEmotionsIcon />
           </IconButton>
         </Tooltip>
       ) : (
         <div style={{ display: "flex" }}>
           <Tooltip title="Download">
             <IconButton>
-              <CloudDownloadIcon />
+              <ReactHTMLTableToExcel
+                id="test-table-xls-button"
+                className="btnDownload-User MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+                table="table-to-xls"
+                filename="User-table"
+                sheet="tablexls"
+                buttonText={<CloudDownloadIcon />}
+              />
             </IconButton>
           </Tooltip>
           <Tooltip title="Print">
@@ -315,6 +323,7 @@ const Users = () => {
         <EnhancedTableToolbar numSelected={selected.length} title="Users" />
         <TableContainer>
           <Table
+            id="table-to-xls"
             sx={{ minWidth: 750 }}
             aria-labelledby="tableTitle"
             size={dense ? "small" : "medium"}
@@ -346,14 +355,14 @@ const Users = () => {
                       key={row.name}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
-                        <Checkbox
+                      <TableCell>
+                        {/* <Checkbox
                           color="primary"
                           checked={isItemSelected}
                           inputProps={{
                             "aria-labelledby": labelId,
                           }}
-                        />
+                        /> */}
                       </TableCell>
                       <TableCell
                         component="th"

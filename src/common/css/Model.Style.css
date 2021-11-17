@@ -78,7 +78,8 @@
     font-size: 25px;
 }
 
-.btn-filter {
+.btn-filter,
+.btnDownload-model {
     padding: 10px 20px 10px 20px;
     border: none;
     background-color: #3fa5ef;
@@ -86,6 +87,19 @@
     border-radius: 4px;
     filter: drop-shadow(0 2px 2px #707070);
     float: right;
+}
+
+.btnDownload-model {
+    background-color: #ef3f3f;
+    float: left;
+}
+
+.btn-filter:hover {
+    background-color: #2f8ed1;
+}
+
+.btnDownload-model:hover {
+    background-color: #cc2f2f;
 }
 
 .table-striped>tbody>tr:nth-of-type(odd) {

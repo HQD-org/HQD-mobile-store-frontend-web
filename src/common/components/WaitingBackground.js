@@ -17,7 +17,9 @@ const WaitingBackground = (props) => {
   return doneGetAuth ? (
     <SpecificComponent showHeaderAndFooter={show} {...remain} />
   ) : (
-    <div style={{ backgroundColor: "blue", width: "100%" }}></div>
+    <div
+      style={{ backgroundColor: "#DCDCDC", width: "100%", height: "100vh" }}
+    ></div>
   );
 };
 

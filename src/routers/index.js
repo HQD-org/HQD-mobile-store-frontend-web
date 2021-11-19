@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import AppFooter from "../common/components/AppFooter";
 import AppHeader from "../common/components/AppHeader";
@@ -9,6 +9,7 @@ import HomeRoute from "./Home.Route";
 import LoginRoute from "./Login.Route";
 import RegisterRoute from "./Register.Route";
 import VerifyRoute from "./Verify.Route";
+
 const Routers = () => {
   return (
     <Router>

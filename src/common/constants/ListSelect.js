@@ -10,4 +10,6 @@ const statusBrand = [
 ];
 const statusModel = [...statusBrand, { _id: "out of stock", name: "Hết hàng" }];
 
+// const color =
+
 export { statusBrand, statusModel };

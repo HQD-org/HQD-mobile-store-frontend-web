@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import AdminMenu from "../../common/components/AdminMenu";
-import AddModelFragment from "./fragments/AddModel";
 import AddProductFragment from "./fragments/AddProduct";
 import BrandFragment from "./fragments/Brand";
 import ModelFragment from "./fragments/Model";
@@ -11,7 +10,6 @@ import ProductFragment from "./fragments/Products";
 const AdminPage = (props) => {
   const [toggleBrand, setToggleBrand] = useState(false);
   const [toggleModel, setToggleModel] = useState(true);
-  const [toggleAddModel, setToggleAddModel] = useState(false);
   const [toggleAddProduct, setToggleAddProduct] = useState(false);
   const [toggleProduct, setToggleProduct] = useState(false);
   const toggleRef = useRef("model");
@@ -27,9 +25,6 @@ const AdminPage = (props) => {
         break;
       case "model":
         setToggleModel(false);
-        break;
-      case "add model":
-        setToggleAddModel(false);
         break;
       case "add product":
         setToggleAddProduct(false);
@@ -53,10 +48,6 @@ const AdminPage = (props) => {
       case "model":
         setToggleModel(true);
         toggleRef.current = "model";
-        break;
-      case "add model":
-        setToggleAddModel(true);
-        toggleRef.current = "add model";
         break;
       case "add product":
         setToggleAddProduct(true);
@@ -84,7 +75,6 @@ const AdminPage = (props) => {
             <div className="container">
               {toggleBrand && <BrandFragment />}
               {toggleModel && <ModelFragment />}
-              {toggleAddModel && <AddModelFragment />}
               {toggleAddProduct && <AddProductFragment />}
               {toggleProduct && <ProductFragment />}
             </div>

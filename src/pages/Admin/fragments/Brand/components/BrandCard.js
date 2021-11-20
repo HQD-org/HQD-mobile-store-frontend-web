@@ -1,14 +1,13 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import React from "react";
 import "../../../../../common/css/Brand.Style.css";
+import { translateStatusToVietnamese } from "../../../../../common/utils/helper";
+
 const BrandCard = (props) => {
   const { list, toggle } = props;
   return list.map((value, index) => {
     const description = value.description;
-    let status = "Hoạt động";
-    if (value.status === "stop selling") {
-      status = "Ngưng kinh doanh";
-    }
+    const status = translateStatusToVietnamese(value.status);
 
     return (
       <div className="col" key={value._id}>

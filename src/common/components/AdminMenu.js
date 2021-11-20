@@ -62,11 +62,6 @@ const AdminMenu = (props) => {
                 <i className="bi bi-front icon-admin"></i>Models
               </div>
             </li>
-            <li onClick={() => toggle("add model")}>
-              <div>
-                <i className="bi bi-plus-square-fill icon-admin"></i>Add Model
-              </div>
-            </li>
           </ul>
           <div className="txtheader">Branch</div>
           <ul className="list-menu">

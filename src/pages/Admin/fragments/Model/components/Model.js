@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useSelector } from "react-redux";
+import { translateStatusToVietnamese } from "../../../../../common/utils/helper";
 
 const Model = (props) => {
   const { setModalEditor, modalEditor, setOption, setCurrentModel } = props;
@@ -19,6 +20,7 @@ const Model = (props) => {
     const { models, brands } = props;
     return models.map((model, index) => {
       const brand = brands.find((brand) => brand._id === model.idBrand) || "";
+      const status = translateStatusToVietnamese(model.status);
       return (
         <tr onClick={() => toggleEditor(index)} key={index}>
           <td>{index + 1}</td>
@@ -26,7 +28,7 @@ const Model = (props) => {
           <td>{brand.name}</td>
           <td>{model.operation}</td>
           <td>{model.timeDebut}</td>
-          <td>{model.status}</td>
+          <td>{status}</td>
         </tr>
       );
     });

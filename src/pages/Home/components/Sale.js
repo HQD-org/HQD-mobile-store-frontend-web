@@ -1,6 +1,7 @@
 import React from "react";
 import backgroundSale from "../../../common/images/sale.jpg";
 import imgXiaomi from "../../../common/images/xiaomi-redmi-note-9.png";
+import discountImg from "../../../common/images/discount-tag.jpg";
 
 const Sale = () => {
   return (
@@ -30,8 +31,15 @@ const Sale = () => {
         <div className="row row-cols-1 row-cols-md-4 g-4 group-promotion">
           <div className="col">
             <div className="card h-100 card-sale">
+              <div className="discount-tag">
+                <img src={discountImg} className="imgDiscount" alt="..." />
+              </div>
               <div className="img-pro">
-                <img src={imgXiaomi} className="card-img-top" alt="..." />
+                <img
+                  src={imgXiaomi}
+                  className="card-img-top pro-sale"
+                  alt="..."
+                />
               </div>
 
               <div className="card-body">
@@ -43,8 +51,15 @@ const Sale = () => {
           </div>
           <div className="col">
             <div className="card h-100 card-sale">
+              <div className="discount-tag">
+                <img src={discountImg} className="imgDiscount" alt="..." />
+              </div>
               <div className="img-pro">
-                <img src={imgXiaomi} className="card-img-top" alt="..." />
+                <img
+                  src={imgXiaomi}
+                  className="card-img-top pro-sale"
+                  alt="..."
+                />
               </div>
 
               <div className="card-body">
@@ -56,9 +71,15 @@ const Sale = () => {
           </div>
           <div className="col">
             <div className="card h-100 card-sale">
+              <div className="discount-tag">
+                <img src={discountImg} className="imgDiscount" alt="..." />
+              </div>
               <div className="img-pro">
-                {" "}
-                <img src={imgXiaomi} className="card-img-top" alt="..." />
+                <img
+                  src={imgXiaomi}
+                  className="card-img-top pro-sale"
+                  alt="..."
+                />
               </div>
 
               <div className="card-body">
@@ -70,8 +91,15 @@ const Sale = () => {
           </div>
           <div className="col">
             <div className="card h-100 card-sale">
+              <div className="discount-tag">
+                <img src={discountImg} className="imgDiscount" alt="..." />
+              </div>
               <div className="img-pro">
-                <img src={imgXiaomi} className="card-img-top" alt="..." />
+                <img
+                  src={imgXiaomi}
+                  className="card-img-top pro-sale"
+                  alt="..."
+                />
               </div>
 
               <div className="card-body">

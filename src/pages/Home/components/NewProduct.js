@@ -8,7 +8,7 @@ const NewProduct = () => {
       <form>
         {" "}
         <div className="row filter-list">
-          <div className="col-1 brand-list">
+          <div className="col-2 brand-list">
             <select className="form-select" aria-label="select-brand">
               <option selected>Brand</option>
               <option value="1">Oppo</option>
@@ -16,7 +16,7 @@ const NewProduct = () => {
               <option value="3">Apple</option>
             </select>
           </div>
-          <div className="col-1 capacity-list">
+          <div className="col-2 capacity-list">
             <select className="form-select" aria-label="select-capacity">
               <option selected>Capacity</option>
               <option value="1">32 Gb</option>
@@ -32,7 +32,7 @@ const NewProduct = () => {
               <option value="3">4 GB</option>
             </select>
           </div>
-          <div className="col-1 operating-system-list">
+          <div className="col-2 operating-system-list">
             <select
               className="form-select"
               aria-label="select-operating-system"
@@ -42,7 +42,7 @@ const NewProduct = () => {
               <option value="2">Android</option>
             </select>
           </div>
-          <div className="col-1 price-list">
+          <div className="col-2 price-list">
             <select className="form-select" aria-label="select-price">
               <option selected>Price</option>
               <option value="1">1m - 2m</option>
@@ -189,6 +189,13 @@ const NewProduct = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col">
+          <a className="see-all" href="# ">
+            <span>See more</span>
+          </a>
         </div>
       </div>
     </div>

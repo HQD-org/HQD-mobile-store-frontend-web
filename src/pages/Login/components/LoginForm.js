@@ -42,7 +42,7 @@ const FormLogin = () => {
             type="email"
             name="username"
             placeholder="E-mail Address"
-            className="form-control"
+            className="form-control mt-4"
             autoFocus
           />
 
@@ -51,7 +51,7 @@ const FormLogin = () => {
               type={isPasswordShown ? "text" : "password"}
               name="password"
               placeholder="Password"
-              className="form-control"
+              className="form-control mt-4"
             />
             <i
               className={`bi ${

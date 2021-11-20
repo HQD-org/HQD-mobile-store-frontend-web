@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { useSelector } from "react-redux";
+import { translateStatusToVietnamese } from "../../../../../common/utils/helper";
+
 
 const Model = (props) => {
   const { setModalEditor, modalEditor, setOption, setCurrentModel } = props;
@@ -19,6 +21,7 @@ const Model = (props) => {
     const { models, brands } = props;
     return models.map((model, index) => {
       const brand = brands.find((brand) => brand._id === model.idBrand) || "";
+      const status = translateStatusToVietnamese(model.status);
       return (
         <tr onClick={() => toggleEditor(index)} key={index}>
           <td>{index + 1}</td>
@@ -26,7 +29,7 @@ const Model = (props) => {
           <td>{brand.name}</td>
           <td>{model.operation}</td>
           <td>{model.timeDebut}</td>
-          <td>{model.status}</td>
+          <td>{status}</td>
         </tr>
       );
     });
@@ -34,7 +37,11 @@ const Model = (props) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <table className="table table-striped" style={{ marginTop: "30px" }}>
+        <table
+          id="table-to-xls"
+          className="table table-striped"
+          style={{ marginTop: "30px" }}
+        >
           <thead>
             <tr>
               <th>STT</th>
@@ -43,7 +50,6 @@ const Model = (props) => {
               <th>Hệ điều hành</th>
               <th>Thời gian ra mắt</th>
               <th>Trạng thái</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>

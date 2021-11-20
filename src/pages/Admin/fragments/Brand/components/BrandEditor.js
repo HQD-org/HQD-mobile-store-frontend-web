@@ -16,7 +16,7 @@ import {
 import { validateAddBrand, validateUpdateBrand } from "../hooks/validate";
 
 const BrandEditor = (props) => {
-  const { className, toggle, option, brand } = props;
+  const { className, setModal, option, brand } = props;
   let { modal } = props;
   const dispatch = useDispatch();
   const [images, setImages] = useState([]);
@@ -29,7 +29,7 @@ const BrandEditor = (props) => {
 
   const onToggle = () => {
     setImages([]);
-    toggle(false);
+    setModal(false);
   };
 
   const addBrand = async (e) => {

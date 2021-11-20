@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import imgPro from "../../../../../common/images/vivo-y20s.png";
-const ProductList = () => {
+import ProductEditorForMain from "./ProductEditorForMain";
+import ProductEditorForSub from "./ProductEditorForSub";
+const ProductList = (props) => {
+  const { buttonLabel } = props;
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
   return (
     <div className="container-fluid">
       <div
@@ -8,7 +13,8 @@ const ProductList = () => {
         style={{ marginTop: "15px" }}
       >
         <div className="col">
-          <div className="card card-product">
+          <div className="card card-product" onClick={toggle}>
+            {buttonLabel}
             <div className="img-top-text">
               <img
                 src={imgPro}
@@ -33,6 +39,12 @@ const ProductList = () => {
             </div>
           </div>
         </div>
+        <ProductEditorForSub
+          modal={modal}
+          toggle={toggle}
+          option={true}
+          brand={undefined}
+        />
       </div>
     </div>
   );

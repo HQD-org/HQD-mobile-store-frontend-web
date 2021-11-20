@@ -219,7 +219,7 @@
 .promotion-product {
     /* background-attachment: fixed; */
     background-position: bottom;
-    height: 600px;
+    height: 665px;
     margin-top: 20px;
     background-size: contain;
 }
@@ -237,6 +237,10 @@
 
 .card-img-top {
     width: 80% !important;
+}
+
+.pro-sale {
+    margin-top: 45px;
 }
 
 .imgNew {
@@ -302,6 +306,17 @@
 .card-sale:hover {
     animation: shake 0.5s;
     cursor: pointer;
+}
+
+.card-sale {
+    position: relative;
+}
+
+.imgDiscount {
+    position: absolute;
+    width: 155px;
+    top: -5px;
+    left: -24px;
 }
 
 .test {
@@ -395,4 +410,19 @@
 
 .w-100 {
     height: 300px;
+}
+
+.see-all {
+    padding: 3px 13px;
+    float: right;
+    text-decoration: none;
+    border: 1px solid #c6c6c6;
+    border-radius: 20px;
+    color: black;
+    margin-right: 10px;
+    font-size: 12px;
+}
+
+.see-all:hover {
+    color: #3fa5ef;
 }

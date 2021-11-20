@@ -13,4 +13,37 @@ const generateString = (length, containNaN) => {
   return result;
 };
 
-export { generateString };
+const translateStatusToVietnamese = (status) => {
+  switch (status.toLowerCase()) {
+    case "active":
+      return "Hoạt động";
+    case "block":
+      return "Khóa";
+    case "cancel":
+      return "Hủy";
+    case "close":
+      return "Đóng cửa";
+    case "done":
+      return "Hoàn tất";
+    case "expired":
+      return "Hết hạng";
+    case "open":
+      return "Mở cửa";
+    case "out of stock":
+      return "Hết hàng";
+    case "stop selling":
+      return "Ngưng kinh doanh";
+    case "paid":
+      return "Đã thanh toán";
+    case "refund":
+      return "Hoàn tiền";
+    case "unpaid":
+      return "Chưa thanh toán";
+    case "wait":
+      return "Chờ xử lý";
+    default:
+      return "Tất cả";
+  }
+};
+
+export { generateString, translateStatusToVietnamese };

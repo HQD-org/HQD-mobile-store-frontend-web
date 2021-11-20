@@ -1,0 +1,11 @@
+.img-color {
+    position: relative;
+}
+
+.delete-obj {
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    color: #d8d8d8;
+}

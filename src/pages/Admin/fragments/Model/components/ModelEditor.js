@@ -289,7 +289,7 @@ const ModelEditor = (props) => {
                 </div>
               </div>
             </div>
-            <div className="row mb-3" style={{ marginTop: "100px" }}>
+            <div className="row mb-3" style={{ marginTop: "50px" }}>
               <ColorModelSection colors={colors} toggle={onToggle} />
               <hr style={{ color: "#cfcfcf" }} />
               <div className="col-12" style={{ textAlign: "center" }}>

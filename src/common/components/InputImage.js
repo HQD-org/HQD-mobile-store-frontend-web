@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
+import "../css/InputImage.Style.css";
+import { FaMinusCircle } from "react-icons/fa";
 
 const thumbsContainer = {
   display: "flex",
@@ -53,7 +55,8 @@ const InputImage = (props) => {
   });
 
   const thumbs = images.map((image, index) => (
-    <div style={thumb} key={index}>
+    <div style={thumb} key={index} className="img-color">
+      <FaMinusCircle className="delete-obj" />
       <div style={thumbInner}>
         <img src={image.preview} style={img} alt="" />
       </div>

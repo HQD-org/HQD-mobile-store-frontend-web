@@ -2,22 +2,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import Input from "../../../../../common/components/Input";
 import InputImage from "../../../../../common/components/InputImage";
-import SelectCustom from "../../../../../common/components/SelectCustom";
-import { storage } from "../../../../../common/config/firebase";
+import SelectInput from "../../../../../common/components/SelectInput";
+import Textarea from "../../../../../common/components/Textarea";
 import { statusBrand } from "../../../../../common/constants/ListSelect";
 import { default as AddBtn } from "../../../../../common/images/add-button.png";
+import { uploadImagesToFirebase } from "../../../../../common/utils/uploadFirebase";
 import {
   addBrandAction,
   updateBrandAction,
 } from "../../../../../redux/actions/Brand/brandAction";
-import { changeLoading } from "../../../../../redux/actions/System/systemAction";
 import { validateAddBrand, validateUpdateBrand } from "../hooks/validate";
-const loading =
-  (loading = false) =>
-  (dispatch) => {
-    dispatch(changeLoading(loading));
-  };
 
 const BrandEditor = (props) => {
   const { className, toggle, option, brand } = props;
@@ -36,7 +32,7 @@ const BrandEditor = (props) => {
     toggle(false);
   };
 
-  const addBrand = (e) => {
+  const addBrand = async (e) => {
     e.preventDefault();
     const name = e.target.brandName.value;
     const description = e.target.description.value;
@@ -48,29 +44,13 @@ const BrandEditor = (props) => {
       description,
     });
     if (!isValidData) return;
-    dispatch(loading(true));
-    const uploadTask = storage.ref(`Brand/${images[0].name}`).put(images[0]);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {},
-      (error) => {
-        dispatch(loading());
-        console.log(error);
-      },
-      async () => {
-        const url = await storage
-          .ref("Brand")
-          .child(images[0].name)
-          .getDownloadURL();
-        dispatch(loading());
-        if (url) {
-          const res = await dispatch(
-            addBrandAction({ name, image: url, status, description })
-          );
-          if (res) onToggle();
-        }
-      }
-    );
+    const url = await dispatch(uploadImagesToFirebase(images, "Brand"));
+    if (url) {
+      const res = await dispatch(
+        addBrandAction({ name, image: url, status, description })
+      );
+      if (res) onToggle();
+    }
   };
 
   const updateBrand = async (e) => {
@@ -85,29 +65,13 @@ const BrandEditor = (props) => {
     const id = brand._id;
     if (!isValidData) return;
     if (images[0].preview !== brand.image) {
-      dispatch(loading(true));
-      const uploadTask = storage.ref(`Brand/${images[0].name}`).put(images[0]);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {},
-        (error) => {
-          dispatch(loading());
-          console.log(error);
-        },
-        async () => {
-          const url = await storage
-            .ref("Brand")
-            .child(images[0].name)
-            .getDownloadURL();
-          if (url) {
-            dispatch(loading());
-            const res = await dispatch(
-              updateBrandAction({ id, name, image: url, status, description })
-            );
-            if (res) onToggle();
-          }
-        }
-      );
+      const url = await dispatch(uploadImagesToFirebase(images, "Brand"));
+      if (url) {
+        const res = await dispatch(
+          updateBrandAction({ id, name, image: url, status, description })
+        );
+        if (res) onToggle();
+      }
     } else {
       const res = await dispatch(
         updateBrandAction({ id, name, status, description })
@@ -129,45 +93,36 @@ const BrandEditor = (props) => {
       <ModalBody>
         <form onSubmit={option ? addBrand : updateBrand}>
           <div className="container">
-            <div className="row mb-3">
-              <label htmlFor="input-name" className="col-sm-4 col-form-label">
-                Tên thương hiệu
-              </label>
-              <div className="col-sm-8">
-                <input
-                  type="text"
-                  className="form-control"
-                  name="brandName"
-                  defaultValue={option ? "" : brand.name}
-                />
-              </div>
-            </div>
-            <div className="row mb-3">
-              <label htmlFor="input-name" className="col-sm-4 col-form-label">
-                Trạng thái
-              </label>
-              <div className="col-sm-8">
-                <SelectCustom
-                  defaultValue={option ? 0 : brand.status}
-                  name="status"
-                  list={statusBrand}
-                />
-              </div>
-            </div>
-            <div className="row mb-3">
-              <label htmlFor="input-introduce" className="col-sm-4 form-label">
-                Giới thiệu
-              </label>
-              <div className="col-12">
-                <textarea
-                  className="form-control"
-                  id="input-introduce"
-                  name="description"
-                  rows="4"
-                  defaultValue={option ? "" : brand.description}
-                ></textarea>
-              </div>
-            </div>
+            <Input
+              classParent="row mb-3"
+              classLabel="col-sm-4 col-form-label"
+              classInput="col-sm-8"
+              label={"Tên thương hiệu"}
+              name={"brandName"}
+              id={"input-name"}
+              defaultValue={option ? "" : brand.name}
+            />
+            <SelectInput
+              id="status"
+              name="status"
+              label={"Trạng thái"}
+              defaultValue={option ? 0 : brand.status}
+              list={statusBrand}
+              classLabel={"col-sm-4 col-form-label"}
+              classInput={"col-sm-8"}
+              classParent={"row mb-3"}
+            />
+            <Textarea
+              id="description"
+              rows={4}
+              name="description"
+              resize={"vertical"}
+              classLabel={"col-sm-4 form-label"}
+              label={"Giới thiệu"}
+              classTextarea={"col-12"}
+              classParent={"row mb-3"}
+              defaultValue={option ? "" : brand.description}
+            />
             <InputImage
               images={images}
               setImages={setImages}

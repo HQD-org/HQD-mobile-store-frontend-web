@@ -12,13 +12,13 @@ import BranchFragment from "./fragments/Branch";
 
 const AdminPage = (props) => {
   const [toggleBrand, setToggleBrand] = useState(false);
-  const [toggleModel, setToggleModel] = useState(false);
-  const [toggleAddModel, setToggleAddModel] = useState(true);
+  const [toggleModel, setToggleModel] = useState(true);
+  const [toggleAddModel, setToggleAddModel] = useState(false);
   const [toggleAddProduct, setToggleAddProduct] = useState(false);
   const [toggleProduct, setToggleProduct] = useState(false);
   const [toggleUser, setToggleUser] = useState(false);
   const [toggleBranch, setToggleBranch] = useState(false);
-  const toggleRef = useRef("add model");
+  const toggleRef = useRef("model");
   const { showHeaderAndFooter } = props;
   const dispatch = useDispatch();
   useEffect(() => {

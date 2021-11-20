@@ -51,7 +51,6 @@ const HeaderBrand = (props) => {
             />
           </div>
           <div className="col-3">
-            {" "}
             <FormGroup>
               <select
                 defaultValue={status}

@@ -21,8 +21,12 @@ const AddProductHeader = () => {
         <div className="col-2"></div>
       </div>
       <hr />
-      <div className="row">
-        <div className="col-2">
+
+      <div
+        className="row"
+        style={{ marginTop: "20px", alignItems: "baseline" }}
+      >
+        <div className="col-3">
           <form>
             <input
               className="form-control me-2"
@@ -32,62 +36,48 @@ const AddProductHeader = () => {
             />{" "}
           </form>
         </div>
-        <form>
-          <div
-            className="row"
-            style={{ marginTop: "20px", alignItems: "center" }}
-          >
-            {" "}
-            <div className="col-2">
-              <FormGroup>
-                <select className="form-select">
-                  <option selected disabled>
-                    Filter by Brand
-                  </option>
-                  <option value="1">OPPO</option>
-                  <option value="2">SAMSUNG</option>
-                </select>
-              </FormGroup>
+        <div className="col-8">
+          <form>
+            <div className="row">
+              <div className="col-3">
+                <FormGroup>
+                  <select className="form-select">
+                    <option selected disabled>
+                      Brand
+                    </option>
+                    <option value="1">OPPO</option>
+                    <option value="2">SAMSUNG</option>
+                  </select>
+                </FormGroup>
+              </div>
+              <div className="col-3">
+                <FormGroup>
+                  <select className="form-select">
+                    <option selected disabled>
+                      Operating System
+                    </option>
+                    <option value="1">iOS</option>
+                    <option value="2">Android</option>
+                  </select>
+                </FormGroup>
+              </div>
+              <div className="col-2">
+                <FormGroup>
+                  <select className="form-select">
+                    <option selected disabled>
+                      Time
+                    </option>
+                    <option value="1">2021</option>
+                    <option value="2">2020</option>
+                  </select>
+                </FormGroup>
+              </div>
+              <div className="col-2">
+                <button className="btn-filter">Filter</button>
+              </div>
             </div>
-            <div className="col-2">
-              <FormGroup>
-                <select className="form-select">
-                  <option selected disabled>
-                    Filter by Operating System
-                  </option>
-                  <option value="1">iOS</option>
-                  <option value="2">Android</option>
-                </select>
-              </FormGroup>
-            </div>
-            <div className="col-2">
-              <FormGroup>
-                <select className="form-select">
-                  <option selected disabled>
-                    Filter by Time
-                  </option>
-                  <option value="1">2021</option>
-                  <option value="2">2020</option>
-                </select>
-              </FormGroup>
-            </div>
-            <div className="col-2">
-              <FormGroup>
-                <select className="form-select">
-                  <option selected disabled>
-                    Filter by Status
-                  </option>
-                  <option value="1">Hoạt động</option>
-                  <option value="2">Hết hàng</option>
-                  <option value="3">Ngừng kinh doanh</option>
-                </select>
-              </FormGroup>
-            </div>
-            <div className="col-2">
-              <button className="btn-filter">Filter</button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );

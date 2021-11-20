@@ -29,7 +29,8 @@
     width: 137px;
 }
 
-.btnAddModel {
+.btnAddModel,
+.btnAddPro {
     border: none;
     font-weight: bold;
     padding: 10px;
@@ -182,6 +183,11 @@ tbody>tr:hover {
 .card-product:hover {
     filter: drop-shadow(1px 4px 3px #949393);
     cursor: pointer;
+}
+
+.thead-addpro {
+    background-color: #de7311;
+    color: white;
 }
 
 

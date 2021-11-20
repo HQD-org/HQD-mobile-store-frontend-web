@@ -76,6 +76,13 @@ const Product = () => {
           </div>
         </div>
       </div>
+      <div className="row">
+        <div className="col">
+          <a className="see-all" href="# ">
+            <span>See more</span>
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { translateStatusToVietnamese } from "../../../../../common/utils/helper";
 
+
 const Model = (props) => {
   const { setModalEditor, modalEditor, setOption, setCurrentModel } = props;
   const brands = useSelector((state) => state.brand.list);
@@ -36,7 +37,11 @@ const Model = (props) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <table className="table table-striped" style={{ marginTop: "30px" }}>
+        <table
+          id="table-to-xls"
+          className="table table-striped"
+          style={{ marginTop: "30px" }}
+        >
           <thead>
             <tr>
               <th>STT</th>
@@ -45,7 +50,6 @@ const Model = (props) => {
               <th>Hệ điều hành</th>
               <th>Thời gian ra mắt</th>
               <th>Trạng thái</th>
-              <th></th>
             </tr>
           </thead>
           <tbody>

@@ -19,6 +19,8 @@ const ModelFragment = () => {
   const [searchTerm, setSearchTerm] = useState(undefined);
   const [status, setStatus] = useState(undefined);
   const [idBrand, setIdBrand] = useState("all");
+  const [os, setOs] = useState("all");
+  const [timeDebut, setTimeDebut] = useState("all");
 
   const onFilterValueChange = async (e, type) => {
     switch (type) {
@@ -31,12 +33,12 @@ const ModelFragment = () => {
       case "name":
         setSearchTerm(e.target.value || undefined);
         break;
-      // case "os":
-      //   setOs(e.target.value);
-      //   break;
-      // case "timeDebut":
-      //   setTimeDebut(e.target.value);
-      //   break;
+      case "os":
+        setOs(e.target.value);
+        break;
+      case "timeDebut":
+        setTimeDebut(e.target.value);
+        break;
       default:
         break;
     }
@@ -51,6 +53,8 @@ const ModelFragment = () => {
 
     if (status) query.status = status;
     if (idBrand && idBrand !== "all") query.idBrand = idBrand;
+    if (os && os !== "all") query.operation = os;
+    if (timeDebut && timeDebut !== "all") query.timeDebut = timeDebut;
 
     await dispatch(filterModelAction(query));
   };
@@ -81,6 +85,8 @@ const ModelFragment = () => {
         onFilterValueChange={onFilterValueChange}
         status={status}
         idBrand={idBrand}
+        os={os}
+        timeDebut={timeDebut}
         filter={filter}
       />
       <Model

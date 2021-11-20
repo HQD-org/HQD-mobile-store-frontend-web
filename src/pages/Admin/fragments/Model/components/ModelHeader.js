@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { FormGroup } from "reactstrap";
 import { statusModel } from "../../../../../common/constants/ListSelect";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import "../../../../../common/css/Model.Style.css";
+
 
 const ModelHeader = (props) => {
   const {
@@ -137,6 +139,16 @@ const ModelHeader = (props) => {
                   Filter
                 </button>
               </div>
+            </div>
+            <div className="col-2">
+              <ReactHTMLTableToExcel
+                id="test-table-xls-button"
+                className="btnDownload-model"
+                table="table-to-xls"
+                filename="tablexls"
+                sheet="tablexls"
+                buttonText="Export"
+              />
             </div>
           </form>
           <div className="col-2">

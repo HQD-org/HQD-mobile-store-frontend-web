@@ -9,6 +9,7 @@ import HomeRoute from "./Home.Route";
 import LoginRoute from "./Login.Route";
 import RegisterRoute from "./Register.Route";
 import VerifyRoute from "./Verify.Route";
+
 const Routers = () => {
   return (
     <Router>

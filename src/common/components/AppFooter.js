@@ -2,11 +2,12 @@ import React from "react";
 import background from "../../common/images/background-header-1.png";
 import "../../common/css/Footer.Style.css";
 import imgBCT from "../../common/images/BCT.png";
+import { useSelector } from "react-redux";
 
 const AppFooter = () => {
-  return (
+  const show = useSelector((state) => state.system.showHeaderAndFooter);
+  return show ? (
     <div>
-      {" "}
       <div
         className="container-fluid"
         style={{
@@ -77,6 +78,8 @@ const AppFooter = () => {
         <p>© 2021 All Rights Reserved by HQD Mobile</p>
       </div>
     </div>
+  ) : (
+    <> </>
   );
 };
 

@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useDropzone } from "react-dropzone";
+import "../css/InputImage.Style.css";
+import { FaMinusCircle } from "react-icons/fa";
 
 const thumbsContainer = {
   display: "flex",
@@ -49,10 +51,12 @@ const InputImage = (props) => {
         setImages(previews);
       }
     },
+    multiple: multiple,
   });
 
   const thumbs = images.map((image, index) => (
-    <div style={thumb} key={index}>
+    <div style={thumb} key={index} className="img-color">
+      <FaMinusCircle className="delete-obj" />
       <div style={thumbInner}>
         <img src={image.preview} style={img} alt="" />
       </div>
@@ -75,7 +79,9 @@ const InputImage = (props) => {
       <div className="border-img">
         <div {...getRootProps({ className: "dropzone" })}>
           <input {...getInputProps()} />
-          <p className="txtSelectImg">Select one or "n" image</p>
+          <p className="txtSelectImg">
+            {multiple ? "Select one or multiple images" : "Select one image"}
+          </p>
         </div>
         <aside style={thumbsContainer}>{thumbs}</aside>
       </div>

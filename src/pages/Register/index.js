@@ -1,10 +1,17 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import "../../common/css/Form.Style.css";
 import login2 from "../../common/images/login2.png";
 import FormRegister from "./components/RegisterForm";
 
-const RegisterPage = () => {
+const RegisterPage = (props) => {
+  const { showHeaderAndFooter } = props;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(showHeaderAndFooter(true));
+  }, []);
   return (
     <div>
       <div className="container">

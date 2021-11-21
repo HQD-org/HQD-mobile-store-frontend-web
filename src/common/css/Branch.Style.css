@@ -1,0 +1,41 @@
+.icon-branch-header {
+    font-size: 25px;
+}
+
+.modal-branch {
+    max-width: 800px !important;
+}
+
+.btnSave-branch {
+    border: none;
+    font-weight: bold;
+    padding: 10px;
+    width: 25%;
+    border-radius: 5px;
+    background: #3fa5ef;
+    border: 1px solid #3fa5ef;
+    color: white;
+    filter: drop-shadow(0 2px 2px #707070);
+}
+
+.record,
+.header-table {
+    border-style: hidden !important;
+}
+
+.header-table {
+    background-color: #3fa5ef;
+    color: white;
+}
+
+.search-branch {
+    width: 200px !important;
+}
+
+.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input.css-194a1fa-MuiSelect-select-MuiInputBase-input {
+    margin-top: -10px;
+}
+
+.css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon {
+    margin-top: -5px;
+}

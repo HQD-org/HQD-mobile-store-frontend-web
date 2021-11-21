@@ -8,7 +8,11 @@ const VerifyPage = lazy(() => import("../pages/Verify"));
 const VerifyRoute = () => {
   return (
     <Switch>
-      <Route path={PATH.VERIFY} exact component={Auth(VerifyPage, false)} />
+      <Route
+        path={PATH.VERIFY}
+        exact
+        component={Auth(VerifyPage, false, false, true)}
+      />
     </Switch>
   );
 };

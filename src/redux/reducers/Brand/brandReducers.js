@@ -33,10 +33,9 @@ export default function (state = initState, action) {
         pagination: { page: 1, itemPerPage: 8, totalItem: 0 },
       };
     case GET_ALL_BRAND_SUCCESS:
-      state.pagination.totalItem = payload.pagination.totalItem;
       return {
         ...state,
-        list: payload.brands,
+        list: action.payload,
       };
     case UPDATE_BRAND_FAIL:
       return { ...state };

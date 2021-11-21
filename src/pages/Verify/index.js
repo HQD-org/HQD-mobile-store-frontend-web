@@ -1,18 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import queryString from "query-string";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import OtpInput from "react-otp-input";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import "../../common/css/Form.Style.css";
 import login2 from "../../common/images/login2.png";
+import toastNotify from "../../common/toastify";
 import {
+  forgotPasswordAction,
   sendOTPAction,
   verifyAction,
-  forgotPasswordAction,
 } from "../../redux/actions/Auth/authActions";
-import toastNotify from "../../common/toastify";
 
-const VerifyPage = () => {
+const VerifyPage = (props) => {
+  const { showHeaderAndFooter } = props;
   const dispatch = useDispatch();
   const history = useHistory();
   const [otp, setOtp] = useState("");
@@ -44,6 +46,10 @@ const VerifyPage = () => {
       setDisabled(false);
     }, 60000);
   };
+
+  useEffect(() => {
+    dispatch(showHeaderAndFooter(true));
+  }, []);
   useEffect(() => {
     if (time > 0)
       setTimeout(() => {

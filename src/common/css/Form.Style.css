@@ -1,44 +1,39 @@
 .txtSignup {
-  color: #3fa5ef;
-  max-width: 88%;
-  font-size: 36px;
-  font-weight: bold;
+    color: #3fa5ef;
+    max-width: 88%;
+    font-size: 36px;
+    font-weight: bold;
 }
 
 .txtStart {
-  max-width: 88%;
-  font-size: 16px;
-  color: #c4c4c4;
-  font-weight: bold;
-}
-
-.container {
-  margin-top: 30px;
+    max-width: 88%;
+    font-size: 16px;
+    color: #c4c4c4;
+    font-weight: bold;
 }
 
 .form-control {
-  margin-top: 20px;
-  height: 50px;
+    height: 50px;
 }
 
 .form-select {
-  margin-top: 20px;
-  height: 50px;
+    height: 50px;
 }
 
 .btnSubmit {
-  width: 95%;
-  height: 50px;
-  margin-top: 20px;
-  color: white;
-  border: none;
-  font-size: 20px;
-  font-style: bold;
-  background: #3fa5ef;
-  padding: 10px;
-  border-radius: 20px;
-  filter: drop-shadow(0 4px 4px #0000003b);
+    width: 95%;
+    height: 50px;
+    margin-top: 20px;
+    color: white;
+    border: none;
+    font-size: 20px;
+    font-style: bold;
+    background: #3fa5ef;
+    padding: 10px;
+    border-radius: 20px;
+    filter: drop-shadow(0 4px 4px #0000003b);
 }
+
 
 /* .img-fluid {
     margin-top: 80px;
@@ -46,49 +41,50 @@
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 input[type="number"] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
 .div-password {
-  position: relative;
+    position: relative;
 }
 
 .password-icon {
-  position: absolute;
-  top: 13px;
-  right: 20px;
+    position: absolute;
+    top: 13px;
+    right: 20px;
 }
 
 .txtForgot {
-  color: #3fa5ef;
-  font-size: 14px;
-  margin-top: 5px;
-  margin-left: 3px;
+    color: #3fa5ef;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-left: 3px;
 }
 
 .otp-input input[type="text"] {
-  width: 50px !important;
-  height: 50px;
-  margin-left: 10px;
-  margin-right: 10px;
+    width: 50px !important;
+    height: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .btnVerify {
-  width: 55%;
-  border: none;
-  background: rgb(102 218 102);
-  color: #ffffff;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 5px;
-  border-radius: 5px;
-  filter: drop-shadow(0 3px 2px #cccccc);
+    width: 55%;
+    border: none;
+    background: rgb(102 218 102);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    filter: drop-shadow(0 3px 2px #cccccc);
 }
+
 .btnVerify:hover {
-  background: #a9e9a9;
+    background: #a9e9a9;
 }

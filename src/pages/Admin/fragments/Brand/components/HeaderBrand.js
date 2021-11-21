@@ -3,10 +3,21 @@ import React, { useState, useRef } from "react";
 import { FormGroup } from "reactstrap";
 import "../../../../../common/css/Brand.Style.css";
 import BrandEditor from "./BrandEditor";
+
 const HeaderBrand = (props) => {
-  const { buttonLabel, onFilterValueChange, status } = props;
-  const [modal, setModal] = useState(false);
-  const toggle = () => setModal(!modal);
+  const {
+    buttonLabel,
+    onFilterValueChange,
+    status,
+    setOption,
+    modal,
+    setModal,
+  } = props;
+  const toggle = () => {
+    setModal(!modal);
+    setOption(true);
+  };
+
   const typingTimeoutRef = useRef(null);
   const onChangeSearch = async (e) => {
     if (!onFilterValueChange) return;
@@ -51,7 +62,6 @@ const HeaderBrand = (props) => {
             />
           </div>
           <div className="col-3">
-            {" "}
             <FormGroup>
               <select
                 defaultValue={status}
@@ -65,11 +75,6 @@ const HeaderBrand = (props) => {
               </select>
             </FormGroup>
           </div>
-          {/* <div className="col-4">
-            <button type="submit" className="btn-addBrand">
-              <span>Search</span>
-            </button>
-          </div> */}
         </div>
       </div>
 
@@ -81,12 +86,12 @@ const HeaderBrand = (props) => {
         </button>
       </div>
 
-      <BrandEditor
+      {/* <BrandEditor
         modal={modal}
         toggle={toggle}
         option={true}
         brand={undefined}
-      />
+      /> */}
     </div>
   );
 };

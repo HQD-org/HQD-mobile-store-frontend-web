@@ -1,15 +1,20 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { Form, Input } from "reactstrap";
 import "../../common/css/Form.Style.css";
 import login2 from "../../common/images/login2.png";
-import validate from "./hooks/validate";
 import { sendOTPAction } from "../../redux/actions/Auth/authActions";
-import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import validate from "./hooks/validate";
 
-const ForgotPasswordPage = () => {
+const ForgotPasswordPage = (props) => {
+  const { showHeaderAndFooter } = props;
   const dispatch = useDispatch();
   const history = useHistory();
+  useEffect(() => {
+    dispatch(showHeaderAndFooter(true));
+  }, []);
   const forgotPassword = async (e) => {
     e.preventDefault();
     const username = e.target.email.value;

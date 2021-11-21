@@ -5,7 +5,7 @@ import { PATH } from "../common/constants/RoutePath";
 
 const AdminPage = lazy(() => import("../pages/Admin"));
 
-const DashboardRoute = () => {
+const DashboardRoute = (props) => {
   return (
     <Switch>
       <Route path={PATH.ADMIN} exact component={Auth(AdminPage, true, true)} />

@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import imgPro from "../../../../../common/images/vivo-y20s.png";
+import BranchList from "./BranchList";
 import ProductEditorForMain from "./ProductEditorForMain";
 import ProductEditorForSub from "./ProductEditorForSub";
+import { IoArrowForwardOutline } from "react-icons/io5";
+
 const ProductList = (props) => {
-  const { buttonLabel } = props;
   const [modal, setModal] = useState(false);
-  const toggle = () => setModal(!modal);
+  const [modalBranch, setModalBranch] = useState(false);
+  const toggle = () => {
+    setModal(!modal);
+  };
+  const toggleBranch = () => {
+    setModalBranch(!modalBranch);
+  };
   return (
     <div className="container-fluid">
       <div
@@ -13,8 +21,7 @@ const ProductList = (props) => {
         style={{ marginTop: "15px" }}
       >
         <div className="col">
-          <div className="card card-product" onClick={toggle}>
-            {buttonLabel}
+          <div className="card card-product">
             <div className="img-top-text">
               <img
                 src={imgPro}
@@ -30,21 +37,22 @@ const ProductList = (props) => {
             </div>
 
             <div className="card-body">
-              <p className="list-branch">Chi nhánh có hàng</p>
+              <p className="list-branch" onClick={toggleBranch}>
+                Chi nhánh có hàng
+              </p>
               <p className="card-text">Màu sắc: Cam</p>
               <p className="card-text">Số lượng: 10</p>
               <p className="card-text">
                 Trạng thái: <span className="txt-status">Hoạt động</span>
               </p>
+              <p className="list-branch" onClick={toggle}>
+                Chi tiết sản phẩm <IoArrowForwardOutline />
+              </p>
             </div>
           </div>
         </div>
-        <ProductEditorForSub
-          modal={modal}
-          toggle={toggle}
-          option={true}
-          brand={undefined}
-        />
+        <ProductEditorForSub modal={modal} toggle={toggle} option={true} />
+        <BranchList modal={modalBranch} toggle={toggleBranch} option={true} />
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ export const PATH = {
   BRAND: "/dashboard/brand",
   MODEL: "/dashboard/model",
   ADD_MODEL: "/dashboard/add-model",
+  PRODUCT: "/product",
 };
 
 export const PATH_API = {};

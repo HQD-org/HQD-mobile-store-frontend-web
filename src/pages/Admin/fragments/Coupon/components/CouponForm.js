@@ -51,7 +51,7 @@ const CouponForm = () => {
           alt=""
           style={{ width: "30px", marginRight: "5px" }}
         />
-        <span className="txtAddCoupon">Add Coupon</span>
+        <span className="txtAddCoupon">Coupon</span>
       </div>
 
       <form>

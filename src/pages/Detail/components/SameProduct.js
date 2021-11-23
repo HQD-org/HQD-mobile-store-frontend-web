@@ -3,7 +3,7 @@ import imgXiaomi from "../../../common/images/xiaomi-redmi-note-9.png";
 import "../../../common/css/ProductHome.Style.css";
 import { Link } from "react-router-dom";
 
-const ProductCard = () => {
+const SameProduct = () => {
   return (
     <div className="col">
       <div className="card h-100 card-newPro">
@@ -26,4 +26,4 @@ const ProductCard = () => {
   );
 };
 
-export default ProductCard;
+export default SameProduct;

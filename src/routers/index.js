@@ -10,6 +10,7 @@ import LoginRoute from "./Login.Route";
 import RegisterRoute from "./Register.Route";
 import VerifyRoute from "./Verify.Route";
 import ProductRoute from "./Product.Route";
+import DetailRoute from "./Detail.Route";
 
 const Routers = () => {
   return (
@@ -19,6 +20,7 @@ const Routers = () => {
         <DashboardRoute />
         <HomeRoute />
         <ProductRoute />
+        <DetailRoute />
         <LoginRoute />
         <RegisterRoute />
         <ForgotPasswordRoute />

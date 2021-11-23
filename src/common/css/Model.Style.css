@@ -159,6 +159,30 @@ tbody>tr:hover {
     height: 260px;
 }
 
+.img-model-detail {
+    position: relative;
+}
+
+.icon-delete {
+    position: absolute;
+    right: 27px;
+    top: -6px;
+}
+
+.imgModel {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #e4e4e4;
+}
+
+.color-name {
+    padding: 5px 15px;
+    border: 1px solid #3fa5ef;
+    color: #3fa5ef;
+    border-radius: 2px;
+}
+
 
 /* .table-striped>tbody>tr:nth-of-type(even) {
     --bs-table-accent-bg: #d1e7f8 !important;

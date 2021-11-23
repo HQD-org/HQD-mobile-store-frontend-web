@@ -10,6 +10,7 @@ import {
   InputGroupText,
 } from "reactstrap";
 import CurrencyInput from "react-currency-input-field";
+import { FcViewDetails } from "react-icons/fc";
 
 const ProductEditorForMain = (props) => {
   const { className, toggle } = props;
@@ -20,7 +21,10 @@ const ProductEditorForMain = (props) => {
 
   return (
     <Modal isOpen={modal} toggle={onToggle} className={className}>
-      <ModalHeader className="close-x" toggle={onToggle}></ModalHeader>
+      <ModalHeader className="close-x" toggle={onToggle}>
+        <FcViewDetails style={{ fontSize: "30px" }} />
+        Chi tiết sản phẩm
+      </ModalHeader>
       <ModalBody>
         <form>
           <div className="row mb-2">

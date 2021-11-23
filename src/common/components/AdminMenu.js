@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import "../../common/css/AdminMenu.Style.css";
 import { logoutAction } from "../../redux/actions/Auth/authActions";
+import { RiCoupon3Fill } from "react-icons/ri";
 const AdminMenu = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -76,6 +77,12 @@ const AdminMenu = (props) => {
             <li onClick={() => toggle("user")}>
               <div>
                 <i className="bi bi-person-fill icon-admin"></i>Users
+              </div>
+            </li>
+            <li onClick={() => toggle("coupon")}>
+              <div>
+                <RiCoupon3Fill className="icon-admin" />
+                Coupons
               </div>
             </li>
             <li>

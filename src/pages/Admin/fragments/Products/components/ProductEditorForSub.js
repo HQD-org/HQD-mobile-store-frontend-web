@@ -9,6 +9,7 @@ import {
   InputGroup,
   InputGroupText,
 } from "reactstrap";
+import { FcViewDetails } from "react-icons/fc";
 
 const ProductEditorForSub = (props) => {
   const { className, toggle } = props;
@@ -19,7 +20,10 @@ const ProductEditorForSub = (props) => {
 
   return (
     <Modal isOpen={modal} toggle={onToggle} className={className}>
-      <ModalHeader className="close-x" toggle={onToggle}></ModalHeader>
+      <ModalHeader className="close-x" toggle={onToggle}>
+        <FcViewDetails style={{ fontSize: "30px" }} />
+        Chi tiết sản phẩm
+      </ModalHeader>
       <ModalBody>
         <form>
           <div className="row mb-2">

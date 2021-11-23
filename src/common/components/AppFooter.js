@@ -9,7 +9,7 @@ const AppFooter = () => {
   return show ? (
     <div>
       <div
-        className="container-fluid"
+        className="container-fluid mt-3"
         style={{
           backgroundImage: `url(${background})`,
           backgroundPosition: "bottom",

@@ -175,6 +175,11 @@ tbody>tr:hover {
     color: #2f8ed1;
 }
 
+.list-branch:hover {
+    cursor: pointer;
+    color: #186196;
+}
+
 .txt-status {
     color: green;
     font-weight: bold;
@@ -182,7 +187,6 @@ tbody>tr:hover {
 
 .card-product:hover {
     filter: drop-shadow(1px 4px 3px #949393);
-    cursor: pointer;
 }
 
 .thead-addpro {

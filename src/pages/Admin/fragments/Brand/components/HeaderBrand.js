@@ -38,7 +38,7 @@ const HeaderBrand = (props) => {
     await onFilterValueChange(status, false);
   };
   return (
-    <div className="row" style={{ marginTop: "50px", alignItems: "baseline" }}>
+    <div className="row" style={{ marginTop: "50px", alignItems: "center" }}>
       <div className="col">
         <div style={{ display: "inline-flex" }}>
           <i className="fab fa-react icon-admin icon-brandHeader"></i>

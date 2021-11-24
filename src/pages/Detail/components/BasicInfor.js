@@ -8,6 +8,12 @@ const images = [Xiaomi, Vivo, Xiaomi, Vivo];
 const RAM = ["4 GB", "6 GB"];
 const Color = ["Xanh", "Đen", "Đỏ"];
 
+const product = {
+  id: 1,
+  name: "OPPO A31",
+  price: 4999999,
+};
+
 const RAMGrid = ({ ram }) => {
   return (
     <Grid container spacing={3}>
@@ -57,6 +63,11 @@ const ImageMain = ({ src }) => {
 
 const BasicInfor = () => {
   const [selectedImage, setSelectedImage] = useState(0);
+  const [cart, setCart] = useState([]);
+  console.log(cart);
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
   return (
     <div className="row mt-3">
       <div className="col-6 all-images">
@@ -70,8 +81,8 @@ const BasicInfor = () => {
         </div>
       </div>
       <div className="col-6">
-        <div className="row">
-          <Typography variant="h4">OPPO A31 4GB</Typography>
+        <div className="row" key={product.id}>
+          <Typography variant="h4">{`${product.name}`}</Typography>
           <Grid item sm={8}>
             <RAMGrid ram={RAM} />
           </Grid>
@@ -80,12 +91,16 @@ const BasicInfor = () => {
           </Grid>
           <div className="row">
             <div className="col-7">
-              <p className="price-infor">4.999.999₫</p>
+              <p className="price-infor">{`${product.price}₫`}</p>
             </div>
           </div>
           <div className="row mb-3">
             <div className="col-7">
-              <button type="button" className="add-to-cart">
+              <button
+                type="submit"
+                className="add-to-cart"
+                onClick={() => addToCart(product)}
+              >
                 THÊM VÔ GIỎ HÀNG
               </button>
             </div>

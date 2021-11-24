@@ -11,6 +11,7 @@ import RegisterRoute from "./Register.Route";
 import VerifyRoute from "./Verify.Route";
 import ProductRoute from "./Product.Route";
 import DetailRoute from "./Detail.Route";
+import CartRoute from "./Cart.Route";
 
 const Routers = () => {
   return (
@@ -21,6 +22,7 @@ const Routers = () => {
         <HomeRoute />
         <ProductRoute />
         <DetailRoute />
+        <CartRoute />
         <LoginRoute />
         <RegisterRoute />
         <ForgotPasswordRoute />

@@ -3,18 +3,14 @@ import { Route, Switch } from "react-router-dom";
 import Auth from "../common/components/Authentication";
 import { PATH } from "../common/constants/RoutePath";
 
-const ProductPage = lazy(() => import("../pages/Products"));
+const CartPage = lazy(() => import("../pages/Cart"));
 
-const ProductRoute = () => {
+const CartRoute = () => {
   return (
     <Switch>
-      <Route
-        path={PATH.PRODUCT}
-        exact
-        component={Auth(ProductPage, false, false)}
-      />
+      <Route path={PATH.CART} exact component={Auth(CartPage, false, false)} />
     </Switch>
   );
 };
 
-export default ProductRoute;
+export default CartRoute;

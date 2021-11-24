@@ -10818,6 +10818,13 @@ react-loading@^2.0.3:
   resolved "https://registry.yarnpkg.com/react-loading/-/react-loading-2.0.3.tgz#e8138fb0c3e4674e481b320802ac7048ae14ffb9"
   integrity sha512-Vdqy79zq+bpeWJqC+xjltUjuGApyoItPgL0vgVfcJHhqwU7bAMKzysfGW/ADu6i0z0JiOCRJjo+IkFNkRNbA3A==
 
+react-number-format@^4.8.0:
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/react-number-format/-/react-number-format-4.8.0.tgz#2ec5efbe7f45c4b1b8951d34774f30e4c69040a4"
+  integrity sha512-oGGiQpqzvKTR5PD2/AJbyUsci8jyupaoKxpuSPevjpWHMhFkUtmo390t+EIpJOgnuAHZogLu6PHiXgb/OXETKA==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-otp-input@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/react-otp-input/-/react-otp-input-2.4.0.tgz#0f0a3de1d8c8d564e2e4fbe5d6b7b56e29e3a6e6"

@@ -10,6 +10,7 @@ export const PATH = {
   ADD_MODEL: "/dashboard/add-model",
   PRODUCT: "/product",
   DETAIL: "/product/tenSP-haygidocungdc",
+  CART: "/cart",
 };
 
 export const PATH_API = {};

@@ -11,6 +11,7 @@ export const PATH = {
   PRODUCT: "/product",
   DETAIL: "/product/tenSP-haygidocungdc",
   CART: "/cart",
+  PAYMENT: "/payment",
 };
 
 export const PATH_API = {};

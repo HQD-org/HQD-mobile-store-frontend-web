@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const InforOrder = () => {
   return (
@@ -37,10 +38,12 @@ const InforOrder = () => {
           <p>8.029.999₫</p>
         </div>
       </div>
-      <div className="row">
-        <button className="btnCheckout" type="submit">
-          THANH TOÁN NGAY
-        </button>
+      <div className="row" style={{ textAlign: "center" }}>
+        <Link to="/payment">
+          <button className="btnCheckout" type="submit">
+            ĐẶT HÀNG NGAY
+          </button>
+        </Link>
       </div>
     </div>
   );

@@ -178,7 +178,7 @@ const ModelEditor = (props) => {
                   name="description"
                   classLabel={"col-3"}
                   label={"Mô tả"}
-                  classTextarea={"col-7 mb-3"}
+                  classTextarea={"col-7 mb-3 mt-3"}
                   classParent={"row"}
                   defaultValue={option ? "" : model.description}
                 />

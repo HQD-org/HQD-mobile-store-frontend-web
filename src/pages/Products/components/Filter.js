@@ -63,8 +63,9 @@ const ProductFilter = () => {
             <div className="col-2">
               <div class="form-check">
                 <input
+                  name="radioPro"
                   class="form-check-input"
-                  type="checkbox"
+                  type="radio"
                   id="trendingCheckbox"
                 />
                 <label class="form-check-label" for="trendingCheckbox">
@@ -75,8 +76,9 @@ const ProductFilter = () => {
             <div className="col-2">
               <div class="form-check">
                 <input
+                  name="radioPro"
                   class="form-check-input"
-                  type="checkbox"
+                  type="radio"
                   id="newCheckbox"
                 />
                 <label class="form-check-label" for="newCheckbox">

@@ -165,7 +165,7 @@ const ModelEditor = (props) => {
                 <SelectInput
                   id="brand"
                   name="brand"
-                  defaultValue={option ? 0 : model.brand}
+                  defaultValue={option ? 0 : model.idBrand._id}
                   list={brands}
                   label={"Thương hiệu"}
                   classLabel={"col-3 mb-3"}

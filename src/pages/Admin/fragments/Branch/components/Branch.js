@@ -1,32 +1,18 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { alpha } from "@mui/material/styles";
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import {
   Box,
+  FormControlLabel,
+  Paper,
+  Switch,
   Table,
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TablePagination,
   TableRow,
-  TableSortLabel,
-  Toolbar,
-  Typography,
-  Paper,
-  Checkbox,
-  Tooltip,
-  FormControlLabel,
-  Switch,
 } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
-import ViewColumnIcon from "@mui/icons-material/ViewColumn";
-import PrintIcon from "@mui/icons-material/Print";
-import { visuallyHidden } from "@mui/utils";
+import React, { useState } from "react";
+import EnhancedTableHead from "../../../../../common/components/EnhancedTableHead";
+import EnhancedTableToolbar from "../../../../../common/components/EnhancedTableToolbar";
 import "../../../../../common/css/Branch.Style.css";
 
 const createData = (branchName, address, adminName, timeDebut, status) => {
@@ -109,160 +95,7 @@ const headCells = [
   },
 ];
 
-const EnhancedTableHead = (props) => {
-  const {
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-  } = props;
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
-
-  return (
-    <TableHead>
-      <TableRow>
-        <TableCell padding="checkbox">
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              "aria-label": "select all desserts",
-            }}
-          />
-        </TableCell>
-        {headCells.map((headCell) => (
-          <TableCell
-            key={headCell.id}
-            align={headCell.numeric ? "right" : "left"}
-            padding={headCell.disablePadding ? "none" : "normal"}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : "asc"}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
-                </Box>
-              ) : null}
-            </TableSortLabel>
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-  );
-};
-
-EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
-
-const EnhancedTableToolbar = (props) => {
-  const { numSelected } = props;
-
-  return (
-    <Toolbar
-      style={{ backgroundColor: "#3FA5EF" }}
-      sx={{
-        pl: { sm: 2 },
-        pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(
-              theme.palette.primary.main,
-              theme.palette.action.activatedOpacity
-            ),
-        }),
-      }}
-    >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: "1 1 100%", color: "white" }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} Branchs
-        </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: "1 1 100%", color: "white" }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          Branchs
-        </Typography>
-      )}
-
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <EmojiEmotionsIcon style={{ color: "white" }} />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <input
-            className="form-control me-2 search-branch"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            name="search"
-            style={{ height: "35px" }}
-          />
-          <Tooltip title="Download">
-            <IconButton>
-              <ReactHTMLTableToExcel
-                id="test-table-xls-button"
-                className="btnDownload-User MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
-                table="table-to-xls"
-                filename="Branch-table"
-                sheet="tablexls"
-                buttonText={<CloudDownloadIcon style={{ color: "white" }} />}
-              />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Print">
-            <IconButton>
-              <PrintIcon style={{ color: "white" }} />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="View Column">
-            <IconButton>
-              <ViewColumnIcon style={{ color: "white" }} />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Filter list">
-            <IconButton>
-              <FilterListIcon style={{ color: "white" }} />
-            </IconButton>
-          </Tooltip>
-        </div>
-      )}
-    </Toolbar>
-  );
-};
-
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
-
-const Branchs = () => {
+const Branch = () => {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("calories");
   const [selected, setSelected] = useState([]);
@@ -278,8 +111,8 @@ const Branchs = () => {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.branchName);
-      setSelected(newSelecteds);
+      const newSelectedOptions = rows.map((n) => n.branchName);
+      setSelected(newSelectedOptions);
       return;
     }
     setSelected([]);
@@ -327,7 +160,10 @@ const Branchs = () => {
   return (
     <Box sx={{ width: "100%" }}>
       <Paper sx={{ width: "100%", mb: 2 }}>
-        <EnhancedTableToolbar numSelected={selected.length} title="Users" />
+        <EnhancedTableToolbar
+          tableName={"Branches"}
+          numSelected={selected.length}
+        />
         <TableContainer>
           <Table
             id="table-to-xls"
@@ -342,6 +178,7 @@ const Branchs = () => {
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
+              headCells={headCells}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
@@ -416,4 +253,4 @@ const Branchs = () => {
   );
 };
 
-export default Branchs;
+export default Branch;

@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import { default as AddBtn } from "../../../../../common/images/add-button-3.png";
-import { FormControl } from "@mui/material";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
-import TextField from "@mui/material/TextField";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { FormControl } from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import React, { useState } from "react";
+import { Modal, ModalBody, ModalHeader } from "reactstrap";
+import { default as AddBtn } from "../../../../../common/images/add-button-3.png";
 
 const BranchEditor = (props) => {
   const [value, setValue] = useState(new Date());

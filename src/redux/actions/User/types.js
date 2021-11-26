@@ -1,0 +1,10 @@
+export const ADD_USER_FAIL = "add user fail";
+export const ADD_USER_SUCCESS = "add user success";
+export const GET_ALL_USER_FAIL = "get all user fail";
+export const GET_ALL_USER_SUCCESS = "get all user success";
+export const UPDATE_USER_FAIL = "update user fail";
+export const UPDATE_USER_SUCCESS = "update user success";
+export const UPDATE_PROFILE_FAIL = "update profile fail";
+export const UPDATE_PROFILE_SUCCESS = "update profile success";
+export const FILTER_USER_FAIL = "filter user fail";
+export const FILTER_USER_SUCCESS = "filter user success";

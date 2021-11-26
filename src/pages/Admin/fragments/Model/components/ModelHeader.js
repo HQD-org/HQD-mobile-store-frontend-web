@@ -1,9 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from "react";
+import React from "react";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { useSelector } from "react-redux";
 import { FormGroup } from "reactstrap";
-import { statusModel } from "../../../../../common/constants/ListSelect";
+import {
+  osList,
+  statusModel,
+  timeDebutList,
+} from "../../../../../common/constants/ListSelect";
 import "../../../../../common/css/Model.Style.css";
 
 const ModelHeader = (props) => {
@@ -15,26 +19,15 @@ const ModelHeader = (props) => {
     idBrand,
     onFilterValueChange,
     filter,
+    os,
+    timeDebut,
   } = props;
   const brands = useSelector((state) => state.brand.list);
-  const [os, setOs] = useState("all");
-  const [timeDebut, setTimeDebut] = useState("all");
   const toggleEditor = () => {
     setModalEditor(!modalEditor);
     setOption(true);
   };
 
-  const timeDebutList = [
-    { _id: "all", name: "Tất cả" },
-    { _id: "2020", name: "2020" },
-    { _id: "2021", name: "2021" },
-    { _id: "2022", name: "2022" },
-  ];
-  const osList = [
-    { _id: "all", name: "Tất cả" },
-    { _id: "android", name: "Android" },
-    { _id: "ios", name: "IOS" },
-  ];
   const options = (list) => {
     return list.map((element) => {
       return (
@@ -47,7 +40,6 @@ const ModelHeader = (props) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     filter(1, 20);
-    console.log("log at ==> ModelHeader ==> line 65 ==> filter: ");
   };
   return (
     <>

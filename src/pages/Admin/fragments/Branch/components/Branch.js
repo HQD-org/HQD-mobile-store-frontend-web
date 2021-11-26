@@ -1,32 +1,18 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { alpha } from "@mui/material/styles";
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import {
   Box,
+  FormControlLabel,
+  Paper,
+  Switch,
   Table,
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TablePagination,
   TableRow,
-  TableSortLabel,
-  Toolbar,
-  Typography,
-  Paper,
-  Checkbox,
-  Tooltip,
-  FormControlLabel,
-  Switch,
 } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
-import ViewColumnIcon from "@mui/icons-material/ViewColumn";
-import PrintIcon from "@mui/icons-material/Print";
-import { visuallyHidden } from "@mui/utils";
+import React, { useState } from "react";
+import EnhancedTableHead from "../../../../../common/components/EnhancedTableHead";
+import EnhancedTableToolbar from "../../../../../common/components/EnhancedTableToolbar";
 import "../../../../../common/css/Branch.Style.css";
 
 const createData = (branchName, address, adminName, timeDebut, status) => {
@@ -109,6 +95,7 @@ const headCells = [
   },
 ];
 
+<<<<<<< HEAD
 const EnhancedTableHead = (props) => {
   const {
     onSelectAllClick,
@@ -263,6 +250,9 @@ EnhancedTableToolbar.propTypes = {
 };
 
 const Branchs = () => {
+=======
+const Branch = () => {
+>>>>>>> 4953c543ae1a7ad01f52791538fba02ad8f95b98
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("calories");
   const [selected, setSelected] = useState([]);
@@ -278,8 +268,8 @@ const Branchs = () => {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.branchName);
-      setSelected(newSelecteds);
+      const newSelectedOptions = rows.map((n) => n.branchName);
+      setSelected(newSelectedOptions);
       return;
     }
     setSelected([]);
@@ -325,6 +315,7 @@ const Branchs = () => {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
+<<<<<<< HEAD
     <div className="container-fluid">
       {" "}
       <Box sx={{ width: "100%" }}>
@@ -347,6 +338,32 @@ const Branchs = () => {
               />
               <TableBody>
                 {/* if you don't need to support IE11, you can replace the `stableSort` call with:
+=======
+    <Box sx={{ width: "100%" }}>
+      <Paper sx={{ width: "100%", mb: 2 }}>
+        <EnhancedTableToolbar
+          tableName={"Branches"}
+          numSelected={selected.length}
+        />
+        <TableContainer>
+          <Table
+            id="table-to-xls"
+            sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+            size={dense ? "small" : "medium"}
+          >
+            <EnhancedTableHead
+              numSelected={selected.length}
+              order={order}
+              orderBy={orderBy}
+              onSelectAllClick={handleSelectAllClick}
+              onRequestSort={handleRequestSort}
+              rowCount={rows.length}
+              headCells={headCells}
+            />
+            <TableBody>
+              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
+>>>>>>> 4953c543ae1a7ad01f52791538fba02ad8f95b98
                  rows.slice().sort(getComparator(order, orderBy)) */}
                 {stableSort(rows, getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -419,4 +436,4 @@ const Branchs = () => {
   );
 };
 
-export default Branchs;
+export default Branch;

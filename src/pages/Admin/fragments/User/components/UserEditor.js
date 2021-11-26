@@ -1,44 +1,57 @@
-import React, { useState } from "react";
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
-import { default as AddBtn } from "../../../../../common/images/add-button-2.png";
 import {
-  TextField,
   FormControl,
-  InputAdornment,
+  FormControlLabel,
+  FormLabel,
   InputLabel,
   OutlinedInput,
-  IconButton,
+  Radio,
+  RadioGroup,
+  TextField,
 } from "@mui/material";
-import { VisibilityOff, Visibility } from "@mui/icons-material";
+import React from "react";
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { default as AddBtn } from "../../../../../common/images/add-button-2.png";
+import { validateAddUser, validateUpdateUser } from "../hooks/validate";
+import {
+  addUserAction,
+  updateUserAction,
+} from "../../../../../redux/actions/User/userAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const UserEditor = (props) => {
-  const [values, setValues] = useState({
-    fullname: "",
-    password: "",
-    email: "",
-    phone: "",
-    showPassword: false,
-  });
-
-  const { className, toggle } = props;
+  const { className, option, user, setModal } = props;
   let { modal } = props;
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+  const dispatch = useDispatch();
   const onToggle = () => {
-    toggle(false);
+    setModal(!modal);
+  };
+
+  const addUser = async (e) => {
+    e.preventDefault();
+    const data = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+      role: e.target.role.value,
+      phone: e.target.phone.value,
+    };
+    const isValidData = validateAddUser(data);
+    if (!isValidData) return;
+    const res = await dispatch(addUserAction(isValidData));
+    if (res) onToggle();
+  };
+  const updateUser = async (e) => {
+    e.preventDefault();
+    const data = {
+      idUser: user.idUser._id,
+      name: e.target.name.value,
+      role: e.target.role.value,
+      phone: e.target.phone.value,
+    };
+    const isValidData = validateUpdateUser(data);
+    if (!isValidData) return;
+    const res = await dispatch(updateUserAction(isValidData));
+    if (res) onToggle();
   };
 
   return (
@@ -49,69 +62,79 @@ const UserEditor = (props) => {
           alt=""
           style={{ width: "30px", marginRight: "5px" }}
         />
-        Add User
+        {option ? "Add User" : "Update User"}
       </ModalHeader>
       <ModalBody>
-        <form>
+        <form onSubmit={option ? addUser : updateUser}>
           <div>
             <FormControl fullWidth sx={{ m: 1 }} variant="outlined">
               <TextField
-                id="outlined-basic"
-                value={values.fullname}
-                label="Fullname"
-                onChange={handleChange("fullname")}
+                defaultValue={option ? "" : user.idUser.name}
+                label="FullName"
                 variant="outlined"
+                name="name"
               />
             </FormControl>
             <FormControl fullWidth sx={{ m: 1 }} variant="outlined">
               <TextField
-                id="outlined-basic"
-                value={values.email}
+                defaultValue={option ? "" : user.idUser.email}
                 label="Email"
-                onChange={handleChange("email")}
                 variant="outlined"
+                name="email"
+                type="email"
+                disabled={!option}
               />
             </FormControl>
             <FormControl fullWidth sx={{ m: 1 }} variant="outlined">
               <TextField
-                id="outlined-basic"
-                value={values.phone}
+                defaultValue={option ? "" : user.idUser.phone}
                 type="number"
                 label="Mobile phone"
-                onChange={handleChange("phone")}
                 variant="outlined"
+                name="phone"
               />
             </FormControl>
-            <FormControl fullWidth sx={{ m: 1 }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-password">
-                Password
-              </InputLabel>
-              <OutlinedInput
-                id="outlined-adornment-password"
-                type={values.showPassword ? "text" : "password"}
-                value={values.password}
-                onChange={handleChange("password")}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Password"
+            {option ? (
+              <FormControl fullWidth sx={{ m: 1 }} variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">
+                  Password
+                </InputLabel>
+                <OutlinedInput
+                  id="outlined-adornment-password"
+                  type="password"
+                  defaultValue={option ? "" : "non accessible"}
+                  label="Password"
+                  name="password"
+                />
+              </FormControl>
+            ) : (
+              <> </>
+            )}
+            <FormLabel component="legend">Role</FormLabel>
+            <RadioGroup
+              row
+              aria-label="role"
+              name="role"
+              defaultValue={option ? "user" : user.role}
+            >
+              <FormControlLabel value="user" control={<Radio />} label="User" />
+              <FormControlLabel
+                value="manager branch"
+                control={<Radio />}
+                label="Manager Branch"
               />
-            </FormControl>
+              <FormControlLabel
+                value="admin"
+                control={<Radio />}
+                label="Admin"
+              />
+            </RadioGroup>
           </div>
 
           <ModalFooter>
             <Button type="submit" color="primary">
               Submit
-            </Button>{" "}
+            </Button>
             <Button type="button" color="secondary" onClick={onToggle}>
               Cancel
             </Button>

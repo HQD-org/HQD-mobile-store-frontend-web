@@ -1,8 +1,7 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { FormGroup } from "reactstrap";
 import "../../../../../common/css/Brand.Style.css";
-import BrandEditor from "./BrandEditor";
 
 const HeaderBrand = (props) => {
   const {

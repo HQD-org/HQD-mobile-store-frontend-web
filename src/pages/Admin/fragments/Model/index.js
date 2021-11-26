@@ -11,14 +11,16 @@ import ModelHeader from "./components/ModelHeader";
 const ModelFragment = () => {
   const dispatch = useDispatch();
   const componentDidMountRef = useRef(false);
-  const pagination = useSelector((state) => state.brand.pagination);
+  const pagination = useSelector((state) => state.model.pagination);
   const updateFlag = useSelector((state) => state.model.updateFlag);
   const [modalEditor, setModalEditor] = useState(false);
   const [currentModel, setCurrentModel] = useState({});
   const [option, setOption] = useState(true);
   const [searchTerm, setSearchTerm] = useState(undefined);
-  const [status, setStatus] = useState(undefined);
+  const [status, setStatus] = useState("all");
   const [idBrand, setIdBrand] = useState("all");
+  const [os, setOs] = useState("all");
+  const [timeDebut, setTimeDebut] = useState("all");
 
   const onFilterValueChange = async (e, type) => {
     switch (type) {
@@ -31,12 +33,12 @@ const ModelFragment = () => {
       case "name":
         setSearchTerm(e.target.value || undefined);
         break;
-      // case "os":
-      //   setOs(e.target.value);
-      //   break;
-      // case "timeDebut":
-      //   setTimeDebut(e.target.value);
-      //   break;
+      case "os":
+        setOs(e.target.value);
+        break;
+      case "timeDebut":
+        setTimeDebut(e.target.value);
+        break;
       default:
         break;
     }
@@ -49,8 +51,10 @@ const ModelFragment = () => {
       itemPerPage: itemPerPage,
     };
 
-    if (status) query.status = status;
+    if (status && status !== "all") query.status = status;
     if (idBrand && idBrand !== "all") query.idBrand = idBrand;
+    if (os && os !== "all") query.operation = os;
+    if (timeDebut && timeDebut !== "all") query.timeDebut = timeDebut;
 
     await dispatch(filterModelAction(query));
   };
@@ -81,6 +85,8 @@ const ModelFragment = () => {
         onFilterValueChange={onFilterValueChange}
         status={status}
         idBrand={idBrand}
+        os={os}
+        timeDebut={timeDebut}
         filter={filter}
       />
       <Model

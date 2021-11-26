@@ -4,7 +4,6 @@ import queryString from "query-string";
 
 const insert = async (body) => {
   try {
-    console.log("log at ==> Model.Api.js ==> body: ", body)
     const res = await axiosClient.post(`/admin/mobile-model/create`, body);
     toastNotify(res ? res.message.VN : "Thêm mẫu điện thoại thất bại");
     return res && res.data
@@ -51,7 +50,6 @@ const update = async (body) => {
 const filter = async (queryParams) => {
   try {
     const query = queryString.stringify(queryParams);
-    console.log("log at ==> Brand.Api.js ==> line55 ==> query: ", query);
     const res = await axiosClient.get(`/mobile-model/filter?${query}`);
     // toastNotify(res ? res.message.VN : "Tìm kiếm mẫu điện thoại thất bại");
     return res && res.data

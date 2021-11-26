@@ -17,6 +17,5 @@ input[type="number"] {
 
 .btnDownload-User {
     border: none;
-    background-color: white;
-    color: rgba(0, 0, 0, 0.54);
+    background-color: #3fa5ef;
 }

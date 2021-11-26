@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import "../../../../../common/css/Branch.Style.css";
-import { IoAddCircleOutline } from "react-icons/io5";
-import BranchEditor from "./BranchEditor";
+import React from "react";
+import { IoAddCircleSharp } from "react-icons/io5";
+import "../css/User.Style.css";
 
-const BranchHeader = (props) => {
-  const { buttonLabel } = props;
-  const [modal, setModal] = useState(false);
-  const toggle = () => setModal(!modal);
+const HeaderDashboard = (props) => {
+  const { buttonLabel, type, modal, setModal, setOption } = props;
+  const toggle = () => {
+    setModal(!modal);
+    setOption(true);
+  };
   return (
     <div className="container-fluid">
       <div
@@ -16,31 +17,23 @@ const BranchHeader = (props) => {
         <div className="col">
           <div>
             <i className="bi bi-person-fill icon-admin icon-user" />
-            <span className="name-management">Branchs</span>
+            <span className="name-management">{type}</span>
           </div>
           <p className="choosenHQD"> Choosing HQD mobile is a good ideal</p>
         </div>
-
         <div className="col-2">
           <button type="button" className="btn-addBrand" onClick={toggle}>
             {buttonLabel}
-            <IoAddCircleOutline
+            <IoAddCircleSharp
               style={{ fontSize: "20px", marginRight: "5px" }}
             />
-
-            <span>Add Branch</span>
+            <span>Add {type}</span>
           </button>
         </div>
-        <BranchEditor
-          modal={modal}
-          toggle={toggle}
-          option={true}
-          brand={undefined}
-        />
       </div>
       <hr />
     </div>
   );
 };
 
-export default BranchHeader;
+export default HeaderDashboard;

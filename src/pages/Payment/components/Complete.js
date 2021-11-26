@@ -9,7 +9,7 @@ const Complete = () => {
         <form>
           <div className="form-deliveryInfor">
             <div style={{ textAlign: "center" }}>
-              <button className="paymentNow">THANH TOÁN NGAY</button>
+              <button className="paymentNow">XÁC NHẬN ĐƠN HÀNG</button>
             </div>
             <div style={{ textAlign: "center", marginTop: "10px" }}>
               <Link to="/Cart" style={{ textDecoration: "none" }}>

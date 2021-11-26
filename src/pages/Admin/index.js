@@ -9,6 +9,7 @@ import ProductFragment from "./fragments/Products";
 import UserFragment from "./fragments/User";
 import BranchFragment from "./fragments/Branch";
 import CouponFragment from "./fragments/Coupon";
+import InvoiceFragment from "./fragments/Invoice";
 
 const AdminPage = (props) => {
   const [toggleBrand, setToggleBrand] = useState(false);
@@ -18,6 +19,7 @@ const AdminPage = (props) => {
   const [toggleUser, setToggleUser] = useState(true);
   const [toggleBranch, setToggleBranch] = useState(false);
   const [toggleCoupon, setToggleCoupon] = useState(false);
+  const [toggleInvoice, setToggleInvoice] = useState(false);
   const toggleRef = useRef("user");
   const { showHeaderAndFooter } = props;
   const dispatch = useDispatch();
@@ -46,6 +48,9 @@ const AdminPage = (props) => {
         break;
       case "coupon":
         setToggleCoupon(false);
+        break;
+      case "invoice":
+        setToggleInvoice(false);
         break;
       default:
         break;
@@ -84,6 +89,10 @@ const AdminPage = (props) => {
         setToggleCoupon(true);
         toggleRef.current = "coupon";
         break;
+      case "invoice":
+        setToggleInvoice(true);
+        toggleRef.current = "invoice";
+        break;
       default:
         break;
     }
@@ -107,6 +116,7 @@ const AdminPage = (props) => {
               {toggleUser && <UserFragment />}
               {toggleBranch && <BranchFragment />}
               {toggleCoupon && <CouponFragment />}
+              {toggleInvoice && <InvoiceFragment />}
             </div>
           </div>
         </div>

@@ -85,7 +85,7 @@ const AdminMenu = (props) => {
                 Coupons
               </div>
             </li>
-            <li>
+            <li onClick={() => toggle("invoice")}>
               <div>
                 <i className="fas fa-file-invoice icon-admin"></i>Invoices
               </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -9,7 +9,7 @@ import { MdSecurity, MdSync } from "react-icons/md";
 import { BsBox } from "react-icons/bs";
 
 const Information = () => {
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

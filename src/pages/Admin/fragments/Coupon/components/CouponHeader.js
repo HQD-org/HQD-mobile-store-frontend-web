@@ -13,7 +13,7 @@ const CouponHeader = () => {
         <div className="col">
           <div>
             <RiCoupon3Fill className="icon-admin icon-coupon" />
-            <span className="name-management">Coupons</span>
+            <span className="name-management">Coupon</span>
           </div>
           <p className="choosenHQD"> Choosing HQD mobile is a good ideal</p>
         </div>

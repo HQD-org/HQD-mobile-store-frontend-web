@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect, useRef } from "react";
-import HeaderDashboard from "../../../../common/components/HeaderDashboard";
-import UserEditor from "./components/UserEditor";
-import TableDashboard from "../../../../common/components/TableDashboard";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import HeaderDashboard from "../../../../common/components/HeaderDashboard";
+import TableDashboard from "../../../../common/components/TableDashboard";
 import { filterUserAction } from "../../../../redux/actions/User/userAction";
+import UserEditor from "./components/UserEditor";
 
 const headCells = [
   {

@@ -23,4 +23,15 @@ const timeDebutList = [
   // { _id: "2022", name: "2022" },
 ];
 
-export { osList, statusBrand, statusModel, timeDebutList };
+const statusBranch = [
+  {
+    _id: "open",
+    name: "Mở cửa",
+  },
+  {
+    _id: "close",
+    name: "Đóng cửa",
+  },
+];
+
+export { osList, statusBranch, statusBrand, statusModel, timeDebutList };

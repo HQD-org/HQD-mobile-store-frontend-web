@@ -3,10 +3,12 @@ import { IoAddCircleSharp } from "react-icons/io5";
 import "../css/User.Style.css";
 
 const HeaderDashboard = (props) => {
-  const { buttonLabel, type, modal, setModal, setOption } = props;
+  const { buttonLabel, type, modal, setModal, setOption, setCurrentItem } =
+    props;
   const toggle = () => {
     setModal(!modal);
     setOption(true);
+    setCurrentItem(undefined);
   };
   return (
     <div className="container-fluid">

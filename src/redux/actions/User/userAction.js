@@ -6,8 +6,6 @@ import {
   GET_ALL_USER_SUCCESS,
   UPDATE_USER_FAIL,
   UPDATE_USER_SUCCESS,
-  UPDATE_PROFILE_FAIL,
-  UPDATE_PROFILE_SUCCESS,
   FILTER_USER_FAIL,
   FILTER_USER_SUCCESS,
 } from "./types";
@@ -19,14 +17,14 @@ const loading =
     dispatch(changeLoading(loading));
   };
 
-export function addUserFail() {
+function addUserFail() {
   return {
     type: ADD_USER_FAIL,
     payload: {},
   };
 }
 
-export function addUserSuccess(data) {
+function addUserSuccess(data) {
   return {
     type: ADD_USER_SUCCESS,
     payload: data,
@@ -54,14 +52,14 @@ export function addUserAction(dataSubmit) {
   };
 }
 
-export function getAllUserFail() {
+function getAllUserFail() {
   return {
     type: GET_ALL_USER_FAIL,
     payload: {},
   };
 }
 
-export function getAllUserSuccess(data) {
+function getAllUserSuccess(data) {
   return {
     type: GET_ALL_USER_SUCCESS,
     payload: data,
@@ -71,32 +69,29 @@ export function getAllUserSuccess(data) {
 export function getAllUserAction() {
   return async (dispatch) => {
     try {
-      dispatch(loading(true));
       const res = await userAPI.getAll();
       if (res.success) {
         dispatch(loading());
         dispatch(getAllUserSuccess(res.data));
         return true;
       }
-      dispatch(loading());
       dispatch(getAllUserFail());
       return false;
     } catch {
-      dispatch(loading());
       dispatch(getAllUserFail());
       return false;
     }
   };
 }
 
-export function updateUserFail() {
+function updateUserFail() {
   return {
     type: UPDATE_USER_FAIL,
     payload: {},
   };
 }
 
-export function updateUserSuccess(data) {
+function updateUserSuccess(data) {
   return {
     type: UPDATE_USER_SUCCESS,
     payload: data,
@@ -124,24 +119,24 @@ export function updateUserAction(dataSubmit) {
   };
 }
 
-export function filterUserFail() {
+function filterUserFail() {
   return {
     type: FILTER_USER_FAIL,
     payload: {},
   };
 }
 
-export function filterUserSuccess(data) {
+function filterUserSuccess(data) {
   return {
     type: FILTER_USER_SUCCESS,
     payload: data,
   };
 }
 
-export function filterUserAction(queryParams) {
+export function filterUserAction(queryParams, load = true) {
   return async (dispatch) => {
     try {
-      dispatch(loading(true));
+      dispatch(loading(load));
       const res = await userAPI.filter(queryParams);
       console.log("log at ==> userAction ==> res: ", res);
       if (res.success) {

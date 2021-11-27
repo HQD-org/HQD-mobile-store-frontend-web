@@ -17,7 +17,7 @@ const Model = (props) => {
   };
 
   const ModelElement = (props) => {
-    const { models, brands } = props;
+    const { models } = props;
     return models.map((model, index) => {
       const status = translateStatusToVietnamese(model.status);
       return (

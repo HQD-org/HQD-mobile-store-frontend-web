@@ -14,9 +14,9 @@ const AdminPage = (props) => {
   const [toggleModel, setToggleModel] = useState(false);
   const [toggleAddProduct, setToggleAddProduct] = useState(false);
   const [toggleProduct, setToggleProduct] = useState(false);
-  const [toggleUser, setToggleUser] = useState(true);
-  const [toggleBranch, setToggleBranch] = useState(false);
-  const toggleRef = useRef("user");
+  const [toggleUser, setToggleUser] = useState(false);
+  const [toggleBranch, setToggleBranch] = useState(true);
+  const toggleRef = useRef("branch");
   const { showHeaderAndFooter } = props;
   const dispatch = useDispatch();
   useEffect(() => {

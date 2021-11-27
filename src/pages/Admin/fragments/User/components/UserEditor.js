@@ -9,14 +9,14 @@ import {
   TextField,
 } from "@mui/material";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { default as AddBtn } from "../../../../../common/images/add-button-2.png";
-import { validateAddUser, validateUpdateUser } from "../hooks/validate";
 import {
   addUserAction,
   updateUserAction,
 } from "../../../../../redux/actions/User/userAction";
-import { useDispatch, useSelector } from "react-redux";
+import { validateAddUser, validateUpdateUser } from "../hooks/validate";
 
 const UserEditor = (props) => {
   const { className, option, user, setModal } = props;
@@ -111,7 +111,12 @@ const UserEditor = (props) => {
               <> </>
             )}
             <FormLabel component="legend">Role</FormLabel>
-            <RadioGroup row aria-label="role" name="role" defaultValue="user">
+            <RadioGroup
+              row
+              aria-label="role"
+              name="role"
+              defaultValue={option ? "user" : user.role}
+            >
               <FormControlLabel value="user" control={<Radio />} label="User" />
               <FormControlLabel
                 value="manager branch"

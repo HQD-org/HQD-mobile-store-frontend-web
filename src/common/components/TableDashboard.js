@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   Box,
+  Checkbox,
   FormControlLabel,
   Paper,
   Switch,
@@ -10,13 +11,12 @@ import {
   TableContainer,
   TablePagination,
   TableRow,
-  Checkbox,
 } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { AiFillLock, AiFillUnlock } from "react-icons/ai";
+import { MdPassword } from "react-icons/md";
 import EnhancedTableHead from "./EnhancedTableHead";
 import EnhancedTableToolbar from "./EnhancedTableToolbar";
-import { MdPassword } from "react-icons/md";
-import { AiFillUnlock, AiFillLock } from "react-icons/ai";
 
 const TableDashboard = (props) => {
   const {
@@ -128,7 +128,7 @@ const TableDashboard = (props) => {
           </>
         );
       default:
-        return <> </>;
+        return <th> </th>;
     }
   };
 

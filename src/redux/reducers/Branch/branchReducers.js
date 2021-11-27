@@ -1,14 +1,14 @@
 /* eslint-disable import/no-anonymous-default-export */
 import {
-  ADD_USER_FAIL,
-  ADD_USER_SUCCESS,
-  GET_ALL_USER_FAIL,
-  GET_ALL_USER_SUCCESS,
-  UPDATE_USER_FAIL,
-  UPDATE_USER_SUCCESS,
-  FILTER_USER_FAIL,
-  FILTER_USER_SUCCESS,
-} from "../../actions/User/types";
+  ADD_BRANCH_FAIL,
+  ADD_BRANCH_SUCCESS,
+  GET_ALL_BRANCH_FAIL,
+  GET_ALL_BRANCH_SUCCESS,
+  UPDATE_BRANCH_FAIL,
+  UPDATE_BRANCH_SUCCESS,
+  FILTER_BRANCH_FAIL,
+  FILTER_BRANCH_SUCCESS,
+} from "../../actions/Branch/types";
 
 const initState = {
   list: [],
@@ -22,35 +22,35 @@ const initState = {
 export default function (state = initState, action) {
   const payload = action.payload;
   switch (action.type) {
-    case ADD_USER_FAIL:
+    case ADD_BRANCH_FAIL:
       return { ...state };
-    case ADD_USER_SUCCESS:
+    case ADD_BRANCH_SUCCESS:
       return { ...state, updateFlag: !state.updateFlag };
-    case GET_ALL_USER_FAIL:
+    case GET_ALL_BRANCH_FAIL:
       return {
         ...state,
         list: [],
         pagination: { page: 1, itemPerPage: 20, totalItem: 0 },
       };
-    case GET_ALL_USER_SUCCESS:
+    case GET_ALL_BRANCH_SUCCESS:
       return {
         ...state,
         list: action.payload,
       };
-    case UPDATE_USER_FAIL:
+    case UPDATE_BRANCH_FAIL:
       return { ...state };
-    case UPDATE_USER_SUCCESS:
+    case UPDATE_BRANCH_SUCCESS:
       return { ...state, updateFlag: !state.updateFlag };
-    case FILTER_USER_FAIL:
+    case FILTER_BRANCH_FAIL:
       return {
         ...state,
         list: [],
         pagination: { page: 1, itemPerPage: 20, totalItem: 0 },
       };
-    case FILTER_USER_SUCCESS:
+    case FILTER_BRANCH_SUCCESS:
       return {
         ...state,
-        list: payload.users,
+        list: payload.branches,
         pagination: payload.pagination,
       };
     default:

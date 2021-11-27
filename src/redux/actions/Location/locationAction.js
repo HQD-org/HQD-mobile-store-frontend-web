@@ -40,7 +40,7 @@ export function getProvince() {
         dispatch(getProvinceSuccess(res.data));
         return true;
       }
-      dispatch(loading(true));
+      dispatch(loading());
       dispatch(getProvinceFail());
       return false;
     } catch {
@@ -68,7 +68,7 @@ export function getDistrictFail() {
 export function getDistrict(idProvince) {
   return async (dispatch) => {
     try {
-      dispatch(loading(true));
+      dispatch(loading());
       const res = await locationAPI.getDistrict(idProvince);
       if (res.success) {
         dispatch(loading());
@@ -103,7 +103,7 @@ export function getVillageFail() {
 export function getVillage(idDistrict) {
   return async (dispatch) => {
     try {
-      dispatch(loading(true));
+      dispatch(loading());
       const res = await locationAPI.getVillage(idDistrict);
       if (res.success) {
         dispatch(loading());

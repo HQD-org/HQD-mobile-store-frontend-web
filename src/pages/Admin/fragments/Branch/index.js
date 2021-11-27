@@ -1,65 +1,144 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import HeaderDashboard from "../../../../common/components/HeaderDashboard";
-import BranchEditor from "./components/BranchEditor";
 import TableDashboard from "../../../../common/components/TableDashboard";
+import { filterBranchAction } from "../../../../redux/actions/Branch/branchAction";
+import BranchEditor from "./components/BranchEditor";
 
-const createData = (branchName, address, adminName, timeDebut, status) => {
-  return {
-    branchName,
-    address,
-    adminName,
-    timeDebut,
-    status,
-  };
-};
-
-const rows = [
-  createData("HQD Mobile Thủ Đức", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
-  createData("HQD Mobile Q9", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
-  createData("HQD Mobile Q1", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
-  createData("HQD Mobile Q2", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
-  createData("HQD Mobile Q3", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
-  createData("HQD Mobile Q4", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
-  createData("HQD Mobile Q5", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
-  createData("HQD Mobile Q6", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
-  createData("HQD Mobile Q7", "HCM", "Id/Tên", "12/11/2021", "Hoạt động"),
-];
 const headCells = [
   {
-    id: "branchName",
-    disablePadding: true,
+    id: "_id",
+    label: "_id",
+    property: ["_id"],
+  },
+  {
+    id: "name",
     label: "Tên chi nhánh",
+    property: ["name"],
   },
   {
     id: "address",
-    disablePadding: false,
     label: "Địa chỉ",
+    property: ["address", "province"],
   },
   {
     id: "adminName",
-    disablePadding: false,
     label: "Quản trị viên",
+    property: ["manager", "username"],
   },
   {
     id: "timeDebut",
-    disablePadding: false,
     label: "Thời gian khai trương",
+    property: ["createdAt"],
   },
   {
     id: "status",
-    disablePadding: false,
     label: "Trạng thái",
+    property: ["status"],
   },
 ];
 
 const BranchFragment = () => {
+  const dispatch = useDispatch();
+  const componentDidMountRef = useRef(false);
+  const typingTimeoutRef = useRef(null);
+  const branches = useSelector((state) => state.branch.list);
+  const pagination = useSelector((state) => state.branch.pagination);
+  const updateFlag = useSelector((state) => state.branch.updateFlag);
+  const [currentItem, setCurrentItem] = useState(undefined);
+  const [sortBy, setSortBy] = useState("name");
+  const [ascSort, setAscSort] = useState("asc");
+  const [option, setOption] = useState(true);
   const [modal, setModal] = useState(false);
-  const toggle = () => setModal(!modal);
+  const [searchTerm, setSearchTerm] = useState(undefined);
+
+  const onFilterValueChange = (value, type) => {
+    switch (type) {
+      case "search":
+        setSearchTerm(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const filter = async (page, itemPerPage) => {
+    const query = {
+      name: searchTerm,
+      page: page,
+      itemPerPage: itemPerPage,
+      sortBy: sortBy,
+      ascSort: ascSort,
+    };
+
+    await dispatch(filterBranchAction(query));
+  };
+
+  const onChangeSearch = async (e) => {
+    if (!onFilterValueChange) return;
+
+    if (typingTimeoutRef.current) {
+      clearTimeout(typingTimeoutRef.current);
+    }
+
+    typingTimeoutRef.current = setTimeout(async () => {
+      const searchKey = e.target.value || undefined;
+      onFilterValueChange(searchKey, "search");
+    }, 300);
+  };
+
+  useEffect(() => {
+    filter(1, 20);
+  }, []);
+
+  useEffect(() => {
+    if (componentDidMountRef.current) {
+      filter(pagination.page, pagination.itemPerPage);
+      return;
+    }
+  }, [updateFlag]);
+
+  useEffect(() => {
+    if (componentDidMountRef.current) {
+      filter(1, pagination.itemPerPage);
+      return;
+    }
+    componentDidMountRef.current = true;
+  }, [searchTerm, sortBy, ascSort]);
+
   return (
     <>
-      <HeaderDashboard type={"Branch"} toggle={toggle} />
-      <TableDashboard rows={rows} headCells={headCells} type={"Branches"} />;
-      <BranchEditor modal={modal} toggle={toggle} option={true} />
+      <HeaderDashboard
+        type={"Branch"}
+        modal={modal}
+        setModal={setModal}
+        setOption={setOption}
+        setCurrentItem={setCurrentItem}
+      />
+      <TableDashboard
+        pagination={pagination}
+        list={branches}
+        sortBy={sortBy}
+        ascSort={ascSort}
+        setSortBy={setSortBy}
+        setAscSort={setAscSort}
+        onChangeSearch={onChangeSearch}
+        modal={modal}
+        setModal={setModal}
+        setOption={setOption}
+        setCurrentItem={setCurrentItem}
+        filter={filter}
+        headCells={headCells}
+        type={"Branches"}
+      />
+      ;
+      <BranchEditor
+        modal={modal}
+        setModal={setModal}
+        option={option}
+        branch={currentItem}
+      />
     </>
   );
 };

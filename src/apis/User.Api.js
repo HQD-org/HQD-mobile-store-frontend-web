@@ -5,7 +5,6 @@ import queryString from "query-string";
 const url = "/admin";
 const insert = async (body) => {
   try {
-    console.log("log at ==> User.Api.js ==> body: ", body);
     const res = await axiosClient.post(`${url}/user/create`, body);
     toastNotify(res ? res.message.VN : "Thêm user thất bại");
     return res && res.data
@@ -69,7 +68,6 @@ const updateProfile = async (body) => {
 const filter = async (queryParams) => {
   try {
     const query = queryString.stringify(queryParams);
-    console.log("log at ==> User.Api.js ==> line55 ==> query: ", query);
     const res = await axiosClient.get(`${url}/user/filter?${query}`);
     // toastNotify(res ? res.message.VN : "Tìm kiếm user thất bại");
     return res && res.data

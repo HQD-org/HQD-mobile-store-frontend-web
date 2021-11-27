@@ -1,4 +1,5 @@
 import authReducer from "./Auth/authReducers";
+import branchReducer from "./Branch/branchReducers";
 import brandReducer from "./Brand/brandReducers";
 import locationReducer from "./Location/locationReducers";
 import modelReducer from "./Model/modelReducers";
@@ -7,6 +8,7 @@ import userReducer from "./User/userReducers";
 
 const rootReducers = {
   auth: authReducer,
+  branch: branchReducer,
   brand: brandReducer,
   location: locationReducer,
   model: modelReducer,

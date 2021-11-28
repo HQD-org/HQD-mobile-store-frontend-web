@@ -8,6 +8,10 @@ export const PATH = {
   BRAND: "/dashboard/brand",
   MODEL: "/dashboard/model",
   ADD_MODEL: "/dashboard/add-model",
+  PRODUCT: "/product",
+  DETAIL: "/product/tenSP-haygidocungdc",
+  CART: "/cart",
+  PAYMENT: "/payment",
 };
 
 export const PATH_API = {};

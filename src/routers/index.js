@@ -9,6 +9,10 @@ import HomeRoute from "./Home.Route";
 import LoginRoute from "./Login.Route";
 import RegisterRoute from "./Register.Route";
 import VerifyRoute from "./Verify.Route";
+import ProductRoute from "./Product.Route";
+import DetailRoute from "./Detail.Route";
+import CartRoute from "./Cart.Route";
+import PaymentRoute from "./Payment.Route";
 
 const Routers = () => {
   return (
@@ -17,6 +21,10 @@ const Routers = () => {
         <AppHeader />
         <DashboardRoute />
         <HomeRoute />
+        <ProductRoute />
+        <DetailRoute />
+        <CartRoute />
+        <PaymentRoute />
         <LoginRoute />
         <RegisterRoute />
         <ForgotPasswordRoute />

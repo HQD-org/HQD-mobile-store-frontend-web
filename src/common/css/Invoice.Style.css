@@ -1,0 +1,54 @@
+.icon-invoice {
+    font-size: 30px;
+}
+
+.btnFilterInvoice {
+    padding: 10px 20px 10px 20px;
+    border: none;
+    background-color: #3fa5ef;
+    color: white;
+    border-radius: 4px;
+    filter: drop-shadow(0 2px 2px #707070);
+}
+
+.table-invoice {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-invoice>tr>td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 10px !important;
+}
+
+.table-invoice>tr>th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 10px !important;
+    background-color: #3fa5ef;
+    color: white;
+}
+
+.btnAccept {
+    padding: 10px 20px 10px 20px;
+    border: none;
+    background-color: #3fa5ef;
+    color: white;
+    border-radius: 4px;
+    filter: drop-shadow(0 2px 2px #707070);
+}
+
+.btnAccept:hover {
+    background-color: #1a7abe;
+}
+
+.table-invoice>tr:hover {
+    background-color: #f6f5f5;
+    cursor: pointer;
+}
+
+.modal-invoice {
+    max-width: 600px !important;
+}

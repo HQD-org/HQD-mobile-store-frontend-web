@@ -169,7 +169,7 @@ const ModelEditor = (props) => {
                   list={brands}
                   label={"Thương hiệu"}
                   classLabel={"col-3 mb-3"}
-                  classInput={"col-7"}
+                  classInput={"col-7 mb-3"}
                   classParent={"row"}
                 />
                 <Textarea
@@ -289,7 +289,7 @@ const ModelEditor = (props) => {
                 </div>
               </div>
             </div>
-            <div className="row mb-3" style={{ marginTop: "100px" }}>
+            <div className="row mb-3" style={{ marginTop: "50px" }}>
               <ColorModelSection colors={colors} toggle={onToggle} />
               <hr style={{ color: "#cfcfcf" }} />
               <div className="col-12" style={{ textAlign: "center" }}>

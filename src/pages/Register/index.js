@@ -25,7 +25,7 @@ const RegisterPage = (props) => {
               width="100%"
             ></img>
           </div>
-          <div className="col">
+          <div className="col mt-3">
             <div className="row" style={{ justifyContent: "center" }}>
               <p className="txtStart">START FOR FREE</p>
               <h3 className="txtSignup">Sign up to HQD Mobile</h3>

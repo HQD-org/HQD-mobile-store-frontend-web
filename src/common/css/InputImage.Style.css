@@ -4,8 +4,8 @@
 
 .delete-obj {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: -8px;
+    top: -6px;
     cursor: pointer;
     color: #d8d8d8;
 }

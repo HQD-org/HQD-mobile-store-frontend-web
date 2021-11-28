@@ -2,6 +2,8 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import "../../common/css/Header.Style.css";
 import logoHQD from "../../common/images/logoHQD.png";
+import imgBackgroundleft from "../images/background-header.jpg";
+import imgBackground from "../images/background-header-1.jpg";
 import "../css/AdminHeader.Style.css";
 import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
@@ -55,7 +57,12 @@ const AppHeader = () => {
   return show ? (
     <nav>
       <div className="navbar navbar-light">
-        <div className="container-fluid" style={{ alignItems: "baseline" }}>
+        <div
+          className="container-fluid"
+          style={{
+            alignItems: "baseline",
+          }}
+        >
           <div className="col-8 logo">
             <NavLink className="navbar-brand name-store" to="/">
               <img src={logoHQD} alt="logo" width="20%" /> HQD Mobile
@@ -63,8 +70,8 @@ const AppHeader = () => {
             <NavLink className="nav-link" to="/">
               Home
             </NavLink>
-            <NavLink className="nav-link" to="/about-us">
-              About us
+            <NavLink className="nav-link" to="/product">
+              Product
             </NavLink>
             <NavLink className="nav-link" to="/question">
               Question
@@ -103,6 +110,18 @@ const AppHeader = () => {
               />
               {isLogin && <DropdownMenu />}
             </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="row background-header"
+        style={{ backgroundImage: `url(${imgBackground})` }}
+      >
+        <div className="col-6 txtheader-sologan">
+          <div>
+            <h2 className="txtModern">Modern technology</h2>
+            <h3 className="txtConnect">Connecting all things</h3>
+            <h4 className="txtConnect">Faster and faster</h4>
           </div>
         </div>
       </div>

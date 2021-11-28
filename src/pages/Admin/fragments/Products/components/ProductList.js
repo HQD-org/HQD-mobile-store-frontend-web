@@ -39,7 +39,7 @@ const ProductList = (props) => {
             </div>
           </div>
         </div>
-        <ProductEditorForSub
+        <ProductEditorForMain
           modal={modal}
           toggle={toggle}
           option={true}

@@ -1,8 +1,27 @@
 import React from "react";
 import "../../../../../common/css/Model.Style.css";
 import { FormGroup } from "reactstrap";
+import {
+  capacityList,
+  ramList,
+  statusProduct,
+} from "../../../../../common/constants/ListSelect";
+import { renderOptionSelect } from "../../../../../common/utils/helper";
+import { useSelector } from "react-redux";
 
-const ProductHeader = () => {
+const ProductHeader = (props) => {
+  const {
+    onFilterValueChange,
+    status,
+    idBrand,
+    idBranch,
+    ram,
+    capacity,
+    filterProduct,
+  } = props;
+  const brands = useSelector((state) => state.brand.list);
+  const branches = useSelector((state) => state.branch.list);
+  const pagination = useSelector((state) => state.product.pagination);
   return (
     <div className="container-fluid">
       <div
@@ -20,82 +39,87 @@ const ProductHeader = () => {
       <hr />
       <div className="row">
         <div className="col-4">
-          <form>
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />{" "}
-          </form>
+          <input
+            className="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            onChange={(e) => onFilterValueChange(e, "name")}
+          />
         </div>
-        <form>
-          <div
-            className="row"
-            style={{ marginTop: "20px", alignItems: "center" }}
-          >
-            {" "}
-            <div className="col-2">
-              <FormGroup>
-                <select className="form-select">
-                  <option selected disabled>
-                    Filter by Branch
-                  </option>
-                  <option value="1">Q1</option>
-                  <option value="2">Q2</option>
-                </select>
-              </FormGroup>
-            </div>
-            <div className="col-2">
-              <FormGroup>
-                <select className="form-select">
-                  <option selected disabled>
-                    Filter by Brand
-                  </option>
-                  <option value="1">SAMSUNG</option>
-                  <option value="2">OPPO</option>
-                </select>
-              </FormGroup>
-            </div>
-            <div className="col-Capacity">
-              <FormGroup>
-                <select className="form-select">
-                  <option selected disabled>
-                    Filter by Capacity
-                  </option>
-                  <option value="1">32 GB</option>
-                  <option value="2">64 GB</option>
-                </select>
-              </FormGroup>
-            </div>
-            <div className="col-RAM">
-              <FormGroup>
-                <select className="form-select">
-                  <option selected disabled>
-                    Filter by RAM
-                  </option>
-                  <option value="1">2 GB</option>
-                  <option value="2">8 GB</option>
-                </select>
-              </FormGroup>
-            </div>
-            <div className="col-2">
-              <FormGroup>
-                <select className="form-select">
-                  <option selected disabled>
-                    Filter by Status
-                  </option>
-                  <option value="1">Hoạt động</option>
-                  <option value="2">Hết hàng</option>
-                  <option value="3">Ngừng kinh doanh</option>
-                </select>
-              </FormGroup>
-            </div>
-            <div className="col-2">
-              <button className="btn-filter">Filter</button>
-            </div>
+        <div
+          className="row"
+          style={{ marginTop: "20px", alignItems: "center" }}
+        >
+          <div className="col-2">
+            <FormGroup>
+              <select
+                className="form-select"
+                onChange={(e) => onFilterValueChange(e, "branch")}
+                defaultValue={idBranch}
+              >
+                <option value="all">Filter by Branch</option>
+                {renderOptionSelect(branches)}
+              </select>
+            </FormGroup>
           </div>
-        </form>
+          <div className="col-2">
+            <FormGroup>
+              <select
+                className="form-select"
+                onChange={(e) => onFilterValueChange(e, "brand")}
+                defaultValue={idBrand}
+              >
+                <option value="all">Filter by Brand</option>
+                {renderOptionSelect(brands)}
+              </select>
+            </FormGroup>
+          </div>
+          <div className="col-Capacity">
+            <FormGroup>
+              <select
+                className="form-select"
+                defaultValue={capacity}
+                onChange={(e) => onFilterValueChange(e, "capacity")}
+              >
+                <option value="all">Filter by Capacity</option>
+                {renderOptionSelect(capacityList)}
+              </select>
+            </FormGroup>
+          </div>
+          <div className="col-RAM">
+            <FormGroup>
+              <select
+                className="form-select"
+                defaultValue={ram}
+                onChange={(e) => onFilterValueChange(e, "ram")}
+              >
+                <option value="all">Filter by RAM</option>
+                {renderOptionSelect(ramList)}
+              </select>
+            </FormGroup>
+          </div>
+          <div className="col-2">
+            <FormGroup>
+              <select
+                className="form-select"
+                defaultValue={status}
+                onChange={(e) => onFilterValueChange(e, "status")}
+              >
+                <option value="all">Filter by Status</option>
+                {renderOptionSelect(statusProduct)}
+              </select>
+            </FormGroup>
+          </div>
+          <div className="col-2">
+            <button
+              onClick={() => filterProduct(1, pagination.itemPerPage)}
+              className="btn-filter"
+            >
+              Filter
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

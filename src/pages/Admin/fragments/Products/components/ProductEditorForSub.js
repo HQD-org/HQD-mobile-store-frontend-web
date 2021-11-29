@@ -11,10 +11,10 @@ import {
 } from "reactstrap";
 
 const ProductEditorForSub = (props) => {
-  const { className, toggle } = props;
+  const { className, setModal } = props;
   let { modal } = props;
   const onToggle = () => {
-    toggle(false);
+    setModal(false);
   };
 
   return (
@@ -24,7 +24,7 @@ const ProductEditorForSub = (props) => {
         <form>
           <div className="row mb-2">
             <div className="col-3">
-              <p>Tên Model</p>
+              <p>Tên mẫu</p>
             </div>
             <div className="col-8">
               <Input readOnly placeholder="Oppo A31" />
@@ -104,7 +104,7 @@ const ProductEditorForSub = (props) => {
           <ModalFooter>
             <Button type="submit" color="primary">
               Save
-            </Button>{" "}
+            </Button>
             <Button type="button" color="secondary" onClick={onToggle}>
               Cancel
             </Button>

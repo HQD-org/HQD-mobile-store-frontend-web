@@ -1,8 +1,18 @@
 import React from "react";
-import "../../../../../common/css/Product.Style.css";
+import { useSelector } from "react-redux";
 import { FormGroup } from "reactstrap";
+import {
+  osList,
+  timeDebutList,
+} from "../../../../../common/constants/ListSelect";
+import "../../../../../common/css/Product.Style.css";
+import { renderOptionSelect } from "../../../../../common/utils/helper";
 
-const AddProductHeader = () => {
+const AddProductHeader = (props) => {
+  const { idBrand, os, timeDebut, onFilterValueChange, filterModel } = props;
+  const brands = useSelector((state) => state.brand.list);
+  const pagination = useSelector((state) => state.model.pagination);
+
   return (
     <div className="container-fluid">
       <div
@@ -27,56 +37,61 @@ const AddProductHeader = () => {
         style={{ marginTop: "20px", alignItems: "baseline" }}
       >
         <div className="col-3">
-          <form>
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />{" "}
-          </form>
+          <input
+            className="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            onChange={(e) => onFilterValueChange(e, "name")}
+          />
         </div>
         <div className="col-8">
-          <form>
-            <div className="row">
-              <div className="col-3">
-                <FormGroup>
-                  <select className="form-select">
-                    <option selected disabled>
-                      Brand
-                    </option>
-                    <option value="1">OPPO</option>
-                    <option value="2">SAMSUNG</option>
-                  </select>
-                </FormGroup>
-              </div>
-              <div className="col-3">
-                <FormGroup>
-                  <select className="form-select">
-                    <option selected disabled>
-                      Operating System
-                    </option>
-                    <option value="1">iOS</option>
-                    <option value="2">Android</option>
-                  </select>
-                </FormGroup>
-              </div>
-              <div className="col-2">
-                <FormGroup>
-                  <select className="form-select">
-                    <option selected disabled>
-                      Time
-                    </option>
-                    <option value="1">2021</option>
-                    <option value="2">2020</option>
-                  </select>
-                </FormGroup>
-              </div>
-              <div className="col-2">
-                <button className="btn-filter">Filter</button>
-              </div>
+          <div className="row">
+            <div className="col-3">
+              <FormGroup>
+                <select
+                  className="form-select"
+                  onChange={(e) => onFilterValueChange(e, "brand")}
+                  defaultValue={idBrand}
+                >
+                  <option value="all">Brand</option>
+                  {renderOptionSelect(brands)}
+                </select>
+              </FormGroup>
             </div>
-          </form>
+            <div className="col-3">
+              <FormGroup>
+                <select
+                  className="form-select"
+                  onChange={(e) => onFilterValueChange(e, "os")}
+                  defaultValue={os}
+                >
+                  <option value="all">Operating System</option>
+                  {renderOptionSelect(osList)}
+                </select>
+              </FormGroup>
+            </div>
+            <div className="col-2">
+              <FormGroup>
+                <select
+                  className="form-select"
+                  onChange={(e) => onFilterValueChange(e, "timeDebut")}
+                  defaultValue={timeDebut}
+                >
+                  <option value="all">Time</option>
+                  {renderOptionSelect(timeDebutList)}
+                </select>
+              </FormGroup>
+            </div>
+            <div className="col-2">
+              <button
+                onClick={() => filterModel(1, pagination.itemPerPage)}
+                className="btn-filter"
+              >
+                Filter
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

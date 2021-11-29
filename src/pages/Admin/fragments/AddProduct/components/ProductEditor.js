@@ -1,36 +1,49 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlinePlus } from "react-icons/ai";
 import { FaCheck } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
+import {
+  capacityList,
+  ramList,
+  statusProduct,
+} from "../../../../../common/constants/ListSelect";
 import "../../../../../common/css/Product.Style.css";
 import productImg from "../../../../../common/images/addProduct.png";
-import { useDispatch, useSelector } from "react-redux";
-import { filterProductAction } from "../../../../../redux/actions/Product/productAction";
+import { renderOptionSelect } from "../../../../../common/utils/helper";
+import {
+  addProductAction,
+  filterProductAction,
+  updateProductAction,
+} from "../../../../../redux/actions/Product/productAction";
 import InputColor from "./InputColor";
 
 const ProductEditor = (props) => {
   const dispatch = useDispatch();
   const { setModal, currentItem, modal } = props;
-  const [formAddProduct, setFormAddProduct] = useState([
-    {
-      name: "",
-      idBrand: {},
-      ram: "",
-      capacity: "",
-      status: "",
-      price: "",
-      color: [],
-    },
-  ]);
-  const models = useSelector((state) => state.model.list) || [];
-  const products = useSelector((state) => state.product.list) || []; // load data
+  const [formAddProduct, setFormAddProduct] = useState(null);
+  const models = useSelector((state) => state.model.list);
+  const products = useSelector((state) => state.product.list);
+  const [productList, setProductList] = useState([]);
   const [currentModel, setCurrentModel] = useState({});
 
-  const toggle = () => setModal(false);
-
+  const toggle = () => {
+    setModal(false);
+    setFormAddProduct(null);
+  };
+  const fetchProductListByModelId = async () => {
+    await dispatch(
+      filterProductAction({
+        idModel: currentModel._id,
+        itemPerPage: 100,
+        page: 1,
+        minPrice: 0,
+        maxPrice: 10000000000,
+      })
+    );
+  };
   useEffect(() => {
-    console.log("log at ==> ProductEditor ==> currentItem: ", currentItem);
     if (currentItem) {
       const model = models.find((model) => model._id === currentItem);
       setCurrentModel(model);
@@ -38,86 +51,101 @@ const ProductEditor = (props) => {
   }, [currentItem]);
 
   useEffect(() => {
-    console.log("log at ==> ProductEditor ==> currentModel: ", currentModel);
     if (currentModel._id) {
-      const fetchProductListByModelId = async () => {
-        await dispatch(
-          filterProductAction({
-            idModel: currentModel._id,
-            itemPerPage: 100,
-            page: 1,
-          })
-        );
-      };
       fetchProductListByModelId();
     }
   }, [currentModel]);
 
-  // const prevIsValid = () => {
-  //   if (formAddProduct.length === 0) {
-  //     return true;
-  //   }
-  //   const someEmpty = formAddProduct.some((item) => item.Price === "");
-  //   if (someEmpty) {
-  //     formAddProduct.map((item, index) => {
-  //       const allPrev = [...formAddProduct];
-  //       if (formAddProduct[index].Price === "") {
-  //         allPrev[index].error.Price = "Please enter Price";
-  //       }
-  //       return setFormAddProduct(allPrev);
-  //     });
-  //   }
-  //   return !someEmpty;
-  // };
+  const handleAddProduct = () => {
+    const colors = currentModel.color.map((color) => {
+      return {
+        name: color.name,
+        price: 0,
+      };
+    });
+    setFormAddProduct({
+      idModel: currentModel._id,
+      name: currentModel.name + " 2 GB",
+      ram: "2 GB",
+      capacity: "8 GB",
+      status: "active",
+      color: colors,
+      description: "Hàng có sẵn",
+    });
+  };
 
-  const handleAddProduct = (e) => {
-    e.preventDefault();
-    const inputState = {
-      color: "",
-      price: "",
-      ram: "",
-      capacity: "",
-      status: "",
-      error: {
-        price: null,
-      },
-      newRow: true,
-    };
-    setFormAddProduct((prev) => [...prev, inputState]);
-    // if (prevIsValid()) {
-    //   setFormAddProduct((prev) => [...prev, inputState]);
-    // }
+  const removeFormAdd = () => {
+    setFormAddProduct(null);
+  };
+
+  const onChangeAddForm = (event) => {
+    setFormAddProduct({
+      ...formAddProduct,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const addProduct = async () => {
+    const color = formAddProduct.color.map((item) => {
+      return {
+        name: item.name,
+        price: parseInt(item.price.replace(/[^0-9]/g, "")),
+      };
+    });
+    formAddProduct.color = color;
+    const res = await dispatch(addProductAction(formAddProduct));
+    if (res) {
+      setFormAddProduct(null);
+      fetchProductListByModelId();
+    }
   };
 
   const onChange = (index, event) => {
-    event.preventDefault();
-    event.persist();
-
-    setFormAddProduct((prev) => {
+    setProductList((prev) => {
       return prev.map((item, i) => {
-        if (i !== index) {
-          return item;
-        }
+        if (i !== index) return item;
         return {
           ...item,
           [event.target.name]: event.target.value,
-
-          error: {
-            ...item.error,
-            [event.target.name]:
-              event.target.value.length > 0
-                ? null
-                : [event.target.name] + " Is required",
-          },
         };
       });
     });
   };
 
-  const handleRemove = (e, index) => {
-    e.preventDefault();
-    setFormAddProduct((prev) => prev.filter((item) => item !== prev[index]));
+  const updateProduct = async (id) => {
+    const product = productList.find((item) => item.id === id);
+    const color = product.color.map((item) => {
+      return {
+        name: item.name,
+        price: parseInt(item.price.replace(/[^0-9]/g, "")),
+        quantityInfo: item.quantityInfo
+          ? item.quantityInfo.map((q) => {
+              return {
+                quantity: q.quantity,
+                idBranch: q.idBranch,
+              };
+            })
+          : [],
+      };
+    });
+    product.color = color;
+    product.name = currentModel.name + " " + product.ram;
+    const res = await dispatch(updateProductAction(product));
+    if (res) fetchProductListByModelId();
   };
+
+  useEffect(() => {
+    const editorList = products.map((product, index) => {
+      return {
+        color: product.color,
+        id: product._id,
+        status: product.status,
+        ram: product.ram,
+        capacity: product.capacity,
+      };
+    });
+    setProductList(editorList);
+  }, [products]);
 
   return (
     <Modal isOpen={modal} toggle={toggle} className="modal-product">
@@ -146,11 +174,10 @@ const ProductEditor = (props) => {
             </tr>
           </thead>
           <tbody>
-            {formAddProduct.map((item, index) => (
-              <tr>
+            {productList.map((item, index) => (
+              <tr key={`product-${index}`}>
                 <td style={{ width: "300px" }}>
                   <div
-                    key={index}
                     data-bs-toggle="collapse"
                     href={`#collapseColor-${index}`}
                     role="button"
@@ -159,13 +186,17 @@ const ProductEditor = (props) => {
                   >
                     {currentModel.name}
                   </div>
-
                   <div
-                    class="collapse"
+                    className="collapse"
                     id={`collapseColor-${index}`}
                     style={{ marginTop: "20px" }}
                   >
-                    <InputColor item={currentModel.color} index={index} />
+                    <InputColor
+                      items={item.color}
+                      index={index}
+                      onValueChange={onChange}
+                      type={"update"}
+                    />
                   </div>
                 </td>
                 <td>
@@ -178,107 +209,37 @@ const ProductEditor = (props) => {
                     disabled
                   />
                 </td>
-
                 <td>
-                  {item.newRow ? (
-                    <select
-                      className="form-select"
-                      name="ram"
-                      value={item.ram}
-                      onChange={(e) => onChange(index, e)}
-                    >
-                      <option value="1" selected>
-                        1 GB
-                      </option>
-                      <option value="2">2 GB</option>
-                      <option value="3">3 GB</option>
-                      <option value="4">4 GB</option>
-                      <option value="5">6 GB</option>
-                      <option value="6">8 GB</option>
-                      <option value="7">12 GB</option>
-                    </select>
-                  ) : (
-                    <select
-                      className="form-select"
-                      name="ram"
-                      value="3"
-                      onChange={(e) => onChange(index, e)}
-                    >
-                      <option value="1" selected>
-                        1 GB
-                      </option>
-                      <option value="2">2 GB</option>
-                      <option value="3">3 GB</option>
-                      <option value="4">4 GB</option>
-                      <option value="5">6 GB</option>
-                      <option value="6">8 GB</option>
-                      <option value="7">12 GB</option>
-                    </select>
-                  )}
+                  <select
+                    className="form-select"
+                    name="ram"
+                    value={item.ram}
+                    onChange={(e) => onChange(index, e)}
+                  >
+                    {renderOptionSelect(ramList)}
+                  </select>
                 </td>
                 <td>
-                  {item.newRow ? (
-                    <select
-                      className="form-select"
-                      name="capacity"
-                      value={item.capacity}
-                      onChange={(e) => onChange(index, e)}
-                    >
-                      <option value="16 GB">16 GB</option>
-                      <option value="32 GB">32 GB</option>
-                      <option value="64 GB">64 GB</option>
-                      <option value="128 GB">128 GB</option>
-                      <option value="256 GB">256 GB</option>
-                      <option value="512 GB">512 GB</option>
-                      <option value="1 TB">1 TB</option>
-                    </select>
-                  ) : (
-                    <select
-                      className="form-select"
-                      name="capacity"
-                      value="64"
-                      onChange={(e) => onChange(index, e)}
-                    >
-                      <option value="16">16 GB</option>
-                      <option value="32">32 GB</option>
-                      <option value="64">64 GB</option>
-                      <option value="128">128 GB</option>
-                      <option value="256">256 GB</option>
-                      <option value="512">512 GB</option>
-                      <option value="1">1 TB</option>
-                    </select>
-                  )}
+                  <select
+                    className="form-select"
+                    name="capacity"
+                    defaultValue={item.capacity}
+                    onChange={(e) => onChange(index, e)}
+                  >
+                    {renderOptionSelect(capacityList)}
+                  </select>
                 </td>
                 <td>
-                  {item.newRow ? (
-                    <select
-                      className="form-select"
-                      name="status"
-                      value={item.status}
-                      onChange={(e) => onChange(index, e)}
-                    >
-                      <option value="1" selected>
-                        Còn hàng
-                      </option>
-                      <option value="2">Hết hàng</option>
-                      <option value="3">Ngưng kinh doanh</option>
-                    </select>
-                  ) : (
-                    <select
-                      className="form-select"
-                      name="Status"
-                      value="2"
-                      onChange={(e) => onChange(index, e)}
-                    >
-                      <option value="1" selected>
-                        Còn hàng
-                      </option>
-                      <option value="2">Hết hàng</option>
-                      <option value="3">Ngưng kinh doanh</option>
-                    </select>
-                  )}
+                  <select
+                    className="form-select"
+                    name="status"
+                    defaultValue={item.status}
+                    onChange={(e) => onChange(index, e)}
+                  >
+                    {renderOptionSelect(statusProduct)}
+                  </select>
                 </td>
-                <td>
+                {/* <td>
                   {item.newRow ? (
                     <AiOutlineClose
                       color="red"
@@ -287,15 +248,95 @@ const ProductEditor = (props) => {
                   ) : (
                     <> </>
                   )}
-                </td>
+                </td> */}
                 <td>
                   <FaCheck
                     color="green"
-                    onClick={(e) => handleRemove(e, index)}
+                    onClick={() => {
+                      return updateProduct(item.id);
+                    }}
                   />
                 </td>
               </tr>
             ))}
+            {formAddProduct && (
+              <tr>
+                <td style={{ width: "300px" }}>
+                  <div
+                    data-bs-toggle="collapse"
+                    href={`#collapseColor-add`}
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="collapseColor"
+                  >
+                    {currentModel.name}
+                  </div>
+                  <div
+                    className="collapse"
+                    id={`collapseColor-add`}
+                    style={{ marginTop: "20px" }}
+                  >
+                    <InputColor
+                      items={formAddProduct.color}
+                      index={-1}
+                      onValueChange={onChangeAddForm}
+                      type={"add"}
+                    />
+                  </div>
+                </td>
+                <td>
+                  <input
+                    className="form-control"
+                    type="text"
+                    value={
+                      currentModel.idBrand ? `${currentModel.idBrand.name}` : ""
+                    }
+                    disabled
+                  />
+                </td>
+                <td>
+                  <select
+                    className="form-select"
+                    name="ram"
+                    value={formAddProduct.ram}
+                    onChange={(e) => onChangeAddForm(e)}
+                  >
+                    {renderOptionSelect(ramList)}
+                  </select>
+                </td>
+                <td>
+                  <select
+                    className="form-select"
+                    name="capacity"
+                    defaultValue={formAddProduct.capacity}
+                    onChange={(e) => onChangeAddForm(e)}
+                  >
+                    {renderOptionSelect(capacityList)}
+                  </select>
+                </td>
+                <td>
+                  <select
+                    className="form-select"
+                    name="status"
+                    defaultValue={formAddProduct.status}
+                    onChange={(e) => onChangeAddForm(e)}
+                  >
+                    {renderOptionSelect(statusProduct)}
+                  </select>
+                </td>
+                <td>
+                  <AiOutlineClose color="red" onClick={removeFormAdd} />
+                </td>
+                <td>
+                  <FaCheck
+                    color="green"
+                    onClick={() => {
+                      return addProduct();
+                    }}
+                  />
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
         <div className="row">

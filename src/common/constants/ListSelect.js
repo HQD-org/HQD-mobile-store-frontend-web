@@ -28,7 +28,7 @@ const statusProduct = [
     name: "Hoạt động",
   },
   {
-    _id: "active",
+    _id: "out of stock",
     name: "Hết hàng",
   },
   {

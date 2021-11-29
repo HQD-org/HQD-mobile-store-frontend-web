@@ -1,41 +1,55 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-const inputColor = ({ item, index }) => {
-  console.log("data:", item);
-  const onChange = (index, event) => {
-    event.preventDefault();
-    event.persist();
+import { numberWithCommas } from "../../../../../common/utils/helper";
+
+const InputColor = (props) => {
+  const { index, items, onValueChange, type } = props;
+
+  const onPriceChange = (idx, e) => {
+    e.target.value = numberWithCommas(e.target.value.replace(/[^0-9]/g, ""));
+    if (!e.target.value) return;
+    const newColors = items.map((item, i) => {
+      if (i !== idx) return item;
+      return {
+        ...item,
+        price: e.target.value,
+      };
+    });
+    if (type === "add") {
+      onValueChange({ target: { name: "color", value: newColors } });
+      return;
+    }
+    onValueChange(index, { target: { name: "color", value: newColors } });
   };
+
   return (
     <>
-      {item.map((items, id) => (
-        <div style={{ display: "flex", marginTop: "10px" }}>
-          <input
-            disabled
-            className="form-control mr-2"
-            style={{ width: "25%" }}
-            name="color"
-            value={items.name}
-            onChange={(e) => onChange(index, e)}
-          ></input>
-          <div className="input-group" style={{ marginLeft: "5px" }}>
+      {items.map((item, id) => {
+        return (
+          <div
+            style={{ display: "flex", marginTop: "10px" }}
+            key={`color${item + id}`}
+          >
             <input
-              type="text"
-              className="form-control"
-              // className={
-              //   item.error.price
-              //     ? "form-control is-invalid"
-              //     : "form-control "
-              // }
-              name="price"
-              value={item.price}
-              onChange={(e) => onChange(index, e)}
-            />
-            <span className="input-group-text">VNĐ</span>
+              disabled
+              className="form-control mr-2"
+              style={{ width: "25%" }}
+              defaultValue={item.name}
+            ></input>
+            <div className="input-group" style={{ marginLeft: "5px" }}>
+              <input
+                type="text"
+                className="form-control"
+                defaultValue={numberWithCommas(item.price)}
+                onChange={(e) => onPriceChange(id, e)}
+              />
+              <span className="input-group-text">VNĐ</span>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </>
   );
 };
 
-export default inputColor;
+export default InputColor;

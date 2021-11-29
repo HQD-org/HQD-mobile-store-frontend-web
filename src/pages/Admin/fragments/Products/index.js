@@ -74,15 +74,15 @@ const ProductFragment = () => {
   };
 
   useEffect(() => {
-    const getAllBrand = async () => {
+    const fetchBrandList = async () => {
       await dispatch(getAllBrandAction());
     };
-    const getAllBranch = async () => {
+    const fetchBranchList = async () => {
       await dispatch(getAllBranchAction());
     };
     filterProduct(1, 16);
-    getAllBrand();
-    getAllBranch();
+    fetchBrandList();
+    fetchBranchList();
   }, []);
 
   return (

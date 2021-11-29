@@ -1,13 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import React from "react";
 import { FaHandPointRight } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import "../../../../../common/css/Product.Style.css";
-import { getAllModelAction } from "../../../../../redux/actions/Model/modelAction";
-import { useDispatch, useSelector } from "react-redux";
 
 const ModelTable = (props) => {
   const { setModal, setCurrentItem } = props;
-  const dispatch = useDispatch();
   const models = useSelector((state) => state.model.list) || [];
   const toggle = (id) => {
     setModal(true);

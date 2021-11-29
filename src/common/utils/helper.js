@@ -46,4 +46,22 @@ const translateStatusToVietnamese = (status) => {
   }
 };
 
-export { generateString, translateStatusToVietnamese };
+const numberWithCommas = (number) => {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+const renderOptionSelect = (list) => {
+  return list.map((element) => {
+    return (
+      <option key={element._id + element.name} value={element._id}>
+        {element.name}
+      </option>
+    );
+  });
+};
+export {
+  generateString,
+  numberWithCommas,
+  translateStatusToVietnamese,
+  renderOptionSelect,
+};

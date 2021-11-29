@@ -37,8 +37,12 @@ const BrandFragment = () => {
     await dispatch(filterBrandAction(query));
   };
 
-  const onPageChange = async (page) => {
+  const onPageChange = (page) => {
     filter(page, pagination.itemPerPage);
+  };
+
+  const onItemPerPageChange = (itemPerPage) => {
+    filter(1, itemPerPage);
   };
 
   useEffect(() => {
@@ -81,7 +85,11 @@ const BrandFragment = () => {
         option={option}
         brand={currentBrand}
       />
-      <Pagination pagination={pagination} onPageChange={onPageChange} />
+      <Pagination
+        pagination={pagination}
+        onPageChange={onPageChange}
+        onItemPerPageChange={onItemPerPageChange}
+      />
     </>
   );
 };

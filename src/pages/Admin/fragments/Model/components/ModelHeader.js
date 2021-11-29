@@ -9,6 +9,7 @@ import {
   timeDebutList,
 } from "../../../../../common/constants/ListSelect";
 import "../../../../../common/css/Model.Style.css";
+import { renderOptionSelect } from "../../../../../common/utils/helper";
 
 const ModelHeader = (props) => {
   const {
@@ -28,15 +29,6 @@ const ModelHeader = (props) => {
     setOption(true);
   };
 
-  const options = (list) => {
-    return list.map((element) => {
-      return (
-        <option key={element._id} value={element._id}>
-          {element.name}
-        </option>
-      );
-    });
-  };
   const onSubmit = async (e) => {
     e.preventDefault();
     filter(1, 20);
@@ -95,7 +87,7 @@ const ModelHeader = (props) => {
                     onChange={(e) => onFilterValueChange(e, "brand")}
                   >
                     <option value="all">Filter by Brand</option>
-                    {options(brands)}
+                    {renderOptionSelect(brands)}
                   </select>
                 </FormGroup>
               </div>
@@ -108,7 +100,7 @@ const ModelHeader = (props) => {
                     onChange={(e) => onFilterValueChange(e, "os")}
                   >
                     <option value="all">Filter by Operating System</option>
-                    {options(osList)}
+                    {renderOptionSelect(osList)}
                   </select>
                 </FormGroup>
               </div>
@@ -121,7 +113,7 @@ const ModelHeader = (props) => {
                     onChange={(e) => onFilterValueChange(e, "timeDebut")}
                   >
                     <option value="all">Filter by Time</option>
-                    {options(timeDebutList)}
+                    {renderOptionSelect(timeDebutList)}
                   </select>
                 </FormGroup>
               </div>
@@ -134,7 +126,7 @@ const ModelHeader = (props) => {
                     onChange={(e) => onFilterValueChange(e, "status")}
                   >
                     <option value="all">Filter by Status</option>
-                    {options(statusModel)}
+                    {renderOptionSelect(statusModel)}
                   </select>
                 </FormGroup>
               </div>

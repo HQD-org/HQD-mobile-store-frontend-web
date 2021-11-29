@@ -59,8 +59,12 @@ const ModelFragment = () => {
     await dispatch(filterModelAction(query));
   };
 
-  const onPageChange = async (page) => {
-    dispatch(filter(page, pagination.itemPerPage));
+  const onPageChange = (page) => {
+    filter(page, pagination.itemPerPage);
+  };
+
+  const onItemPerPageChange = (itemPerPage) => {
+    filter(1, itemPerPage);
   };
 
   useEffect(() => {
@@ -101,7 +105,11 @@ const ModelFragment = () => {
         option={option}
         model={currentModel}
       />
-      <Pagination pagination={pagination} onPageChange={onPageChange} />
+      <Pagination
+        pagination={pagination}
+        onPageChange={onPageChange}
+        onItemPerPageChange={onItemPerPageChange}
+      />
     </>
   );
 };

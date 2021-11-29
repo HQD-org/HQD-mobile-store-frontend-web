@@ -14,13 +14,13 @@ import InvoiceFragment from "./fragments/Invoice";
 const AdminPage = (props) => {
   const [toggleBrand, setToggleBrand] = useState(false);
   const [toggleModel, setToggleModel] = useState(false);
-  const [toggleAddProduct, setToggleAddProduct] = useState(true);
-  const [toggleProduct, setToggleProduct] = useState(false);
+  const [toggleAddProduct, setToggleAddProduct] = useState(false);
+  const [toggleProduct, setToggleProduct] = useState(true);
   const [toggleUser, setToggleUser] = useState(false);
   const [toggleBranch, setToggleBranch] = useState(false);
   const [toggleCoupon, setToggleCoupon] = useState(false);
   const [toggleInvoice, setToggleInvoice] = useState(false);
-  const toggleRef = useRef("add product");
+  const toggleRef = useRef("product");
   const { showHeaderAndFooter } = props;
   const dispatch = useDispatch();
   useEffect(() => {

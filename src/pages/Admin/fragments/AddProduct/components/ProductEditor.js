@@ -7,11 +7,22 @@ import "../../../../../common/css/Product.Style.css";
 import productImg from "../../../../../common/images/addProduct.png";
 import { useDispatch, useSelector } from "react-redux";
 import { filterProductAction } from "../../../../../redux/actions/Product/productAction";
+import InputColor from "./InputColor";
 
 const ProductEditor = (props) => {
   const dispatch = useDispatch();
   const { setModal, currentItem, modal } = props;
-  const [formAddProduct, setFormAddProduct] = useState([]);
+  const [formAddProduct, setFormAddProduct] = useState([
+    {
+      name: "",
+      idBrand: {},
+      ram: "",
+      capacity: "",
+      status: "",
+      price: "",
+      color: [],
+    },
+  ]);
   const models = useSelector((state) => state.model.list) || [];
   const products = useSelector((state) => state.product.list) || []; // load data
   const [currentModel, setCurrentModel] = useState({});
@@ -42,39 +53,40 @@ const ProductEditor = (props) => {
     }
   }, [currentModel]);
 
-  const prevIsValid = () => {
-    if (formAddProduct.length === 0) {
-      return true;
-    }
-    const someEmpty = formAddProduct.some((item) => item.Price === "");
-    if (someEmpty) {
-      formAddProduct.map((item, index) => {
-        const allPrev = [...formAddProduct];
-        if (formAddProduct[index].Price === "") {
-          allPrev[index].error.Price = "Please enter Price";
-        }
-        return setFormAddProduct(allPrev);
-      });
-    }
-    return !someEmpty;
-  };
+  // const prevIsValid = () => {
+  //   if (formAddProduct.length === 0) {
+  //     return true;
+  //   }
+  //   const someEmpty = formAddProduct.some((item) => item.Price === "");
+  //   if (someEmpty) {
+  //     formAddProduct.map((item, index) => {
+  //       const allPrev = [...formAddProduct];
+  //       if (formAddProduct[index].Price === "") {
+  //         allPrev[index].error.Price = "Please enter Price";
+  //       }
+  //       return setFormAddProduct(allPrev);
+  //     });
+  //   }
+  //   return !someEmpty;
+  // };
 
   const handleAddProduct = (e) => {
     e.preventDefault();
     const inputState = {
-      Color: "",
-      Price: "",
-      RAM: "",
-      Capacity: "",
-      Status: "",
+      color: "",
+      price: "",
+      ram: "",
+      capacity: "",
+      status: "",
       error: {
-        Price: null,
+        price: null,
       },
       newRow: true,
     };
-    if (prevIsValid()) {
-      setFormAddProduct((prev) => [...prev, inputState]);
-    }
+    setFormAddProduct((prev) => [...prev, inputState]);
+    // if (prevIsValid()) {
+    //   setFormAddProduct((prev) => [...prev, inputState]);
+    // }
   };
 
   const onChange = (index, event) => {
@@ -119,73 +131,60 @@ const ProductEditor = (props) => {
         Add Product
       </ModalHeader>
       <ModalBody>
-        <form>
-          <table
-            className="table table-add-product"
-            style={{ marginTop: "30px" }}
-          >
-            <thead>
+        <table
+          className="table table-add-product"
+          style={{ marginTop: "30px" }}
+        >
+          <thead>
+            <tr>
+              <th>Tên Model</th>
+              <th>Thương hiệu</th>
+              <th>RAM</th>
+              <th>Dung lượng</th>
+              <th>Trạng thái</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {formAddProduct.map((item, index) => (
               <tr>
-                <th>Tên Model</th>
-                <th>Thương hiệu</th>
-                <th>Màu</th>
-                <th>Giá</th>
-                <th>RAM</th>
-                <th>Dung lượng</th>
-                <th>Trạng thái</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {formAddProduct.map((item, index) => (
-                <tr key={`item-${index}`}>
-                  <td>{currentModel.name}</td>
-                  <td>
-                    <input
-                      className="form-control"
-                      type="text"
-                      defaultValue={currentModel.idBrand.name}
-                      disabled
-                    />
-                  </td>
-                  <td>
+                <td style={{ width: "300px" }}>
+                  <div
+                    key={index}
+                    data-bs-toggle="collapse"
+                    href={`#collapseColor-${index}`}
+                    role="button"
+                    aria-expanded="false"
+                    aria-controls="collapseColor"
+                  >
+                    {currentModel.name}
+                  </div>
+
+                  <div
+                    class="collapse"
+                    id={`collapseColor-${index}`}
+                    style={{ marginTop: "20px" }}
+                  >
+                    <InputColor item={currentModel.color} index={index} />
+                  </div>
+                </td>
+                <td>
+                  <input
+                    className="form-control"
+                    type="text"
+                    value={
+                      currentModel.idBrand ? `${currentModel.idBrand.name}` : ""
+                    }
+                    disabled
+                  />
+                </td>
+
+                <td>
+                  {item.newRow ? (
                     <select
                       className="form-select"
-                      name="Color"
-                      value={item.Color}
-                      onChange={(e) => onChange(index, e)}
-                    >
-                      <option value="1" selected>
-                        Đỏ
-                      </option>
-                      <option value="2">Nâu</option>
-                      <option value="3">Xanh</option>
-                    </select>
-                  </td>
-                  <td>
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        className={
-                          item.error.Price
-                            ? "form-control is-invalid"
-                            : "form-control "
-                        }
-                        name="Price"
-                        value={item.Price}
-                        onChange={(e) => onChange(index, e)}
-                      />
-                      <span className="input-group-text">VNĐ</span>
-                    </div>
-                    {item.error.Price && (
-                      <div className="invalid-feedback">{item.error.Price}</div>
-                    )}
-                  </td>
-                  <td>
-                    <select
-                      className="form-select"
-                      name="RAM"
-                      value={item.RAM}
+                      name="ram"
+                      value={item.ram}
                       onChange={(e) => onChange(index, e)}
                     >
                       <option value="1" selected>
@@ -198,12 +197,31 @@ const ProductEditor = (props) => {
                       <option value="6">8 GB</option>
                       <option value="7">12 GB</option>
                     </select>
-                  </td>
-                  <td>
+                  ) : (
                     <select
                       className="form-select"
-                      name="Capacity"
-                      defaultValue={item.Capacity}
+                      name="ram"
+                      value="3"
+                      onChange={(e) => onChange(index, e)}
+                    >
+                      <option value="1" selected>
+                        1 GB
+                      </option>
+                      <option value="2">2 GB</option>
+                      <option value="3">3 GB</option>
+                      <option value="4">4 GB</option>
+                      <option value="5">6 GB</option>
+                      <option value="6">8 GB</option>
+                      <option value="7">12 GB</option>
+                    </select>
+                  )}
+                </td>
+                <td>
+                  {item.newRow ? (
+                    <select
+                      className="form-select"
+                      name="capacity"
+                      value={item.capacity}
                       onChange={(e) => onChange(index, e)}
                     >
                       <option value="16 GB">16 GB</option>
@@ -214,12 +232,29 @@ const ProductEditor = (props) => {
                       <option value="512 GB">512 GB</option>
                       <option value="1 TB">1 TB</option>
                     </select>
-                  </td>
-                  <td>
+                  ) : (
                     <select
                       className="form-select"
-                      name="Status"
-                      value={item.Status}
+                      name="capacity"
+                      value="64"
+                      onChange={(e) => onChange(index, e)}
+                    >
+                      <option value="16">16 GB</option>
+                      <option value="32">32 GB</option>
+                      <option value="64">64 GB</option>
+                      <option value="128">128 GB</option>
+                      <option value="256">256 GB</option>
+                      <option value="512">512 GB</option>
+                      <option value="1">1 TB</option>
+                    </select>
+                  )}
+                </td>
+                <td>
+                  {item.newRow ? (
+                    <select
+                      className="form-select"
+                      name="status"
+                      value={item.status}
                       onChange={(e) => onChange(index, e)}
                     >
                       <option value="1" selected>
@@ -228,38 +263,46 @@ const ProductEditor = (props) => {
                       <option value="2">Hết hàng</option>
                       <option value="3">Ngưng kinh doanh</option>
                     </select>
-                  </td>
-                  <td>
-                    {item.newRow ? (
-                      <AiOutlineClose
-                        color="red"
-                        onClick={(e) => handleRemove(e, index)}
-                      />
-                    ) : (
-                      <> </>
-                    )}
-                  </td>
-                  <td>
-                    <FaCheck
-                      color="green"
+                  ) : (
+                    <select
+                      className="form-select"
+                      name="Status"
+                      value="2"
+                      onChange={(e) => onChange(index, e)}
+                    >
+                      <option value="1" selected>
+                        Còn hàng
+                      </option>
+                      <option value="2">Hết hàng</option>
+                      <option value="3">Ngưng kinh doanh</option>
+                    </select>
+                  )}
+                </td>
+                <td>
+                  {item.newRow ? (
+                    <AiOutlineClose
+                      color="red"
                       onClick={(e) => handleRemove(e, index)}
                     />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="row">
-            <div className="col-3">
-              <AiOutlinePlus color="blue" onClick={handleAddProduct} />
-            </div>
+                  ) : (
+                    <> </>
+                  )}
+                </td>
+                <td>
+                  <FaCheck
+                    color="green"
+                    onClick={(e) => handleRemove(e, index)}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="row">
+          <div className="col-3">
+            <AiOutlinePlus color="blue" onClick={handleAddProduct} />
           </div>
-          <div className="row" style={{ textAlign: "center" }}>
-            <div>
-              <button className="btnAddPro">Submit</button>
-            </div>
-          </div>
-        </form>
+        </div>
       </ModalBody>
     </Modal>
   );

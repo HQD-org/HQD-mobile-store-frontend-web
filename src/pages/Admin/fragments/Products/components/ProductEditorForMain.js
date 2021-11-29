@@ -12,10 +12,10 @@ import {
 import CurrencyInput from "react-currency-input-field";
 
 const ProductEditorForMain = (props) => {
-  const { className, toggle } = props;
+  const { className, setModal } = props;
   let { modal } = props;
   const onToggle = () => {
-    toggle(false);
+    setModal(false);
   };
 
   return (
@@ -25,7 +25,7 @@ const ProductEditorForMain = (props) => {
         <form>
           <div className="row mb-2">
             <div className="col-3">
-              <p>Tên Model</p>
+              <p>Tên mẫu</p>
             </div>
             <div className="col-8">
               <Input readOnly placeholder="Oppo A31" />

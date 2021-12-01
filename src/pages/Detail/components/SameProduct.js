@@ -1,26 +1,26 @@
 import React from "react";
-import imgXiaomi from "../../../common/images/xiaomi-redmi-note-9.png";
+import { useHistory } from "react-router-dom";
 import "../../../common/css/ProductHome.Style.css";
-import { Link } from "react-router-dom";
 
-const SameProduct = () => {
+const SameProduct = (props) => {
+  const { img, item, price } = props;
+  const history = useHistory();
+  const handleOnClick = () => {
+    history.push(`/detail/${item._id}`);
+    history.go(0);
+  };
   return (
-    <div className="col">
+    <div className="col" onClick={handleOnClick}>
       <div className="card h-100 card-newPro">
-        <Link
-          to="/product/tenSp-haygidocungdc"
-          style={{ textDecoration: "none" }}
-        >
+        <div style={{ textDecoration: "none" }}>
           <div className="img-pro">
-            <img src={imgXiaomi} className="card-img-top" alt="..." />
+            <img src={img} className="card-img-top" alt="..." />
           </div>
-
           <div className="card-body">
-            <h5 className="card-title">Xiaomi Redmi Note 9 4GB-128GB</h5>
-            <h5 className="card-text now-price">4.940.000 ₫</h5>
-            <h5 class="card-text pre-price"></h5>
+            <h5 className="card-title">{item.name}</h5>
+            <h5 className="card-text now-price">{price}</h5>
           </div>
-        </Link>
+        </div>
       </div>
     </div>
   );

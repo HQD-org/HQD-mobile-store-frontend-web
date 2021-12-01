@@ -8,6 +8,8 @@ import {
   UPDATE_PRODUCT_SUCCESS,
   FILTER_PRODUCT_FAIL,
   FILTER_PRODUCT_SUCCESS,
+  FIND_PRODUCT_BY_ID_FAIL,
+  FIND_PRODUCT_BY_ID_SUCCESS,
 } from "../../actions/Product/types";
 
 const initState = {
@@ -18,6 +20,7 @@ const initState = {
     totalItem: 0,
   },
   updateFlag: false,
+  productDetail: {},
 };
 export default function (state = initState, action) {
   const payload = action.payload;
@@ -52,6 +55,16 @@ export default function (state = initState, action) {
         ...state,
         list: payload.products,
         pagination: payload.pagination,
+      };
+    case FIND_PRODUCT_BY_ID_FAIL:
+      return {
+        ...state,
+        productDetail: {},
+      };
+    case FIND_PRODUCT_BY_ID_SUCCESS:
+      return {
+        ...state,
+        productDetail: payload,
       };
     default:
       return state;

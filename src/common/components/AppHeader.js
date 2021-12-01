@@ -45,11 +45,7 @@ const AppHeader = () => {
     }
   };
   const onClickCart = () => {
-    if (isLogin) {
-      history.push("/cart");
-    } else {
-      history.push("/login");
-    }
+    history.push("/cart");
   };
   const onClickSearch = () => {
     console.log("log at ==> AppHeader.js ==> line 27 ==> search");

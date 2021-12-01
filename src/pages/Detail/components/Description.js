@@ -2,7 +2,7 @@ import React from "react";
 import ShowMoreText from "react-show-more-text";
 const Description = () => {
   const executeOnClick = (isExpanded) => {
-    console.log(isExpanded);
+    // console.log(isExpanded);
   };
   return (
     <div>

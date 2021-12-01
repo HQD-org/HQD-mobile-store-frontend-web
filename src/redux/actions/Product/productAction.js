@@ -8,6 +8,8 @@ import {
   UPDATE_PRODUCT_SUCCESS,
   FILTER_PRODUCT_FAIL,
   FILTER_PRODUCT_SUCCESS,
+  FIND_PRODUCT_BY_ID_FAIL,
+  FIND_PRODUCT_BY_ID_SUCCESS,
 } from "./types";
 import productAPI from "../../../apis/Product.Api";
 
@@ -136,10 +138,10 @@ export function filterProductSuccess(data) {
   };
 }
 
-export function filterProductAction(queryParams) {
+export function filterProductAction(queryParams, load = true) {
   return async (dispatch) => {
     try {
-      dispatch(loading(true));
+      dispatch(loading(load));
       const res = await productAPI.filter(queryParams);
       if (res.success) {
         dispatch(loading());
@@ -152,6 +154,41 @@ export function filterProductAction(queryParams) {
     } catch {
       dispatch(loading());
       dispatch(filterProductFail());
+      return false;
+    }
+  };
+}
+
+export function findProductByIdFail() {
+  return {
+    type: FIND_PRODUCT_BY_ID_FAIL,
+    payload: {},
+  };
+}
+
+export function findProductByIdSuccess(data) {
+  return {
+    type: FIND_PRODUCT_BY_ID_SUCCESS,
+    payload: data,
+  };
+}
+
+export function findProductByIdAction(id) {
+  return async (dispatch) => {
+    try {
+      dispatch(loading(true));
+      const res = await productAPI.findById(id);
+      if (res.success) {
+        dispatch(loading());
+        dispatch(findProductByIdSuccess(res.data));
+        return true;
+      }
+      dispatch(loading());
+      dispatch(findProductByIdFail());
+      return false;
+    } catch {
+      dispatch(loading());
+      dispatch(findProductByIdFail());
       return false;
     }
   };

@@ -1,19 +1,27 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import { FcTwoSmartphones, FcClock, FcApproval, FcGlobe } from "react-icons/fc";
-import { MdSecurity, MdSync } from "react-icons/md";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import React, { useState, useEffect } from "react";
 import { BsBox } from "react-icons/bs";
+import { FcApproval, FcClock, FcGlobe, FcTwoSmartphones } from "react-icons/fc";
+import { MdSecurity, MdSync } from "react-icons/md";
+import { useSelector } from "react-redux";
 
 const Information = () => {
   const [value, setValue] = useState("1");
-
+  const product = useSelector((state) => state.product.productDetail);
+  const [brand, setBrand] = useState({});
+  const [model, setModel] = useState({});
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    if (product.brand) setBrand(product.brand);
+    if (product.model) setModel(product.model);
+  }, [product]);
   return (
     <div className="row mt-3">
       <Box sx={{ width: "100%", typography: "body1" }}>
@@ -26,10 +34,10 @@ const Information = () => {
           </Box>
           <TabPanel value="1">
             <p>
-              <FcTwoSmartphones /> Thương hiệu: OPPO
+              <FcTwoSmartphones /> Thương hiệu: {brand.name}
             </p>
             <p>
-              <FcClock /> Thời gian ra mắt: 2020
+              <FcClock /> Thời gian ra mắt: {model.timeDebut}
             </p>
             <p>
               <FcApproval /> Hàng chính hãng - Bảo hành 12 tháng

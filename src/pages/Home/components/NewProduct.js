@@ -19,12 +19,12 @@ const NewProduct = () => {
       <div className="row" style={{ justifyContent: "center" }}>
         <div
           id="carouselNewProduct"
-          class="carousel slide"
+          className="carousel slide"
           data-bs-touch="false"
           data-bs-interval="false"
         >
-          <div class="carousel-inner">
-            <div class="carousel-item active">
+          <div className="carousel-inner">
+            <div className="carousel-item active">
               <div className="row row-cols-1 row-cols-md-5 g-1 group-promotion">
                 <div className="col">
                   <div className="card h-100 card-newPro">
@@ -156,7 +156,7 @@ const NewProduct = () => {
                 </div>
               </div>
             </div>
-            <div class="carousel-item">
+            <div className="carousel-item">
               <div className="row row-cols-1 row-cols-md-5 g-1 group-promotion">
                 <div className="col">
                   <div className="card h-100 card-newPro">
@@ -290,22 +290,22 @@ const NewProduct = () => {
             </div>
           </div>
           <button
-            class="carousel-control-prev"
+            className="carousel-control-prev"
             type="button"
             data-bs-target="#carouselNewProduct"
             data-bs-slide="prev"
           >
             <IoArrowBackCircle aria-hidden="true" className="icon-prev" />
-            <span class="visually-hidden">Previous</span>
+            <span className="visually-hidden">Previous</span>
           </button>
           <button
-            class="carousel-control-next"
+            className="carousel-control-next"
             type="button"
             data-bs-target="#carouselNewProduct"
             data-bs-slide="next"
           >
             <IoArrowForwardCircle aria-hidden="true" className="icon-next" />
-            <span class="visually-hidden">Next</span>
+            <span className="visually-hidden">Next</span>
           </button>
         </div>
       </div>

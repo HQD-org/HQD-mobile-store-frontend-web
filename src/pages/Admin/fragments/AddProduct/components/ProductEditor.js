@@ -65,9 +65,9 @@ const ProductEditor = (props) => {
     });
     setFormAddProduct({
       idModel: currentModel._id,
-      name: currentModel.name + " 2 GB",
-      ram: "2 GB",
-      capacity: "8 GB",
+      name: currentModel.name + " 2GB" + " 16GB",
+      ram: "2GB",
+      capacity: "16GB",
       status: "active",
       color: colors,
       description: "Hàng có sẵn",
@@ -93,6 +93,7 @@ const ProductEditor = (props) => {
       };
     });
     formAddProduct.color = color;
+    formAddProduct.name = currentModel.name + " " + formAddProduct.ram + " " +  formAddProduct.capacity
     const res = await dispatch(addProductAction(formAddProduct));
     if (res) {
       setFormAddProduct(null);
@@ -129,7 +130,7 @@ const ProductEditor = (props) => {
       };
     });
     product.color = color;
-    product.name = currentModel.name + " " + product.ram;
+    product.name = currentModel.name + " " + product.ram + " " + product.capacity;
     const res = await dispatch(updateProductAction(product));
     if (res) fetchProductListByModelId();
   };

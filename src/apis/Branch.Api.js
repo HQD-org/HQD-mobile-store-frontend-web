@@ -53,7 +53,6 @@ const update = async (body) => {
 const filter = async (queryParams) => {
   try {
     const query = queryString.stringify(queryParams);
-    console.log("log at ==> Branch.Api.js ==> line55 ==> query: ", query);
     const res = await axiosClient.get(`${url}/filter?${query}`);
     // toastNotify(res ? res.message.VN : "Tìm kiếm chi nhánh thất bại");
     return res && res.data
@@ -67,6 +66,25 @@ const filter = async (queryParams) => {
   }
 };
 
-const Branch = { insert, filter, getAll, update };
+const getByListId = async (queryParams) => {
+  try {
+    const query = queryString.stringify(queryParams, {
+      arrayFormat: "bracket",
+    });
+    console.log("log at ==> Branch.Api.js ==> query: ", query);
+    const res = await axiosClient.get(`${url}/get-by-list-id?${query}`);
+    // toastNotify(res ? res.message.VN : "Tìm kiếm chi nhánh thất bại");
+    return res && res.data
+      ? { data: res.data || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    // toastNotify("Tìm kiếm chi nhánh thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const Branch = { insert, filter, getAll, update, getByListId };
 
 export default Branch;

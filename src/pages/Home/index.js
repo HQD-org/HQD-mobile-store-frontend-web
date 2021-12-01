@@ -7,12 +7,26 @@ import NewProduct from "./components/NewProduct";
 import Product from "./components/Product";
 import Sale from "./components/Sale";
 import Trending from "./components/Trending";
+import { filterProductAction } from "../../redux/actions/Product/productAction";
+import { getAllBrandAction } from "../../redux/actions/Brand/brandAction";
 
 const HomePage = (props) => {
   const { showHeaderAndFooter } = props;
   const dispatch = useDispatch();
+
+  const filterProduct = async (page, itemPerPage) => {
+    const query = {
+      page,
+      itemPerPage,
+      minPrice: 0,
+      maxPrice: 10000000000,
+    };
+    await dispatch(filterProductAction(query));
+  };
   useEffect(() => {
     dispatch(showHeaderAndFooter(true));
+    filterProduct(1, 20);
+    dispatch(getAllBrandAction());
   }, []);
   return (
     <div>
@@ -61,8 +75,6 @@ const HomePage = (props) => {
 
           <div id="products">
             <NewProduct />
-            <Product />
-            <Product />
             <Product />
             <Advertise />
           </div>

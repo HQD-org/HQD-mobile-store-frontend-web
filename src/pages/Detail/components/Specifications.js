@@ -1,45 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Table } from "reactstrap";
-const Secifications = () => {
+
+const Specifications = () => {
+  const product = useSelector((state) => state.product.productDetail);
+  const [model, setModel] = useState({});
+  useEffect(() => {
+    if (product.model) setModel(product.model);
+  }, [product]);
+
   return (
     <div>
       <Table bordered>
         <tbody>
           <tr>
             <th>Màn hình</th>
-            <td>IPS LCD6.5"HD+</td>
+            <td>{model.screen}</td>
           </tr>
           <tr>
             <th>Hệ điều hành</th>
-            <td>Android 9 (Pie)</td>
+            <td>{model.operation}</td>
           </tr>
           <tr>
             <th>Camera sau</th>
-            <td>Chính 12 MP & Phụ 2 MP, 2 MP</td>
+            <td>{model.rearCamera}</td>
           </tr>
           <tr>
             <th>Camera trước</th>
-            <td>8 MP</td>
+            <td>{model.frontCamera}</td>
           </tr>
           <tr>
             <th>Chip</th>
-            <td>MediaTek Helio P35</td>
+            <td>{model.chip}</td>
           </tr>
           <tr>
             <th>RAM</th>
-            <td>4 GB</td>
+            <td>{product.ram}</td>
           </tr>
           <tr>
             <th>Bộ nhớ trong</th>
-            <td>128 GB</td>
+            <td>{product.capacity}</td>
           </tr>
           <tr>
             <th>Sim</th>
-            <td>2 Nano SIMHỗ trợ 4G</td>
+            <td>{model.sim}</td>
           </tr>
           <tr>
             <th>Pin, Sạc</th>
-            <td>4230 mAh</td>
+            <td>{model.battery + ", " + model.charger}</td>
           </tr>
         </tbody>
       </Table>
@@ -47,4 +55,4 @@ const Secifications = () => {
   );
 };
 
-export default Secifications;
+export default Specifications;

@@ -49,7 +49,6 @@ const update = async (body) => {
 const filter = async (queryParams) => {
   try {
     const query = queryString.stringify(queryParams);
-    console.log("log at ==> Brand.Api.js ==> line55 ==> query: ", query);
     const res = await axiosClient.get(`/mobile-brand/filter?${query}`);
     // toastNotify(res ? res.message.VN : "Tìm kiếm thương hiệu thất bại");
     return res && res.data

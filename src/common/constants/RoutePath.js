@@ -9,7 +9,7 @@ export const PATH = {
   MODEL: "/dashboard/model",
   ADD_MODEL: "/dashboard/add-model",
   PRODUCT: "/product",
-  DETAIL: "/product/tenSP-haygidocungdc",
+  DETAIL: "/detail/:idProduct?",
   CART: "/cart",
   PAYMENT: "/payment",
 };

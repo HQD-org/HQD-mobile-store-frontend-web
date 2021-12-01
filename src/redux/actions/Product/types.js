@@ -6,3 +6,5 @@ export const UPDATE_PRODUCT_FAIL = "update product fail";
 export const UPDATE_PRODUCT_SUCCESS = "update product success";
 export const FILTER_PRODUCT_FAIL = "filter product fail";
 export const FILTER_PRODUCT_SUCCESS = "filter product success";
+export const FIND_PRODUCT_BY_ID_FAIL = "find product by id fail";
+export const FIND_PRODUCT_BY_ID_SUCCESS = "find product by id success";

@@ -1,20 +1,49 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { FaHeart } from "react-icons/fa";
-import BasicInfor from "./components/BasicInfor";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  filterProductAction,
+  findProductByIdAction,
+} from "../../redux/actions/Product/productAction";
+import AnotherProduct from "./components/AnotherProduct";
+import BasicInfo from "./components/BasicInfo";
 import Description from "./components/Description";
 import Information from "./components/Information";
-import Secifications from "./components/Specifications";
-import AnotherProduct from "./components/AnotherProduct";
+import Specifications from "./components/Specifications";
 
 const DetailPage = (props) => {
   const { showHeaderAndFooter } = props;
-  const [like, setLike] = useState(false);
   const dispatch = useDispatch();
+  const product = useSelector((state) => state.product.productDetail);
+  const [like, setLike] = useState(false);
+
   useEffect(() => {
+    const fetchProduct = async () => {
+      await dispatch(findProductByIdAction(props.match.params.idProduct));
+    };
     dispatch(showHeaderAndFooter(true));
+    fetchProduct();
   }, []);
+
+  useEffect(() => {
+    if (product.model) {
+      const filterProduct = async () => {
+        await dispatch(
+          filterProductAction(
+            {
+              page: 1,
+              itemPerPage: 1000,
+              idBrand: product.brand._id,
+            },
+            false
+          )
+        );
+      };
+      filterProduct();
+    }
+  }, [product]);
+
   return (
     <div>
       <div className="container">
@@ -32,14 +61,14 @@ const DetailPage = (props) => {
           </div>
 
           <hr />
-          <BasicInfor />
+          <BasicInfo />
           <div className="row mt-3">
             <div className="col-6">
               <Information />
               <Description />
             </div>
             <div className="col-6">
-              <Secifications />
+              <Specifications />
             </div>
           </div>
 

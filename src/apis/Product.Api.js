@@ -65,6 +65,21 @@ const filter = async (queryParams) => {
   }
 };
 
-const Product = { insert, getAll, update, filter };
+const findById = async (id) => {
+  try {
+    const res = await axiosClient.get(`${url}/find-by-id/${id}`);
+    // toastNotify(res ? res.message.VN : "Tìm kiếm điện thoại thất bại");
+    return res && res.data
+      ? { data: res.data || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    // toastNotify("Tìm kiếm điện thoại thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const Product = { insert, getAll, update, filter, findById };
 
 export default Product;

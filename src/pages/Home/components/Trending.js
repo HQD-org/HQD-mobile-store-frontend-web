@@ -8,7 +8,7 @@ import imgWait from "../../../common/images/wait.png";
 const Trending = () => {
   return (
     <div style={{ marginTop: "60px" }}>
-      <div class="row" style={{ textAlign: "center" }}>
+      <div className="row" style={{ textAlign: "center" }}>
         <img src={imgWait} alt=""></img>
       </div>
       <div

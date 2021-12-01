@@ -4,22 +4,22 @@ const osList = [
 ];
 
 const ramList = [
-  { _id: "2 GB", name: "2 GB" },
-  { _id: "3 GB", name: "3 GB" },
-  { _id: "4 GB", name: "4 GB" },
-  { _id: "6 GB", name: "6 GB" },
-  { _id: "8 GB", name: "8 GB" },
-  { _id: "12 GB", name: "12 GB" },
+  { _id: "2GB", name: "2 GB" },
+  { _id: "3GB", name: "3 GB" },
+  { _id: "4GB", name: "4 GB" },
+  { _id: "6GB", name: "6 GB" },
+  { _id: "8GB", name: "8 GB" },
+  { _id: "12GB", name: "12 GB" },
 ];
 
 const capacityList = [
-  { _id: "8 GB", name: "8 GB" },
-  { _id: "16 GB", name: "16 GB" },
-  { _id: "32 GB", name: "32 GB" },
-  { _id: "64 GB", name: "64 GB" },
-  { _id: "128 GB", name: "128 GB" },
-  { _id: "256 GB", name: "256 GB" },
-  { _id: "512 GB", name: "512 GB" },
+  { _id: "8GB", name: "8GB" },
+  { _id: "16GB", name: "16GB" },
+  { _id: "32GB", name: "32GB" },
+  { _id: "64GB", name: "64GB" },
+  { _id: "128GB", name: "128GB" },
+  { _id: "256GB", name: "256GB" },
+  { _id: "512GB", name: "512GB" },
 ];
 
 const statusProduct = [

@@ -117,6 +117,7 @@ const UserFragment = () => {
         modal={modal}
         setModal={setModal}
         setOption={setOption}
+        setCurrentItem={setCurrentItem}
       />
       <TableDashboard
         pagination={pagination}

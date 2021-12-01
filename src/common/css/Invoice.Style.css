@@ -52,3 +52,16 @@
 .modal-invoice {
     max-width: 600px !important;
 }
+
+.btnCancel {
+    padding: 10px 20px 10px 20px;
+    border: none;
+    background-color: rgb(230, 2, 2);
+    color: white;
+    border-radius: 4px;
+    filter: drop-shadow(0 2px 2px #707070);
+}
+
+.btnCancel:hover {
+    background-color: rgb(161, 1, 1);
+}

@@ -64,7 +64,37 @@ const DeliveryInfor = () => {
               <option value="2">Các ngày trong tuần</option>
             </select>
 
-            <textarea className="form-control mb-3" placeholder="Ghi chú" />
+            <p>Phương thức thanh toán</p>
+            <div style={{ display: "flex", justifyContent: "space-around" }}>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="payment-methods"
+                  id="payment-methods1"
+                />
+                <label class="form-check-label" for="payment-methods1">
+                  Thanh toán khi nhận hàng
+                </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="payment-methods"
+                  id="payment-methods2"
+                  checked
+                />
+                <label class="form-check-label" for="payment-methods2">
+                  Thanh toán bằng Paypal
+                </label>
+              </div>
+            </div>
+
+            <textarea
+              className="form-control mb-3 mt-3"
+              placeholder="Ghi chú"
+            />
           </div>
         </form>
       </div>

@@ -22,7 +22,7 @@ const ProductEditorForSub = (props) => {
       <ModalHeader className="close-x" toggle={onToggle}></ModalHeader>
       <ModalBody>
         <form>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
               <p>Tên mẫu</p>
             </div>
@@ -30,7 +30,7 @@ const ProductEditorForSub = (props) => {
               <Input readOnly placeholder="Oppo A31" />
             </div>
           </div>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
               <p>Thương hiệu</p>
             </div>
@@ -38,7 +38,7 @@ const ProductEditorForSub = (props) => {
               <Input readOnly placeholder="OPPO" />
             </div>
           </div>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
               <p>Thương hiệu</p>
             </div>
@@ -46,7 +46,7 @@ const ProductEditorForSub = (props) => {
               <Input placeholder="Cam" readOnly></Input>
             </div>
           </div>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
               <p>Giá</p>
             </div>
@@ -57,7 +57,7 @@ const ProductEditorForSub = (props) => {
               </InputGroup>
             </div>
           </div>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
               <p>RAM</p>
             </div>
@@ -65,7 +65,7 @@ const ProductEditorForSub = (props) => {
               <Input placeholder="4 GB" readOnly></Input>
             </div>
           </div>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
               <p>Dung lượng</p>
             </div>
@@ -73,7 +73,7 @@ const ProductEditorForSub = (props) => {
               <Input placeholder="32 GB" readOnly></Input>
             </div>
           </div>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
               <p>Chi nhánh</p>
             </div>
@@ -81,7 +81,7 @@ const ProductEditorForSub = (props) => {
               <Input placeholder="4 GB" readOnly></Input>
             </div>
           </div>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
               <p>Số lượng</p>
             </div>
@@ -89,7 +89,7 @@ const ProductEditorForSub = (props) => {
               <Input type="number" />
             </div>
           </div>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
               <p>Trạng thái</p>
             </div>

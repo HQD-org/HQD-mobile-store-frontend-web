@@ -1,42 +1,49 @@
-import React, { useState } from "react";
-import Vivo from "../../../common/images/vivo-y20s.png";
-import Xiaomi from "../../../common/images/xiaomi-redmi-note-9.png";
-import { IoAdd, IoRemove, IoChevronBackCircleSharp } from "react-icons/io5";
-import "../../../common/css/Cart.Style.css";
+import React, { useEffect, useState } from "react";
+import { IoAdd, IoChevronBackCircleSharp, IoRemove } from "react-icons/io5";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import "../../../common/css/Cart.Style.css";
+import { numberWithCommas } from "../../../common/utils/helper";
+import {
+  updateCartAction,
+  removeCartAction,
+} from "../../../redux/actions/Cart/cartAction";
 
-const product = [
-  {
-    id: 1,
-    name: "OPPO A31",
-    color: "Xanh",
-    price: 4999999,
-    img: Vivo,
-  },
-  {
-    id: 2,
-    name: "Xiaomi A59",
-    color: "Đỏ",
-    price: 3000000,
-    img: Xiaomi,
-  },
-];
+const ListItem = () => {
+  const dispatch = useDispatch();
+  const itemsInCart = useSelector((state) => state.cart.items);
+  const dataProduct = useSelector((state) => state.cart.dataProduct);
 
-const ListItem = ({ product }) => {
-  const [quantity, setQuantity] = useState(1);
-  console.log(quantity);
-
-  const plusQuantity = () => {
-    setQuantity(quantity + 1);
-    console.log(quantity);
+  const updateCart = async (data) => {
+    return await dispatch(updateCartAction(data));
   };
 
-  const subQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-      console.log(quantity);
-    }
+  const plusQuantity = (item) => {
+    updateCart({
+      idProduct: item.idProduct,
+      quantity: item.quantity + 1,
+      color: item.color,
+    });
   };
+
+  const subQuantity = (item) => {
+    if (item.quantity - 1 <= 0) return;
+    updateCart({
+      idProduct: item.idProduct,
+      quantity: item.quantity - 1,
+      color: item.color,
+    });
+  };
+
+  const removeFormCart = async (item) => {
+    await dispatch(
+      removeCartAction({ idProduct: item.idProduct, color: item.color })
+    );
+  };
+
+  useEffect(() => {
+    console.log("log at ==> CartList => cart", itemsInCart);
+  }, [itemsInCart]);
   return (
     <ul className="listCart">
       <div className="row">
@@ -55,30 +62,39 @@ const ListItem = ({ product }) => {
         </div>
       </div>
 
-      {product.map((p) => (
-        <li key={p.id}>
+      {itemsInCart.map((p) => (
+        <li key={p._id}>
           <hr />
           <div className="row">
             <div className="col-3">
-              <img src={`${p.img}`} alt="" width="80%" />
+              <img src={p.image} alt="" width="80%" />
             </div>
             <div className="col-4">
               <div>
-                <h6>{`${p.name}`}</h6>
-                <p>{`${p.color}`}</p>
-                <button className="btnRemoveCart">Remove</button>
+                <h6>
+                  {dataProduct.find((item) => item._id === p.idProduct).name}
+                </h6>
+                <p>{p.color}</p>
+                <button
+                  className="btnRemoveCart"
+                  onClick={() => removeFormCart(p)}
+                >
+                  Remove
+                </button>
               </div>
             </div>
             <div className="col-5 price-quantity">
               <div>
-                <h6 style={{ textAlign: "end" }}>{`${p.price}₫`}</h6>
-                <div class="quantity">
-                  <div class="sub">
-                    <IoRemove onClick={subQuantity} />
+                <h6 style={{ textAlign: "end" }}>{`${numberWithCommas(
+                  p.price
+                )} ₫`}</h6>
+                <div className="quantity">
+                  <div className="sub">
+                    <IoRemove onClick={() => subQuantity(p)} />
                   </div>
-                  <div class="number">{quantity}</div>
-                  <div class="plus">
-                    <IoAdd onClick={plusQuantity} />
+                  <div className="number">{p.quantity}</div>
+                  <div className="plus">
+                    <IoAdd onClick={() => plusQuantity(p)} />
                   </div>
                 </div>
               </div>
@@ -94,7 +110,7 @@ const CartList = () => {
   return (
     <div className="row">
       <div className="col">
-        <ListItem product={product} />
+        <ListItem />
       </div>
     </div>
   );

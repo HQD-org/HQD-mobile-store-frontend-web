@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Grid, Link, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "../../../common/css/Detail.Style.css";
 import { getByListIdAction } from "../../../redux/actions/Branch/branchAction";
+import { addToCartAction } from "../../../redux/actions/Cart/cartAction";
 import { findProductByIdAction } from "../../../redux/actions/Product/productAction";
-import { useHistory } from "react-router-dom";
 
 const CapacityGrid = (props) => {
   const { capacity, currentCapacity, onChangeCapacity } = props;
@@ -92,7 +93,6 @@ const BasicInfo = () => {
   const products = useSelector((state) => state.product.list);
   const branches = useSelector((state) => state.branch.list);
 
-  const [cart, setCart] = useState([]);
   const [selectedImage, setSelectedImage] = useState(0);
   const [currentColor, setCurrentColor] = useState(
     product.color ? product.color[0] : {}
@@ -100,9 +100,16 @@ const BasicInfo = () => {
   const [images, setImages] = useState([]);
   const [capacityList, setCapacityList] = useState([]);
   const [listBranches, setListBranches] = useState([]);
-  const [quantityOfBranch, setQuantityOfBranch] = useState([]);
-  const addToCart = (product) => {
-    setCart([...cart, product]);
+   const [quantityOfBranch, setQuantityOfBranch] = useState([]);
+
+  const addToCart = async () => {
+    if (currentColor.quantityInfo.length <= 0) return;
+    const data = {
+      idProduct: product._id,
+      color: currentColor.name,
+      image: images[selectedImage],
+    };
+    await dispatch(addToCartAction(data));
   };
 
   const changeColor = (value) => {
@@ -225,14 +232,12 @@ const BasicInfo = () => {
               </p>
             </div>
           </div>
-          <div className="row mb-3">
+          <div className="row mb-3" onClick={() => addToCart()}>
             <div className="col-7">
-              <button
-                type="submit"
-                className="add-to-cart"
-                onClick={() => addToCart(product)}
-              >
-                THÊM GIỎ HÀNG
+              <button type="button" className="add-to-cart">
+                {currentColor.quantityInfo.length > 0
+                  ? "THÊM VÀO GIỎ HÀNG"
+                  : "HẾT HÀNG"}
               </button>
             </div>
           </div>

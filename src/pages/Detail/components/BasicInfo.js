@@ -100,7 +100,8 @@ const BasicInfo = () => {
   const [images, setImages] = useState([]);
   const [capacityList, setCapacityList] = useState([]);
   const [listBranches, setListBranches] = useState([]);
-   const [quantityOfBranch, setQuantityOfBranch] = useState([]);
+  const [quantityOfBranch, setQuantityOfBranch] = useState([]);
+  const [textBtn, setTextBtn] = useState("THÊM VÀO GIỎ HÀNG");
 
   const addToCart = async () => {
     if (currentColor.quantityInfo.length <= 0) return;
@@ -148,9 +149,10 @@ const BasicInfo = () => {
       currentColor.quantityInfo.forEach((q) => {
         if (q.quantity > 0) quantityOfBranch.push(q.quantity);
       });
-      console.log(quantityOfBranch[0]);
-      console.log("show:", quantityOfBranch);
       setQuantityOfBranch(quantityOfBranch);
+      setTextBtn(
+        currentColor.quantityInfo.length > 0 ? "THÊM VÀO GIỎ HÀNG" : "HẾT HÀNG"
+      );
     }
   }, [currentColor]);
 
@@ -235,9 +237,7 @@ const BasicInfo = () => {
           <div className="row mb-3" onClick={() => addToCart()}>
             <div className="col-7">
               <button type="button" className="add-to-cart">
-                {currentColor.quantityInfo.length > 0
-                  ? "THÊM VÀO GIỎ HÀNG"
-                  : "HẾT HÀNG"}
+                {textBtn}
               </button>
             </div>
           </div>

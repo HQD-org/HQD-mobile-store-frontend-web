@@ -14,7 +14,13 @@ const SameProduct = (props) => {
       <div className="card h-100 card-newPro">
         <div style={{ textDecoration: "none" }}>
           <div className="img-pro">
-            <img src={img} className="card-img-top" alt="..." />
+            <img
+              src={img}
+              className="card-img-top"
+              alt="..."
+              height="200px"
+              width="200px"
+            />
           </div>
           <div className="card-body">
             <h5 className="card-title">{item.name}</h5>

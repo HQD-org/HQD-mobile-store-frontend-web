@@ -37,6 +37,8 @@ const Product = () => {
                           src={color.images[0]}
                           className="card-img-top"
                           alt={product.name}
+                          width="200px"
+                          height="200px"
                         />
                       </div>
                       <div className="card-body">

@@ -145,25 +145,21 @@ const BasicInfo = () => {
   }, [product]);
 
   useEffect(() => {
+    const branches = [];
+    const quantityOfBranch = [];
     if (currentColor.quantityInfo) {
       currentColor.quantityInfo.forEach((q) => {
-        if (q.quantity > 0) quantityOfBranch.push(q.quantity);
+        if (q.quantity > 0) {
+          branches.push(q.idBranch);
+          quantityOfBranch.push(q.quantity);
+        }
       });
-      setQuantityOfBranch(quantityOfBranch);
-      setTextBtn(
+    }
+    setQuantityOfBranch(quantityOfBranch);
+    setListBranches(branches);
+    setTextBtn(
         currentColor.quantityInfo.length > 0 ? "THÊM VÀO GIỎ HÀNG" : "HẾT HÀNG"
       );
-    }
-  }, [currentColor]);
-
-  useEffect(() => {
-    const branches = [];
-    if (currentColor.quantityInfo) {
-      currentColor.quantityInfo.forEach((q) => {
-        if (q.quantity > 0) branches.push(q.idBranch);
-      });
-    }
-    setListBranches(branches);
   }, [currentColor]);
 
   useEffect(() => {

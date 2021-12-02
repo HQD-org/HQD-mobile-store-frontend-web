@@ -16,7 +16,10 @@ const CapacityGrid = (props) => {
           <p
             className="ram-infor"
             style={{
-              backgroundColor: currentCapacity === c ? "blue" : "white",
+              // backgroundColor: currentCapacity === c ? "#EF7E3F" : "white",
+              color: currentCapacity === c ? "#3FA5EF" : "black",
+              border:
+                currentCapacity === c ? "1px solid #3FA5EF" : "1px solid black",
             }}
           >
             {c}
@@ -36,7 +39,10 @@ const ColorGrid = (props) => {
           <p
             className="ram-infor"
             style={{
-              backgroundColor: currentColor.name === c.name ? "blue" : "white",
+              // backgroundColor: currentColor.name === c.name ? "blue" : "white",
+              color: currentColor === c ? "#3FA5EF" : "black",
+              border:
+                currentColor === c ? "1px solid #3FA5EF" : "1px solid black",
             }}
           >
             {c.name}
@@ -68,7 +74,13 @@ const ImageGrid = ({ images, onSelect }) => {
 const ImageMain = ({ src }) => {
   return (
     <div>
-      <img className="main-image mb-5 mt-3" src={src} width="100%" alt="" />
+      <img
+        className="main-image mb-5 mt-3"
+        src={src}
+        width="500px"
+        height="500px"
+        alt=""
+      />
     </div>
   );
 };
@@ -88,6 +100,7 @@ const BasicInfo = () => {
   const [images, setImages] = useState([]);
   const [capacityList, setCapacityList] = useState([]);
   const [listBranches, setListBranches] = useState([]);
+  const [quantityOfBranch, setQuantityOfBranch] = useState([]);
   const addToCart = (product) => {
     setCart([...cart, product]);
   };
@@ -122,6 +135,17 @@ const BasicInfo = () => {
       setImages(imgs);
     }
   }, [product]);
+
+  useEffect(() => {
+    if (currentColor.quantityInfo) {
+      currentColor.quantityInfo.forEach((q) => {
+        if (q.quantity > 0) quantityOfBranch.push(q.quantity);
+      });
+      console.log(quantityOfBranch[0]);
+      console.log("show:", quantityOfBranch);
+      setQuantityOfBranch(quantityOfBranch);
+    }
+  }, [currentColor]);
 
   useEffect(() => {
     const branches = [];
@@ -208,18 +232,18 @@ const BasicInfo = () => {
                 className="add-to-cart"
                 onClick={() => addToCart(product)}
               >
-                THÊM VÔ GIỎ HÀNG
+                THÊM GIỎ HÀNG
               </button>
             </div>
           </div>
           <div className="row">
             <p style={{ marginLeft: "2px", fontWeight: "600" }}>
               Có <span style={{ color: "red" }}>{branches.length}</span> cửa
-              hàng có sản phẩm
+              hàng có sẵn sản phẩm này
             </p>
             <div className="col-7 hasBranch">
               <ul style={{ paddingLeft: "20px", fontSize: "13px" }}>
-                {branches.map((branch) => {
+                {branches.map((branch, i) => {
                   const address = branch.address;
                   return (
                     <div key={branch._id}>
@@ -230,8 +254,14 @@ const BasicInfo = () => {
                           " " +
                           address.district +
                           " " +
-                          address.province}
+                          address.province +
+                          " còn "}
+                        <span style={{ color: "#3FA5EF" }}>
+                          {quantityOfBranch[i] + " "}
+                        </span>
+                        sản phẩm
                       </li>
+
                       <hr />
                     </div>
                   );

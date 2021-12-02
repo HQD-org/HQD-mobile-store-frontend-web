@@ -23,7 +23,7 @@ const ProductEditorForMain = (props) => {
       <ModalHeader className="close-x" toggle={onToggle}></ModalHeader>
       <ModalBody>
         <form>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
               <p>Tên mẫu</p>
             </div>
@@ -31,7 +31,7 @@ const ProductEditorForMain = (props) => {
               <Input readOnly placeholder="Oppo A31" />
             </div>
           </div>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
               <p>Thương hiệu</p>
             </div>
@@ -39,19 +39,15 @@ const ProductEditorForMain = (props) => {
               <Input readOnly placeholder="OPPO" />
             </div>
           </div>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
-              <p>Thương hiệu</p>
+              <p>Màu</p>
             </div>
-            <div className="col-8">
-              <Input type="select" name="select" className="form-select">
-                <option>Cam</option>
-                <option>Nâu</option>
-                <option>Đen</option>
-              </Input>
+            <div className="col-8 ">
+              <Input readOnly placeholder="Xanh" />
             </div>
           </div>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
               <p>Giá</p>
             </div>
@@ -71,7 +67,7 @@ const ProductEditorForMain = (props) => {
               </InputGroup>
             </div>
           </div>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
               <p>RAM</p>
             </div>
@@ -83,7 +79,7 @@ const ProductEditorForMain = (props) => {
               </Input>
             </div>
           </div>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
               <p>Dung lượng</p>
             </div>
@@ -95,7 +91,7 @@ const ProductEditorForMain = (props) => {
               </Input>
             </div>
           </div>
-          <div className="row mb-2">
+          <div className="row mb-2 formMain">
             <div className="col-3">
               <p>Trạng thái</p>
             </div>

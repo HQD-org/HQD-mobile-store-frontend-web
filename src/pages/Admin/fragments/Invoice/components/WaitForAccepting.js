@@ -19,6 +19,7 @@ const WaitForAccepting = () => {
           <th>Tổng tiền</th>
           <th>Ngày tạo đơn</th>
           <th></th>
+          <th></th>
         </tr>
         <tr onClick={toggle}>
           {" "}
@@ -31,6 +32,11 @@ const WaitForAccepting = () => {
           <td style={{ textAlign: "center" }}>
             <button type="submit" className="btnAccept">
               Accept
+            </button>
+          </td>
+          <td style={{ textAlign: "center" }}>
+            <button type="submit" className="btnCancel">
+              Cancel
             </button>
           </td>
         </tr>
@@ -47,6 +53,11 @@ const WaitForAccepting = () => {
               Accept
             </button>
           </td>
+          <td style={{ textAlign: "center" }}>
+            <button type="submit" className="btnCancel">
+              Cancel
+            </button>
+          </td>
         </tr>
         <tr onClick={toggle}>
           {" "}
@@ -59,6 +70,11 @@ const WaitForAccepting = () => {
           <td style={{ textAlign: "center" }}>
             <button type="submit" className="btnAccept">
               Accept
+            </button>
+          </td>
+          <td style={{ textAlign: "center" }}>
+            <button type="submit" className="btnCancel">
+              Cancel
             </button>
           </td>
         </tr>

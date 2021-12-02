@@ -32,6 +32,14 @@ const Confirm = () => {
             </div>
             <div className="row">
               <div className="col-6">
+                <h6>Phương thức thanh toán</h6>
+              </div>
+              <div className="col-6">
+                <p>Thanh toán khi nhận hàng</p>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-6">
                 <h6>Đơn hàng</h6>
               </div>
             </div>

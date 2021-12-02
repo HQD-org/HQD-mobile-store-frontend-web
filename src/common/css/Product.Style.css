@@ -187,11 +187,16 @@ tbody>tr:hover {
 
 .card-product:hover {
     filter: drop-shadow(1px 4px 3px #949393);
+    cursor: pointer;
 }
 
 .thead-addpro {
     background-color: #de7311;
     color: white;
+}
+
+.formMain {
+    align-items: baseline;
 }
 
 

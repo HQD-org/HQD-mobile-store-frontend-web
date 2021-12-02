@@ -110,25 +110,31 @@ const UserEditor = (props) => {
             ) : (
               <> </>
             )}
-            <FormLabel component="legend">Role</FormLabel>
-            <RadioGroup
-              row
-              aria-label="role"
-              name="role"
-              defaultValue={option ? "user" : user.role}
-            >
-              <FormControlLabel value="user" control={<Radio />} label="User" />
-              <FormControlLabel
-                value="manager branch"
-                control={<Radio />}
-                label="Manager Branch"
-              />
-              <FormControlLabel
-                value="admin"
-                control={<Radio />}
-                label="Admin"
-              />
-            </RadioGroup>
+            <FormControl fullWidth sx={{ m: 1 }}>
+              <FormLabel component="legend">Role</FormLabel>
+              <RadioGroup
+                row
+                aria-label="role"
+                name="role"
+                defaultValue={option ? "user" : user.role}
+              >
+                <FormControlLabel
+                  value="user"
+                  control={<Radio />}
+                  label="User"
+                />
+                <FormControlLabel
+                  value="manager branch"
+                  control={<Radio />}
+                  label="Manager Branch"
+                />
+                <FormControlLabel
+                  value="admin"
+                  control={<Radio />}
+                  label="Admin"
+                />
+              </RadioGroup>
+            </FormControl>
           </div>
 
           <ModalFooter>

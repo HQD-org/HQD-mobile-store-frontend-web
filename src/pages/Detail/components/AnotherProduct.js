@@ -1,6 +1,6 @@
 import React from "react";
-import SameProduct from "./SameProduct";
 import { useSelector } from "react-redux";
+import SameProduct from "./SameProduct";
 
 const AnotherProduct = () => {
   const products = useSelector((state) => state.product.list);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import ShowMoreText from "react-show-more-text";
+
 const Description = () => {
   const product = useSelector((state) => state.product.productDetail);
   const [model, setModel] = useState({});

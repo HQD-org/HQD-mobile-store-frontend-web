@@ -1,0 +1,33 @@
+.btnSaveInfor,
+.btnChangePass {
+    padding: 10px 20px 10px 20px;
+    border: none;
+    font-weight: bold;
+    color: white;
+    border-radius: 4px;
+    filter: drop-shadow(0 2px 2px #707070);
+    margin: 5px;
+}
+
+.btnSaveInfor {
+    background-color: #3fa5ef;
+}
+
+.btnSaveInfor:hover {
+    background-color: #1b75b6;
+}
+
+.btnChangePass {
+    background-color: rgb(216, 7, 7);
+}
+
+.btnChangePass:hover {
+    background-color: rgb(182, 8, 8);
+}
+
+.form-Infor {
+    box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+    padding: 20px !important;
+    border-radius: 3px;
+    width: 600px;
+}

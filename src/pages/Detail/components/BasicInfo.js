@@ -137,23 +137,19 @@ const BasicInfo = () => {
   }, [product]);
 
   useEffect(() => {
-    if (currentColor.quantityInfo) {
-      currentColor.quantityInfo.forEach((q) => {
-        if (q.quantity > 0) quantityOfBranch.push(q.quantity);
-      });
-      console.log(quantityOfBranch[0]);
-      console.log("show:", quantityOfBranch);
-      setQuantityOfBranch(quantityOfBranch);
-    }
-  }, [currentColor]);
-
-  useEffect(() => {
     const branches = [];
+    const quantityOfBranch = [];
     if (currentColor.quantityInfo) {
       currentColor.quantityInfo.forEach((q) => {
-        if (q.quantity > 0) branches.push(q.idBranch);
+        if (q.quantity > 0) {
+          branches.push(q.idBranch);
+          quantityOfBranch.push(q.quantity);
+        }
       });
     }
+    console.log("show:", quantityOfBranch);
+    console.log("show branch", branches);
+    setQuantityOfBranch(quantityOfBranch);
     setListBranches(branches);
   }, [currentColor]);
 

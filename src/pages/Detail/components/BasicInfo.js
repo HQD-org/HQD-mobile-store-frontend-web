@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Grid, Link, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../../common/css/Detail.Style.css";
@@ -221,8 +221,8 @@ const BasicInfo = () => {
               </p>
             </div>
           </div>
-          <div className="row mb-3">
-            <div className="col-7">
+          <div className="col-7 mb-3">
+            <div>
               <button
                 type="submit"
                 className="add-to-cart"

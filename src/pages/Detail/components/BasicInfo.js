@@ -158,8 +158,8 @@ const BasicInfo = () => {
     setQuantityOfBranch(quantityOfBranch);
     setListBranches(branches);
     setTextBtn(
-        currentColor.quantityInfo.length > 0 ? "THÊM VÀO GIỎ HÀNG" : "HẾT HÀNG"
-      );
+      currentColor.quantityInfo.length > 0 ? "THÊM VÀO GIỎ HÀNG" : "HẾT HÀNG"
+    );
   }, [currentColor]);
 
   useEffect(() => {
@@ -230,8 +230,8 @@ const BasicInfo = () => {
               </p>
             </div>
           </div>
-          <div className="row mb-3" onClick={() => addToCart()}>
-            <div className="col-7">
+          <div className="col-7 mb-3" onClick={() => addToCart()}>
+            <div>
               <button type="button" className="add-to-cart">
                 {textBtn}
               </button>

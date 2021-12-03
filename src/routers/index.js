@@ -13,6 +13,7 @@ import ProductRoute from "./Product.Route";
 import DetailRoute from "./Detail.Route";
 import CartRoute from "./Cart.Route";
 import PaymentRoute from "./Payment.Route";
+import ProfileRoute from "./Profile.Route";
 
 const Routers = () => {
   return (
@@ -25,6 +26,7 @@ const Routers = () => {
         <DetailRoute />
         <CartRoute />
         <PaymentRoute />
+        <ProfileRoute />
         <LoginRoute />
         <RegisterRoute />
         <ForgotPasswordRoute />

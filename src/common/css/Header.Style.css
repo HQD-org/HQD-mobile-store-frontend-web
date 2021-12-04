@@ -137,3 +137,14 @@ nav-link:hover {
     color: white;
     position: absolute;
 }
+
+.total-quantity-none {
+    top: 9px;
+    position: absolute;
+    right: 144px;
+    font-size: 10px;
+    padding: 1px 5px;
+    border-radius: 50%;
+    color: white;
+    position: absolute;
+}

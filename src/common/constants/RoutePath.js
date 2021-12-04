@@ -13,6 +13,7 @@ export const PATH = {
   CART: "/cart",
   PAYMENT: "/payment",
   PROFILE: "/profile",
+  BILLS: "/bills",
 };
 
 export const PATH_API = {};

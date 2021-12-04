@@ -117,7 +117,7 @@ const AppHeader = () => {
               {totalQuantity > 0 ? (
                 <p className="total-quantity">{totalQuantity}</p>
               ) : (
-                <p className="total-quantity"></p>
+                <p className="total-quantity-none"></p>
               )}
             </div>
 

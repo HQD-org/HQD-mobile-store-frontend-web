@@ -24,10 +24,7 @@ const InvoiceFragment = React.memo(() => {
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-              <TabList
-                onChange={handleChange}
-                aria-label="lab API tabs example"
-              >
+              <TabList onChange={handleChange}>
                 <Tab label="Chờ xác nhận" value="1" />
                 <Tab label="Chờ lấy hàng" value="2" />
                 <Tab label="Đang giao hàng" value="3" />

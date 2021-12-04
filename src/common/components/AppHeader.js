@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import "../../common/css/Header.Style.css";
 import logoHQD from "../../common/images/logoHQD.png";
@@ -12,6 +12,8 @@ import { logoutAction } from "../../redux/actions/Auth/authActions";
 
 const AppHeader = () => {
   const show = useSelector((state) => state.system.showHeaderAndFooter);
+  const itemsInCart = useSelector((state) => state.cart.items);
+  const [totalQuantity, setTotalQuantity] = useState("0");
   const dispatch = useDispatch();
   const history = useHistory();
   const isLogin = useSelector((state) => state.auth.isLogin);
@@ -20,6 +22,18 @@ const AppHeader = () => {
     await dispatch(logoutAction());
     history.push("/login");
   };
+
+  useEffect(() => {
+    if (itemsInCart.length > 0) {
+      const total = itemsInCart.reduce((init, item) => {
+        return init + item.quantity;
+      }, 0);
+      setTotalQuantity(total);
+      return;
+    }
+
+    setTotalQuantity("0");
+  }, [itemsInCart]);
 
   const DropdownMenu = () => {
     return (
@@ -94,11 +108,19 @@ const AppHeader = () => {
               />
             </div>
 
-            <FaShoppingCart
-              className="icon-header"
-              onClick={onClickCart}
-              style={{ color: "#3FA5EF", transform: "scaleX(-1)" }}
-            />
+            <div>
+              <FaShoppingCart
+                className="icon-header icon-cartHeader"
+                onClick={onClickCart}
+                style={{ color: "#3FA5EF", transform: "scaleX(-1)" }}
+              />
+              {totalQuantity > 0 ? (
+                <p className="total-quantity">{totalQuantity}</p>
+              ) : (
+                <p className="total-quantity"></p>
+              )}
+            </div>
+
             <div className="dropdown icon-header">
               <FaUser
                 onClick={onClickUser}

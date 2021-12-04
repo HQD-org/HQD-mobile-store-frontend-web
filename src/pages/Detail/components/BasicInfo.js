@@ -155,6 +155,7 @@ const BasicInfo = () => {
         }
       });
     }
+    console.log("a", currentColor.quantityInfo.length);
     setQuantityOfBranch(quantityOfBranch);
     setListBranches(branches);
     setTextBtn(

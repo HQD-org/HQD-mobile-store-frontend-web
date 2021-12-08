@@ -158,6 +158,7 @@ const BasicInfo = () => {
         currentColor.quantityInfo.length > 0 ? "THÊM VÀO GIỎ HÀNG" : "HẾT HÀNG"
       );
     }
+    console.log("a", currentColor.quantityInfo.length);
     setQuantityOfBranch(quantityOfBranch);
     setListBranches(branches);
   }, [currentColor]);

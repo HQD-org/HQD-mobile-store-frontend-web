@@ -1,5 +1,4 @@
 import React from "react";
-import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import ProductList from "./ProductList";
 import "../../../../../common/css/Payment.Style.css";
 

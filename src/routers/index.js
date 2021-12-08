@@ -14,6 +14,7 @@ import DetailRoute from "./Detail.Route";
 import CartRoute from "./Cart.Route";
 import PaymentRoute from "./Payment.Route";
 import ProfileRoute from "./Profile.Route";
+import BillRoute from "./Bill.Route";
 
 const Routers = () => {
   return (
@@ -27,6 +28,7 @@ const Routers = () => {
         <CartRoute />
         <PaymentRoute />
         <ProfileRoute />
+        <BillRoute />
         <LoginRoute />
         <RegisterRoute />
         <ForgotPasswordRoute />

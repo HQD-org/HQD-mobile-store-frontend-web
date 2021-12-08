@@ -68,7 +68,7 @@ const ListItem = () => {
           <hr />
           <div className="row">
             <div className="col-3">
-              <img src={p.image} alt="" width="80%" />
+              <img src={p.image} alt="" width="100%" height="150px" />
             </div>
             <div className="col-4">
               <div>

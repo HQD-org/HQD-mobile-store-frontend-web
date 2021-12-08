@@ -12,6 +12,7 @@ export const PATH = {
   DETAIL: "/detail/:idProduct?",
   CART: "/cart",
   PAYMENT: "/payment",
+  PROFILE: "/profile",
 };
 
 export const PATH_API = {};

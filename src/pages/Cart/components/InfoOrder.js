@@ -5,7 +5,6 @@ import { numberWithCommas } from "../../../common/utils/helper";
 
 const InfoOrder = () => {
   const itemsInCart = useSelector((state) => state.cart.items);
-  const [totalQuantity, setTotalQuantity] = useState("0");
   const [totalPrice, setTotalPrice] = useState("30000");
   const [estimatePrice, setEstimatePrice] = useState("0");
 
@@ -22,17 +21,6 @@ const InfoOrder = () => {
     setTotalPrice("0");
   }, [itemsInCart]);
 
-  useEffect(() => {
-    if (itemsInCart.length > 0) {
-      const total = itemsInCart.reduce((init, item) => {
-        return init + item.quantity;
-      }, 0);
-      setTotalQuantity(total);
-      return;
-    }
-
-    setTotalQuantity("0");
-  }, [itemsInCart]);
   return (
     <div className="summary">
       <div className="row">
@@ -41,7 +29,8 @@ const InfoOrder = () => {
       <hr style={{ marginTop: "20px" }} />
       <div className="row">
         <h6>
-          Tổng <span style={{ color: "red" }}>{totalQuantity}</span> sản phẩm
+          Tổng <span style={{ color: "red" }}>{itemsInCart.length}</span> sản
+          phẩm
         </h6>
       </div>
       <div className="row">

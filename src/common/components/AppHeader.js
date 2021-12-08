@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
+import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
+import { Link, NavLink } from "react-router-dom";
 import "../../common/css/Header.Style.css";
 import logoHQD from "../../common/images/logoHQD.png";
-import imgBackgroundleft from "../images/background-header.jpg";
-import imgBackground from "../images/background-header-1.jpg";
-import "../css/AdminHeader.Style.css";
-import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router";
 import { logoutAction } from "../../redux/actions/Auth/authActions";
+import { getCartAction } from "../../redux/actions/Cart/cartAction";
+import "../css/AdminHeader.Style.css";
+import imgBackground from "../images/background-header-1.jpg";
 
 const AppHeader = () => {
   const show = useSelector((state) => state.system.showHeaderAndFooter);
   const itemsInCart = useSelector((state) => state.cart.items);
-  const [totalQuantity, setTotalQuantity] = useState("0");
   const dispatch = useDispatch();
   const history = useHistory();
   const isLogin = useSelector((state) => state.auth.isLogin);
@@ -24,16 +24,13 @@ const AppHeader = () => {
   };
 
   useEffect(() => {
-    if (itemsInCart.length > 0) {
-      const total = itemsInCart.reduce((init, item) => {
-        return init + item.quantity;
-      }, 0);
-      setTotalQuantity(total);
-      return;
+    if (isLogin) {
+      const getCart = async () => {
+        await dispatch(getCartAction());
+      };
+      getCart();
     }
-
-    setTotalQuantity("0");
-  }, [itemsInCart]);
+  }, [isLogin]);
 
   const DropdownMenu = () => {
     return (
@@ -114,8 +111,8 @@ const AppHeader = () => {
                 onClick={onClickCart}
                 style={{ color: "#3FA5EF", transform: "scaleX(-1)" }}
               />
-              {totalQuantity > 0 ? (
-                <p className="total-quantity">{totalQuantity}</p>
+              {itemsInCart.length > 0 ? (
+                <p className="total-quantity">{itemsInCart.length}</p>
               ) : (
                 <p className="total-quantity-none"></p>
               )}

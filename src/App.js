@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import Routers from "./routers";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-// import RoutersManage from "./routers/indexAdmin";
+
 const App = () => {
   return (
     <>

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getCartAction } from "../../redux/actions/Cart/cartAction";
 import CartList from "./components/CartList";
 import InfoOrder from "./components/InfoOrder";
 
@@ -9,10 +8,6 @@ const CartPage = (props) => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    const getCart = async () => {
-      await dispatch(getCartAction());
-    };
-    getCart();
     dispatch(showHeaderAndFooter(true));
   });
 

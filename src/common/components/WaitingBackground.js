@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import "../css/Loading.Style.css";
 import { changeShow } from "../../redux/actions/System/systemAction";
 import { useDispatch } from "react-redux";
+
 const WaitingBackground = (props) => {
   const dispatch = useDispatch();
   const show =

@@ -23,10 +23,10 @@ const PaymentPage = (props) => {
       district: "",
       village: "",
     },
-    receiveType: "home",
-    paymentType: "cash",
-    timeDelivery: "all",
-    message: "",
+    receiveType: "at home",
+    paymentType: "cod",
+    timeDelivery: "all day",
+    message: " ",
   });
 
   const [dataStep2, setDataStep2] = useState({

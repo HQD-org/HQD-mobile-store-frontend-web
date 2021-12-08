@@ -2,8 +2,8 @@ import { changeLoading } from "../System/systemAction";
 import {
   CREATE_ORDER_FAIL,
   CREATE_ORDER_SUCCESS,
-  GET_ORDER_FAIL,
-  GET_ORDER_SUCCESS,
+  GET_BY_STATUS_AND_USER_FAIL,
+  GET_BY_STATUS_AND_USER_SUCCESS,
   CHANGE_STATUS_ORDER_FAIL,
   CHANGE_STATUS_ORDER_SUCCESS,
   REMOVE_ORDER_FAIL,
@@ -17,71 +17,71 @@ const loading =
     dispatch(changeLoading(loading));
   };
 
-export function addOrderFail() {
+export function createOrderFail() {
   return {
     type: CREATE_ORDER_FAIL,
     payload: {},
   };
 }
 
-export function addOrderSuccess(data) {
+export function createOrderSuccess(data) {
   return {
     type: CREATE_ORDER_SUCCESS,
     payload: data,
   };
 }
 
-export function addOrderAction(dataSubmit) {
+export function createOrderAction(dataSubmit) {
   return async (dispatch) => {
     try {
       dispatch(loading(true));
       const res = await orderAPI.create(dataSubmit);
       if (res.success) {
         dispatch(loading());
-        dispatch(addOrderSuccess(res.data));
+        dispatch(createOrderSuccess(res.data));
         return true;
       }
       dispatch(loading());
-      dispatch(addOrderFail());
+      dispatch(createOrderFail());
       return false;
     } catch {
       dispatch(loading());
-      dispatch(addOrderFail());
+      dispatch(createOrderFail());
       return false;
     }
   };
 }
 
-export function getOrderFail() {
+export function getByStatusAndUserFail() {
   return {
-    type: GET_ORDER_FAIL,
+    type: GET_BY_STATUS_AND_USER_FAIL,
     payload: {},
   };
 }
 
-export function getOrderSuccess(data) {
+export function getByStatusAndUserSuccess(data) {
   return {
-    type: GET_ORDER_SUCCESS,
+    type: GET_BY_STATUS_AND_USER_SUCCESS,
     payload: data,
   };
 }
 
-export function getOrderAction() {
+export function getByStatusAndUserAction() {
   return async (dispatch) => {
     try {
       dispatch(loading(true));
-      const res = await orderAPI.getOrder();
+      const res = await orderAPI.getByStatusAndUser();
       if (res.success) {
         dispatch(loading());
-        dispatch(getOrderSuccess(res.data));
+        dispatch(getByStatusAndUserSuccess(res.data));
         return true;
       }
       dispatch(loading());
-      dispatch(getOrderFail());
+      dispatch(getByStatusAndUserFail());
       return false;
     } catch {
       dispatch(loading());
-      dispatch(getOrderFail());
+      dispatch(getByStatusAndUserFail());
       return false;
     }
   };

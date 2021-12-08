@@ -21,7 +21,7 @@ export default function (state = initState, action) {
     case ADD_CART_FAIL:
       return { ...state };
     case ADD_CART_SUCCESS:
-      return { ...state, items: payload.products };
+      return { ...state };
     case GET_CART_FAIL:
       return {
         ...state,

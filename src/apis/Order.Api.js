@@ -5,7 +5,7 @@ const url = "/order";
 
 const create = async (body) => {
   try {
-    const res = await axiosClient.post(`${url}/create-order`, body);
+    const res = await axiosClient.post(`${url}/create`, body);
     toastNotify(res ? res.message.VN : "Thêm hoá đơn thất bại");
     return res && res.data
       ? { data: res.data || {}, success: true }
@@ -20,7 +20,7 @@ const create = async (body) => {
 
 const changeStatus = async (body) => {
   try {
-    const res = await axiosClient.post(`${url}/change-status-order`, body);
+    const res = await axiosClient.post(`${url}/change-status`, body);
     toastNotify(res ? res.message.VN : "Cập nhật hoá đơn thất bại");
     return res && res.data
       ? { data: res.data || {}, success: true }
@@ -35,7 +35,7 @@ const changeStatus = async (body) => {
 
 const remove = async (body) => {
   try {
-    const res = await axiosClient.post(`${url}/delete-order`, body);
+    const res = await axiosClient.post(`${url}/cancel`, body);
     toastNotify(res ? res.message.VN : "Huỷ hoá đơn thất bại");
     return res && res.data
       ? { data: res.data || {}, success: true }
@@ -48,9 +48,9 @@ const remove = async (body) => {
   }
 };
 
-const getOrder = async () => {
+const getByStatusAndUser = async () => {
   try {
-    const res = await axiosClient.get(`${url}/get-order`);
+    const res = await axiosClient.get(`${url}/get-by-status-and-user`);
     // toastNotify(res ? res.message.VN : "Tìm kiếm hoá đơn thất bại");
     return res && res.data
       ? { data: res.data || {}, success: true }
@@ -63,6 +63,6 @@ const getOrder = async () => {
   }
 };
 
-const Cart = { create, remove, changeStatus, getOrder };
+const Cart = { create, remove, changeStatus, getByStatusAndUser };
 
 export default Cart;

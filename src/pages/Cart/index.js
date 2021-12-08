@@ -9,8 +9,11 @@ const CartPage = (props) => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    const getCart = async () => {
+      await dispatch(getCartAction());
+    };
+    getCart();
     dispatch(showHeaderAndFooter(true));
-    dispatch(getCartAction());
   });
 
   return (

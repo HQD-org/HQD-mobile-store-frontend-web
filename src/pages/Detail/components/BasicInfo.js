@@ -154,12 +154,12 @@ const BasicInfo = () => {
           quantityOfBranch.push(q.quantity);
         }
       });
+      setTextBtn(
+        currentColor.quantityInfo.length > 0 ? "THÊM VÀO GIỎ HÀNG" : "HẾT HÀNG"
+      );
     }
     setQuantityOfBranch(quantityOfBranch);
     setListBranches(branches);
-    setTextBtn(
-      currentColor.quantityInfo.length > 0 ? "THÊM VÀO GIỎ HÀNG" : "HẾT HÀNG"
-    );
   }, [currentColor]);
 
   useEffect(() => {
@@ -258,7 +258,7 @@ const BasicInfo = () => {
                           address.province +
                           " còn "}
                         <span style={{ color: "#3FA5EF" }}>
-                          {quantityOfBranch[i] + " "}
+                          {(quantityOfBranch[i] || 0) + " "}
                         </span>
                         sản phẩm
                       </li>

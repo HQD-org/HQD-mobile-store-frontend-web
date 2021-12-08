@@ -4,7 +4,6 @@ import axiosClient from "./axiosClient";
 const url = "/cart";
 const addToCart = async (body) => {
   try {
-    console.log("log at ==> Cart.Api.js ==> body: ", body);
     const res = await axiosClient.post(`${url}/add-to-cart`, body);
     toastNotify(res ? res.message.VN : "Thêm gio hang thất bại");
     return res && res.data

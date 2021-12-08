@@ -22,6 +22,14 @@ const capacityList = [
   { _id: "512GB", name: "512GB" },
 ];
 
+const priceList = [
+  { _id: "0-1999999", name: "Dưới 2 triệu" },
+  { _id: "2000000-5000000", name: "Từ 2 - 5 triệu" },
+  { _id: "5000000-10000000", name: "Từ 5 - 10 triệu" },
+  { _id: "10000000-20000000", name: "Từ 10 - 20 triệu" },
+  { _id: "20000001-1000000000", name: "Trên 20 triệu" },
+];
+
 const statusProduct = [
   {
     _id: "active",
@@ -77,4 +85,5 @@ export {
   statusModel,
   statusProduct,
   timeDebutList,
+  priceList,
 };

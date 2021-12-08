@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "../../../common/css/Detail.Style.css";
 import { getByListIdAction } from "../../../redux/actions/Branch/branchAction";
-import { addToCartAction } from "../../../redux/actions/Cart/cartAction";
+import {
+  addToCartAction,
+  getCartAction,
+} from "../../../redux/actions/Cart/cartAction";
 import { findProductByIdAction } from "../../../redux/actions/Product/productAction";
 
 const CapacityGrid = (props) => {
@@ -110,7 +113,8 @@ const BasicInfo = () => {
       color: currentColor.name,
       image: images[selectedImage],
     };
-    await dispatch(addToCartAction(data));
+    const res = await dispatch(addToCartAction(data));
+    if (res) await dispatch(getCartAction());
   };
 
   const changeColor = (value) => {
@@ -158,7 +162,6 @@ const BasicInfo = () => {
         currentColor.quantityInfo.length > 0 ? "THÊM VÀO GIỎ HÀNG" : "HẾT HÀNG"
       );
     }
-    console.log("a", currentColor.quantityInfo.length);
     setQuantityOfBranch(quantityOfBranch);
     setListBranches(branches);
   }, [currentColor]);

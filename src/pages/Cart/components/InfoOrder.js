@@ -59,10 +59,8 @@ const InfoOrder = () => {
         </div>
       </div>
       <div className="row" style={{ textAlign: "center" }}>
-        <Link to="/payment">
-          <button className="btnCheckout" type="submit">
-            ĐẶT HÀNG NGAY
-          </button>
+        <Link to={itemsInCart.length > 0 ? "/payment" : "#"}>
+          <button className="btnCheckout">ĐẶT HÀNG NGAY</button>
         </Link>
       </div>
     </div>

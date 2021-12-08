@@ -6,13 +6,13 @@ const Pagination = (props) => {
   const { page, itemPerPage, totalItem } = pagination;
   const totalPage = Math.ceil(totalItem / itemPerPage);
   const handleOnPageChange = (newPage) => {
+    if (newPage === page) return;
     if (onPageChange) {
       onPageChange(newPage);
     }
   };
   const handleOnItemPerPageChange = (e) => {
     if (onItemPerPageChange) {
-      console.log("log at => Pagination: ", e.target.value);
       onItemPerPageChange(e.target.value);
     }
   };

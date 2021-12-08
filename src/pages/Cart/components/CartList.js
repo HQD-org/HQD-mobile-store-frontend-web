@@ -44,6 +44,7 @@ const ListItem = () => {
   useEffect(() => {
     console.log("log at ==> CartList => cart", itemsInCart);
   }, [itemsInCart]);
+
   return (
     <ul className="listCart">
       <div className="row">

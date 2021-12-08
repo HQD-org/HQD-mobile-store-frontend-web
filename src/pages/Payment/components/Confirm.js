@@ -1,97 +1,144 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { numberWithCommas } from "../../../common/utils/helper";
 import ProductList from "./ProductList";
-const Confirm = () => {
+
+const Confirm = (props) => {
+  const { dataStep1, dataStep2, setShowStep1, setShowStep3 } = props;
+  const [address, setAddress] = useState(dataStep1.address);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    setAddress(dataStep1.address);
+  }, [dataStep1.address]);
+
+  useEffect(() => {
+    setTotalPrice(
+      dataStep2.estimatePrice + dataStep2.shipPrice - dataStep2.discount
+    );
+  }, [dataStep2]);
+
+  const previousStep = () => {
+    setShowStep1(true);
+  };
+
+  const nextStep = () => {
+    setShowStep3(true);
+  };
   return (
     <div className="row" style={{ justifyContent: "center" }}>
       <div className="col-5">
-        <form>
-          <div className="form-deliveryInfor">
-            <div className="row">
-              <div className="col-6">
-                <h6>Họ tên người nhận</h6>
-              </div>
-              <div className="col-6">
-                <p>Một người nào đó</p>
-              </div>
+        <div className="form-deliveryInfor">
+          <div className="row">
+            <div className="col-6">
+              <h6>Họ tên người nhận</h6>
             </div>
-            <div className="row">
-              <div className="col-6">
-                <h6>Số điện thoại người nhận</h6>
-              </div>
-              <div className="col-6">
-                <p>0123456789</p>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-6">
-                <h6>Địa chỉ nhận hàng</h6>
-              </div>
-              <div className="col-6">
-                <p>Mặt trăng</p>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-6">
-                <h6>Phương thức thanh toán</h6>
-              </div>
-              <div className="col-6">
-                <p>Thanh toán khi nhận hàng</p>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-6">
-                <h6>Đơn hàng</h6>
-              </div>
-            </div>
-            <hr />
-            <div className="row">
-              <ProductList />
-            </div>
-            <div className="row mb-3">
-              <div className="col-4">
-                <h6>Mã khuyến mãi</h6>
-              </div>
-              <div className="col-5">
-                <input className="form-control" type="text" />
-              </div>
-              <div className="col-3" style={{ textAlign: "end" }}>
-                <button className="btnCoupon">Áp dụng</button>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-6">
-                <h6>Tạm tính</h6>
-              </div>
-              <div className="col-6">
-                <p className="txtprice">7.999.999₫</p>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-6">
-                <h6>Phí vận chuyển</h6>
-              </div>
-              <div className="col-6">
-                <p className="txtprice">30.000₫</p>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-6">
-                <h6>Khuyến mãi</h6>
-              </div>
-              <div className="col-6">
-                <p className="txtprice coupon">- 10.000₫</p>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-6">
-                <h6>Tổng tính</h6>
-              </div>
-              <div className="col-6">
-                <p className="txtprice totalPrice">7.989.999₫</p>
-              </div>
+            <div className="col-6">
+              <p>{dataStep1.name}</p>
             </div>
           </div>
-        </form>
+          <div className="row">
+            <div className="col-6">
+              <h6>Số điện thoại người nhận</h6>
+            </div>
+            <div className="col-6">
+              <p>{dataStep1.phone}</p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-6">
+              <h6>Địa chỉ nhận hàng</h6>
+            </div>
+            <div className="col-6">
+              <p>
+                {address.detail +
+                  ", " +
+                  address.village +
+                  ", " +
+                  address.district +
+                  ", " +
+                  address.province}
+              </p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-6">
+              <h6>Phương thức thanh toán</h6>
+            </div>
+            <div className="col-6">
+              <p>
+                {dataStep1.paymentType === "cash"
+                  ? "Thanh toán khi nhận hàng"
+                  : "Paypal"}
+              </p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-6">
+              <h6>Đơn hàng</h6>
+            </div>
+          </div>
+          <hr />
+          <div className="row">
+            <ProductList />
+          </div>
+          <div className="row mb-3">
+            <div className="col-4">
+              <h6>Mã khuyến mãi</h6>
+            </div>
+            <div className="col-5">
+              <input className="form-control" type="text" />
+            </div>
+            <div className="col-3" style={{ textAlign: "end" }}>
+              <button className="btnCoupon">Áp dụng</button>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-6">
+              <h6>Tạm tính</h6>
+            </div>
+            <div className="col-6">
+              <p className="txtprice">
+                {numberWithCommas(dataStep2.estimatePrice)}₫
+              </p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-6">
+              <h6>Phí vận chuyển</h6>
+            </div>
+            <div className="col-6">
+              <p className="txtprice">
+                {numberWithCommas(dataStep2.shipPrice)}₫
+              </p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-6">
+              <h6>Khuyến mãi</h6>
+            </div>
+            <div className="col-6">
+              <p className="txtprice coupon">{`- ${numberWithCommas(
+                dataStep2.discount
+              )}₫`}</p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-6">
+              <h6>Tổng tính</h6>
+            </div>
+            <div className="col-6">
+              <p className="txtprice totalPrice">
+                {numberWithCommas(totalPrice)}₫
+              </p>
+            </div>
+          </div>
+        </div>
+        <button className="btnSubmit" onClick={previousStep}>
+          Previous
+        </button>
+        <button className="btnSubmit" onClick={nextStep}>
+          Next
+        </button>
       </div>
     </div>
   );

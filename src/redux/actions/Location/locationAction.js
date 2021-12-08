@@ -8,6 +8,7 @@ import {
   GET_VILLAGE_SUCCESS,
 } from "./types";
 import { changeLoading } from "../System/systemAction";
+import { location } from "../../../common/constants/location";
 
 const loading =
   (loading = false) =>
@@ -116,6 +117,21 @@ export function getVillage(idDistrict) {
     } catch {
       dispatch(loading());
       dispatch(getVillageFail());
+      return false;
+    }
+  };
+}
+
+export function getAllProvince() {
+  return async (dispatch) => {
+    try {
+      const res = await Object.keys(location).map((key) => {
+        return location[key];
+      });
+      dispatch(getProvinceSuccess(res));
+      return true;
+    } catch {
+      dispatch(getProvinceFail());
       return false;
     }
   };

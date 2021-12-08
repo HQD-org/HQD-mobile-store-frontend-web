@@ -16,6 +16,7 @@ const LoginPage = (props) => {
   useEffect(() => {
     if (loginFormRef.current) loginFormRef.current.scrollIntoView();
   }, [loginFormRef]);
+
   return (
     <div>
       <div className="container">

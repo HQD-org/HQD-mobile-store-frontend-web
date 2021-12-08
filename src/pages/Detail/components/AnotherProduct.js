@@ -12,8 +12,7 @@ const AnotherProduct = () => {
         <div className="row" style={{ justifyContent: "center" }}>
           <div className="row row-cols-1 row-cols-md-5 g-1 group-promotion mb-3">
             {products.map((item) => {
-              if (item._id === product._id)
-                return <div key={`same-product${item._id}`}> </div>;
+              if (item._id === product._id) return null;
               const color = item.model.color[0];
               const price = item.color.find((c) => c.name === color.name).price;
               return (

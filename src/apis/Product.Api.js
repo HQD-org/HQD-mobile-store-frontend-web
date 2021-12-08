@@ -52,6 +52,7 @@ const update = async (body) => {
 const filter = async (queryParams) => {
   try {
     const query = queryString.stringify(queryParams);
+    console.log("log at ==> product api ==> query", query);
     const res = await axiosClient.get(`${url}/filter?${query}`);
     // toastNotify(res ? res.message.VN : "Tìm kiếm điện thoại thất bại");
     return res && res.data

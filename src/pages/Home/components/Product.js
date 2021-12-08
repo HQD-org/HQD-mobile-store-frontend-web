@@ -7,9 +7,9 @@ const Product = () => {
   const products = useSelector((state) => state.product.list);
   const brands = useSelector((state) => state.brand.list);
   return brands.map((brand) => {
-    const productsByBrand = products.filter(
-      (item) => item.brand._id === brand._id
-    );
+    const productsByBrand = products
+      .filter((item) => item.brand._id === brand._id)
+      .slice(0, 4);
     return (
       <div style={{ marginTop: "20px" }} key={`brand-${brand._id}`}>
         <div className="row">
@@ -56,7 +56,7 @@ const Product = () => {
         </div>
         <div className="row">
           <div className="col">
-            <a className="see-all" href="# ">
+            <a className="see-all" href="/product">
               <span>See more</span>
             </a>
           </div>

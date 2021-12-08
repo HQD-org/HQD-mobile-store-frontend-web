@@ -34,6 +34,7 @@ const ProductCard = (props) => {
               src={color ? color.images[0] : ""}
               className="card-img-top"
               alt={product.name}
+              height="200px"
             />
           </div>
 

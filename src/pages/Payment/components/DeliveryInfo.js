@@ -159,8 +159,8 @@ const DeliveryInfo = (props) => {
   };
 
   return (
-    <div className="row" style={{ justifyContent: "center" }}>
-      <div className="col-5">
+    <div className="row mb-3 mt-3" style={{ justifyContent: "center" }}>
+      <div className="col-6">
         <div className="form-deliveryInfor">
           <input
             type="text"
@@ -189,7 +189,7 @@ const DeliveryInfo = (props) => {
 
           <p>Hình thức nhận hàng</p>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <div className="form-check">
+            <div className="form-check mb-3">
               <input
                 className="form-check-input"
                 type="radio"
@@ -283,7 +283,7 @@ const DeliveryInfo = (props) => {
 
           <p>Thời gian giao hàng</p>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <div className="form-check">
+            <div className="form-check mb-3">
               <input
                 className="form-check-input"
                 type="radio"
@@ -353,7 +353,7 @@ const DeliveryInfo = (props) => {
             onChange={onChangeState}
           />
         </div>
-        <button className="btnSubmit" onClick={nextStep}>
+        <button className="btnNext" onClick={nextStep}>
           Next
         </button>
       </div>

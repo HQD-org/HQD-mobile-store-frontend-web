@@ -25,8 +25,8 @@ const Confirm = (props) => {
     setShowStep3(true);
   };
   return (
-    <div className="row" style={{ justifyContent: "center" }}>
-      <div className="col-5">
+    <div className="row mt-3 mb-3" style={{ justifyContent: "center" }}>
+      <div className="col-6">
         <div className="form-deliveryInfor">
           <div className="row">
             <div className="col-6">
@@ -86,7 +86,11 @@ const Confirm = (props) => {
               <h6>Mã khuyến mãi</h6>
             </div>
             <div className="col-5">
-              <input className="form-control" type="text" />
+              <input
+                className="form-control"
+                type="text"
+                style={{ height: "35px" }}
+              />
             </div>
             <div className="col-3" style={{ textAlign: "end" }}>
               <button className="btnCoupon">Áp dụng</button>
@@ -133,12 +137,18 @@ const Confirm = (props) => {
             </div>
           </div>
         </div>
-        <button className="btnSubmit" onClick={previousStep}>
-          Previous
-        </button>
-        <button className="btnSubmit" onClick={nextStep}>
-          Next
-        </button>
+        <div className="row" style={{ justifyContent: "center" }}>
+          <div className="col-6">
+            <button className="btnNext" onClick={previousStep}>
+              Previous
+            </button>
+          </div>
+          <div className="col-6">
+            <button className="btnNext" onClick={nextStep}>
+              Next
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

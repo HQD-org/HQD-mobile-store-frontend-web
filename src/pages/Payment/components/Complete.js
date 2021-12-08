@@ -50,8 +50,8 @@ const Complete = (props) => {
   };
 
   return (
-    <div className="row" style={{ justifyContent: "center" }}>
-      <div className="col-5">
+    <div className="row mt-3 mb-3" style={{ justifyContent: "center" }}>
+      <div className="col-6">
         <div className="form-deliveryInfor">
           <div style={{ textAlign: "center" }}>
             <button className="paymentNow" onClick={confirmOrder}>
@@ -66,7 +66,7 @@ const Complete = (props) => {
 
           <img src={complete} alt="" width="100%"></img>
         </div>
-        <button className="btnSubmit" onClick={previousStep}>
+        <button className="btnNext" onClick={previousStep}>
           Previous
         </button>
       </div>

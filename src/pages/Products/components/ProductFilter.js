@@ -22,7 +22,7 @@ const ProductFilter = (props) => {
   return (
     <>
       <div className="row filter-list">
-        <div className="col-2 brand-list">
+        <div className="col-3 brand-list">
           <select
             className="form-select"
             aria-label="select-brand"
@@ -44,7 +44,7 @@ const ProductFilter = (props) => {
             {renderOptionSelect(capacityList)}
           </select>
         </div>
-        <div className="col-1 ram-list">
+        <div className="col-2 ram-list">
           <select
             className="form-select"
             aria-label="select-ram"

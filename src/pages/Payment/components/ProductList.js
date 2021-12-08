@@ -14,7 +14,7 @@ const ProductList = () => {
             <hr />
             <div className="row">
               <div className="col-3">
-                <img src={`${p.image}`} alt="" width="80%" />
+                <img src={`${p.image}`} alt="" width="80%" height="100px" />
               </div>
               <div className="col-4">
                 <div>

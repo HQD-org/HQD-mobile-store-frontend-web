@@ -45,14 +45,16 @@ const Complete = (props) => {
         receiveAt: dataStep1.receiveType,
         timeReceive: dataStep1.timeDelivery,
         message: dataStep1.message,
-        status: dataStep1.paymentType,
       },
     };
 
-    const res = await dispatch(createOrderAction(data));
-    if (res) {
-      await dispatch(getCartAction());
-      history.push("/");
+    if (dataStep1.paymentType === "cod") {
+      const res = await dispatch(createOrderAction(data));
+      if (res) {
+        await dispatch(getCartAction());
+        history.push("/");
+      }
+      return;
     }
   };
 

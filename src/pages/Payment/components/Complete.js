@@ -1,12 +1,16 @@
 import React from "react";
-import complete from "../../../common/images/complete.png";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import complete from "../../../common/images/complete.png";
+import { createOrderAction } from "../../../redux/actions/Order/orderAction";
+import { getCartAction } from "../../../redux/actions/Cart/cartAction";
+import { useHistory } from "react-router-dom";
 
 const Complete = (props) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const { setShowStep2, dataStep1, dataStep2 } = props;
   const itemsInCart = useSelector((state) => state.cart.items);
-  const authInfo = useSelector((state) => state.auth.user);
   const previousStep = () => {
     setShowStep2(true);
   };
@@ -26,8 +30,7 @@ const Complete = (props) => {
       products: products,
       totalPrice:
         dataStep2.estimatePrice + dataStep2.shipPrice - dataStep2.discount,
-      coupon: "",
-      user: authInfo.user._id,
+      coupon: "123",
       receiveInfo: {
         receiver: dataStep1.name,
         phone: dataStep1.phone,
@@ -41,12 +44,18 @@ const Complete = (props) => {
           address.province,
         receiveAt: dataStep1.receiveType,
         timeReceive: dataStep1.timeDelivery,
-        status: dataStep1.paymentType,
         message: dataStep1.message,
       },
-      status: "wait confirm",
     };
-    console.log("log at ==> Complete.js ==> data: ", data);
+
+    if (dataStep1.paymentType === "cod") {
+      const res = await dispatch(createOrderAction(data));
+      if (res) {
+        await dispatch(getCartAction());
+        history.push("/");
+      }
+      return;
+    }
   };
 
   return (

@@ -4,6 +4,7 @@ import brandReducer from "./Brand/brandReducers";
 import cartReducer from "./Cart/cartReducers";
 import locationReducer from "./Location/locationReducers";
 import modelReducer from "./Model/modelReducers";
+import orderReducer from "./Order/orderReducers";
 import productReducer from "./Product/productReducers";
 import systemReducer from "./System/systemReducers";
 import userReducer from "./User/userReducers";
@@ -15,6 +16,7 @@ const rootReducers = {
   cart: cartReducer,
   location: locationReducer,
   model: modelReducer,
+  order: orderReducer,
   product: productReducer,
   system: systemReducer,
   user: userReducer,

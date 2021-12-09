@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import Cookie from "js-cookie";
 import React, { useEffect } from "react";
 import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,12 +27,22 @@ const AppHeader = () => {
   };
 
   useEffect(() => {
+    // const cart = Cookie.get("cart");
     if (isLogin) {
+      // if (cart) {
+      //   //   merge cart cookies với cart database
+      //   // xong xoá cart ở Cookies
+      //     Cookie.remove("cart");
+      //return;
+      // }
       const getCart = async () => {
         await dispatch(getCartAction());
       };
       getCart();
+      return;
     }
+
+    // get data product by list id in cart;
   }, [isLogin]);
 
   const DropdownMenu = () => {

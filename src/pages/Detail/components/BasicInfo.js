@@ -1,11 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Grid, Typography } from "@material-ui/core";
+import Cookie from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "../../../common/css/Detail.Style.css";
 import { getByListIdAction } from "../../../redux/actions/Branch/branchAction";
-import { addToCartAction } from "../../../redux/actions/Cart/cartAction";
+import {
+  addToCartAction,
+  getCartAction,
+} from "../../../redux/actions/Cart/cartAction";
 import { findProductByIdAction } from "../../../redux/actions/Product/productAction";
 
 const CapacityGrid = (props) => {
@@ -92,6 +96,7 @@ const BasicInfo = () => {
   const product = useSelector((state) => state.product.productDetail);
   const products = useSelector((state) => state.product.list);
   const branches = useSelector((state) => state.branch.list);
+  const isLogin = useSelector((state) => state.auth.isLogin);
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [currentColor, setCurrentColor] = useState(
@@ -110,7 +115,26 @@ const BasicInfo = () => {
       color: currentColor.name,
       image: images[selectedImage],
     };
-    await dispatch(addToCartAction(data));
+    if (isLogin) {
+      const res = await dispatch(addToCartAction(data));
+      if (res) await dispatch(getCartAction());
+      return;
+    }
+    const cart = Cookie.get("cart");
+    data.quantity = 1;
+    if (cart) {
+      const cartArray = JSON.parse(cart);
+      const index = cartArray.findIndex((c) => c.idProduct === data.idProduct);
+      if (index === -1) {
+        cartArray.push(data);
+        Cookie.set("cart", JSON.stringify(cartArray));
+        return;
+      }
+      cartArray[index] = { ...data, quantity: cartArray[index].quantity + 1 };
+      Cookie.set("cart", JSON.stringify(cartArray));
+      return;
+    }
+    Cookie.set("cart", JSON.stringify([data]));
   };
 
   const changeColor = (value) => {
@@ -158,7 +182,6 @@ const BasicInfo = () => {
         currentColor.quantityInfo.length > 0 ? "THÊM VÀO GIỎ HÀNG" : "HẾT HÀNG"
       );
     }
-    // console.log("a", currentColor.quantityInfo.length);
     setQuantityOfBranch(quantityOfBranch);
     setListBranches(branches);
   }, [currentColor]);

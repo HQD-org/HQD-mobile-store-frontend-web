@@ -96,7 +96,6 @@ const DeliveryInfo = (props) => {
       );
       setProvince(provinceIndex);
     }
-    setDistrictList([]);
   }, [provinceList]);
 
   useEffect(() => {
@@ -106,7 +105,6 @@ const DeliveryInfo = (props) => {
       );
       setDistrict(districtIndex);
     }
-    setVillageList([]);
   }, [districtList]);
 
   useEffect(() => {
@@ -196,8 +194,8 @@ const DeliveryInfo = (props) => {
                 name="receiveType"
                 id="receive-type2"
                 onChange={onChangeState}
-                value="home"
-                checked={dataStep1.receiveType === "home"}
+                value="at home"
+                checked={dataStep1.receiveType === "at home"}
               />
               <label className="form-check-label" htmlFor="receive-type2">
                 Tại nhà
@@ -209,9 +207,9 @@ const DeliveryInfo = (props) => {
                 type="radio"
                 name="receiveType"
                 id="receive-type1"
-                value="store"
+                value="at store"
                 onChange={onChangeState}
-                checked={dataStep1.receiveType === "store"}
+                checked={dataStep1.receiveType === "at store"}
               />
               <label className="form-check-label" htmlFor="receive-type1">
                 Tại cửa hàng
@@ -289,9 +287,9 @@ const DeliveryInfo = (props) => {
                 type="radio"
                 name="timeDelivery"
                 id="time-delivery1"
-                value="all"
+                value="all day"
                 onChange={onChangeState}
-                checked={dataStep1.timeDelivery === "all"}
+                checked={dataStep1.timeDelivery === "all day"}
               />
               <label className="form-check-label" htmlFor="time-delivery1">
                 Các ngày trong tuần
@@ -303,9 +301,9 @@ const DeliveryInfo = (props) => {
                 type="radio"
                 name="timeDelivery"
                 id="time-delivery2"
-                value="office"
+                value="office day"
                 onChange={onChangeState}
-                checked={dataStep1.timeDelivery === "office"}
+                checked={dataStep1.timeDelivery === "office day"}
               />
               <label className="form-check-label" htmlFor="time-delivery2">
                 Giờ hành chính
@@ -321,9 +319,9 @@ const DeliveryInfo = (props) => {
                 type="radio"
                 name="paymentType"
                 id="payment-methods1"
-                value="cash"
+                value="cod"
                 onChange={onChangeState}
-                checked={dataStep1.paymentType === "cash"}
+                checked={dataStep1.paymentType === "cod"}
               />
               <label className="form-check-label" htmlFor="payment-methods1">
                 Thanh toán khi nhận hàng
@@ -336,8 +334,8 @@ const DeliveryInfo = (props) => {
                 name="paymentType"
                 id="payment-methods2"
                 onChange={onChangeState}
-                value="paypal"
-                checked={dataStep1.paymentType === "paypal"}
+                value="online"
+                checked={dataStep1.paymentType === "online"}
               />
               <label className="form-check-label" htmlFor="payment-methods2">
                 Thanh toán bằng Paypal

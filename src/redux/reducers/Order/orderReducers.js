@@ -2,13 +2,13 @@
 import {
   CREATE_ORDER_FAIL,
   CREATE_ORDER_SUCCESS,
-  GET_ORDER_FAIL,
-  GET_ORDER_SUCCESS,
+  GET_BY_STATUS_AND_USER_FAIL,
+  GET_BY_STATUS_AND_USER_SUCCESS,
   CHANGE_STATUS_ORDER_FAIL,
   CHANGE_STATUS_ORDER_SUCCESS,
   REMOVE_ORDER_FAIL,
   REMOVE_ORDER_SUCCESS,
-} from "../../actions/Model/types";
+} from "../../actions/Order/types";
 
 const initState = {
   list: [],
@@ -27,11 +27,11 @@ export default function (state = initState, action) {
       return { ...state };
     case CREATE_ORDER_SUCCESS:
       return { ...state, updateFlag: !state.updateFlag, detailOrder: payload };
-    case GET_ORDER_FAIL:
+    case GET_BY_STATUS_AND_USER_FAIL:
       return {
         ...state,
       };
-    case GET_ORDER_SUCCESS:
+    case GET_BY_STATUS_AND_USER_SUCCESS:
       return {
         ...state,
         detailOrder: payload,

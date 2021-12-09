@@ -27,7 +27,7 @@ const ProductList = () => {
               <div className="col-5 price-quantity">
                 <div>
                   <h6 style={{ textAlign: "end" }}>{`${p.price}₫`}</h6>
-                  <p>x1</p>
+                  <p>x{p.quantity}</p>
                 </div>
               </div>
             </div>

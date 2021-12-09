@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Cookie from "js-cookie";
 import React, { useEffect, useState } from "react";
-import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
+import { FaSearch, FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Link, NavLink } from "react-router-dom";
@@ -21,7 +21,7 @@ const AppHeader = () => {
   const history = useHistory();
   const isLogin = useSelector((state) => state.auth.isLogin);
   const user = useSelector((state) => state.auth.user);
-  const [itemsInCartLength, setItemsInCartLength] = useState(0);
+  const [totalQuantity, setTotalQuantity] = useState(0);
   const handleLogout = async () => {
     await dispatch(logoutAction());
     history.push("/login");
@@ -47,9 +47,14 @@ const AppHeader = () => {
   }, [isLogin]);
 
   useEffect(() => {
-    if (itemsInCart) {
-      setItemsInCartLength(itemsInCart.length);
+    if (itemsInCart.length > 0) {
+      const totalProduct = itemsInCart.reduce((init, item) => {
+        return init + item.quantity;
+      }, 0);
+      setTotalQuantity(totalProduct);
+      return;
     }
+    setTotalQuantity(0);
   }, [itemsInCart]);
 
   const DropdownMenu = () => {
@@ -127,8 +132,8 @@ const AppHeader = () => {
 
             <div>
               <Badge
-                badgeContent={itemsInCartLength > 0 ? itemsInCartLength : ""}
-                invisible={itemsInCartLength > 0 ? false : true}
+                badgeContent={totalQuantity > 0 ? totalQuantity : ""}
+                invisible={totalQuantity > 0 ? false : true}
               >
                 <ShoppingCartIcon
                   className="icon-header"

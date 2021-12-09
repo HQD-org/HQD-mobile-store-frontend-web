@@ -32,10 +32,18 @@ const ProductList = (props) => {
                     alt={product.name}
                   />
                   <div className="txt-product">
-                    <p className="name-pro">{product.name}</p>
-                    <p className="capacity-pro">Capacity: {product.capacity}</p>
-                    <p className="ram-pro">RAM: {product.ram}</p>
-                    <p className="price-pro">Giá: {price}</p>
+                    <h4
+                      className="name-pro"
+                      data-toggle="tooltip"
+                      title={product.name}
+                    >
+                      {product.name}
+                    </h4>
+                    <h6 className="capacity-pro">
+                      Capacity: {product.capacity}
+                    </h6>
+                    <h6 className="ram-pro">RAM: {product.ram}</h6>
+                    <h6 className="price-pro">Giá: {price}₫</h6>
                   </div>
                 </div>
 

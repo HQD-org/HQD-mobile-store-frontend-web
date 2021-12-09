@@ -232,7 +232,7 @@ const ProductEditor = (props) => {
           <tbody>
             {productList.map((item, index) => (
               <tr key={`product-${index}`}>
-                <td style={{ width: "300px" }}>
+                <td style={{ width: "500px" }}>
                   <div
                     data-bs-toggle="collapse"
                     href={`#collapseColor-${index}`}

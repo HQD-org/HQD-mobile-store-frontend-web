@@ -14,7 +14,7 @@ const initState = {
   list: [],
   pagination: {
     page: 1,
-    itemPerPage: 20,
+    itemPerPage: 16,
     totalItem: 0,
   },
   updateFlag: false,
@@ -30,7 +30,7 @@ export default function (state = initState, action) {
       return {
         ...state,
         list: [],
-        pagination: { page: 1, itemPerPage: 8, totalItem: 0 },
+        pagination: { page: 1, itemPerPage: 16, totalItem: 0 },
       };
     case GET_ALL_MODEL_SUCCESS:
       return {
@@ -45,7 +45,7 @@ export default function (state = initState, action) {
       return {
         ...state,
         list: [],
-        pagination: { page: 1, itemPerPage: 8, totalItem: 0 },
+        pagination: { page: 1, itemPerPage: 16, totalItem: 0 },
       };
     case FILTER_MODEL_SUCCESS:
       return {

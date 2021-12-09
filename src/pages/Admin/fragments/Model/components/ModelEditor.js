@@ -169,7 +169,7 @@ const ModelEditor = (props) => {
                   list={brands}
                   label={"Thương hiệu"}
                   classLabel={"col-3 mb-3"}
-                  classInput={"col-7"}
+                  classInput={"col-7 mb-3"}
                   classParent={"row"}
                 />
                 <Textarea

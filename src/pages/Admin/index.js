@@ -8,15 +8,19 @@ import ModelFragment from "./fragments/Model";
 import ProductFragment from "./fragments/Products";
 import UserFragment from "./fragments/User";
 import BranchFragment from "./fragments/Branch";
+import CouponFragment from "./fragments/Coupon";
+import InvoiceFragment from "./fragments/Invoice";
 
 const AdminPage = (props) => {
   const [toggleBrand, setToggleBrand] = useState(false);
   const [toggleModel, setToggleModel] = useState(false);
-  const [toggleAddProduct, setToggleAddProduct] = useState(false);
+  const [toggleAddProduct, setToggleAddProduct] = useState(true);
   const [toggleProduct, setToggleProduct] = useState(false);
   const [toggleUser, setToggleUser] = useState(false);
-  const [toggleBranch, setToggleBranch] = useState(true);
-  const toggleRef = useRef("branch");
+  const [toggleBranch, setToggleBranch] = useState(false);
+  const [toggleCoupon, setToggleCoupon] = useState(false);
+  const [toggleInvoice, setToggleInvoice] = useState(false);
+  const toggleRef = useRef("add product");
   const { showHeaderAndFooter } = props;
   const dispatch = useDispatch();
   useEffect(() => {
@@ -41,6 +45,12 @@ const AdminPage = (props) => {
         break;
       case "branch":
         setToggleBranch(false);
+        break;
+      case "coupon":
+        setToggleCoupon(false);
+        break;
+      case "invoice":
+        setToggleInvoice(false);
         break;
       default:
         break;
@@ -75,6 +85,14 @@ const AdminPage = (props) => {
         setToggleBranch(true);
         toggleRef.current = "branch";
         break;
+      case "coupon":
+        setToggleCoupon(true);
+        toggleRef.current = "coupon";
+        break;
+      case "invoice":
+        setToggleInvoice(true);
+        toggleRef.current = "invoice";
+        break;
       default:
         break;
     }
@@ -97,6 +115,8 @@ const AdminPage = (props) => {
               {toggleProduct && <ProductFragment />}
               {toggleUser && <UserFragment />}
               {toggleBranch && <BranchFragment />}
+              {toggleCoupon && <CouponFragment />}
+              {toggleInvoice && <InvoiceFragment />}
             </div>
           </div>
         </div>

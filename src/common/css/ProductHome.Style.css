@@ -1,0 +1,79 @@
+.btnfilter-home {
+    z-index: 1;
+    position: relative;
+    font-size: inherit;
+    font-family: inherit;
+    color: white;
+    padding: 0.5em 1em;
+    outline: none;
+    border: none;
+    background-color: #3fa5ef;
+    overflow: hidden;
+    border-radius: 3px;
+    transition: color 0.4s ease-in-out;
+}
+
+.btnfilter-home::before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    bottom: 100%;
+    right: 100%;
+    width: 2em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: hsl(236, 32%, 26%);
+    transform-origin: center;
+    transform: translate3d(50%, 50%, 0) scale3d(0, 0, 0);
+    transition: transform 0.45s ease-in-out;
+}
+
+.btnfilter-home:hover {
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.btnfilter-home:hover::before {
+    transform: translate3d(50%, 50%, 0) scale3d(15, 15, 15);
+}
+
+.btnfilter-home {
+    width: 100%;
+    font-weight: bold;
+}
+
+.filter-list {
+    justify-content: center;
+}
+
+.now-price {
+    color: red;
+    font-weight: bold !important;
+}
+
+.card-newPro:hover {
+    filter: drop-shadow(1px 2px 2px rgb(65, 64, 64));
+    cursor: pointer;
+}
+
+.card-newPro {
+    filter: drop-shadow(1px 0px 2px #cccccc);
+    padding: 10px;
+}
+
+.card-img-top {
+    width: 80% !important;
+}
+
+.pre-price {
+    text-decoration-line: line-through;
+    font-weight: normal !important;
+}
+
+.img-pro {
+    text-align: center;
+}
+
+.card-title {
+    color: black;
+}

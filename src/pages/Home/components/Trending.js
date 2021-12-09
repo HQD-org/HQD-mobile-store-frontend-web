@@ -8,14 +8,14 @@ import imgWait from "../../../common/images/wait.png";
 const Trending = () => {
   return (
     <div style={{ marginTop: "60px" }}>
-      <div style={{ textAlign: "center" }}>
+      <div className="row" style={{ textAlign: "center" }}>
         <img src={imgWait} alt=""></img>
       </div>
       <div
         className="row body-trending"
         style={{
           backgroundImage: `url(${backgroundTrending})`,
-          marginTop: "-88px",
+          marginTop: "-149px",
         }}
       >
         <div

@@ -8,6 +8,8 @@ import {
   UPDATE_BRANCH_SUCCESS,
   FILTER_BRANCH_FAIL,
   FILTER_BRANCH_SUCCESS,
+  GET_BY_LIST_ID_FAIL,
+  GET_BY_LIST_ID_SUCCESS,
 } from "../../actions/Branch/types";
 
 const initState = {
@@ -52,6 +54,15 @@ export default function (state = initState, action) {
         ...state,
         list: payload.branches,
         pagination: payload.pagination,
+      };
+    case GET_BY_LIST_ID_FAIL:
+      return {
+        ...state,
+      };
+    case GET_BY_LIST_ID_SUCCESS:
+      return {
+        ...state,
+        list: payload,
       };
     default:
       return state;

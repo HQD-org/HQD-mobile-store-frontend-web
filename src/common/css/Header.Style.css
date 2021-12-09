@@ -33,7 +33,7 @@ nav-link:hover {
 
 .icon-search {
     position: absolute;
-    top: 37%;
+    top: 35%;
     left: 85.5%;
     color: #c8c6c6;
 }
@@ -96,4 +96,60 @@ nav-link:hover {
     .btnWelcome {
         width: 100%;
     }
+}
+
+.txtheader-sologan {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.background-header {
+    background-size: cover;
+    height: 500px;
+    background-repeat: no-repeat;
+}
+
+.txtModern {
+    font-size: 50px;
+    color: #3fa5ef;
+    filter: drop-shadow(2px 4px 6px black);
+}
+
+.txtConnect {
+    color: white;
+    filter: drop-shadow(2px 4px 6px black);
+}
+
+.icon-cartHeader {
+    position: relative;
+}
+
+.total-quantity {
+    top: 9px;
+    position: absolute;
+    right: 144px;
+    font-size: 10px;
+    background: #fc9860;
+    padding: 1px 5px;
+    border: 1px solid #fc9860;
+    border-radius: 50%;
+    color: white;
+    position: absolute;
+}
+
+.total-quantity-none {
+    top: 9px;
+    position: absolute;
+    right: 144px;
+    font-size: 10px;
+    padding: 1px 5px;
+    border-radius: 50%;
+    color: white;
+    position: absolute;
+}
+
+.MuiBadge-badge {
+    background-color: #de7311;
+    color: white;
 }

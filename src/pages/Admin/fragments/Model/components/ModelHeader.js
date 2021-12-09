@@ -9,6 +9,7 @@ import {
   timeDebutList,
 } from "../../../../../common/constants/ListSelect";
 import "../../../../../common/css/Model.Style.css";
+import { renderOptionSelect } from "../../../../../common/utils/helper";
 
 const ModelHeader = (props) => {
   const {
@@ -28,15 +29,6 @@ const ModelHeader = (props) => {
     setOption(true);
   };
 
-  const options = (list) => {
-    return list.map((element) => {
-      return (
-        <option key={element._id} value={element._id}>
-          {element.name}
-        </option>
-      );
-    });
-  };
   const onSubmit = async (e) => {
     e.preventDefault();
     filter(1, 20);
@@ -46,29 +38,42 @@ const ModelHeader = (props) => {
       <div className="container-fluid">
         <div
           className="row"
-          style={{ marginTop: "50px", alignItems: "baseline" }}
+          style={{ marginTop: "50px", alignItems: "center" }}
         >
-          <div className="col">
+          <div className="col-10">
             <div>
               <i className="bi bi-front icon-admin icon-model" />
               <span className="name-management">Model</span>
             </div>
             <p className="choosenHQD"> Choosing HQD mobile is a good ideal</p>
           </div>
+          <div className="col-2">
+            <button
+              type="button"
+              className="btn-addBrand"
+              onClick={toggleEditor}
+            >
+              <i className="bi bi-plus-square-fill icon-brand"></i>
+              <span>Add Model</span>
+            </button>
+          </div>
         </div>
         <hr />
         <div className="row">
           <form onSubmit={onSubmit}>
-            <div className="col-2">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                name="searchTerm"
-                onChange={(e) => onFilterValueChange(e, "name")}
-              />
+            <div className="row">
+              <div className="col-3">
+                <input
+                  className="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  name="searchTerm"
+                  onChange={(e) => onFilterValueChange(e, "name")}
+                />
+              </div>
             </div>
+
             <div
               className="row"
               style={{ marginTop: "20px", alignItems: "center" }}
@@ -82,11 +87,11 @@ const ModelHeader = (props) => {
                     onChange={(e) => onFilterValueChange(e, "brand")}
                   >
                     <option value="all">Filter by Brand</option>
-                    {options(brands)}
+                    {renderOptionSelect(brands)}
                   </select>
                 </FormGroup>
               </div>
-              <div className="col-2">
+              <div className="col-2" style={{ width: "23%" }}>
                 <FormGroup>
                   <select
                     className="form-select"
@@ -95,7 +100,7 @@ const ModelHeader = (props) => {
                     onChange={(e) => onFilterValueChange(e, "os")}
                   >
                     <option value="all">Filter by Operating System</option>
-                    {options(osList)}
+                    {renderOptionSelect(osList)}
                   </select>
                 </FormGroup>
               </div>
@@ -108,7 +113,7 @@ const ModelHeader = (props) => {
                     onChange={(e) => onFilterValueChange(e, "timeDebut")}
                   >
                     <option value="all">Filter by Time</option>
-                    {options(timeDebutList)}
+                    {renderOptionSelect(timeDebutList)}
                   </select>
                 </FormGroup>
               </div>
@@ -121,37 +126,27 @@ const ModelHeader = (props) => {
                     onChange={(e) => onFilterValueChange(e, "status")}
                   >
                     <option value="all">Filter by Status</option>
-                    {options(statusModel)}
+                    {renderOptionSelect(statusModel)}
                   </select>
                 </FormGroup>
               </div>
-              <div className="col-2">
+              <div className="col-1">
                 <button type="submit" className="btn-filter">
                   Filter
                 </button>
               </div>
-            </div>
-            <div className="col-2">
-              <ReactHTMLTableToExcel
-                id="test-table-xls-button"
-                className="btnDownload-model"
-                table="table-to-xls"
-                filename="tablexls"
-                sheet="tablexls"
-                buttonText="Export"
-              />
+              <div className="col-2">
+                <ReactHTMLTableToExcel
+                  id="test-table-xls-button"
+                  className="btnDownload-model"
+                  table="table-to-xls"
+                  filename="tablexls"
+                  sheet="tablexls"
+                  buttonText="Export"
+                />
+              </div>
             </div>
           </form>
-          <div className="col-2">
-            <button
-              type="button"
-              className="btn-addBrand"
-              onClick={toggleEditor}
-            >
-              <i className="bi bi-plus-square-fill icon-brand"></i>
-              <span>Add Model</span>
-            </button>
-          </div>
         </div>
       </div>
     </>

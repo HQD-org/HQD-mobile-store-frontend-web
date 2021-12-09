@@ -17,14 +17,14 @@ const loading =
     dispatch(changeLoading(loading));
   };
 
-function addUserFail() {
+export function addUserFail() {
   return {
     type: ADD_USER_FAIL,
     payload: {},
   };
 }
 
-function addUserSuccess(data) {
+export function addUserSuccess(data) {
   return {
     type: ADD_USER_SUCCESS,
     payload: data,
@@ -52,14 +52,14 @@ export function addUserAction(dataSubmit) {
   };
 }
 
-function getAllUserFail() {
+export function getAllUserFail() {
   return {
     type: GET_ALL_USER_FAIL,
     payload: {},
   };
 }
 
-function getAllUserSuccess(data) {
+export function getAllUserSuccess(data) {
   return {
     type: GET_ALL_USER_SUCCESS,
     payload: data,
@@ -84,14 +84,14 @@ export function getAllUserAction() {
   };
 }
 
-function updateUserFail() {
+export function updateUserFail() {
   return {
     type: UPDATE_USER_FAIL,
     payload: {},
   };
 }
 
-function updateUserSuccess(data) {
+export function updateUserSuccess(data) {
   return {
     type: UPDATE_USER_SUCCESS,
     payload: data,
@@ -119,14 +119,14 @@ export function updateUserAction(dataSubmit) {
   };
 }
 
-function filterUserFail() {
+export function filterUserFail() {
   return {
     type: FILTER_USER_FAIL,
     payload: {},
   };
 }
 
-function filterUserSuccess(data) {
+export function filterUserSuccess(data) {
   return {
     type: FILTER_USER_SUCCESS,
     payload: data,

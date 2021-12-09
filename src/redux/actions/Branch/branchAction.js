@@ -8,6 +8,8 @@ import {
   UPDATE_BRANCH_SUCCESS,
   FILTER_BRANCH_FAIL,
   FILTER_BRANCH_SUCCESS,
+  GET_BY_LIST_ID_FAIL,
+  GET_BY_LIST_ID_SUCCESS,
 } from "./types";
 import branchAPI from "../../../apis/Branch.Api";
 
@@ -153,6 +155,37 @@ export function filterBranchAction(queryParams) {
     } catch {
       dispatch(loading());
       dispatch(filterBranchFail());
+      return false;
+    }
+  };
+}
+
+export function getByListIdFail() {
+  return {
+    type: GET_BY_LIST_ID_FAIL,
+    payload: {},
+  };
+}
+
+export function getByListIdSuccess(data) {
+  return {
+    type: GET_BY_LIST_ID_SUCCESS,
+    payload: data,
+  };
+}
+
+export function getByListIdAction(queryParams) {
+  return async (dispatch) => {
+    try {
+      const res = await branchAPI.getByListId(queryParams);
+      if (res.success) {
+        dispatch(getByListIdSuccess(res.data));
+        return true;
+      }
+      dispatch(getByListIdFail());
+      return false;
+    } catch {
+      dispatch(getByListIdFail());
       return false;
     }
   };

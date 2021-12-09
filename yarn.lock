@@ -954,6 +954,14 @@
     "@babel/helper-create-regexp-features-plugin" "^7.16.0"
     "@babel/helper-plugin-utils" "^7.14.5"
 
+"@babel/polyfill@^7.12.1":
+  version "7.12.1"
+  resolved "https://registry.yarnpkg.com/@babel/polyfill/-/polyfill-7.12.1.tgz#1f2d6371d1261bbd961f3c5d5909150e12d0bd96"
+  integrity sha512-X0pi0V6gxLi6lFZpGmeNa4zxtwEmCs42isWLNjZZDE0Y8yVfgu0T2OAHlzBbdYlqbW/YXVvoBHpATEM+goCj8g==
+  dependencies:
+    core-js "^2.6.5"
+    regenerator-runtime "^0.13.4"
+
 "@babel/preset-env@7.12.1":
   version "7.12.1"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.12.1.tgz#9c7e5ca82a19efc865384bb4989148d2ee5d7ac2"
@@ -4657,7 +4665,7 @@ core-js@3.6.5:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
   integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
 
-core-js@^2.4.0:
+core-js@^2.4.0, core-js@^2.6.5:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.12.tgz#d9333dfa7b065e347cc5682219d6f690859cc2ec"
   integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
@@ -10920,6 +10928,14 @@ react-scripts@4.0.3:
   optionalDependencies:
     fsevents "^2.1.3"
 
+react-show-more-text@^1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/react-show-more-text/-/react-show-more-text-1.5.2.tgz#154cb955b731007e4f215e573e5169b8d17b23dd"
+  integrity sha512-E5HRCjvxE2SfWeuf2lXSoNi/5TJFhX3vXF9sOHEaBlqRPDPuBWw3VnKHf8EwWG4NOU0tsQkeO19yj2mvIpc38g==
+  dependencies:
+    "@babel/polyfill" "^7.12.1"
+    prop-types "^15.7.2"
+
 react-sortable-tree-patch-react-17@^2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-sortable-tree-patch-react-17/-/react-sortable-tree-patch-react-17-2.9.0.tgz#d80ef61a5b941a8cc52570f6aa2c3059076d9f21"
@@ -10941,6 +10957,11 @@ react-spinners@^0.11.0:
   integrity sha512-rDZc0ABWn/M1OryboGsWVmIPg8uYWl0L35jPUhr40+Yg+syVPjeHwvnB7XWaRpaKus3M0cG9BiJA+ZB0dAwWyw==
   dependencies:
     "@emotion/react" "^11.1.4"
+
+react-stepzilla@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/react-stepzilla/-/react-stepzilla-7.0.0.tgz#cea91c5ff0fe6425da2939980559ec6bf296e987"
+  integrity sha512-8SbVrNyCvVIewC1NcolmcxXE7lP4U38+5fQRa5jfXEv3AscOZikS9Z2DsTOWjL2F9VFy/YHb8pZe3p3BkRquPw==
 
 react-to-print@^2.8.0:
   version "2.14.0"

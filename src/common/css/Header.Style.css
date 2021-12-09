@@ -148,3 +148,8 @@ nav-link:hover {
     color: white;
     position: absolute;
 }
+
+.MuiBadge-badge {
+    background-color: #de7311;
+    color: white;
+}

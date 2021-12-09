@@ -76,6 +76,18 @@ const PaymentPage = (props) => {
     <div className="container">
       <div className="row mt-3">
         <div className="step-progress">
+          <div className="row" style={{ justifyContent: "center" }}>
+            <div className="col-12">
+              <ul class="progressbar">
+                <li class={showStep1 ? "active" : "done"}>Information</li>
+                <li class={showStep2 ? "active" : showStep3 ? "done" : ""}>
+                  Confirm
+                </li>
+                <li class={showStep3 ? "active" : ""}>Complete</li>
+              </ul>
+            </div>
+          </div>
+
           {showStep1 && (
             <DeliveryInfo
               dataStep1={dataStep1}

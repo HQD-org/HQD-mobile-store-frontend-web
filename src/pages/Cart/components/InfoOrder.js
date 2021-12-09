@@ -22,7 +22,7 @@ const InfoOrder = () => {
   }, [itemsInCart]);
 
   return (
-    <div className="summary">
+    <div className="summary mb-3">
       <div className="row">
         <h5>SUMMARY</h5>
       </div>

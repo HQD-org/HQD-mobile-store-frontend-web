@@ -11,6 +11,8 @@ import { logoutAction } from "../../redux/actions/Auth/authActions";
 import { getCartAction } from "../../redux/actions/Cart/cartAction";
 import "../css/AdminHeader.Style.css";
 import imgBackground from "../images/background-header-1.jpg";
+import Badge from "@mui/material/Badge";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const AppHeader = () => {
   const show = useSelector((state) => state.system.showHeaderAndFooter);
@@ -117,18 +119,19 @@ const AppHeader = () => {
             </div>
 
             <div>
-              <FaShoppingCart
-                className="icon-header icon-cartHeader"
-                onClick={onClickCart}
-                style={{ color: "#3FA5EF", transform: "scaleX(-1)" }}
-              />
-              {itemsInCart.length > 0 ? (
-                <p className="total-quantity">{itemsInCart.length}</p>
-              ) : (
-                <p className="total-quantity-none"></p>
-              )}
+              <Badge
+                badgeContent={
+                  itemsInCart.length > 0 ? `${itemsInCart.length}` : ""
+                }
+                invisible={itemsInCart.length > 0 ? false : true}
+              >
+                <ShoppingCartIcon
+                  className="icon-header"
+                  onClick={onClickCart}
+                  style={{ color: "#3FA5EF", transform: "scaleX(-1)" }}
+                />
+              </Badge>
             </div>
-
             <div className="dropdown icon-header">
               <FaUser
                 onClick={onClickUser}

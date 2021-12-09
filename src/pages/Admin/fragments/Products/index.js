@@ -5,8 +5,6 @@ import Pagination from "../../../../common/components/Pagination";
 import { getAllBranchAction } from "../../../../redux/actions/Branch/branchAction";
 import { getAllBrandAction } from "../../../../redux/actions/Brand/brandAction";
 import { filterProductAction } from "../../../../redux/actions/Product/productAction";
-import ProductEditorForMain from "./components/ProductEditorForMain";
-import ProductEditorForSub from "./components/ProductEditorForSub";
 import ProductHeader from "./components/ProductHeader";
 import ProductList from "./components/ProductList";
 
@@ -97,21 +95,6 @@ const ProductFragment = () => {
         filterProduct={filterProduct}
       />
       <ProductList setModal={setModal} />
-      {role === "admin" ? (
-        <ProductEditorForMain
-          modal={modal}
-          setModal={setModal}
-          option={true}
-          brand={undefined}
-        />
-      ) : (
-        <ProductEditorForSub
-          modal={modal}
-          setModal={setModal}
-          option={true}
-          brand={undefined}
-        />
-      )}
       <Pagination
         pagination={pagination}
         onPageChange={onPageChange}

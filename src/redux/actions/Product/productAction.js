@@ -193,3 +193,24 @@ export function findProductByIdAction(id) {
     }
   };
 }
+
+export function updateQuantityAction(dataSubmit) {
+  return async (dispatch) => {
+    try {
+      dispatch(loading(true));
+      const res = await productAPI.updateQuantity(dataSubmit);
+      if (res.success) {
+        dispatch(loading());
+        dispatch(updateProductSuccess(res.data));
+        return true;
+      }
+      dispatch(loading());
+      dispatch(updateProductFail());
+      return false;
+    } catch {
+      dispatch(loading());
+      dispatch(updateProductFail());
+      return false;
+    }
+  };
+}

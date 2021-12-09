@@ -16,6 +16,7 @@ import {
   addProductAction,
   filterProductAction,
   updateProductAction,
+  updateQuantityAction,
 } from "../../../../../redux/actions/Product/productAction";
 import InputColor from "./InputColor";
 
@@ -25,8 +26,11 @@ const ProductEditor = (props) => {
   const [formAddProduct, setFormAddProduct] = useState(null);
   const models = useSelector((state) => state.model.list);
   const products = useSelector((state) => state.product.list);
+  const role = useSelector((state) => state.auth.role);
+  const branch = useSelector((state) => state.auth.branch);
   const [productList, setProductList] = useState([]);
   const [currentModel, setCurrentModel] = useState({});
+  const [quantityList, setQuantityList] = useState([]);
 
   const toggle = () => {
     setModal(false);
@@ -93,7 +97,12 @@ const ProductEditor = (props) => {
       };
     });
     formAddProduct.color = color;
-    formAddProduct.name = currentModel.name + " " + formAddProduct.ram + " " +  formAddProduct.capacity
+    formAddProduct.name =
+      currentModel.name +
+      " " +
+      formAddProduct.ram +
+      " " +
+      formAddProduct.capacity;
     const res = await dispatch(addProductAction(formAddProduct));
     if (res) {
       setFormAddProduct(null);
@@ -113,6 +122,31 @@ const ProductEditor = (props) => {
     });
   };
 
+  const onQuantityChange = (index, value) => {
+    setQuantityList((prev) => {
+      return prev.map((item, i) => {
+        if (i !== index) return item;
+        const color = item.color.map((c) => {
+          if (c.name !== value.color) return c;
+          return {
+            ...c,
+            quantity: value.quantity,
+          };
+        });
+        return {
+          ...item,
+          color,
+        };
+      });
+    });
+  };
+
+  const updateQuantity = async (id) => {
+    const product = quantityList.find((item) => item.id === id);
+    const res = await dispatch(updateQuantityAction(product));
+    if (res) fetchProductListByModelId();
+  };
+
   const updateProduct = async (id) => {
     const product = productList.find((item) => item.id === id);
     const color = product.color.map((item) => {
@@ -130,13 +164,14 @@ const ProductEditor = (props) => {
       };
     });
     product.color = color;
-    product.name = currentModel.name + " " + product.ram + " " + product.capacity;
+    product.name =
+      currentModel.name + " " + product.ram + " " + product.capacity;
     const res = await dispatch(updateProductAction(product));
     if (res) fetchProductListByModelId();
   };
 
   useEffect(() => {
-    const editorList = products.map((product, index) => {
+    const editorList = products.map((product) => {
       return {
         color: product.color,
         id: product._id,
@@ -146,6 +181,26 @@ const ProductEditor = (props) => {
       };
     });
     setProductList(editorList);
+
+    if (role === "manager branch") {
+      const quantiTyInfoList = products.map((product) => {
+        const colorList = product.color.map((color) => {
+          const quantity =
+            color.quantityInfo.find((item) => item.idBranch === branch._id) ||
+            0;
+          return {
+            name: color.name,
+            quantity: quantity,
+          };
+        });
+        return {
+          id: product._id,
+          color: colorList,
+        };
+      });
+      setQuantityList(quantiTyInfoList);
+      return;
+    }
   }, [products]);
 
   return (
@@ -196,6 +251,7 @@ const ProductEditor = (props) => {
                       items={item.color}
                       index={index}
                       onValueChange={onChange}
+                      onQuantityChange={onQuantityChange}
                       type={"update"}
                     />
                   </div>
@@ -216,6 +272,7 @@ const ProductEditor = (props) => {
                     name="ram"
                     value={item.ram}
                     onChange={(e) => onChange(index, e)}
+                    disabled={role === "admin" ? false : true}
                   >
                     {renderOptionSelect(ramList)}
                   </select>
@@ -226,6 +283,7 @@ const ProductEditor = (props) => {
                     name="capacity"
                     defaultValue={item.capacity}
                     onChange={(e) => onChange(index, e)}
+                    disabled={role === "admin" ? false : true}
                   >
                     {renderOptionSelect(capacityList)}
                   </select>
@@ -236,25 +294,18 @@ const ProductEditor = (props) => {
                     name="status"
                     defaultValue={item.status}
                     onChange={(e) => onChange(index, e)}
+                    disabled={role === "admin" ? false : true}
                   >
                     {renderOptionSelect(statusProduct)}
                   </select>
                 </td>
-                {/* <td>
-                  {item.newRow ? (
-                    <AiOutlineClose
-                      color="red"
-                      onClick={(e) => handleRemove(e, index)}
-                    />
-                  ) : (
-                    <> </>
-                  )}
-                </td> */}
                 <td>
                   <FaCheck
                     color="green"
                     onClick={() => {
-                      return updateProduct(item.id);
+                      role === "admin"
+                        ? updateProduct(item.id)
+                        : updateQuantity(item.id);
                     }}
                   />
                 </td>
@@ -342,7 +393,11 @@ const ProductEditor = (props) => {
         </table>
         <div className="row">
           <div className="col-3">
-            <AiOutlinePlus color="blue" onClick={handleAddProduct} />
+            {role === "admin" ? (
+              <AiOutlinePlus color="blue" onClick={handleAddProduct} />
+            ) : (
+              <></>
+            )}{" "}
           </div>
         </div>
       </ModalBody>

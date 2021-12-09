@@ -1,20 +1,22 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import React from "react";
-// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import FragmentBrandPage from "../../pages/Brand";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import "../../common/css/AdminMenu.Style.css";
 import { logoutAction } from "../../redux/actions/Auth/authActions";
 import { RiCoupon3Fill } from "react-icons/ri";
+
 const AdminMenu = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const role = useSelector((state) => state.auth.role);
+
   const { toggle } = props;
   const handleLogout = async () => {
     await dispatch(logoutAction());
     history.push("/login");
   };
+
   return (
     <div>
       <div style={{ background: "#263544" }}>
@@ -38,47 +40,58 @@ const AdminMenu = (props) => {
                   <i className="fab fa-product-hunt icon-admin"></i>
                 </span>
                 <span>Products</span>
-              </div>{" "}
+              </div>
             </li>
             <li onClick={() => toggle("add product")}>
               <div to="# ">
                 <i className="bi bi-plus-square-fill icon-admin"></i>Add Product
-              </div>{" "}
+              </div>
             </li>
           </ul>
 
-          <div className="txtheader">Brand</div>
-          <ul className="list-menu">
-            <li onClick={() => toggle("brand")}>
-              <div>
-                <i className="fab fa-react icon-admin"></i>
-                Brands
-              </div>
-            </li>
-          </ul>
-          <div className="txtheader">Model</div>
-          <ul className="list-menu">
-            <li onClick={() => toggle("model")}>
-              <div>
-                <i className="bi bi-front icon-admin"></i>Models
-              </div>
-            </li>
-          </ul>
-          <div className="txtheader">Branch</div>
-          <ul className="list-menu">
-            <li onClick={() => toggle("branch")}>
-              <div>
-                <i className="bi bi-geo-alt-fill icon-admin"></i>Branchs
-              </div>
-            </li>
-          </ul>
+          {role === "admin" ? (
+            <>
+              <div className="txtheader">Brand</div>
+              <ul className="list-menu">
+                <li onClick={() => toggle("brand")}>
+                  <div>
+                    <i className="fab fa-react icon-admin"></i>
+                    Brands
+                  </div>
+                </li>
+              </ul>
+              <div className="txtheader">Model</div>
+              <ul className="list-menu">
+                <li onClick={() => toggle("model")}>
+                  <div>
+                    <i className="bi bi-front icon-admin"></i>Models
+                  </div>
+                </li>
+              </ul>
+              <div className="txtheader">Branch</div>
+              <ul className="list-menu">
+                <li onClick={() => toggle("branch")}>
+                  <div>
+                    <i className="bi bi-geo-alt-fill icon-admin"></i>Branchs
+                  </div>
+                </li>
+              </ul>
+            </>
+          ) : (
+            <> </>
+          )}
+
           <div className="txtheader">Manage</div>
           <ul className="list-menu">
-            <li onClick={() => toggle("user")}>
-              <div>
-                <i className="bi bi-person-fill icon-admin"></i>Users
-              </div>
-            </li>
+            {role === "admin" ? (
+              <li onClick={() => toggle("user")}>
+                <div>
+                  <i className="bi bi-person-fill icon-admin"></i>Users
+                </div>
+              </li>
+            ) : (
+              <> </>
+            )}
             <li onClick={() => toggle("coupon")}>
               <div>
                 <RiCoupon3Fill className="icon-admin" />

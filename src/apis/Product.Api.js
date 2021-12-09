@@ -81,6 +81,21 @@ const findById = async (id) => {
   }
 };
 
-const Product = { insert, getAll, update, filter, findById };
+const updateQuantity = async (body) => {
+  try {
+    const res = await axiosClient.post(`${url}/update-quantity`, body);
+    toastNotify(res ? res.message.VN : "Cập nhật số lượng thất bại");
+    return res && res.data
+      ? { data: res.data || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    toastNotify("Cập nhật số lượng thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const Product = { insert, getAll, update, filter, findById, updateQuantity };
 
 export default Product;

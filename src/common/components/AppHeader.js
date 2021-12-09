@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Cookie from "js-cookie";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearch, FaShoppingCart, FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
@@ -21,6 +21,7 @@ const AppHeader = () => {
   const history = useHistory();
   const isLogin = useSelector((state) => state.auth.isLogin);
   const user = useSelector((state) => state.auth.user);
+  const [itemsInCartLength, setItemsInCartLength] = useState(0);
   const handleLogout = async () => {
     await dispatch(logoutAction());
     history.push("/login");
@@ -44,6 +45,12 @@ const AppHeader = () => {
 
     // get data product by list id in cart;
   }, [isLogin]);
+
+  useEffect(() => {
+    if (itemsInCart) {
+      setItemsInCartLength(itemsInCart.length);
+    }
+  }, [itemsInCart]);
 
   const DropdownMenu = () => {
     return (
@@ -120,10 +127,8 @@ const AppHeader = () => {
 
             <div>
               <Badge
-                badgeContent={
-                  itemsInCart.length > 0 ? `${itemsInCart.length}` : ""
-                }
-                invisible={itemsInCart.length > 0 ? false : true}
+                badgeContent={itemsInCartLength > 0 ? itemsInCartLength : ""}
+                invisible={itemsInCartLength > 0 ? false : true}
               >
                 <ShoppingCartIcon
                   className="icon-header"

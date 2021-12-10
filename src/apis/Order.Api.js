@@ -1,5 +1,6 @@
 import toastNotify from "../common/toastify";
 import axiosClient from "./axiosClient";
+import queryString from "query-string";
 
 const url = "/order";
 
@@ -48,9 +49,10 @@ const remove = async (body) => {
   }
 };
 
-const getByStatusAndUser = async () => {
+const getByStatusAndUser = async (queryParams) => {
   try {
-    const res = await axiosClient.get(`${url}/get-by-status-and-user`);
+    const query = queryString.stringify(queryParams);
+    const res = await axiosClient.get(`${url}/get-by-status-and-user?${query}`);
     // toastNotify(res ? res.message.VN : "Tìm kiếm hoá đơn thất bại");
     return res && res.data
       ? { data: res.data || {}, success: true }
@@ -63,6 +65,47 @@ const getByStatusAndUser = async () => {
   }
 };
 
-const Cart = { create, remove, changeStatus, getByStatusAndUser };
+const getByStatusAndBranch = async (queryParams) => {
+  try {
+    const query = queryString.stringify(queryParams);
+    const res = await axiosClient.get(
+      `${url}/get-by-status-and-branch?${query}`
+    );
+    // toastNotify(res ? res.message.VN : "Tìm kiếm hoá đơn thất bại");
+    return res && res.data
+      ? { data: res.data || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    // toastNotify("Tìm kiếm hoá đơn thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const filterByBranch = async (queryParams) => {
+  try {
+    const query = queryString.stringify(queryParams);
+    const res = await axiosClient.get(`${url}/filter-by-branch?${query}`);
+    // toastNotify(res ? res.message.VN : "Tìm kiếm hoá đơn thất bại");
+    return res && res.data
+      ? { data: res.data || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    // toastNotify("Tìm kiếm hoá đơn thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const Cart = {
+  create,
+  remove,
+  changeStatus,
+  getByStatusAndUser,
+  getByStatusAndBranch,
+  filterByBranch,
+};
 
 export default Cart;

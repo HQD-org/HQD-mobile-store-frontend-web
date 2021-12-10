@@ -1,22 +1,39 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
+/* eslint-disable react-hooks/exhaustive-deps */
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getByStatusAndBranchAction } from "../../../../redux/actions/Order/orderAction";
 import InvoiceHeader from "./components/InvoiceHeader";
-import WaitForAccepting from "./components/WaitForAccepting";
-import WaitForTheGoods from "./components/WaitForTheGoods";
-import Delivering from "./components/Delivering";
-import Success from "./components/Success";
-import Cancel from "./components/Cancel";
+import TableInvoice from "./components/TableInvoice";
 
 const InvoiceFragment = React.memo(() => {
+  const dispatch = useDispatch();
+  const branch = useSelector((state) => state.auth.branch);
   const [value, setValue] = useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const getInvoiceByStatus = async (page, itemPerPage, status) => {
+    const query = {
+      page,
+      itemPerPage,
+      status,
+      idBranch: branch._id,
+    };
+    console.log("log at --> invoice index --> query: ", query);
+    await dispatch(getByStatusAndBranchAction(query));
+  };
+
+  useEffect(() => {
+    getInvoiceByStatus(1, 16, "wait");
+  }, []);
+
   return (
     <div>
       <InvoiceHeader />
@@ -33,19 +50,19 @@ const InvoiceFragment = React.memo(() => {
               </TabList>
             </Box>
             <TabPanel value="1">
-              <WaitForAccepting />
+              <TableInvoice />
             </TabPanel>
             <TabPanel value="2">
-              <WaitForTheGoods />
+              <TableInvoice />
             </TabPanel>
             <TabPanel value="3">
-              <Delivering />
+              <TableInvoice />
             </TabPanel>
             <TabPanel value="4">
-              <Success />
+              <TableInvoice />
             </TabPanel>
             <TabPanel value="5">
-              <Cancel />
+              <TableInvoice />
             </TabPanel>
           </TabContext>
         </Box>

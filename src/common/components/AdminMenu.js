@@ -34,7 +34,7 @@ const AdminMenu = (props) => {
 
           <div className="txtheader">Product</div>
           <ul className="list-menu">
-            <li onClick={() => toggle("product")}>
+            <li onClick={() => toggle("product")} tabIndex="1">
               <div>
                 <span>
                   <i className="fab fa-product-hunt icon-admin"></i>
@@ -42,7 +42,7 @@ const AdminMenu = (props) => {
                 <span>Products</span>
               </div>
             </li>
-            <li onClick={() => toggle("add product")}>
+            <li onClick={() => toggle("add product")} tabIndex="1">
               <div to="# ">
                 <i className="bi bi-plus-square-fill icon-admin"></i>Add Product
               </div>
@@ -53,7 +53,7 @@ const AdminMenu = (props) => {
             <>
               <div className="txtheader">Brand</div>
               <ul className="list-menu">
-                <li onClick={() => toggle("brand")}>
+                <li onClick={() => toggle("brand")} tabIndex="1">
                   <div>
                     <i className="fab fa-react icon-admin"></i>
                     Brands
@@ -62,7 +62,7 @@ const AdminMenu = (props) => {
               </ul>
               <div className="txtheader">Model</div>
               <ul className="list-menu">
-                <li onClick={() => toggle("model")}>
+                <li onClick={() => toggle("model")} tabIndex="1">
                   <div>
                     <i className="bi bi-front icon-admin"></i>Models
                   </div>
@@ -70,7 +70,7 @@ const AdminMenu = (props) => {
               </ul>
               <div className="txtheader">Branch</div>
               <ul className="list-menu">
-                <li onClick={() => toggle("branch")}>
+                <li onClick={() => toggle("branch")} tabIndex="1">
                   <div>
                     <i className="bi bi-geo-alt-fill icon-admin"></i>Branchs
                   </div>
@@ -84,7 +84,7 @@ const AdminMenu = (props) => {
           <div className="txtheader">Manage</div>
           <ul className="list-menu">
             {role === "admin" ? (
-              <li onClick={() => toggle("user")}>
+              <li onClick={() => toggle("user")} tabIndex="1">
                 <div>
                   <i className="bi bi-person-fill icon-admin"></i>Users
                 </div>
@@ -92,30 +92,29 @@ const AdminMenu = (props) => {
             ) : (
               <> </>
             )}
-            <li onClick={() => toggle("coupon")}>
+            <li onClick={() => toggle("coupon")} tabIndex="1">
               <div>
                 <RiCoupon3Fill className="icon-admin" />
                 Coupons
               </div>
             </li>
-            <li onClick={() => toggle("invoice")}>
-              <div>
-                <i className="fas fa-file-invoice icon-admin"></i>Invoices
-              </div>
-            </li>
+            {role === "admin" ? (
+              <></>
+            ) : (
+              <li onClick={() => toggle("invoice")} tabIndex="1">
+                <div>
+                  <i className="fas fa-file-invoice icon-admin"></i>Invoices
+                </div>
+              </li>
+            )}
           </ul>
           <div className="txtheader">Statistical</div>
           <ul className="list-menu">
-            <li onClick={() => toggle("statistical")}>
+            <li onClick={() => toggle("statistical")} tabIndex="1">
               <div>
                 <i className="fas fa-chart-line icon-admin"></i>Statistical
               </div>
             </li>
-            {/* <li>
-              <div>
-                <i className="bi bi-bar-chart-fill icon-admin"></i>Product
-              </div>
-            </li> */}
           </ul>
           <hr style={{ color: "#C4C4C4" }} />
           <div className="txtheader">Other</div>

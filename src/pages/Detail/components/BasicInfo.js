@@ -21,7 +21,6 @@ const CapacityGrid = (props) => {
           <p
             className="ram-infor"
             style={{
-              // backgroundColor: currentCapacity === c ? "#EF7E3F" : "white",
               color: currentCapacity === c ? "#3FA5EF" : "black",
               border:
                 currentCapacity === c ? "1px solid #3FA5EF" : "1px solid black",
@@ -44,7 +43,6 @@ const ColorGrid = (props) => {
           <p
             className="ram-infor"
             style={{
-              // backgroundColor: currentColor.name === c.name ? "blue" : "white",
               color: currentColor === c ? "#3FA5EF" : "black",
               border:
                 currentColor === c ? "1px solid #3FA5EF" : "1px solid black",
@@ -84,7 +82,7 @@ const ImageMain = ({ src }) => {
         src={src}
         width="500px"
         height="500px"
-        alt=""
+        alt="mobile phone"
       />
     </div>
   );
@@ -190,7 +188,10 @@ const BasicInfo = () => {
     if (products.length > 0) {
       setCapacityList(
         products
-          .filter((item) => product.ram === item.ram)
+          .filter(
+            (item) =>
+              product.ram === item.ram && item.idModel === product.idModel
+          )
           .map((p) => p.capacity)
           .sort(function (a, b) {
             const x = parseInt(a.replace("GB", ""));

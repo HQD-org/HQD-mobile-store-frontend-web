@@ -78,12 +78,12 @@ const PaymentPage = (props) => {
         <div className="step-progress">
           <div className="row" style={{ justifyContent: "center" }}>
             <div className="col-12">
-              <ul class="progressbar">
-                <li class={showStep1 ? "active" : "done"}>Information</li>
-                <li class={showStep2 ? "active" : showStep3 ? "done" : ""}>
+              <ul className="progressbar">
+                <li className={showStep1 ? "active" : "done"}>Information</li>
+                <li className={showStep2 ? "active" : showStep3 ? "done" : ""}>
                   Confirm
                 </li>
-                <li class={showStep3 ? "active" : ""}>Complete</li>
+                <li className={showStep3 ? "active" : ""}>Complete</li>
               </ul>
             </div>
           </div>

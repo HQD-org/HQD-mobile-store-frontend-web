@@ -1,56 +1,125 @@
-import React, { useState } from "react";
-import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
+/* eslint-disable react-hooks/exhaustive-deps */
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getByStatusAndBranchAction } from "../../../../redux/actions/Order/orderAction";
+import Pagination from "../../../../common/components/Pagination";
 import InvoiceHeader from "./components/InvoiceHeader";
-import WaitForAccepting from "./components/WaitForAccepting";
-import WaitForTheGoods from "./components/WaitForTheGoods";
-import Delivering from "./components/Delivering";
-import Success from "./components/Success";
-import Cancel from "./components/Cancel";
+import InvoiceInformation from "./components/InvoiceInformation";
+import TableInvoice from "./components/TableInvoice";
 
 const InvoiceFragment = React.memo(() => {
-  const [value, setValue] = useState("1");
+  const dispatch = useDispatch();
+  const branch = useSelector((state) => state.auth.branch);
+  const firstInitRef = useRef(null);
+  const [status, setStatus] = useState("wait");
+  const [modal, setModal] = useState(false);
+  const [currentItem, setCurrentItem] = useState(-1);
+  const pagination = useSelector((state) => state.order.pagination);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const statusList = [
+    {
+      value: "wait",
+      next: "confirmed",
+    },
+    {
+      value: "confirmed",
+      next: "delivering",
+    },
+    {
+      value: "delivering",
+      next: "delivered",
+    },
+    {
+      value: "delivered",
+      next: "",
+    },
+    {
+      value: "cancel",
+      next: "",
+    },
+  ];
+
+  const getInvoiceByStatus = async (page, itemPerPage) => {
+    const query = {
+      page,
+      itemPerPage,
+      status,
+      idBranch: branch._id,
+    };
+    await dispatch(getByStatusAndBranchAction(query));
   };
+
+  const handleChange = (event, newStatus) => {
+    setStatus(newStatus);
+  };
+
+  const onPageChange = (page) => {
+    getInvoiceByStatus(page, pagination.itemPerPage);
+  };
+
+  const onItemPerPageChange = (itemPerPage) => {
+    getInvoiceByStatus(1, itemPerPage);
+  };
+
+  useEffect(() => {
+    getInvoiceByStatus(1, 16);
+  }, []);
+
+  useEffect(() => {
+    if (!firstInitRef.current) {
+      firstInitRef.current = true;
+      return;
+    }
+    getInvoiceByStatus(pagination.page, pagination.itemPerPage);
+  }, [status]);
+
   return (
-    <div>
+    <>
       <InvoiceHeader />
       <div className="row container-fluid">
         <Box sx={{ width: "100%", typography: "body1" }}>
-          <TabContext value={value}>
+          <TabContext value={status}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
               <TabList onChange={handleChange}>
-                <Tab label="Chờ xác nhận" value="1" />
-                <Tab label="Chờ lấy hàng" value="2" />
-                <Tab label="Đang giao hàng" value="3" />
-                <Tab label="Giao thành công" value="4" />
-                <Tab label="Đã hủy" value="5" />
+                <Tab label="Chờ xác nhận" value="wait" />
+                <Tab label="Chờ lấy hàng" value="confirmed" />
+                <Tab label="Đang giao hàng" value="delivering" />
+                <Tab label="Giao thành công" value="delivered" />
+                <Tab label="Đã hủy" value="cancel" />
               </TabList>
             </Box>
-            <TabPanel value="1">
-              <WaitForAccepting />
-            </TabPanel>
-            <TabPanel value="2">
-              <WaitForTheGoods />
-            </TabPanel>
-            <TabPanel value="3">
-              <Delivering />
-            </TabPanel>
-            <TabPanel value="4">
-              <Success />
-            </TabPanel>
-            <TabPanel value="5">
-              <Cancel />
-            </TabPanel>
+            {statusList.map((item) => (
+              <TabPanel value={item.value} key={item.value}>
+                <TableInvoice
+                  setCurrentItem={setCurrentItem}
+                  setModal={setModal}
+                  nextStatus={item.next}
+                  getInvoiceByStatus={getInvoiceByStatus}
+                />
+              </TabPanel>
+            ))}
           </TabContext>
         </Box>
       </div>
-    </div>
+
+      <Pagination
+        pagination={pagination}
+        onPageChange={onPageChange}
+        onItemPerPageChange={onItemPerPageChange}
+      />
+
+      <InvoiceInformation
+        setModal={setModal}
+        modal={modal}
+        currentItem={currentItem}
+        setCurrentItem={setCurrentItem}
+      />
+    </>
   );
 });
 

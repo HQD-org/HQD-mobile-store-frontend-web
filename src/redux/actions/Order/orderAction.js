@@ -8,6 +8,10 @@ import {
   CHANGE_STATUS_ORDER_SUCCESS,
   REMOVE_ORDER_FAIL,
   REMOVE_ORDER_SUCCESS,
+  FILTER_BY_BRANCH_FAIL,
+  FILTER_BY_BRANCH_SUCCESS,
+  GET_BY_STATUS_AND_BRANCH_FAIL,
+  GET_BY_STATUS_AND_BRANCH_SUCCESS,
 } from "./types";
 import orderAPI from "../../../apis/Order.Api";
 
@@ -66,11 +70,11 @@ export function getByStatusAndUserSuccess(data) {
   };
 }
 
-export function getByStatusAndUserAction() {
+export function getByStatusAndUserAction(query) {
   return async (dispatch) => {
     try {
       dispatch(loading(true));
-      const res = await orderAPI.getByStatusAndUser();
+      const res = await orderAPI.getByStatusAndUser(query);
       if (res.success) {
         dispatch(loading());
         dispatch(getByStatusAndUserSuccess(res.data));
@@ -152,6 +156,76 @@ export function removeOrderAction(queryParams) {
     } catch {
       dispatch(loading());
       dispatch(removeOrderFail());
+      return false;
+    }
+  };
+}
+
+export function getByStatusAndBranchFail() {
+  return {
+    type: GET_BY_STATUS_AND_BRANCH_FAIL,
+    payload: {},
+  };
+}
+
+export function getByStatusAndBranchSuccess(data) {
+  return {
+    type: GET_BY_STATUS_AND_BRANCH_SUCCESS,
+    payload: data,
+  };
+}
+
+export function getByStatusAndBranchAction(query) {
+  return async (dispatch) => {
+    try {
+      dispatch(loading(true));
+      const res = await orderAPI.getByStatusAndBranch(query);
+      if (res.success) {
+        dispatch(loading());
+        dispatch(getByStatusAndBranchSuccess(res.data));
+        return true;
+      }
+      dispatch(loading());
+      dispatch(getByStatusAndBranchFail());
+      return false;
+    } catch {
+      dispatch(loading());
+      dispatch(getByStatusAndBranchFail());
+      return false;
+    }
+  };
+}
+
+export function filterByBranchFail() {
+  return {
+    type: FILTER_BY_BRANCH_FAIL,
+    payload: {},
+  };
+}
+
+export function filterByBranchSuccess(data) {
+  return {
+    type: FILTER_BY_BRANCH_SUCCESS,
+    payload: data,
+  };
+}
+
+export function filterByBranchAction(query) {
+  return async (dispatch) => {
+    try {
+      dispatch(loading(true));
+      const res = await orderAPI.filterByBranch(query);
+      if (res.success) {
+        dispatch(loading());
+        dispatch(filterByBranchSuccess(res.data));
+        return true;
+      }
+      dispatch(loading());
+      dispatch(filterByBranchFail());
+      return false;
+    } catch {
+      dispatch(loading());
+      dispatch(filterByBranchFail());
       return false;
     }
   };

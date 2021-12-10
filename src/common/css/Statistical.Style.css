@@ -1,0 +1,15 @@
+.icon-statistical {
+    font-size: 25px;
+}
+
+.statistical-profit,
+.statistical-product {
+    border: none;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    background: #3fa5ef;
+    border: 1px solid #3fa5ef;
+    color: white;
+    filter: drop-shadow(0 2px 2px #707070);
+}

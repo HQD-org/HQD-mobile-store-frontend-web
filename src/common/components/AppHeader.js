@@ -47,7 +47,7 @@ const AppHeader = () => {
   }, [isLogin]);
 
   useEffect(() => {
-    if (itemsInCart.length > 0) {
+    if (itemsInCart) {
       const totalProduct = itemsInCart.reduce((init, item) => {
         return init + item.quantity;
       }, 0);

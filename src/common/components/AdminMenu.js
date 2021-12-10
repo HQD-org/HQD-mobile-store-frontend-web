@@ -106,16 +106,16 @@ const AdminMenu = (props) => {
           </ul>
           <div className="txtheader">Statistical</div>
           <ul className="list-menu">
-            <li>
+            <li onClick={() => toggle("statistical")}>
               <div>
-                <i className="fas fa-chart-line icon-admin"></i>Profit
+                <i className="fas fa-chart-line icon-admin"></i>Statistical
               </div>
             </li>
-            <li>
+            {/* <li>
               <div>
                 <i className="bi bi-bar-chart-fill icon-admin"></i>Product
               </div>
-            </li>
+            </li> */}
           </ul>
           <hr style={{ color: "#C4C4C4" }} />
           <div className="txtheader">Other</div>

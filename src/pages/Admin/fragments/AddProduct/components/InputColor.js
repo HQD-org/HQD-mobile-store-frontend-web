@@ -37,13 +37,16 @@ const InputColor = (props) => {
   return (
     <>
       {items.map((item, id) => {
-        const quantityInfo = item.quantityInfo.find(
-          (q) => q.idBranch === branch._id
-        );
         let quantity = 0;
-        if (quantityInfo) {
-          quantity = quantityInfo.quantity;
+        if (item.quantityInfo) {
+          const quantityInfo = item.quantityInfo.find(
+            (q) => q.idBranch === branch._id
+          );
+          if (quantityInfo) {
+            quantity = quantityInfo.quantity;
+          }
         }
+
         return (
           <div
             style={{ display: "flex", marginTop: "10px" }}

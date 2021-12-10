@@ -11,18 +11,21 @@ const Complete = (props) => {
   const history = useHistory();
   const { setShowStep2, dataStep1, dataStep2 } = props;
   const itemsInCart = useSelector((state) => state.cart.items);
+  const dataProduct = useSelector((state) => state.cart.dataProduct);
   const previousStep = () => {
     setShowStep2(true);
   };
 
   const confirmOrder = async () => {
     const products = itemsInCart.map((item) => {
+      const name = dataProduct.find((p) => p._id === item.idProduct).name;
       return {
         idProduct: item.idProduct,
         quantity: item.quantity,
         color: item.color,
         image: item.image,
         price: item.price,
+        name,
       };
     });
     const address = dataStep1.address;

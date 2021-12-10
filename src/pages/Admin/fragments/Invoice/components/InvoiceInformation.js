@@ -1,14 +1,32 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from "react";
 import { FcViewDetails } from "react-icons/fc";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import "../../../../../common/css/Payment.Style.css";
 import ProductList from "./ProductList";
+import { useSelector } from "react-redux";
+import { numberWithCommas } from "../../../../../common/utils/helper";
 
 const InvoiceInformation = (props) => {
-  const { modal, setModal } = props;
+  const { modal, setModal, currentItem } = props;
+  const invoices = useSelector((state) => state.order.list);
+  const [order, setOrder] = useState("");
+  const [receiveInfo, setReceiveInfo] = useState("");
   const toggle = () => {
     setModal(!modal);
   };
+
+  useEffect(() => {
+    if (currentItem >= 0) {
+      setOrder(invoices[currentItem]);
+    }
+  }, [currentItem]);
+
+  useEffect(() => {
+    if (order) {
+      setReceiveInfo(order.receiveInfo);
+    }
+  }, [order]);
   return (
     <Modal isOpen={modal} toggle={toggle} className="modal-invoice">
       <ModalHeader className="close-x" toggle={toggle}>
@@ -22,7 +40,7 @@ const InvoiceInformation = (props) => {
               <h6>Họ tên người nhận</h6>
             </div>
             <div className="col-6">
-              <p>Một người nào đó</p>
+              <p>{receiveInfo ? receiveInfo.receiver : ""}</p>
             </div>
           </div>
           <div className="row">
@@ -30,7 +48,7 @@ const InvoiceInformation = (props) => {
               <h6>Số điện thoại người nhận</h6>
             </div>
             <div className="col-6">
-              <p>0123456789</p>
+              <p>{receiveInfo ? receiveInfo.phone : ""}</p>
             </div>
           </div>
           <div className="row">
@@ -38,7 +56,7 @@ const InvoiceInformation = (props) => {
               <h6>Địa chỉ nhận hàng</h6>
             </div>
             <div className="col-6">
-              <p>Mặt trăng</p>
+              <p>{receiveInfo ? receiveInfo.address : ""}</p>
             </div>
           </div>
           <div className="row">
@@ -48,7 +66,7 @@ const InvoiceInformation = (props) => {
           </div>
           <hr />
           <div className="row">
-            <ProductList />
+            <ProductList products={order.products} />
           </div>
           <div className="row mb-3">
             <div className="col-4">
@@ -63,7 +81,7 @@ const InvoiceInformation = (props) => {
               <h6>Tạm tính</h6>
             </div>
             <div className="col-6">
-              <p className="txtprice">7.999.999₫</p>
+              <p className="txtprice">Quên lưu field này rầu =)) ₫</p>
             </div>
           </div>
           <div className="row">
@@ -87,7 +105,9 @@ const InvoiceInformation = (props) => {
               <h6>Tổng tính</h6>
             </div>
             <div className="col-6">
-              <p className="txtprice totalPrice">7.989.999₫</p>
+              <p className="txtprice totalPrice">
+                {order ? numberWithCommas(order.totalPrice) : 0} ₫
+              </p>
             </div>
           </div>
         </div>

@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from "react";
 import { FcViewDetails } from "react-icons/fc";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
-import "../../../../../common/css/Payment.Style.css";
+import "../../../common/css/Payment.Style.css";
 import ProductList from "./ProductList";
 import { useSelector } from "react-redux";
-import { numberWithCommas } from "../../../../../common/utils/helper";
+import { numberWithCommas } from "../../../common/utils/helper";
 
 const InvoiceInformation = (props) => {
   const { modal, setModal, currentItem, setCurrentItem } = props;

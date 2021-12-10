@@ -98,11 +98,15 @@ const AdminMenu = (props) => {
                 Coupons
               </div>
             </li>
-            <li onClick={() => toggle("invoice")}>
-              <div>
-                <i className="fas fa-file-invoice icon-admin"></i>Invoices
-              </div>
-            </li>
+            {role === "admin" ? (
+              <></>
+            ) : (
+              <li onClick={() => toggle("invoice")}>
+                <div>
+                  <i className="fas fa-file-invoice icon-admin"></i>Invoices
+                </div>
+              </li>
+            )}
           </ul>
           <div className="txtheader">Statistical</div>
           <ul className="list-menu">

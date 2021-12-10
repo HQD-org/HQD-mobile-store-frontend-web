@@ -82,7 +82,7 @@ const ImageMain = ({ src }) => {
         src={src}
         width="500px"
         height="500px"
-        alt=""
+        alt="mobile phone"
       />
     </div>
   );
@@ -188,7 +188,10 @@ const BasicInfo = () => {
     if (products.length > 0) {
       setCapacityList(
         products
-          .filter((item) => product.ram === item.ram)
+          .filter(
+            (item) =>
+              product.ram === item.ram && item.idModel === product.idModel
+          )
           .map((p) => p.capacity)
           .sort(function (a, b) {
             const x = parseInt(a.replace("GB", ""));

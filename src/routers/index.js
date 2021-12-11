@@ -15,6 +15,7 @@ import CartRoute from "./Cart.Route";
 import PaymentRoute from "./Payment.Route";
 import ProfileRoute from "./Profile.Route";
 import BillRoute from "./Bill.Route";
+import ErrorRoute from "./Error.Route";
 
 const Routers = () => {
   return (
@@ -33,6 +34,7 @@ const Routers = () => {
         <RegisterRoute />
         <ForgotPasswordRoute />
         <VerifyRoute />
+        <ErrorRoute />
         <AppFooter />
       </Suspense>
       <Loading />

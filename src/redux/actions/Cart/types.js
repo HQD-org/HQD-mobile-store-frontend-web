@@ -6,3 +6,5 @@ export const UPDATE_CART_FAIL = "update cart fail";
 export const UPDATE_CART_SUCCESS = "update cart success";
 export const REMOVE_CART_FAIL = "remove cart fail";
 export const REMOVE_CART_SUCCESS = "remove cart success";
+export const MERGE_CART_FAIL = "merge cart fail";
+export const MERGE_CART_SUCCESS = "merge cart success";

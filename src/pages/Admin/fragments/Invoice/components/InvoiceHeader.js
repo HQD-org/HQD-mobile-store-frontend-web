@@ -1,5 +1,4 @@
 import React from "react";
-import { FormGroup } from "reactstrap";
 import "../../../../../common/css/Invoice.Style.css";
 
 const InvoiceHeader = () => {

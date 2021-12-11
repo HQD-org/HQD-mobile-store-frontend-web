@@ -1,11 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import SameProduct from "./SameProduct";
+import { useHistory } from "react-router-dom";
 
 const AnotherProduct = () => {
+  const history = useHistory();
   const products = useSelector((state) => state.product.list);
   const product = useSelector((state) => state.product.productDetail);
-
+  const redirectToProductPage = () => {
+    history.push(`/product`);
+  };
   return (
     <div>
       <div>
@@ -27,7 +31,11 @@ const AnotherProduct = () => {
           </div>
           <div className="row mb-3 mt-2" style={{ textAlign: "center" }}>
             <div>
-              <button type="button" className="btnAnotherProduct">
+              <button
+                type="button"
+                className="btnAnotherProduct"
+                onClick={redirectToProductPage}
+              >
                 Khám phá các sản phẩm khác
               </button>
             </div>

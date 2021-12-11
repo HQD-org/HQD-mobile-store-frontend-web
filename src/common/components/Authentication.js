@@ -27,7 +27,6 @@ const Authentication = (
           return;
         }
         //đã đăng nhập
-        console.log("log at ==> Authentication.js ==> line 22 ===> res: ", res);
         if (adminRoute) {
           if (res.role !== "admin" && res.role !== "manager branch") {
             //khong phai admin

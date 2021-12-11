@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import Cookie from "js-cookie";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Badge from "@mui/material/Badge";
 import React, { useEffect, useState } from "react";
 import { FaSearch, FaUser } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,11 +9,12 @@ import { Link, NavLink } from "react-router-dom";
 import "../../common/css/Header.Style.css";
 import logoHQD from "../../common/images/logoHQD.png";
 import { logoutAction } from "../../redux/actions/Auth/authActions";
-import { getCartAction } from "../../redux/actions/Cart/cartAction";
+import {
+  getCartAction,
+  getCartGuestAction,
+} from "../../redux/actions/Cart/cartAction";
 import "../css/AdminHeader.Style.css";
 import imgBackground from "../images/background-header-1.jpg";
-import Badge from "@mui/material/Badge";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 const AppHeader = () => {
   const show = useSelector((state) => state.system.showHeaderAndFooter);
@@ -28,22 +30,17 @@ const AppHeader = () => {
   };
 
   useEffect(() => {
-    // const cart = Cookie.get("cart");
     if (isLogin) {
-      // if (cart) {
-      //   //   merge cart cookies với cart database
-      //   // xong xoá cart ở Cookies
-      //     Cookie.remove("cart");
-      //return;
-      // }
       const getCart = async () => {
         await dispatch(getCartAction());
       };
       getCart();
       return;
     }
-
-    // get data product by list id in cart;
+    const getCartGuest = async () => {
+      await dispatch(getCartGuestAction());
+    };
+    getCartGuest();
   }, [isLogin]);
 
   useEffect(() => {

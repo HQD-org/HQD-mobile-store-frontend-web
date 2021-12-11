@@ -27,7 +27,6 @@ const login = async (body) => {
     toastNotify(res.message.VN);
     return { data: {}, success: false };
   } catch (error) {
-    console.log("log at ==> Auth Api ==> error login: ", error);
     toastNotify(error.message.VN || "Đăng nhập thất bại");
     if (error.status === 401)
       return {

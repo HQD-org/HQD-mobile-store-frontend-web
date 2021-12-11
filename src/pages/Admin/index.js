@@ -16,13 +16,14 @@ const AdminPage = (props) => {
   const [toggleBrand, setToggleBrand] = useState(false);
   const [toggleModel, setToggleModel] = useState(false);
   const [toggleAddProduct, setToggleAddProduct] = useState(false);
-  const [toggleProduct, setToggleProduct] = useState(false);
+  const [toggleProduct, setToggleProduct] = useState(true);
   const [toggleUser, setToggleUser] = useState(false);
   const [toggleBranch, setToggleBranch] = useState(false);
   const [toggleCoupon, setToggleCoupon] = useState(false);
-  const [toggleInvoice, setToggleInvoice] = useState(true);
+  const [toggleInvoice, setToggleInvoice] = useState(false);
   const [toggleStatistical, setToggleStatistical] = useState(false);
-  const toggleRef = useRef("invoice");
+  const toggleRef = useRef("product");
+  
   const { showHeaderAndFooter } = props;
   const dispatch = useDispatch();
   useEffect(() => {

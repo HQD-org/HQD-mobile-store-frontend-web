@@ -4,7 +4,9 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { Form, Input } from "reactstrap";
 import { loginAction } from "../../../redux/actions/Auth/authActions";
+import { mergeCartAction } from "../../../redux/actions/Cart/cartAction";
 import validate from "../hooks/validate";
+import Cookie from "js-cookie";
 
 const FormLogin = () => {
   const dispatch = useDispatch();
@@ -18,6 +20,11 @@ const FormLogin = () => {
     if (!isValidData) return;
     const res = await dispatch(loginAction(isValidData));
     if (res) {
+      const cart = Cookie.get("cart");
+      if (cart) {
+        const done = dispatch(mergeCartAction({ products: JSON.parse(cart) }));
+        if (done) Cookie.remove("cart");
+      }
       if (res.role === "admin" || res.role === "manager branch") {
         history.push("/dashboard");
         return;

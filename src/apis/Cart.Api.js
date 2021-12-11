@@ -62,6 +62,37 @@ const getCart = async () => {
   }
 };
 
-const Cart = { addToCart, remove, update, getCart };
+//cart api for guest
+const updateGuest = async (body) => {
+  try {
+    const res = await axiosClient.post(`${url}/update-cart-guest`, body);
+    toastNotify(res ? res.message.VN : "Cập nhật gio hang thất bại");
+    return res && res.data
+      ? { data: res.data || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    toastNotify("Cập nhật gio hang thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const merge = async (body) => {
+  try {
+    const res = await axiosClient.post(`${url}/merge-cart`, body);
+    // toastNotify(res ? res.message.VN : "Cập nhật gio hang thất bại");
+    return res && res.data
+      ? { data: res.data || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    // toastNotify("Cập nhật gio hang thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const Cart = { addToCart, remove, update, getCart, updateGuest, merge };
 
 export default Cart;

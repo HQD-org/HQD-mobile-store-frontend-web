@@ -12,6 +12,7 @@ import {
   getCartGuestAction,
 } from "../../../redux/actions/Cart/cartAction";
 import { findProductByIdAction } from "../../../redux/actions/Product/productAction";
+import { numberWithCommas } from "../../../common/utils/helper";
 
 const CapacityGrid = (props) => {
   const { capacity, currentCapacity, onChangeCapacity } = props;
@@ -241,7 +242,9 @@ const BasicInfo = () => {
           <div className="row">
             <div className="col-7">
               <p className="price-infor">
-                {currentColor.price ? currentColor.price + " ₫" : "0 ₫"}
+                {currentColor.price
+                  ? numberWithCommas(currentColor.price) + " ₫"
+                  : "0 ₫"}
               </p>
             </div>
           </div>

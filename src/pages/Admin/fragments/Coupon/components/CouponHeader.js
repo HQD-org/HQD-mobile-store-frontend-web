@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import "../../../../../common/css/Coupon.Style.css";
+import React from "react";
 import { RiCoupon3Fill } from "react-icons/ri";
 import { FormGroup } from "reactstrap";
+import "../../../../../common/css/Coupon.Style.css";
 
 const CouponHeader = () => {
   return (

@@ -2,30 +2,36 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import complete from "../../../common/images/complete.png";
-import { createOrderAction } from "../../../redux/actions/Order/orderAction";
-import { getCartAction } from "../../../redux/actions/Cart/cartAction";
+import {
+  createOrderAction,
+  createOrderForGuestAction,
+} from "../../../redux/actions/Order/orderAction";
+import {
+  getCartAction,
+  getCartGuestAction,
+} from "../../../redux/actions/Cart/cartAction";
 import { useHistory } from "react-router-dom";
+import Cookie from "js-cookie";
 
 const Complete = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { setShowStep2, dataStep1, dataStep2 } = props;
   const itemsInCart = useSelector((state) => state.cart.items);
-  const dataProduct = useSelector((state) => state.cart.dataProduct);
+  const isLogin = useSelector((state) => state.auth.isLogin);
   const previousStep = () => {
     setShowStep2(true);
   };
 
   const confirmOrder = async () => {
     const products = itemsInCart.map((item) => {
-      const name = dataProduct.find((p) => p._id === item.idProduct).name;
       return {
         idProduct: item.idProduct,
         quantity: item.quantity,
         color: item.color,
         image: item.image,
         price: item.price,
-        name,
+        name: item.name,
       };
     });
     const address = dataStep1.address;
@@ -52,6 +58,15 @@ const Complete = (props) => {
     };
 
     if (dataStep1.paymentType === "cod") {
+      if (!isLogin) {
+        const res = await dispatch(createOrderForGuestAction(data));
+        if (res) {
+          Cookie.remove("cart");
+          await dispatch(getCartGuestAction());
+          history.push("/");
+        }
+        return;
+      }
       const res = await dispatch(createOrderAction(data));
       if (res) {
         await dispatch(getCartAction());

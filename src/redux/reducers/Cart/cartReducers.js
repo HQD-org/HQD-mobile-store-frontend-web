@@ -8,20 +8,21 @@ import {
   UPDATE_CART_SUCCESS,
   REMOVE_CART_FAIL,
   REMOVE_CART_SUCCESS,
+  MERGE_CART_FAIL,
+  MERGE_CART_SUCCESS,
 } from "../../actions/Cart/types";
 
 const initState = {
   items: [],
-  dataProduct: [],
   updateFlag: false,
 };
 export default function (state = initState, action) {
   const payload = action.payload;
   switch (action.type) {
     case ADD_CART_FAIL:
-      return { ...state };
+      return state;
     case ADD_CART_SUCCESS:
-      return { ...state };
+      return state;
     case GET_CART_FAIL:
       return {
         ...state,
@@ -32,21 +33,24 @@ export default function (state = initState, action) {
       return {
         ...state,
         items: payload.products,
-        dataProduct: payload.dataProduct,
       };
     case UPDATE_CART_FAIL:
-      return { ...state };
+      return state;
     case UPDATE_CART_SUCCESS:
       return { ...state, items: payload.products };
     case REMOVE_CART_FAIL:
-      return {
-        ...state,
-      };
+      return state;
     case REMOVE_CART_SUCCESS:
       return {
         ...state,
         items: payload.products,
       };
+    case MERGE_CART_SUCCESS:
+      return {
+        ...state,
+        items: payload.products,
+      };
+    case MERGE_CART_FAIL:
     default:
       return state;
   }

@@ -52,7 +52,6 @@ const update = async (body) => {
 const filter = async (queryParams) => {
   try {
     const query = queryString.stringify(queryParams);
-    console.log("log at ==> product api ==> query", query);
     const res = await axiosClient.get(`${url}/filter?${query}`);
     // toastNotify(res ? res.message.VN : "Tìm kiếm điện thoại thất bại");
     return res && res.data
@@ -96,6 +95,30 @@ const updateQuantity = async (body) => {
   }
 };
 
-const Product = { insert, getAll, update, filter, findById, updateQuantity };
+const getGroupByBrand = async (queryParams) => {
+  try {
+    const query = queryString.stringify(queryParams);
+    const res = await axiosClient.get(`${url}/get-group-by-brand?${query}`);
+    // toastNotify(res ? res.message.VN : "Tìm kiếm điện thoại thất bại");
+    return res && res.data
+      ? { data: res.data || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    // toastNotify("Tìm kiếm điện thoại thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const Product = {
+  insert,
+  getAll,
+  update,
+  filter,
+  findById,
+  updateQuantity,
+  getGroupByBrand,
+};
 
 export default Product;

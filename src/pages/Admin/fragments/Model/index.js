@@ -69,7 +69,7 @@ const ModelFragment = () => {
 
   useEffect(() => {
     dispatch(getAllBrandAction());
-    filter(1, 20);
+    filter(1, 16);
   }, []);
 
   useEffect(() => {

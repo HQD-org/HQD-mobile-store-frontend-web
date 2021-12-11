@@ -1,10 +1,10 @@
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { RiCoupon3Fill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import "../../common/css/AdminMenu.Style.css";
 import { logoutAction } from "../../redux/actions/Auth/authActions";
-import { RiCoupon3Fill } from "react-icons/ri";
 
 const AdminMenu = (props) => {
   const dispatch = useDispatch();

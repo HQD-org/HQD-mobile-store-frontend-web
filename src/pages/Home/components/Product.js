@@ -4,22 +4,19 @@ import { Link } from "react-router-dom";
 import { numberWithCommas } from "../../../common/utils/helper";
 
 const Product = () => {
-  const products = useSelector((state) => state.product.list);
-  const brands = useSelector((state) => state.brand.list);
-  return brands.map((brand) => {
-    const productsByBrand = products
-      .filter((item) => item.brand._id === brand._id)
-      .slice(0, 4);
+  const products = useSelector((state) => state.product.homeList);
+  return products.map((productsByBrand) => {
+    const list = productsByBrand.list;
     return (
-      <div style={{ marginTop: "20px" }} key={`brand-${brand._id}`}>
+      <div style={{ marginTop: "20px" }} key={`brand-${productsByBrand.brand}`}>
         <div className="row">
           <div className="col-2">
-            <button className="product-header">{brand.name}</button>
+            <button className="product-header">{productsByBrand.brand}</button>
           </div>
         </div>
         <div className="row" style={{ justifyContent: "center" }}>
           <div className="row row-cols-1 row-cols-md-5 g-1 group-promotion">
-            {productsByBrand.map((product) => {
+            {list.map((product) => {
               const color = product.model.color[0];
               const price = product.color.find(
                 (item) => item.name === color.name

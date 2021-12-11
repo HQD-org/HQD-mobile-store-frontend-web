@@ -50,6 +50,7 @@ const update = async (body) => {
 const filter = async (queryParams) => {
   try {
     const query = queryString.stringify(queryParams);
+    console.log("log at -=> model api -> query: ", query);
     const res = await axiosClient.get(`/mobile-model/filter?${query}`);
     // toastNotify(res ? res.message.VN : "Tìm kiếm mẫu điện thoại thất bại");
     return res && res.data

@@ -1,21 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { IoAdd, IoChevronBackCircleSharp, IoRemove } from "react-icons/io5";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "../../../common/css/Cart.Style.css";
 import { numberWithCommas } from "../../../common/utils/helper";
 import {
-  updateCartAction,
   removeCartAction,
+  removeCartGuestAction,
+  updateCartAction,
+  updateCartGuestAction,
 } from "../../../redux/actions/Cart/cartAction";
 
 const ListItem = () => {
   const dispatch = useDispatch();
   const itemsInCart = useSelector((state) => state.cart.items);
-  const dataProduct = useSelector((state) => state.cart.dataProduct);
+  const isLogin = useSelector((state) => state.auth.isLogin);
 
   const updateCart = async (data) => {
-    return await dispatch(updateCartAction(data));
+    if (isLogin) {
+      return await dispatch(updateCartAction(data));
+    }
+    return await dispatch(updateCartGuestAction(data));
   };
 
   const plusQuantity = (item) => {
@@ -35,15 +40,15 @@ const ListItem = () => {
     });
   };
 
-  const removeFormCart = async (item) => {
+  const removeFromCart = async (item) => {
+    if (!isLogin) {
+      await dispatch(removeCartGuestAction(item.idProduct));
+      return;
+    }
     await dispatch(
       removeCartAction({ idProduct: item.idProduct, color: item.color })
     );
   };
-
-  useEffect(() => {
-    console.log("log at ==> CartList => cart", itemsInCart);
-  }, [itemsInCart]);
 
   return (
     <ul className="listCart">
@@ -63,8 +68,8 @@ const ListItem = () => {
         </div>
       </div>
 
-      {itemsInCart.map((p) => (
-        <li key={p._id}>
+      {itemsInCart.map((p, index) => (
+        <li key={index}>
           <hr />
           <div className="row">
             <div className="col-3">
@@ -72,13 +77,11 @@ const ListItem = () => {
             </div>
             <div className="col-4">
               <div>
-                <h6>
-                  {dataProduct.find((item) => item._id === p.idProduct).name}
-                </h6>
+                <h6>{p.name}</h6>
                 <p>{p.color}</p>
                 <button
                   className="btnRemoveCart"
-                  onClick={() => removeFormCart(p)}
+                  onClick={() => removeFromCart(p)}
                 >
                   Remove
                 </button>

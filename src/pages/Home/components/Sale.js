@@ -1,9 +1,18 @@
-import React from "react";
-import backgroundSale from "../../../common/images/sale.jpg";
-import imgXiaomi from "../../../common/images/xiaomi-redmi-note-9.png";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import discountImg from "../../../common/images/discount-tag.jpg";
+import backgroundSale from "../../../common/images/sale.jpg";
+import { numberWithCommas } from "../../../common/utils/helper";
 
 const Sale = () => {
+  const products = useSelector((state) => state.product.list);
+  const [list, setList] = useState([]);
+  useEffect(() => {
+    if (products.length > 0) {
+      setList(products.slice(0, 4));
+    }
+  }, [products]);
   return (
     <div style={{ marginTop: "20px" }}>
       <div className="row" style={{ textAlign: "center" }}>
@@ -29,86 +38,41 @@ const Sale = () => {
         </div>
 
         <div className="row row-cols-1 row-cols-md-4 g-4 group-promotion">
-          <div className="col">
-            <div className="card h-100 card-sale">
-              <div className="discount-tag">
-                <img src={discountImg} className="imgDiscount" alt="..." />
-              </div>
-              <div className="img-pro">
-                <img
-                  src={imgXiaomi}
-                  className="card-img-top pro-sale"
-                  alt="..."
-                />
-              </div>
+          {list.map((item) => {
+            const color = item.model.color[0];
+            const price = item.color.find(
+              (item) => item.name === color.name
+            ).price;
+            return (
+              <div className="col" key={`discount${item._id}`}>
+                <Link
+                  className="card h-100 card-sale"
+                  to={`/detail/${item._id}`}
+                >
+                  <div className="discount-tag">
+                    <img src={discountImg} className="imgDiscount" alt="..." />
+                  </div>
+                  <div className="img-pro">
+                    <img
+                      src={color.images[0]}
+                      className="card-img-top pro-sale"
+                      alt="mobile product"
+                    />
+                  </div>
 
-              <div className="card-body">
-                <h5 className="card-title">Xiaomi Redmi Note 9 4GB-128GB</h5>
-                <h5 className="card-text now-price">4.940.000 ₫</h5>
-                <h5 className="card-text pre-price">5.940.000 ₫</h5>
+                  <div className="card-body">
+                    <h5 className="card-title">{item.name}</h5>
+                    <h5 className="card-text now-price">
+                      {numberWithCommas(price - 1000000)} ₫
+                    </h5>
+                    <h5 className="card-text pre-price">
+                      {numberWithCommas(price)} ₫
+                    </h5>
+                  </div>
+                </Link>
               </div>
-            </div>
-          </div>
-          <div className="col">
-            <div className="card h-100 card-sale">
-              <div className="discount-tag">
-                <img src={discountImg} className="imgDiscount" alt="..." />
-              </div>
-              <div className="img-pro">
-                <img
-                  src={imgXiaomi}
-                  className="card-img-top pro-sale"
-                  alt="..."
-                />
-              </div>
-
-              <div className="card-body">
-                <h5 className="card-title">Xiaomi Redmi Note 9 4GB-128GB</h5>
-                <h5 className="card-text now-price">4.940.000 ₫</h5>
-                <h5 className="card-text pre-price">5.940.000 ₫</h5>
-              </div>
-            </div>
-          </div>
-          <div className="col">
-            <div className="card h-100 card-sale">
-              <div className="discount-tag">
-                <img src={discountImg} className="imgDiscount" alt="..." />
-              </div>
-              <div className="img-pro">
-                <img
-                  src={imgXiaomi}
-                  className="card-img-top pro-sale"
-                  alt="..."
-                />
-              </div>
-
-              <div className="card-body">
-                <h5 className="card-title">Xiaomi Redmi Note 9 4GB-128GB</h5>
-                <h5 className="card-text now-price">4.940.000 ₫</h5>
-                <h5 className="card-text pre-price">5.940.000 ₫</h5>
-              </div>
-            </div>
-          </div>
-          <div className="col">
-            <div className="card h-100 card-sale">
-              <div className="discount-tag">
-                <img src={discountImg} className="imgDiscount" alt="..." />
-              </div>
-              <div className="img-pro">
-                <img
-                  src={imgXiaomi}
-                  className="card-img-top pro-sale"
-                  alt="..."
-                />
-              </div>
-
-              <div className="card-body">
-                <h5 className="card-title">Xiaomi Redmi Note 9 4GB-128GB</h5>
-                <h5 className="card-text now-price">4.940.000 ₫</h5>
-                <h5 className="card-text pre-price">5.940.000 ₫</h5>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
     </div>

@@ -10,6 +10,8 @@ import {
   FILTER_PRODUCT_SUCCESS,
   FIND_PRODUCT_BY_ID_FAIL,
   FIND_PRODUCT_BY_ID_SUCCESS,
+  GET_BY_BRAND_FAIL,
+  GET_BY_BRAND_SUCCESS,
 } from "./types";
 import productAPI from "../../../apis/Product.Api";
 
@@ -210,6 +212,41 @@ export function updateQuantityAction(dataSubmit) {
     } catch {
       dispatch(loading());
       dispatch(updateProductFail());
+      return false;
+    }
+  };
+}
+
+export function getProductByBrandFail() {
+  return {
+    type: GET_BY_BRAND_FAIL,
+    payload: {},
+  };
+}
+
+export function getProductByBrandSuccess(data) {
+  return {
+    type: GET_BY_BRAND_SUCCESS,
+    payload: data,
+  };
+}
+
+export function getProductByBrandAction(queryParams, load = true) {
+  return async (dispatch) => {
+    try {
+      dispatch(loading(load));
+      const res = await productAPI.getGroupByBrand(queryParams);
+      if (res.success) {
+        dispatch(loading());
+        dispatch(getProductByBrandSuccess(res.data));
+        return true;
+      }
+      dispatch(loading());
+      dispatch(getProductByBrandFail());
+      return false;
+    } catch {
+      dispatch(loading());
+      dispatch(getProductByBrandFail());
       return false;
     }
   };

@@ -8,3 +8,5 @@ export const FILTER_PRODUCT_FAIL = "filter product fail";
 export const FILTER_PRODUCT_SUCCESS = "filter product success";
 export const FIND_PRODUCT_BY_ID_FAIL = "find product by id fail";
 export const FIND_PRODUCT_BY_ID_SUCCESS = "find product by id success";
+export const GET_BY_BRAND_FAIL = "get by brand fail";
+export const GET_BY_BRAND_SUCCESS = "get by brand success";

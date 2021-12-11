@@ -7,27 +7,35 @@ import NewProduct from "./components/NewProduct";
 import Product from "./components/Product";
 import Sale from "./components/Sale";
 import Trending from "./components/Trending";
-import { filterProductAction } from "../../redux/actions/Product/productAction";
-import { getAllBrandAction } from "../../redux/actions/Brand/brandAction";
+import {
+  getProductByBrandAction,
+  filterProductAction,
+} from "../../redux/actions/Product/productAction";
 
 const HomePage = (props) => {
   const { showHeaderAndFooter } = props;
   const dispatch = useDispatch();
 
-  const filterProduct = async (page, itemPerPage) => {
-    const query = {
-      page,
-      itemPerPage,
-      minPrice: 0,
-      maxPrice: 10000000000,
-    };
-    await dispatch(filterProductAction(query));
-  };
   useEffect(() => {
+    const filterProduct = async () => {
+      const query = {
+        page: 1,
+        itemPerPage: 5,
+      };
+      await dispatch(getProductByBrandAction(query));
+      await dispatch(
+        filterProductAction({
+          ...query,
+          itemPerPage: 10,
+          minPrice: 0,
+          maxPrice: 1000000000,
+        })
+      );
+    };
+    filterProduct();
     dispatch(showHeaderAndFooter(true));
-    filterProduct(1, 20);
-    dispatch(getAllBrandAction());
   }, []);
+
   return (
     <div>
       <nav id="navbar-HQDlist" className="navbar px-3">

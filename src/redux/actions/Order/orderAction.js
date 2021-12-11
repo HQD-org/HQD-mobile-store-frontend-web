@@ -230,3 +230,24 @@ export function filterByBranchAction(query) {
     }
   };
 }
+
+export function createOrderForGuestAction(dataSubmit) {
+  return async (dispatch) => {
+    try {
+      dispatch(loading(true));
+      const res = await orderAPI.createForGuest(dataSubmit);
+      if (res.success) {
+        dispatch(loading());
+        dispatch(createOrderSuccess(res.data));
+        return true;
+      }
+      dispatch(loading());
+      dispatch(createOrderFail());
+      return false;
+    } catch {
+      dispatch(loading());
+      dispatch(createOrderFail());
+      return false;
+    }
+  };
+}

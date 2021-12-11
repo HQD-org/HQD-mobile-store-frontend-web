@@ -7,12 +7,12 @@ const url = "/order";
 const create = async (body) => {
   try {
     const res = await axiosClient.post(`${url}/create`, body);
-    toastNotify(res ? res.message.VN : "Thêm hoá đơn thất bại");
+    toastNotify(res ? res.message.VN : "Tạo hoá đơn thất bại");
     return res && res.data
       ? { data: res.data || {}, success: true }
       : { success: false };
   } catch (error) {
-    toastNotify("Thêm hoá đơn thất bại");
+    toastNotify("Tạo hoá đơn thất bại");
     return {
       success: false,
     };
@@ -99,8 +99,24 @@ const filterByBranch = async (queryParams) => {
   }
 };
 
+const createForGuest = async (body) => {
+  try {
+    const res = await axiosClient.post(`${url}/create-guest`, body);
+    toastNotify(res ? res.message.VN : "Tạo hoá đơn thất bại");
+    return res && res.data
+      ? { data: res.data || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    toastNotify("Tạo hoá đơn thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
 const Cart = {
   create,
+  createForGuest,
   remove,
   changeStatus,
   getByStatusAndUser,

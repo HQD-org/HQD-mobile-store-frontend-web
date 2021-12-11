@@ -10,6 +10,8 @@ import {
   FILTER_PRODUCT_SUCCESS,
   FIND_PRODUCT_BY_ID_FAIL,
   FIND_PRODUCT_BY_ID_SUCCESS,
+  GET_BY_BRAND_FAIL,
+  GET_BY_BRAND_SUCCESS,
 } from "../../actions/Product/types";
 
 const initState = {
@@ -21,6 +23,7 @@ const initState = {
   },
   updateFlag: false,
   productDetail: {},
+  homeList: [],
 };
 export default function (state = initState, action) {
   const payload = action.payload;
@@ -55,6 +58,16 @@ export default function (state = initState, action) {
         ...state,
         list: payload.products,
         pagination: payload.pagination,
+      };
+    case GET_BY_BRAND_FAIL:
+      return {
+        ...state,
+        homeList: [],
+      };
+    case GET_BY_BRAND_SUCCESS:
+      return {
+        ...state,
+        homeList: payload,
       };
     case FIND_PRODUCT_BY_ID_FAIL:
       return {

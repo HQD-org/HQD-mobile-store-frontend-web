@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
-import { numberWithCommas } from "../../../../../common/utils/helper";
+import React from "react";
 import { useSelector } from "react-redux";
+import { numberWithCommas } from "../../../../../common/utils/helper";
 
 const InputColor = (props) => {
   const { index, items, onValueChange, type, onQuantityChange } = props;

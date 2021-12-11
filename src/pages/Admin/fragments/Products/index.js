@@ -10,9 +10,7 @@ import ProductList from "./components/ProductList";
 
 const ProductFragment = () => {
   const dispatch = useDispatch();
-  const role = useSelector((state) => state.auth.role);
   const pagination = useSelector((state) => state.product.pagination);
-  const [modal, setModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState(undefined);
   const [idBranch, setIdBranch] = useState("all");
   const [idBrand, setIdBrand] = useState("all");
@@ -94,7 +92,7 @@ const ProductFragment = () => {
         capacity={capacity}
         filterProduct={filterProduct}
       />
-      <ProductList setModal={setModal} />
+      <ProductList />
       <Pagination
         pagination={pagination}
         onPageChange={onPageChange}

@@ -69,7 +69,7 @@ const ProductEditor = (props) => {
     });
     setFormAddProduct({
       idModel: currentModel._id,
-      name: currentModel.name + " 2GB" + " 16GB",
+      name: currentModel.name.concat(" 2GB 16GB"),
       ram: "2GB",
       capacity: "16GB",
       status: "active",

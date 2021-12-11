@@ -3,8 +3,6 @@ import { useSelector } from "react-redux";
 import { numberWithCommas } from "../../../../../common/utils/helper";
 
 const ProductList = (props) => {
-  const { setModal } = props;
-  const toggle = () => setModal(true);
   const products = useSelector((state) => state.product.list);
 
   return (
@@ -24,7 +22,7 @@ const ProductList = (props) => {
           }, 0);
           return (
             <div className="col" key={product._id}>
-              <div className="card card-product" onClick={toggle}>
+              <div className="card card-product">
                 <div className="img-top-text">
                   <img
                     src={img}

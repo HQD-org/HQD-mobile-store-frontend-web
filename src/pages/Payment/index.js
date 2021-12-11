@@ -1,18 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../../common/css/Form.Style.css";
-import { getCartAction } from "../../redux/actions/Cart/cartAction";
+import {
+  getCartAction,
+  getCartGuestAction,
+} from "../../redux/actions/Cart/cartAction";
 import { getAllProvince } from "../../redux/actions/Location/locationAction";
 import Complete from "./components/Complete";
 import Confirm from "./components/Confirm";
 import DeliveryInfo from "./components/DeliveryInfo";
-import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import toastNotify from "../../common/toastify";
 
 const PaymentPage = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { showHeaderAndFooter } = props;
   const itemsInCart = useSelector((state) => state.cart.items);
+  const isLogin = useSelector((state) => state.auth.isLogin);
   const [dataStep1, setDataStep1] = useState({
     name: "",
     phone: "",
@@ -40,10 +46,18 @@ const PaymentPage = (props) => {
   const [showStep3, setShowStep3] = useState(false);
 
   useEffect(() => {
-    const getCart = async () => {
-      await dispatch(getCartAction());
-    };
-    getCart();
+    if (!isLogin) {
+      const getCart = async () => {
+        await dispatch(getCartGuestAction());
+      };
+      getCart();
+    } else {
+      const getCart = async () => {
+        await dispatch(getCartAction());
+      };
+      getCart();
+    }
+
     dispatch(showHeaderAndFooter(true));
     dispatch(getAllProvince());
   }, []);
@@ -54,7 +68,10 @@ const PaymentPage = (props) => {
         return init + item.price * item.quantity;
       }, 0);
       setDataStep2((prev) => ({ ...prev, estimatePrice: totalPrice }));
+      return;
     }
+    toastNotify("Không có sản phẩm trong giỏ hàng để thực hiện giao dịch");
+    history.push("/cart");
   }, [itemsInCart]);
 
   useEffect(() => {

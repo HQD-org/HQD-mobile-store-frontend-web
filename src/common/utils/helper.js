@@ -1,4 +1,4 @@
-const generateString = (length, containNaN) => {
+export const generateString = (length, containNaN) => {
   let result = "";
   let characters = "0123456789";
   if (containNaN) {
@@ -13,7 +13,7 @@ const generateString = (length, containNaN) => {
   return result;
 };
 
-const translateStatusToVietnamese = (status) => {
+export const translateStatusToVietnamese = (status) => {
   switch (status.toLowerCase()) {
     case "active":
       return "Hoạt động";
@@ -46,11 +46,11 @@ const translateStatusToVietnamese = (status) => {
   }
 };
 
-const numberWithCommas = (number) => {
+export const numberWithCommas = (number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-const renderOptionSelect = (list) => {
+export const renderOptionSelect = (list) => {
   return list.map((element) => {
     return (
       <option key={element._id + element.name} value={element._id}>
@@ -58,10 +58,4 @@ const renderOptionSelect = (list) => {
       </option>
     );
   });
-};
-export {
-  generateString,
-  numberWithCommas,
-  translateStatusToVietnamese,
-  renderOptionSelect,
 };

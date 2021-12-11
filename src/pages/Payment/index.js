@@ -51,7 +51,7 @@ const PaymentPage = (props) => {
   useEffect(() => {
     if (itemsInCart.length > 0) {
       const totalPrice = itemsInCart.reduce((init, item) => {
-        return init + item.price;
+        return init + item.price * item.quantity;
       }, 0);
       setDataStep2((prev) => ({ ...prev, estimatePrice: totalPrice }));
     }

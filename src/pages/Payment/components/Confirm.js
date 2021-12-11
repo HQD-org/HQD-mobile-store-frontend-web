@@ -66,7 +66,7 @@ const Confirm = (props) => {
             </div>
             <div className="col-6">
               <p>
-                {dataStep1.paymentType === "cash"
+                {dataStep1.paymentType === "cod"
                   ? "Thanh toán khi nhận hàng"
                   : "Paypal"}
               </p>

@@ -1,78 +1,78 @@
 .icon-invoice {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 .btnFilterInvoice {
-    padding: 10px 20px 10px 20px;
-    border: none;
-    background-color: #3fa5ef;
-    color: white;
-    border-radius: 4px;
-    filter: drop-shadow(0 2px 2px #707070);
+  padding: 10px 20px 10px 20px;
+  border: none;
+  background-color: #3fa5ef;
+  color: white;
+  border-radius: 4px;
+  filter: drop-shadow(0 2px 2px #707070);
 }
 
 .table-invoice {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
 
-.table-invoice>tr>td {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 10px !important;
+.table-invoice > tbody > tr > td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 10px !important;
 }
 
-.table-invoice>tr>th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 10px !important;
-    background-color: #3fa5ef;
-    color: white;
+.table-invoice > thead > tr > th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 10px !important;
+  background-color: #3fa5ef;
+  color: white;
 }
 
 .btnAccept {
-    padding: 10px 20px 10px 20px;
-    border: none;
-    background-color: #3fa5ef;
-    color: white;
-    border-radius: 4px;
-    filter: drop-shadow(0 2px 2px #707070);
+  padding: 10px 20px 10px 20px;
+  border: none;
+  background-color: #3fa5ef;
+  color: white;
+  border-radius: 4px;
+  filter: drop-shadow(0 2px 2px #707070);
 }
 
 .btnAccept:hover {
-    background-color: #1a7abe;
+  background-color: #1a7abe;
 }
 
-.table-invoice>tr:hover {
-    background-color: #f6f5f5;
-    cursor: pointer;
+.table-invoice > tr:hover {
+  background-color: #f6f5f5;
+  cursor: pointer;
 }
 
 .modal-invoice {
-    max-width: 640px !important;
+  max-width: 640px !important;
 }
 
 .btnCancel {
-    padding: 10px 20px 10px 20px;
-    border: none;
-    background-color: rgb(230, 2, 2);
-    color: white;
-    border-radius: 4px;
-    filter: drop-shadow(0 2px 2px #707070);
+  padding: 10px 20px 10px 20px;
+  border: none;
+  background-color: rgb(230, 2, 2);
+  color: white;
+  border-radius: 4px;
+  filter: drop-shadow(0 2px 2px #707070);
 }
 
 .btnCancel:hover {
-    background-color: rgb(161, 1, 1);
+  background-color: rgb(161, 1, 1);
 }
 
 .modal-header {
-    color: #3fa5ef;
+  color: #3fa5ef;
 }
 
 .close-x button {
-    border: 1px solid white;
-    background: #cacaca;
-    border-radius: 3px;
-    color: white;
+  border: 1px solid white;
+  background: #cacaca;
+  border-radius: 3px;
+  color: white;
 }

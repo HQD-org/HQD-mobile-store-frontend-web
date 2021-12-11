@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import React, { useEffect, useState } from "react";
 import { BsBox } from "react-icons/bs";
-import { FcApproval, FcClock, FcGlobe, FcTwoSmartphones } from "react-icons/fc";
+import { FcApproval, FcClock, FcTwoSmartphones } from "react-icons/fc";
 import { MdSecurity, MdSync } from "react-icons/md";
 import { useSelector } from "react-redux";
 
@@ -41,9 +41,6 @@ const Information = () => {
             </p>
             <p>
               <FcApproval /> Hàng chính hãng - Bảo hành 12 tháng
-            </p>
-            <p>
-              <FcGlobe /> Xuất xứ: Trung Quốc
             </p>
           </TabPanel>
           <TabPanel value="2">

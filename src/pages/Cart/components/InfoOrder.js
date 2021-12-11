@@ -7,17 +7,23 @@ const InfoOrder = () => {
   const itemsInCart = useSelector((state) => state.cart.items);
   const [totalPrice, setTotalPrice] = useState("30000");
   const [estimatePrice, setEstimatePrice] = useState("0");
+  const [totalQuantity, setTotalQuantity] = useState("0");
 
   useEffect(() => {
     if (itemsInCart.length > 0) {
       const total = itemsInCart.reduce((init, item) => {
         return init + item.price * item.quantity;
       }, 0);
+      const totalProduct = itemsInCart.reduce((init, item) => {
+        return init + item.quantity;
+      }, 0);
+      setTotalQuantity(totalProduct);
       setTotalPrice(numberWithCommas(total + 30000));
       setEstimatePrice(numberWithCommas(total));
       return;
     }
 
+    setTotalQuantity("0");
     setTotalPrice("0");
   }, [itemsInCart]);
 
@@ -29,8 +35,7 @@ const InfoOrder = () => {
       <hr style={{ marginTop: "20px" }} />
       <div className="row">
         <h6>
-          Tổng <span style={{ color: "red" }}>{itemsInCart.length}</span> sản
-          phẩm
+          Tổng <span style={{ color: "red" }}>{totalQuantity}</span> sản phẩm
         </h6>
       </div>
       <div className="row">

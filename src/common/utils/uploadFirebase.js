@@ -8,7 +8,7 @@ const loading =
     dispatch(changeLoading(loading));
   };
 
-const uploadImagesToFirebase = (images = [], folder) => {
+export const uploadImagesToFirebase = (images = [], folder) => {
   return async (dispatch) => {
     dispatch(loading(true));
     const result = await Promise.all(
@@ -21,7 +21,7 @@ const uploadImagesToFirebase = (images = [], folder) => {
   };
 };
 
-const upload = async (image, folder) => {
+export const upload = async (image, folder) => {
   if (!(image instanceof File)) return image.preview;
   const storageRef = storage.ref(`${folder}`);
   const name = generateString(24, true);
@@ -29,5 +29,3 @@ const upload = async (image, folder) => {
   await fileRef.put(image);
   return await fileRef.getDownloadURL();
 };
-
-export { uploadImagesToFirebase };

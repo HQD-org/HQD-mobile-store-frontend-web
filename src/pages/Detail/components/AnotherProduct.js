@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import SameProduct from "./SameProduct";
 import { useHistory } from "react-router-dom";
+import { numberWithCommas } from "../../../common/utils/helper";
+import SameProduct from "./SameProduct";
 
 const AnotherProduct = () => {
   const history = useHistory();
@@ -23,7 +24,7 @@ const AnotherProduct = () => {
                 <SameProduct
                   key={`same-product${item._id}`}
                   img={color.images[0]}
-                  price={price}
+                  price={numberWithCommas(price)}
                   item={item}
                 />
               );

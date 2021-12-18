@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,21 +7,22 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-
-const createData = (name, timeStart, timeEnd, status) => {
-  return { name, timeStart, timeEnd, status };
-};
+import { useSelector } from "react-redux";
+import {
+  translateStatusToVietnamese,
+  formatDate,
+} from "../../../../../common/utils/helper";
 
 const columns = [
   { id: "name", label: "Tên Coupon", minWidth: 170, fontWeight: "bold" },
   {
-    id: "timeStart",
+    id: "startedDate",
     label: "Thời gian bắt đầu",
     minWidth: 170,
     fontWeight: "bold",
   },
   {
-    id: "timeEnd",
+    id: "expiredDate",
     label: "Thời gian kết thúc",
     minWidth: 170,
     align: "left",
@@ -36,42 +37,21 @@ const columns = [
   },
 ];
 
-const rows = [
-  createData("DealHot1", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot2", "21/11/2021", "21/12/2021", "Hết mã"),
-  createData("DealHot3", "21/11/2021", "21/12/2021", "Không khả dụng"),
-  createData("DealHot4", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot5", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot6", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot7", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot8", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot9", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot10", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot11", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot12", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot13", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot13", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot13", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot13", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot13", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot13", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot13", "21/11/2021", "21/12/2021", "Khả dụng"),
-  createData("DealHot13", "21/11/2021", "21/12/2021", "Khả dụng"),
-];
-
-const Coupons = () => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+const Coupons = (props) => {
+  const { filter, setCurrentItem } = props;
+  const pagination = useSelector((state) => state.coupon.pagination);
+  const list = useSelector((state) => state.coupon.list);
+  const handleChangePage = (e, newPage) => {
+    filter(newPage + 1, pagination.itemPerPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const handleChangeRowsPerPage = (e) => {
+    filter(1, e.target.value);
   };
 
+  const onRowClick = (row) => {
+    setCurrentItem(row);
+  };
   return (
     <div className="container-fluid">
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -96,38 +76,35 @@ const Coupons = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.code}
-                    >
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === "number"
-                              ? column.format(value)
-                              : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
+              {list.map((row) => {
+                return (
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={row._id}
+                    onClick={() => onRowClick(row)}
+                  >
+                    <TableCell>{row.name}</TableCell>
+                    <TableCell>{formatDate(row.startedDate)}</TableCell>
+                    <TableCell align={"left"}>
+                      {formatDate(row.expiredDate)}
+                    </TableCell>
+                    <TableCell align={"left"}>
+                      {translateStatusToVietnamese(row.status)}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10, 20, 30]}
+          rowsPerPageOptions={[20, 50, 100]}
           component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
+          count={pagination.totalItem}
+          rowsPerPage={pagination.itemPerPage}
+          page={pagination.page - 1}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />

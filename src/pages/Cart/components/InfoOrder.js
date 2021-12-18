@@ -28,7 +28,7 @@ const InfoOrder = () => {
   }, [itemsInCart]);
 
   return (
-    <div className="summary mb-3">
+    <div className="summary" style={{ marginBottom: "1rem" }}>
       <div className="row">
         <h5>SUMMARY</h5>
       </div>

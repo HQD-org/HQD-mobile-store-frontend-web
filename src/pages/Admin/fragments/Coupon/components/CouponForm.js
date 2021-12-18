@@ -71,6 +71,10 @@ const CouponForm = (props) => {
     setCouponPercent(e.target.value);
   };
 
+  const onDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
+
   const onClickGenerateName = async () => {
     if (currentItem) return;
     const name = await dispatch(generateUniqueNameAction());
@@ -243,6 +247,7 @@ const CouponForm = (props) => {
               rows={2}
               name="description"
               value={description}
+              onChange={onDescriptionChange}
             />
           </FormControl>
           <FormControl

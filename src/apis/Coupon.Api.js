@@ -66,9 +66,9 @@ const filter = async (queryParams) => {
   }
 };
 
-const use = async (body) => {
+const applyCoupon = async (body) => {
   try {
-    const res = await axiosClient.post(`${url}/use`, body);
+    const res = await axiosClient.post(`${url}/apply`, body);
     return res && res.data
       ? { data: res.data || {}, success: true }
       : { success: false };
@@ -92,6 +92,32 @@ const generateUniqueName = async () => {
   }
 };
 
-const Coupon = { insert, filter, getAll, update, use, generateUniqueName };
+const findByName = async (queryParams) => {
+  try {
+    const query = queryString.stringify(queryParams);
+    const res = await axiosClient.get(`${url}/find-by-name?${query}`);
+    toastNotify(
+      !res.success ? res.message.VN : "Tìm kiếm mã khuyến mãi thất bại"
+    );
+    return res && res.data
+      ? { data: res.data || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    toastNotify("Tìm kiếm mã khuyến mãi thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const Coupon = {
+  insert,
+  filter,
+  getAll,
+  update,
+  applyCoupon,
+  generateUniqueName,
+  findByName,
+};
 
 export default Coupon;

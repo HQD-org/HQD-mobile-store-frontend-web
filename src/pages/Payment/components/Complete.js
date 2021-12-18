@@ -12,15 +12,37 @@ import {
 } from "../../../redux/actions/Cart/cartAction";
 import { useHistory } from "react-router-dom";
 import Cookie from "js-cookie";
+import { applyCouponAction } from "../../../redux/actions/Coupon/couponAction";
 
 const Complete = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { setShowStep2, dataStep1, dataStep2 } = props;
+  const coupon = useSelector((state) => state.coupon.detail);
+  const { setShowStep2, dataStep1, dataStep2, setDataStep1, setDataStep2 } =
+    props;
   const itemsInCart = useSelector((state) => state.cart.items);
   const isLogin = useSelector((state) => state.auth.isLogin);
   const previousStep = () => {
     setShowStep2(true);
+  };
+
+  const resetDataPayment = () => {
+    setDataStep1({
+      name: "",
+      phone: "",
+      email: "",
+      address: {
+        detail: "",
+        province: "",
+        district: "",
+        village: "",
+      },
+      receiveType: "at home",
+      paymentType: "cod",
+      timeDelivery: "all day",
+      message: " ",
+    });
+    setDataStep2({ estimatePrice: 0, shipPrice: 30000, discount: 0 });
   };
 
   const confirmOrder = async () => {
@@ -58,11 +80,13 @@ const Complete = (props) => {
     };
 
     if (dataStep1.paymentType === "cod") {
+      if (coupon) await dispatch(applyCouponAction({ id: coupon._id }));
       if (!isLogin) {
         const res = await dispatch(createOrderForGuestAction(data));
         if (res) {
           Cookie.remove("cart");
           await dispatch(getCartGuestAction());
+          resetDataPayment();
           history.push("/");
         }
         return;
@@ -70,6 +94,7 @@ const Complete = (props) => {
       const res = await dispatch(createOrderAction(data));
       if (res) {
         await dispatch(getCartAction());
+        resetDataPayment();
         history.push("/");
       }
       return;

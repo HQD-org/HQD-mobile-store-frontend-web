@@ -1,11 +1,61 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import toastNotify from "../../../common/toastify";
 import { numberWithCommas } from "../../../common/utils/helper";
+import { findByNameAction } from "../../../redux/actions/Coupon/couponAction";
 import ProductList from "./ProductList";
 
 const Confirm = (props) => {
-  const { dataStep1, dataStep2, setShowStep1, setShowStep3 } = props;
+  const dispatch = useDispatch();
+  const coupon = useSelector((state) => state.coupon.detail);
+  const { dataStep1, dataStep2, setShowStep1, setShowStep3, setDataStep2 } =
+    props;
   const [address, setAddress] = useState(dataStep1.address);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [couponName, setCouponName] = useState("");
+
+  const previousStep = () => {
+    setShowStep1(true);
+  };
+
+  const nextStep = () => {
+    setShowStep3(true);
+  };
+
+  const onChangeCoupon = (e) => {
+    setCouponName(e.target.value);
+  };
+
+  const findCoupon = async () => {
+    if (!couponName) return;
+    await dispatch(findByNameAction({ name: couponName }));
+  };
+
+  useEffect(() => {
+    if (coupon) {
+      if (coupon._id) {
+        if (dataStep2.estimatePrice >= coupon.minPriceToApply) {
+          if (coupon.discountBy === "amount") {
+            setDataStep2({
+              ...dataStep2,
+              discount: coupon.discountValue,
+            });
+            return;
+          }
+          let discount = dataStep2.estimatePrice * (coupon.discountValue / 100);
+          if (discount > coupon.maxDiscount) discount = coupon.maxDiscount;
+          setDataStep2({
+            ...dataStep2,
+            discount,
+          });
+          return;
+        }
+        toastNotify("Số tiền mua hàng không đủ để áp dụng mã giảm giá");
+        return;
+      }
+    }
+  }, [coupon]);
 
   useEffect(() => {
     setAddress(dataStep1.address);
@@ -17,13 +67,6 @@ const Confirm = (props) => {
     );
   }, [dataStep2]);
 
-  const previousStep = () => {
-    setShowStep1(true);
-  };
-
-  const nextStep = () => {
-    setShowStep3(true);
-  };
   return (
     <div className="row mt-3 mb-3" style={{ justifyContent: "center" }}>
       <div className="col-6">
@@ -87,13 +130,17 @@ const Confirm = (props) => {
             </div>
             <div className="col-5">
               <input
+                value={couponName}
+                onChange={onChangeCoupon}
                 className="form-control"
                 type="text"
                 style={{ height: "35px" }}
               />
             </div>
             <div className="col-3" style={{ textAlign: "end" }}>
-              <button className="btnCoupon">Áp dụng</button>
+              <button className="btnCoupon" type="button" onClick={findCoupon}>
+                Áp dụng
+              </button>
             </div>
           </div>
           <div className="row">

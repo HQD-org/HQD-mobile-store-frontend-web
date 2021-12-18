@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../common/css/Form.Style.css";
 import {
@@ -17,6 +17,7 @@ const PaymentPage = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { showHeaderAndFooter } = props;
+  const firstInitRef = useRef();
   const itemsInCart = useSelector((state) => state.cart.items);
   const isLogin = useSelector((state) => state.auth.isLogin);
   const [dataStep1, setDataStep1] = useState({
@@ -38,7 +39,7 @@ const PaymentPage = (props) => {
   const [dataStep2, setDataStep2] = useState({
     estimatePrice: 0,
     shipPrice: 30000,
-    discount: 10000,
+    discount: 0,
   });
 
   const [showStep1, setShowStep1] = useState(true);
@@ -70,7 +71,9 @@ const PaymentPage = (props) => {
       setDataStep2((prev) => ({ ...prev, estimatePrice: totalPrice }));
       return;
     }
-    toastNotify("Không có sản phẩm trong giỏ hàng để thực hiện giao dịch");
+    if (!firstInitRef.current)
+      toastNotify("Không có sản phẩm trong giỏ hàng để thực hiện giao dịch");
+    firstInitRef.current = true;
     history.push("/cart");
   }, [itemsInCart]);
 
@@ -118,6 +121,7 @@ const PaymentPage = (props) => {
               dataStep2={dataStep2}
               setShowStep1={setShowStep1}
               setShowStep3={setShowStep3}
+              setDataStep2={setDataStep2}
             />
           )}
           {showStep3 && (
@@ -125,6 +129,8 @@ const PaymentPage = (props) => {
               dataStep1={dataStep1}
               dataStep2={dataStep2}
               setShowStep2={setShowStep2}
+              setDataStep1={setDataStep1}
+              setDataStep2={setDataStep2}
             />
           )}
         </div>

@@ -10,6 +10,8 @@ import {
   FILTER_COUPON_SUCCESS,
   USE_COUPON_FAIL,
   USE_COUPON_SUCCESS,
+  FIND_COUPON_BY_NAME_FAIL,
+  FIND_COUPON_BY_NAME_SUCCESS,
 } from "../../actions/Coupon/types";
 
 const initState = {
@@ -20,6 +22,7 @@ const initState = {
     totalItem: 0,
   },
   updateFlag: false,
+  detail: {},
 };
 export default function (state = initState, action) {
   const payload = action.payload;
@@ -55,6 +58,9 @@ export default function (state = initState, action) {
         list: payload.coupons,
         pagination: payload.pagination,
       };
+    case FIND_COUPON_BY_NAME_SUCCESS:
+      return { ...state, detail: payload };
+    case FIND_COUPON_BY_NAME_FAIL:
     case USE_COUPON_FAIL:
     case USE_COUPON_SUCCESS:
     default:

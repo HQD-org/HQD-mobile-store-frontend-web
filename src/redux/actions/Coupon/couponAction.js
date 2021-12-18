@@ -11,6 +11,8 @@ import {
   FILTER_COUPON_SUCCESS,
   USE_COUPON_FAIL,
   USE_COUPON_SUCCESS,
+  FIND_COUPON_BY_NAME_FAIL,
+  FIND_COUPON_BY_NAME_SUCCESS,
 } from "./types";
 import couponAPI from "../../../apis/Coupon.Api";
 
@@ -160,32 +162,32 @@ export function filterCouponAction(queryParams) {
   };
 }
 
-export function useCouponFail() {
+export function applyCouponFail() {
   return {
     type: USE_COUPON_FAIL,
     payload: {},
   };
 }
 
-export function useCouponSuccess(data) {
+export function applyCouponSuccess(data) {
   return {
     type: USE_COUPON_SUCCESS,
     payload: data,
   };
 }
 
-export function useCouponAction(queryParams) {
+export function applyCouponAction(queryParams) {
   return async (dispatch) => {
     try {
-      const res = await couponAPI.use(queryParams);
+      const res = await couponAPI.applyCoupon(queryParams);
       if (res.success) {
-        dispatch(useCouponSuccess(res.data));
+        dispatch(applyCouponSuccess(res.data));
         return true;
       }
-      dispatch(useCouponFail());
+      dispatch(applyCouponFail());
       return false;
     } catch {
-      dispatch(useCouponFail());
+      dispatch(applyCouponFail());
       return false;
     }
   };
@@ -204,6 +206,41 @@ export function generateUniqueNameAction() {
       return false;
     } catch {
       dispatch(loading());
+      return false;
+    }
+  };
+}
+
+export function findByNameFail() {
+  return {
+    type: FIND_COUPON_BY_NAME_FAIL,
+    payload: {},
+  };
+}
+
+export function findByNameSuccess(data) {
+  return {
+    type: FIND_COUPON_BY_NAME_SUCCESS,
+    payload: data,
+  };
+}
+
+export function findByNameAction(queryParams) {
+  return async (dispatch) => {
+    try {
+      dispatch(loading(true));
+      const res = await couponAPI.findByName(queryParams);
+      if (res.success) {
+        dispatch(loading());
+        dispatch(findByNameSuccess(res.data));
+        return res.data;
+      }
+      dispatch(loading());
+      dispatch(findByNameFail());
+      return false;
+    } catch {
+      dispatch(loading());
+      dispatch(findByNameFail());
       return false;
     }
   };

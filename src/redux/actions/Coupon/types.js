@@ -8,3 +8,5 @@ export const FILTER_COUPON_FAIL = "filter coupon fail";
 export const FILTER_COUPON_SUCCESS = "filter coupon success";
 export const USE_COUPON_FAIL = "use coupon fail";
 export const USE_COUPON_SUCCESS = "use coupon success";
+export const FIND_COUPON_BY_NAME_FAIL = "find coupon by name fail";
+export const FIND_COUPON_BY_NAME_SUCCESS = "find coupon by name success";

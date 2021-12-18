@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import "../../../../../common/css/Statistical.Style.css";
-import { FormGroup } from "reactstrap";
 
 const StatisticalHeader = () => {
   return (

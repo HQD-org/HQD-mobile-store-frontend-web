@@ -76,6 +76,21 @@ const statusBranch = [
   },
 ];
 
+const statusCoupon = [
+  {
+    _id: "expired",
+    name: "Hết hạn",
+  },
+  {
+    _id: "out of stock",
+    name: "Hết số lượng",
+  },
+  {
+    _id: "active",
+    name: "Khả dụng",
+  },
+];
+
 export {
   capacityList,
   ramList,
@@ -86,4 +101,5 @@ export {
   statusProduct,
   timeDebutList,
   priceList,
+  statusCoupon,
 };

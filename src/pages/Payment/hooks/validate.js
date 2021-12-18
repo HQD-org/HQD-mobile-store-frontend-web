@@ -2,16 +2,24 @@ import validator from "validator";
 import toastNotify from "../../../common/toastify";
 
 const validateStep1 = (data) => {
+  const isEmptyName = validator.isEmpty(data.name);
+  if (isEmptyName) {
+    toastNotify("Tên người nhận không được bỏ trống");
+    return false;
+  }
+
   const isEmail = validator.isEmail(data.email);
   if (!isEmail) {
     toastNotify("Email không hợp lệ");
     return false;
   }
+
   const isEmptyPhone = validator.isEmpty(data.phone);
   if (isEmptyPhone) {
-    toastNotify("Mật khẩu không được bỏ trống");
+    toastNotify("Số điện thoại không được bỏ trống");
     return false;
   }
+
   const address = data.address;
   const isEmptyDetail = validator.isEmpty(address.detail);
   if (isEmptyDetail) {

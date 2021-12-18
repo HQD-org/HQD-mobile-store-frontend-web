@@ -1,9 +1,15 @@
 import React from "react";
 import { RiCoupon3Fill } from "react-icons/ri";
 import { FormGroup } from "reactstrap";
+import { statusCoupon } from "../../../../../common/constants/ListSelect";
 import "../../../../../common/css/Coupon.Style.css";
 
-const CouponHeader = () => {
+const CouponHeader = (props) => {
+  const { setStatus, status } = props;
+  const onStatusFilterChange = (e) => {
+    setStatus(e.target.value);
+  };
+
   return (
     <div className="container-fluid">
       <div
@@ -33,13 +39,17 @@ const CouponHeader = () => {
             </div>
             <div className="col-2">
               <FormGroup>
-                <select className="form-select" name="status">
-                  <option value="all" selected dissable>
-                    Status
-                  </option>
-                  <option value="kd">Khả dụng</option>
-                  <option value="kkd">Không khả dụng</option>
-                  <option value="hm">Hết mã</option>
+                <select
+                  className="form-select"
+                  value={status}
+                  onChange={onStatusFilterChange}
+                >
+                  <option value="all">Status</option>
+                  {statusCoupon.map((item) => (
+                    <option value={item._id} key={item._id}>
+                      {item.name}
+                    </option>
+                  ))}
                 </select>
               </FormGroup>
             </div>

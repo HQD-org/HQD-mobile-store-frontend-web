@@ -13,22 +13,20 @@ import InvoiceFragment from "./fragments/Invoice";
 import StatisticalFragment from "./fragments/Statistical";
 
 const AdminPage = (props) => {
+  const dispatch = useDispatch();
+  const { showHeaderAndFooter } = props;
+
   const [toggleBrand, setToggleBrand] = useState(false);
   const [toggleModel, setToggleModel] = useState(false);
   const [toggleAddProduct, setToggleAddProduct] = useState(false);
-  const [toggleProduct, setToggleProduct] = useState(true);
+  const [toggleProduct, setToggleProduct] = useState(false);
   const [toggleUser, setToggleUser] = useState(false);
   const [toggleBranch, setToggleBranch] = useState(false);
-  const [toggleCoupon, setToggleCoupon] = useState(false);
+  const [toggleCoupon, setToggleCoupon] = useState(true);
   const [toggleInvoice, setToggleInvoice] = useState(false);
   const [toggleStatistical, setToggleStatistical] = useState(false);
-  const toggleRef = useRef("product");
-  
-  const { showHeaderAndFooter } = props;
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(showHeaderAndFooter(false));
-  }, []);
+  const toggleRef = useRef("coupon");
+
   const disabledToggle = (ref) => {
     switch (ref) {
       case "brand":
@@ -107,6 +105,10 @@ const AdminPage = (props) => {
         break;
     }
   };
+
+  useEffect(() => {
+    dispatch(showHeaderAndFooter(false));
+  }, []);
   return (
     <>
       <div className="row">

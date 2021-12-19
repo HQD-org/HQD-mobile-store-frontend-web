@@ -180,15 +180,26 @@ const CouponForm = (props) => {
 
   return (
     <div className="form-coupon">
-      <div className="header-coupon">
-        <img
-          src={AddBtn}
-          alt="coupon icon"
-          style={{ width: "30px", marginRight: "5px" }}
-        />
-        <span className="txtAddCoupon">Coupon</span>
+      <div className="row header-coupon">
+        <div className="col-5">
+          {" "}
+          <img
+            src={AddBtn}
+            alt="coupon icon"
+            style={{ width: "30px", marginRight: "5px" }}
+          />
+          <span className="txtAddCoupon">Coupon</span>
+        </div>
+        <div
+          className="col-7"
+          style={{ display: "flex", justifyContent: "end" }}
+        >
+          <button className="btnreset" onClick={resetForm}>
+            Reset Form
+          </button>
+        </div>
       </div>
-      <button onClick={resetForm}>Reset Form</button>
+
       <form
         onSubmit={currentItem ? updateCoupon : addCoupon}
         ref={(el) => (addCouponForm.current = el)}
@@ -201,6 +212,7 @@ const CouponForm = (props) => {
             className="form-control-coupon"
           >
             <TextField
+              className="name-coupon"
               id="outlined-basic"
               label="Tên mã khuyến mãi"
               variant="outlined"

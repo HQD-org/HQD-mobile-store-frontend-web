@@ -17,6 +17,7 @@ import ProfileRoute from "./Profile.Route";
 import BillRoute from "./Bill.Route";
 import ErrorRoute from "./Error.Route";
 import ContactRoute from "./Contact.Route";
+import QuestionRoute from "./Question.Route";
 
 const Routers = () => {
   return (
@@ -31,6 +32,7 @@ const Routers = () => {
         <CartRoute />
         <PaymentRoute />
         <ProfileRoute />
+        <QuestionRoute />
         <BillRoute />
         <LoginRoute />
         <RegisterRoute />

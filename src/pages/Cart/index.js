@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import CartList from "./components/CartList";
 import InfoOrder from "./components/InfoOrder";
+import "../../common/css/Cart.Style.css";
 
 const CartPage = (props) => {
   const { showHeaderAndFooter } = props;

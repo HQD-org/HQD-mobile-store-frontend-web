@@ -258,6 +258,7 @@
 }
 
 .pre-price {
+    color: black !important;
     text-decoration-line: line-through;
     font-weight: normal !important;
 }

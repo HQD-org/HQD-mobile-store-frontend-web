@@ -16,6 +16,7 @@ export const PATH = {
   BILLS: "/bills",
   ERROR: "/error",
   CONTACT: "/contact",
+  QUESTION: "/question",
 };
 
 export const PATH_API = {};

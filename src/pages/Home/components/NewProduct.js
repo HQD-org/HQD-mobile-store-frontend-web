@@ -47,6 +47,7 @@ const NewProduct = () => {
                       className="col"
                       key={`new-product${item._id}`}
                       to={`/detail/${item._id}`}
+                      style={{ textDecoration: "none" }}
                     >
                       <div className="card h-100 card-newPro">
                         <div
@@ -65,7 +66,9 @@ const NewProduct = () => {
                         </div>
 
                         <div className="card-body">
-                          <h5 className="card-title">{item.name_with_type}</h5>
+                          <h5 className="card-title" style={{ color: "black" }}>
+                            {item.name}
+                          </h5>
                           <h5 className="card-text now-price">
                             {numberWithCommas(price)} ₫
                           </h5>

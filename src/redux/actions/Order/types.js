@@ -11,3 +11,9 @@ export const GET_BY_STATUS_AND_BRANCH_SUCCESS =
   "get by status and branch success";
 export const FILTER_BY_BRANCH_FAIL = "filter by branch fail";
 export const FILTER_BY_BRANCH_SUCCESS = "filter by branch success";
+export const GET_PROFIT_BY_YEAR_FAIL = "get profit by year fail";
+export const GET_PROFIT_BY_YEAR_SUCCESS = "get profit by year success";
+export const GET_TOP_10_BEST_SELLER_PRODUCT_FAIL =
+  "get top 10 best seller product fail";
+export const GET_TOP_10_BEST_SELLER_PRODUCT_SUCCESS =
+  "get top 10 best seller product success";

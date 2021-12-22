@@ -12,6 +12,10 @@ import {
   FILTER_BY_BRANCH_SUCCESS,
   GET_BY_STATUS_AND_BRANCH_FAIL,
   GET_BY_STATUS_AND_BRANCH_SUCCESS,
+  GET_PROFIT_BY_YEAR_FAIL,
+  GET_PROFIT_BY_YEAR_SUCCESS,
+  GET_TOP_10_BEST_SELLER_PRODUCT_FAIL,
+  GET_TOP_10_BEST_SELLER_PRODUCT_SUCCESS,
 } from "../../actions/Order/types";
 
 const initState = {
@@ -23,6 +27,8 @@ const initState = {
   },
   detailOrder: {},
   updateFlag: false,
+  profit: [],
+  top10BestSeller: [],
 };
 export default function (state = initState, action) {
   const payload = action.payload;
@@ -51,6 +57,12 @@ export default function (state = initState, action) {
       return { ...state };
     case CHANGE_STATUS_ORDER_SUCCESS:
       return { ...state, updateFlag: !state.updateFlag };
+    case GET_PROFIT_BY_YEAR_SUCCESS:
+      return { ...state, profit: payload };
+    case GET_TOP_10_BEST_SELLER_PRODUCT_SUCCESS:
+      return { ...state, top10BestSeller: payload };
+    case GET_TOP_10_BEST_SELLER_PRODUCT_FAIL:
+    case GET_PROFIT_BY_YEAR_FAIL:
     case REMOVE_ORDER_FAIL:
       return {
         ...state,

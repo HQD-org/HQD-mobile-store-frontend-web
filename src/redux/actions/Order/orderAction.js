@@ -12,6 +12,10 @@ import {
   FILTER_BY_BRANCH_SUCCESS,
   GET_BY_STATUS_AND_BRANCH_FAIL,
   GET_BY_STATUS_AND_BRANCH_SUCCESS,
+  GET_PROFIT_BY_YEAR_FAIL,
+  GET_PROFIT_BY_YEAR_SUCCESS,
+  GET_TOP_10_BEST_SELLER_PRODUCT_FAIL,
+  GET_TOP_10_BEST_SELLER_PRODUCT_SUCCESS,
 } from "./types";
 import orderAPI from "../../../apis/Order.Api";
 
@@ -247,6 +251,76 @@ export function createOrderForGuestAction(dataSubmit) {
     } catch {
       dispatch(loading());
       dispatch(createOrderFail());
+      return false;
+    }
+  };
+}
+
+export function getProfitByYearFail() {
+  return {
+    type: GET_PROFIT_BY_YEAR_FAIL,
+    payload: {},
+  };
+}
+
+export function getProfitByYearSuccess(data) {
+  return {
+    type: GET_PROFIT_BY_YEAR_SUCCESS,
+    payload: data,
+  };
+}
+
+export function getProfitByYearAction(query) {
+  return async (dispatch) => {
+    try {
+      dispatch(loading(true));
+      const res = await orderAPI.getProfitByYear(query);
+      if (res.success) {
+        dispatch(loading());
+        dispatch(getProfitByYearSuccess(res.data));
+        return true;
+      }
+      dispatch(loading());
+      dispatch(getProfitByYearFail());
+      return false;
+    } catch {
+      dispatch(loading());
+      dispatch(getProfitByYearFail());
+      return false;
+    }
+  };
+}
+
+export function getTop10BestSellerProductFail() {
+  return {
+    type: GET_TOP_10_BEST_SELLER_PRODUCT_FAIL,
+    payload: {},
+  };
+}
+
+export function getTop10BestSellerProductSuccess(data) {
+  return {
+    type: GET_TOP_10_BEST_SELLER_PRODUCT_SUCCESS,
+    payload: data,
+  };
+}
+
+export function getTop10BestSellerProductAction(query) {
+  return async (dispatch) => {
+    try {
+      dispatch(loading(true));
+      const res = await orderAPI.getTop10BestSellerProduct(query);
+      if (res.success) {
+        dispatch(loading());
+        dispatch(getTop10BestSellerProductSuccess(res.data));
+        return true;
+      }
+      dispatch(loading());
+      dispatch(getTop10BestSellerProductFail());
+      return false;
+    } catch {
+      dispatch(loading());
+      dispatch(getTop10BestSellerProductFail());
       return false;
     }
   };

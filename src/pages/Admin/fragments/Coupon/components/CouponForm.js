@@ -9,7 +9,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MdSettingsBackupRestore } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { statusCoupon } from "../../../../../common/constants/ListSelect";
@@ -18,16 +18,18 @@ import { numberWithCommas } from "../../../../../common/utils/helper";
 import { upload } from "../../../../../common/utils/uploadFirebase";
 import {
   addCouponAction,
-  updateCouponAction,
   generateUniqueNameAction,
+  updateCouponAction,
 } from "../../../../../redux/actions/Coupon/couponAction";
+import { changeLoading } from "../../../../../redux/actions/System/systemAction";
 import { validateAddCoupon, validateUpdateCoupon } from "../hooks/validate";
 
 const CouponForm = (props) => {
-  const { currentItem } = props;
+  const { currentItem, setCurrentItem } = props;
   const dispatch = useDispatch();
   const [discountBy, setDiscountBy] = useState("percent");
   const [name, setName] = useState("");
+  const [quantity, setQuantity] = useState(1);
   const [couponPrice, setCouponPrice] = useState("0");
   const [couponPercent, setCouponPercent] = useState("0");
   const [minPriceToApply, setMinPriceToApply] = useState("0");
@@ -37,6 +39,12 @@ const CouponForm = (props) => {
   const [selectedFile, setSelectedFile] = useState();
   const [description, setDescription] = useState("");
   const addCouponForm = useRef();
+
+  const loading =
+    (load = true) =>
+    (dispatch) => {
+      dispatch(changeLoading(load));
+    };
 
   const onChangeImage = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -71,6 +79,11 @@ const CouponForm = (props) => {
     setCouponPercent(e.target.value);
   };
 
+  const onChangeQuantity = (e) => {
+    if (e.target.value < 0) return;
+    setQuantity(e.target.value);
+  };
+
   const onDescriptionChange = (e) => {
     setDescription(e.target.value);
   };
@@ -93,6 +106,7 @@ const CouponForm = (props) => {
     setSelectedFile();
     setDiscountBy("percent");
     setDescription("");
+    setCurrentItem(undefined);
   };
 
   const addCoupon = async (e) => {
@@ -115,6 +129,7 @@ const CouponForm = (props) => {
     };
     const isValidData = validateAddCoupon(data);
     if (isValidData) {
+      loading();
       const imgURL = await upload(data.image, "Coupon");
       data = {
         ...data,
@@ -149,7 +164,8 @@ const CouponForm = (props) => {
     const isValidData = validateUpdateCoupon(data);
     if (isValidData) {
       if (selectedFile) {
-        const imgURL = await upload(data.image, "Coupon");
+        loading();
+        const imgURL = await upload(selectedFile, "Coupon");
         data.image = imgURL;
       }
       data = {
@@ -164,6 +180,7 @@ const CouponForm = (props) => {
   useEffect(() => {
     if (currentItem) {
       setName(currentItem.name);
+      setQuantity(currentItem.quantity);
       setMinPriceToApply(numberWithCommas(currentItem.minPriceToApply));
       setDiscountBy(currentItem.discountBy);
       if (currentItem.discountBy === "amount") {
@@ -182,7 +199,6 @@ const CouponForm = (props) => {
     <div className="form-coupon">
       <div className="row header-coupon">
         <div className="col-5">
-          {" "}
           <img
             src={AddBtn}
             alt="coupon icon"
@@ -213,7 +229,7 @@ const CouponForm = (props) => {
           >
             <TextField
               className="name-coupon"
-              id="outlined-basic"
+              // id="outlined-basic"
               label="Tên mã khuyến mãi"
               variant="outlined"
               name="name"
@@ -234,14 +250,15 @@ const CouponForm = (props) => {
             <TextField
               onWheel={(e) => e.target.blur()}
               onFocus={(e) => e.target.select()}
-              id="outlined-number"
+              // id="outlined-number"
               label="Số lượng"
               type="number"
               InputLabelProps={{
                 shrink: true,
               }}
               name="quantity"
-              defaultValue={currentItem ? currentItem.quantity : 1}
+              value={quantity}
+              onChange={onChangeQuantity}
             />
           </FormControl>
           <FormControl
@@ -251,7 +268,7 @@ const CouponForm = (props) => {
             className="form-control-coupon"
           >
             <TextField
-              id="outlined-basic"
+              // id="outlined-basic"
               variant="outlined"
               label="Mô tả"
               floatinglabeltext="MultiLine and FloatingLabel"
@@ -272,7 +289,7 @@ const CouponForm = (props) => {
               onFocus={(e) => e.target.select()}
               inputProps={{ readOnly: discountBy === "percent" }}
               value={couponPrice}
-              id="outlined-basic"
+              // id="outlined-basic"
               label="Giảm theo mệnh giá"
               variant="outlined"
               onChange={onChangeValuePrice}
@@ -301,9 +318,10 @@ const CouponForm = (props) => {
             className="form-control-coupon"
           >
             <TextField
+              onWheel={(e) => e.target.blur()}
               onFocus={(e) => e.target.select()}
               inputProps={{ readOnly: discountBy === "amount" }}
-              id="outlined-basic"
+              // id="outlined-basic"
               label="Giảm theo %"
               value={couponPercent}
               variant="outlined"
@@ -333,7 +351,7 @@ const CouponForm = (props) => {
           >
             <TextField
               onFocus={(e) => e.target.select()}
-              id="outlined-number"
+              // id="outlined-number"
               label="Giá trị đơn hàng tối thiểu"
               type="text"
               name="minPriceToApply"
@@ -352,7 +370,7 @@ const CouponForm = (props) => {
           >
             <TextField
               onFocus={(e) => e.target.select()}
-              id="outlined-number"
+              // id="outlined-number"
               label="Giảm tối đa"
               type="text"
               name="maxDiscount"

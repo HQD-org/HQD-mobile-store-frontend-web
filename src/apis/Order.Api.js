@@ -114,7 +114,40 @@ const createForGuest = async (body) => {
   }
 };
 
-const Cart = {
+const getProfitByYear = async (queryParams) => {
+  try {
+    const query = queryString.stringify(queryParams);
+    console.log("log at ==> query ==> ", query);
+    const res = await axiosClient.get(`${url}/get-profit-by-year?${query}`);
+    return res && res.data
+      ? { data: res.data || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    toastNotify("Lấy doanh thu thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const getTop10BestSellerProduct = async (queryParams) => {
+  try {
+    const query = queryString.stringify(queryParams);
+    console.log("log at ==> query ==> ", query);
+    const res = await axiosClient.get(
+      `${url}/get-top-10-best-seller-product?${query}`
+    );
+    return res && res.data
+      ? { data: res.data || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    return {
+      success: false,
+    };
+  }
+};
+
+const Order = {
   create,
   createForGuest,
   remove,
@@ -122,6 +155,8 @@ const Cart = {
   getByStatusAndUser,
   getByStatusAndBranch,
   filterByBranch,
+  getProfitByYear,
+  getTop10BestSellerProduct,
 };
 
-export default Cart;
+export default Order;

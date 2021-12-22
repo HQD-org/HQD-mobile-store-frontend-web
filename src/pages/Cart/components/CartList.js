@@ -2,7 +2,6 @@ import React from "react";
 import { IoAdd, IoChevronBackCircleSharp, IoRemove } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import "../../../common/css/Cart.Style.css";
 import { numberWithCommas } from "../../../common/utils/helper";
 import {
   removeCartAction,

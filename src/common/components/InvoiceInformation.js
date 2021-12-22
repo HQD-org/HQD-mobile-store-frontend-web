@@ -2,16 +2,18 @@
 import React, { useState, useEffect } from "react";
 import { FcViewDetails } from "react-icons/fc";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
-import "../../../common/css/Payment.Style.css";
+import "../css/Payment.Style.css";
 import ProductList from "./ProductList";
 import { useSelector } from "react-redux";
-import { numberWithCommas } from "../../../common/utils/helper";
+import { numberWithCommas } from "../utils/helper";
 
 const InvoiceInformation = (props) => {
   const { modal, setModal, currentItem, setCurrentItem } = props;
   const invoices = useSelector((state) => state.order.list);
   const [order, setOrder] = useState("");
   const [receiveInfo, setReceiveInfo] = useState("");
+  const [estimatePrice, setEstimatePrice] = useState("0");
+  const [discount, setDiscount] = useState("0");
   const toggle = () => {
     setModal(false);
     setCurrentItem(-1);
@@ -25,9 +27,21 @@ const InvoiceInformation = (props) => {
 
   useEffect(() => {
     if (order) {
+      const estimate = order.products.reduce(
+        (total, p) => total + p.price * p.quantity,
+        0
+      );
+      setEstimatePrice(numberWithCommas(estimate));
       setReceiveInfo(order.receiveInfo);
     }
   }, [order]);
+
+  useEffect(() => {
+    const estimatePriceInt = parseInt(estimatePrice.replace(/[^0-9]/g, ""));
+    if (estimatePriceInt > 0) {
+      setDiscount(30000 + estimatePriceInt - order.totalPrice);
+    }
+  }, [estimatePrice]);
 
   return (
     <Modal isOpen={modal} toggle={toggle} className="modal-invoice">
@@ -83,7 +97,7 @@ const InvoiceInformation = (props) => {
               <h6>Tạm tính</h6>
             </div>
             <div className="col-6">
-              <p className="txtprice">Quên lưu field này rầu =)) ₫</p>
+              <p className="txtprice">{estimatePrice} ₫</p>
             </div>
           </div>
           <div className="row">
@@ -99,7 +113,7 @@ const InvoiceInformation = (props) => {
               <h6>Khuyến mãi</h6>
             </div>
             <div className="col-6">
-              <p className="txtprice coupon">- 10.000₫</p>
+              <p className="txtprice coupon">- {discount}₫</p>
             </div>
           </div>
           <div className="row">

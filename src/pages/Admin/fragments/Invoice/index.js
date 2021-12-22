@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getByStatusAndBranchAction } from "../../../../redux/actions/Order/orderAction";
 import Pagination from "../../../../common/components/Pagination";
 import InvoiceHeader from "./components/InvoiceHeader";
-import InvoiceInformation from "./components/InvoiceInformation";
+import InvoiceInformation from "../../../../common/components/InvoiceInformation";
 import TableInvoice from "./components/TableInvoice";
 
 const InvoiceFragment = React.memo(() => {

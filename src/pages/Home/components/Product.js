@@ -39,7 +39,9 @@ const Product = () => {
                         />
                       </div>
                       <div className="card-body">
-                        <h5 className="card-title">{product.name}</h5>
+                        <h5 className="card-title" style={{ color: "black" }}>
+                          {product.name}
+                        </h5>
                         <h5 className="card-text now-price">
                           {numberWithCommas(price) + " đ"}
                         </h5>

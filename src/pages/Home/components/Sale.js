@@ -46,6 +46,7 @@ const Sale = () => {
             return (
               <div className="col" key={`discount${item._id}`}>
                 <Link
+                  style={{ textDecoration: "none" }}
                   className="card h-100 card-sale"
                   to={`/detail/${item._id}`}
                 >
@@ -61,7 +62,9 @@ const Sale = () => {
                   </div>
 
                   <div className="card-body">
-                    <h5 className="card-title">{item.name}</h5>
+                    <h5 className="card-title" style={{ color: "black" }}>
+                      {item.name}
+                    </h5>
                     <h5 className="card-text now-price">
                       {numberWithCommas(price - 1000000)} ₫
                     </h5>

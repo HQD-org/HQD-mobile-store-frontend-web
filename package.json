@@ -29,6 +29,7 @@
         "components": "^0.1.0",
         "date-fns": "^2.25.0",
         "dotenv": "^10.0.0",
+        "emailjs-com": "^3.2.0",
         "faker": "^5.5.3",
         "firebase": "^9.2.0",
         "js-cookie": "^3.0.1",

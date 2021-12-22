@@ -41,7 +41,10 @@ const CouponFragment = () => {
           <Coupons filter={filterCoupon} setCurrentItem={setCurrentItem} />
         </div>
         <div className="col-4">
-          <CouponForm currentItem={currentItem} />
+          <CouponForm
+            currentItem={currentItem}
+            setCurrentItem={setCurrentItem}
+          />
         </div>
       </div>
     </div>

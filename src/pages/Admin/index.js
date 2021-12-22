@@ -19,13 +19,13 @@ const AdminPage = (props) => {
   const [toggleBrand, setToggleBrand] = useState(false);
   const [toggleModel, setToggleModel] = useState(false);
   const [toggleAddProduct, setToggleAddProduct] = useState(false);
-  const [toggleProduct, setToggleProduct] = useState(false);
+  const [toggleProduct, setToggleProduct] = useState(true);
   const [toggleUser, setToggleUser] = useState(false);
   const [toggleBranch, setToggleBranch] = useState(false);
-  const [toggleCoupon, setToggleCoupon] = useState(true);
+  const [toggleCoupon, setToggleCoupon] = useState(false);
   const [toggleInvoice, setToggleInvoice] = useState(false);
   const [toggleStatistical, setToggleStatistical] = useState(false);
-  const toggleRef = useRef("coupon");
+  const toggleRef = useRef("product");
 
   const disabledToggle = (ref) => {
     switch (ref) {

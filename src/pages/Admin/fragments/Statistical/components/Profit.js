@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
   BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
   Title,
   Tooltip,
-  Legend,
 } from "chart.js";
+import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
-import faker from "faker";
+import { useSelector } from "react-redux";
 
 ChartJS.register(
   CategoryScale,
@@ -48,17 +49,53 @@ const labels = [
   "December",
 ];
 
-const data = {
-  labels,
-  datasets: [
-    {
-      label: "Profit (million)",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-  ],
+const defaultContent = {
+  1: 0,
+  2: 0,
+  3: 0,
+  4: 0,
+  5: 0,
+  6: 0,
+  7: 0,
+  8: 0,
+  9: 0,
+  10: 0,
+  11: 0,
+  12: 0,
 };
+
+const defaultData = (content = defaultContent) => {
+  return {
+    labels,
+    datasets: [
+      {
+        label: "Profit (million)",
+        data: labels.map((label, index) => content[index + 1]),
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+    ],
+  };
+};
+
 const Profit = () => {
+  const profit = useSelector((state) => state.order.profit);
+  const [content, setContent] = useState(defaultContent);
+  const [data, setData] = useState(defaultData());
+
+  useEffect(() => {
+    if (profit.length === 0) {
+      setContent(defaultContent);
+      return;
+    }
+    profit.forEach((item) => {
+      setContent(Object.assign({}, content, { [item._id.month]: item.total }));
+    });
+  }, [profit]);
+
+  useEffect(() => {
+    setData(defaultData(content));
+  }, [content]);
+
   return (
     <div>
       <Bar data={data} options={options} />

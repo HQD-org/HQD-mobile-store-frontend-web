@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../../../common/css/Cart.Style.css";
+import "../css/Cart.Style.css";
 
 const ProductList = (props) => {
   const { products } = props;
@@ -22,7 +22,7 @@ const ProductList = (props) => {
               <div className="col-4 price-quantity">
                 <div>
                   <h6 style={{ textAlign: "end" }}>{p.price}</h6>
-                  <p>x1</p>
+                  <p>x{p.quantity}</p>
                 </div>
               </div>
             </div>

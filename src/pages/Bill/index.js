@@ -7,7 +7,7 @@ import "../../common/css/Bill.Style.css";
 import img from "../../common/images/bill.png";
 import Pagination from "../../common/components/Pagination";
 import { getByStatusAndUserAction } from "../../redux/actions/Order/orderAction";
-import InvoiceInformation from "./components/InvoiceInformation";
+import InvoiceInformation from "../../common/components/InvoiceInformation";
 
 const BillPage = (props) => {
   const dispatch = useDispatch();

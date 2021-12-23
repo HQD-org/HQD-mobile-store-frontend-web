@@ -14,6 +14,7 @@ const Confirm = (props) => {
   const [address, setAddress] = useState(dataStep1.address);
   const [totalPrice, setTotalPrice] = useState(0);
   const [couponName, setCouponName] = useState("");
+  const listBranch = useSelector((state) => state.branch.list);
 
   const previousStep = () => {
     setShowStep1(true);
@@ -101,6 +102,16 @@ const Confirm = (props) => {
                   ", " +
                   address.province}
               </p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-6">
+              <h6>Chi nhánh đặt hàng</h6>
+            </div>
+            <div className="col-6">
+              {listBranch.map((branch) =>
+                dataStep1.branch === branch._id ? <p>{branch.name}</p> : <></>
+              )}
             </div>
           </div>
           <div className="row">

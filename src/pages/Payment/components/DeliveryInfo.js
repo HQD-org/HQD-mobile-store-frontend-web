@@ -1,12 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "../../../common/css/Payment.Style.css";
 import { validateStep1 } from "../hooks/validate";
+import { getAllBranchAction } from "../../../redux/actions/Branch/branchAction";
 
 const DeliveryInfo = (props) => {
   const { setShowStep2, setDataStep1, dataStep1 } = props;
   const firstInitRef = useRef("");
+  const dispatch = useDispatch();
   const [province, setProvince] = useState(-1);
   const [district, setDistrict] = useState(-1);
   const [village, setVillage] = useState(-1);
@@ -15,6 +17,7 @@ const DeliveryInfo = (props) => {
 
   const authInfo = useSelector((state) => state.auth.user);
   const provinceList = useSelector((state) => state.location.provinces);
+  const listBranch = useSelector((state) => state.branch.list);
 
   useEffect(() => {
     if (authInfo.user)
@@ -26,6 +29,13 @@ const DeliveryInfo = (props) => {
         address: authInfo.user.address,
       });
   }, [authInfo]);
+
+  useEffect(() => {
+    const getAllBranch = async () => {
+      await dispatch(getAllBranchAction());
+    };
+    getAllBranch();
+  }, []);
 
   useEffect(() => {
     setDistrict(-1);
@@ -126,6 +136,7 @@ const DeliveryInfo = (props) => {
       case "timeDelivery":
       case "receiveType":
       case "message":
+      case "branch":
         setDataStep1({ ...dataStep1, [e.target.name]: e.target.value });
         break;
       case "detail":
@@ -216,7 +227,25 @@ const DeliveryInfo = (props) => {
               </label>
             </div>
           </div>
-
+          {dataStep1.receiveType === "at store" ? (
+            <select
+              value={dataStep1.branch}
+              name="branch"
+              className="form-select mb-3"
+              onChange={onChangeState}
+            >
+              <option selected disabled>
+                Chọn chi nhánh đặt hàng
+              </option>
+              {listBranch.map((branch) => (
+                <option value={branch._id} key={branch._id}>
+                  {branch.name}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <></>
+          )}
           <input
             type="text"
             name="detail"

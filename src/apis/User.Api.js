@@ -81,6 +81,28 @@ const filter = async (queryParams) => {
   }
 };
 
-const User = { insert, filter, getAll, update, updateProfile };
+const getAllManagerBranch = async () => {
+  try {
+    const res = await axiosClient.get(`${url}/user/get-all-manager-branch?`);
+    // toastNotify(res ? res.message.VN : "Tìm kiếm user thất bại");
+    return res && res.data
+      ? { data: res.data || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    // toastNotify("Tìm kiếm user thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const User = {
+  insert,
+  filter,
+  getAll,
+  update,
+  updateProfile,
+  getAllManagerBranch,
+};
 
 export default User;

@@ -8,6 +8,8 @@ import {
   UPDATE_USER_SUCCESS,
   FILTER_USER_FAIL,
   FILTER_USER_SUCCESS,
+  GET_ALL_MANAGER_BRANCH_FAIL,
+  GET_ALL_MANAGER_BRANCH_SUCCESS,
 } from "./types";
 import userAPI from "../../../apis/User.Api";
 
@@ -138,7 +140,6 @@ export function filterUserAction(queryParams, load = true) {
     try {
       dispatch(loading(load));
       const res = await userAPI.filter(queryParams);
-      console.log("log at ==> userAction ==> res: ", res);
       if (res.success) {
         dispatch(loading());
         dispatch(filterUserSuccess(res.data));
@@ -150,6 +151,38 @@ export function filterUserAction(queryParams, load = true) {
     } catch {
       dispatch(loading());
       dispatch(filterUserFail());
+      return false;
+    }
+  };
+}
+
+export function getAllManagerBranchFail() {
+  return {
+    type: GET_ALL_MANAGER_BRANCH_FAIL,
+    payload: {},
+  };
+}
+
+export function getAllManagerBranchSuccess(data) {
+  return {
+    type: GET_ALL_MANAGER_BRANCH_SUCCESS,
+    payload: data,
+  };
+}
+
+export function getAllManagerBranchAction() {
+  return async (dispatch) => {
+    try {
+      const res = await userAPI.getAllManagerBranch();
+      if (res.success) {
+        dispatch(loading());
+        dispatch(getAllManagerBranchSuccess(res.data));
+        return true;
+      }
+      dispatch(getAllManagerBranchFail());
+      return false;
+    } catch {
+      dispatch(getAllManagerBranchFail());
       return false;
     }
   };

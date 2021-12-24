@@ -33,6 +33,11 @@ const validate = (data) => {
     return false;
   }
 
+  // if (data.grandOpeningDate.getTime() < new Date().getTime()) {
+  //   toastNotify("Ngày mở cửa không được nhỏ hơn ngày hiện tại");
+  //   return false;
+  // }
+
   if (data.idManager === "1") {
     toastNotify("Quản lý không được để trống");
     return false;

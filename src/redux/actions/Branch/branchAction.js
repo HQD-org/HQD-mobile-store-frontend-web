@@ -143,7 +143,6 @@ export function filterBranchAction(queryParams) {
     try {
       dispatch(loading(true));
       const res = await branchAPI.filter(queryParams);
-      console.log("log at ==> branchAction ==> res: ", res);
       if (res.success) {
         dispatch(loading());
         dispatch(filterBranchSuccess(res.data));

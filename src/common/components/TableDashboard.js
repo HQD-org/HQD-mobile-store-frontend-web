@@ -17,6 +17,7 @@ import { AiFillLock, AiFillUnlock } from "react-icons/ai";
 import { MdPassword } from "react-icons/md";
 import EnhancedTableHead from "./EnhancedTableHead";
 import EnhancedTableToolbar from "./EnhancedTableToolbar";
+import { formatDate } from "../utils/helper";
 
 const TableDashboard = (props) => {
   const {
@@ -174,7 +175,7 @@ const TableDashboard = (props) => {
             </TableCell>
           ) : (
             <TableCell align="left" key={i} onClick={() => onRowClick(index)}>
-              {value}
+              {formatDate(value)}
             </TableCell>
           );
         })}

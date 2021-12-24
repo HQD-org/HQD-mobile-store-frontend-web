@@ -8,6 +8,8 @@ import {
   UPDATE_USER_SUCCESS,
   FILTER_USER_FAIL,
   FILTER_USER_SUCCESS,
+  GET_ALL_MANAGER_BRANCH_FAIL,
+  GET_ALL_MANAGER_BRANCH_SUCCESS,
 } from "../../actions/User/types";
 
 const initState = {
@@ -26,16 +28,17 @@ export default function (state = initState, action) {
       return { ...state };
     case ADD_USER_SUCCESS:
       return { ...state, updateFlag: !state.updateFlag };
+    case GET_ALL_MANAGER_BRANCH_FAIL:
     case GET_ALL_USER_FAIL:
       return {
         ...state,
         list: [],
-        pagination: { page: 1, itemPerPage: 20, totalItem: 0 },
       };
+    case GET_ALL_MANAGER_BRANCH_SUCCESS:
     case GET_ALL_USER_SUCCESS:
       return {
         ...state,
-        list: action.payload,
+        list: payload,
       };
     case UPDATE_USER_FAIL:
       return { ...state };

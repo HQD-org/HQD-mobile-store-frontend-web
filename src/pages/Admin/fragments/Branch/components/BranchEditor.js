@@ -7,7 +7,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal, ModalBody, ModalHeader } from "reactstrap";
 import { statusBranch } from "../../../../../common/constants/ListSelect";
@@ -16,100 +16,35 @@ import {
   addBranchAction,
   updateBranchAction,
 } from "../../../../../redux/actions/Branch/branchAction";
-import {
-  getDistrict,
-  getProvince,
-  getVillage,
-} from "../../../../../redux/actions/Location/locationAction";
-import { filterUserAction } from "../../../../../redux/actions/User/userAction";
+import { getAllProvince } from "../../../../../redux/actions/Location/locationAction";
+import { getAllManagerBranchAction } from "../../../../../redux/actions/User/userAction";
 import validate from "../hooks/validate";
 
 const BranchEditor = (props) => {
-  const { option, branch, setModal } = props;
-  let { modal } = props;
+  const { option, branch, setModal, modal } = props;
   const dispatch = useDispatch();
   const [province, setProvince] = useState(-1);
-  const [district, setDistrict] = useState(1);
+  const [district, setDistrict] = useState(-1);
   const [village, setVillage] = useState(-1);
   const [timeOpen, setTimeOpen] = useState(new Date());
-  const provinceList = useSelector((state) => state.location.provinces) || [];
-  const districtList = useSelector((state) => state.location.districts) || [];
-  const villageList = useSelector((state) => state.location.villages) || [];
-  const managerList = useSelector((state) => state.user.list) || [];
+  const [districtList, setDistrictList] = useState([]);
+  const [villageList, setVillageList] = useState([]);
+  const [manager, setManager] = useState("1");
+  const [listManager, setListManager] = useState([]);
+  const provinceList = useSelector((state) => state.location.provinces);
+  const managerList = useSelector((state) => state.user.list);
+
+  const fetchManagerList = async () => {
+    await dispatch(getAllManagerBranchAction());
+  };
 
   const onToggle = () => {
     setModal(!modal);
     setProvince(-1);
     setDistrict(-1);
     setVillage(-1);
-  };
-
-  useEffect(() => {
-    const fetchProvinceList = async () => {
-      await dispatch(getProvince());
-    };
-
-    const fetchManagerList = async () => {
-      await dispatch(
-        filterUserAction(
-          {
-            itemPerPage: 1000,
-            sortBy: "name",
-            role: "manager branch",
-          },
-          false
-        )
-      );
-    };
-
     fetchManagerList();
-    fetchProvinceList();
-  }, []);
-
-  useEffect(() => {
-    if (provinceList[province]) {
-      const fetchDistrictList = async () => {
-        await dispatch(getDistrict(provinceList[province].code));
-      };
-      fetchDistrictList();
-      if (branch) {
-        setDistrict(
-          districtList.findIndex(
-            (item) => item.name_with_type === branch.address.district
-          )
-        );
-        return;
-      }
-      setDistrict(-1);
-    }
-  }, [province]);
-
-  useEffect(() => {
-    if (districtList[district]) {
-      const fetchVillageList = async () => {
-        await dispatch(getVillage(districtList[district].code));
-      };
-      fetchVillageList();
-      if (branch) {
-        setVillage(
-          villageList.findIndex(
-            (item) => item.name_with_type === branch.address.village
-          )
-        );
-        return;
-      }
-      setVillage(-1);
-    }
-  }, [district]);
-
-  useEffect(() => {
-    if (option || !modal) return;
-    setProvince(
-      provinceList.findIndex(
-        (item) => item.name_with_type === branch.address.province
-      )
-    );
-  }, [modal]);
+  };
 
   const addBranch = async (e) => {
     e.preventDefault();
@@ -123,12 +58,14 @@ const BranchEditor = (props) => {
         province: province === -1 ? "" : provinceList[province].name_with_type,
       },
       status: e.target.status.value,
+      grandOpeningDate: timeOpen,
     };
     const isValidData = validate(data);
     if (!isValidData) return;
     const res = await dispatch(addBranchAction(isValidData));
     if (res) onToggle();
   };
+
   const updateBranch = async (e) => {
     e.preventDefault();
     const data = {
@@ -142,6 +79,7 @@ const BranchEditor = (props) => {
         province: province === -1 ? "" : provinceList[province].name_with_type,
       },
       status: e.target.status.value,
+      grandOpeningDate: timeOpen,
     };
     const isValidData = validate(data);
     if (!isValidData) return;
@@ -160,7 +98,6 @@ const BranchEditor = (props) => {
   };
 
   const onChangeSelectOption = (e, type) => {
-    console.log("log at ==> BranchEditor ==> value: ", e.target.value);
     switch (type) {
       case "province":
         setProvince(e.target.value);
@@ -171,10 +108,107 @@ const BranchEditor = (props) => {
       case "village":
         setVillage(e.target.value);
         break;
+      case "manager":
+        setManager(e.target.value);
+        break;
       default:
         break;
     }
   };
+
+  useEffect(() => {
+    const fetchProvinceList = async () => {
+      await dispatch(getAllProvince());
+    };
+    fetchManagerList();
+    fetchProvinceList();
+  }, []);
+
+  useEffect(() => {
+    if (!modal) setManager("1");
+    if (!option && modal) {
+      setProvince(
+        provinceList.findIndex(
+          (item) => item.name_with_type === branch.address.province
+        )
+      );
+    }
+  }, [modal]);
+
+  useEffect(() => {
+    if (managerList.length >= 0) {
+      setListManager(managerList);
+    }
+  }, [managerList]);
+
+  useEffect(() => {
+    setDistrict(-1);
+    const index = parseInt(province);
+    if (index >= 0) {
+      const districtJSON = provinceList[index]["quan-huyen"];
+      const getDistrictList = async () => {
+        return await Promise.all(
+          Object.keys(districtJSON).map((key) => districtJSON[key])
+        );
+      };
+      getDistrictList().then((data) => {
+        setDistrictList(data);
+      });
+    }
+  }, [province]);
+
+  useEffect(() => {
+    setVillage(-1);
+    const index = parseInt(district);
+    if (index >= 0) {
+      const villageJSON = districtList[index]["xa-phuong"];
+      const getVillageList = async () => {
+        return await Promise.all(
+          Object.keys(villageJSON).map((key) => villageJSON[key])
+        );
+      };
+      getVillageList().then((data) => {
+        setVillageList(data);
+      });
+    }
+  }, [district]);
+
+  useEffect(() => {
+    if (!option && districtList.length > 0) {
+      const districtIndex = districtList.findIndex(
+        (item) => item.name_with_type === branch.address.district
+      );
+      if (districtIndex === -1) return;
+      setDistrict(districtIndex);
+    }
+  }, [districtList]);
+
+  useEffect(() => {
+    if (!option && villageList.length > 0) {
+      const villageIndex = villageList.findIndex(
+        (item) => item.name_with_type === branch.address.village
+      );
+      if (villageIndex === -1) return;
+      setVillage(villageIndex);
+    }
+  }, [villageList]);
+
+  useEffect(() => {
+    if (managerList.length > 0) {
+      setListManager(managerList);
+    }
+  }, [managerList]);
+
+  useEffect(() => {
+    if (!option && branch) {
+      setListManager((prev) => [
+        ...prev,
+        { _id: branch.manager._id, username: branch.manager.username },
+      ]);
+      setManager(branch.manager._id);
+      setTimeOpen(branch.grandOpeningDate);
+    }
+  }, [branch]);
 
   return (
     <Modal isOpen={modal} toggle={onToggle} className="modal-branch">
@@ -265,10 +299,11 @@ const BranchEditor = (props) => {
               <Select
                 label="Quản trị viên"
                 name="manager"
-                defaultValue={option ? 1 : branch.idManager}
+                value={manager}
+                onChange={(e) => onChangeSelectOption(e, "manager")}
               >
                 <MenuItem value="1">Quản trị viên</MenuItem>
-                {managerList.map((value) => {
+                {listManager.map((value) => {
                   return (
                     <MenuItem value={value._id} key={value._id}>
                       {value.username}

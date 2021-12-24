@@ -28,9 +28,9 @@ const headCells = [
     property: ["manager", "username"],
   },
   {
-    id: "timeDebut",
+    id: "grandOpeningDate",
     label: "Thời gian khai trương",
-    property: ["createdAt"],
+    property: ["grandOpeningDate"],
   },
   {
     id: "status",

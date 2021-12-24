@@ -3,8 +3,8 @@ import Cookie from "js-cookie";
 import queryString from "query-string";
 
 const axiosClient = axios.create({
-  baseURL: "https://hqd-mobile-store-api.herokuapp.com",
-  // baseURL: "http://localhost:8080",
+  // baseURL: "https://hqd-mobile-store-api.herokuapp.com",
+  baseURL: "http://localhost:8080",
   timeout: 10000,
   headers: {
     Accept: "application/json, text/plain, */*",

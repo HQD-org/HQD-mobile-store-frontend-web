@@ -8,3 +8,5 @@ export const UPDATE_USER_SUCCESS = "update user success";
 // export const UPDATE_PROFILE_SUCCESS = "update profile success";
 export const FILTER_USER_FAIL = "filter user fail";
 export const FILTER_USER_SUCCESS = "filter user success";
+export const GET_ALL_MANAGER_BRANCH_FAIL = "get all manager branch fail";
+export const GET_ALL_MANAGER_BRANCH_SUCCESS = "get all manager branch success";

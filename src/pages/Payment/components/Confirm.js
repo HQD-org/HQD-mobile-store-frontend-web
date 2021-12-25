@@ -9,12 +9,18 @@ import ProductList from "./ProductList";
 const Confirm = (props) => {
   const dispatch = useDispatch();
   const coupon = useSelector((state) => state.coupon.detail);
-  const { dataStep1, dataStep2, setShowStep1, setShowStep3, setDataStep2 } =
-    props;
-  const [address, setAddress] = useState(dataStep1.address);
+  const {
+    dataStep1,
+    dataStep2,
+    setShowStep1,
+    setShowStep3,
+    setDataStep2,
+    showStep2,
+  } = props;
   const [totalPrice, setTotalPrice] = useState(0);
   const [couponName, setCouponName] = useState("");
-  const listBranch = useSelector((state) => state.branch.list);
+  const [address, setAddress] = useState(dataStep1.address);
+  const listBranches = useSelector((state) => state.branch.list);
 
   const previousStep = () => {
     setShowStep1(true);
@@ -34,6 +40,7 @@ const Confirm = (props) => {
   };
 
   useEffect(() => {
+    if (!showStep2) return;
     if (coupon) {
       if (coupon._id) {
         if (dataStep2.estimatePrice >= coupon.minPriceToApply) {
@@ -59,10 +66,19 @@ const Confirm = (props) => {
   }, [coupon]);
 
   useEffect(() => {
-    setAddress(dataStep1.address);
-  }, [dataStep1.address]);
+    if (!showStep2) return;
+    if (dataStep1.idBranch !== "1") {
+      const findBranch = listBranches.find(
+        (branch) => branch._id === dataStep1.idBranch
+      );
+      setAddress(findBranch.address);
+    } else {
+      setAddress(dataStep1.address);
+    }
+  }, [dataStep1.address, dataStep1.idBranch]);
 
   useEffect(() => {
+    if (!showStep2) return;
     setTotalPrice(
       dataStep2.estimatePrice + dataStep2.shipPrice - dataStep2.discount
     );
@@ -88,32 +104,42 @@ const Confirm = (props) => {
               <p>{dataStep1.phone}</p>
             </div>
           </div>
-          <div className="row">
-            <div className="col-6">
-              <h6>Địa chỉ nhận hàng</h6>
+          {dataStep1.receiveType === "at store" ? (
+            <div className="row">
+              <div className="col-6">
+                <h6>Chi nhánh đặt hàng</h6>
+              </div>
+              <div className="col-6">
+                <p>
+                  {address.detail +
+                    ", " +
+                    address.village +
+                    ", " +
+                    address.district +
+                    ", " +
+                    address.province}
+                </p>
+              </div>
             </div>
-            <div className="col-6">
-              <p>
-                {address.detail +
-                  ", " +
-                  address.village +
-                  ", " +
-                  address.district +
-                  ", " +
-                  address.province}
-              </p>
+          ) : (
+            <div className="row">
+              <div className="col-6">
+                <h6>Địa chỉ nhận hàng</h6>
+              </div>
+              <div className="col-6">
+                <p>
+                  {address.detail +
+                    ", " +
+                    address.village +
+                    ", " +
+                    address.district +
+                    ", " +
+                    address.province}
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-6">
-              <h6>Chi nhánh đặt hàng</h6>
-            </div>
-            <div className="col-6">
-              {listBranch.map((branch) =>
-                dataStep1.branch === branch._id ? <p>{branch.name}</p> : <></>
-              )}
-            </div>
-          </div>
+          )}
+
           <div className="row">
             <div className="col-6">
               <h6>Phương thức thanh toán</h6>

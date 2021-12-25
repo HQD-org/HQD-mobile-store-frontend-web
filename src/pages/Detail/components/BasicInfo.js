@@ -109,21 +109,22 @@ const BasicInfo = () => {
   const [textBtn, setTextBtn] = useState("THÊM VÀO GIỎ HÀNG");
 
   const addToCart = async () => {
-    if (currentColor.quantityInfo.length <= 0) return;
-    const data = {
-      idProduct: product._id,
-      color: currentColor.name,
-      image: images[selectedImage],
-      name: product.name,
-      price: currentColor.price,
-    };
-    if (isLogin) {
-      const res = await dispatch(addToCartAction(data));
-      if (res) await dispatch(getCartAction());
-      return;
+    if (textBtn === "THÊM VÀO GIỎ HÀNG") {
+      const data = {
+        idProduct: product._id,
+        color: currentColor.name,
+        image: images[selectedImage],
+        name: product.name,
+        price: currentColor.price,
+      };
+      if (isLogin) {
+        const res = await dispatch(addToCartAction(data));
+        if (res) await dispatch(getCartAction());
+        return;
+      }
+      const res = await dispatch(addToCartGuestAction(data));
+      if (res) await dispatch(getCartGuestAction());
     }
-    const res = await dispatch(addToCartGuestAction(data));
-    if (res) await dispatch(getCartGuestAction());
   };
 
   const changeColor = (value) => {
@@ -161,15 +162,34 @@ const BasicInfo = () => {
     const branches = [];
     const quantityOfBranch = [];
     if (currentColor.quantityInfo) {
+      let count = 0;
       currentColor.quantityInfo.forEach((q) => {
         if (q.quantity > 0) {
           branches.push(q.idBranch);
           quantityOfBranch.push(q.quantity);
+        } else {
+          count++;
         }
       });
-      setTextBtn(
-        currentColor.quantityInfo.length > 0 ? "THÊM VÀO GIỎ HÀNG" : "HẾT HÀNG"
-      );
+      switch (product.status) {
+        case "active":
+          console.log(" log at ==?> Bassic info count: ", count);
+          setTextBtn(
+            currentColor.quantityInfo.length > count
+              ? "THÊM VÀO GIỎ HÀNG"
+              : "HẾT HÀNG"
+          );
+          break;
+        case "out of stock":
+          setTextBtn("HẾT HÀNG");
+          break;
+        case "stop selling":
+          setTextBtn("NGỪNG KINH DOANH");
+          break;
+        default:
+          setTextBtn("THÊM VÀO GIỎ HÀNG");
+          break;
+      }
     }
     setQuantityOfBranch(quantityOfBranch);
     setListBranches(branches);
@@ -268,13 +288,13 @@ const BasicInfo = () => {
                     <div key={branch._id}>
                       <li>
                         {address.detail +
-                          " " +
+                          ", " +
                           address.village +
-                          " " +
+                          ", " +
                           address.district +
-                          " " +
+                          ", " +
                           address.province +
-                          " còn "}
+                          ", còn "}
                         <span style={{ color: "#3FA5EF" }}>
                           {(quantityOfBranch[i] || 0) + " "}
                         </span>

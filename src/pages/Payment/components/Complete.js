@@ -41,6 +41,7 @@ const Complete = (props) => {
       paymentType: "cod",
       timeDelivery: "all day",
       message: " ",
+      idBranch: "1",
     });
     setDataStep2({ estimatePrice: 0, shipPrice: 30000, discount: 0 });
   };
@@ -56,37 +57,44 @@ const Complete = (props) => {
         name: item.name,
       };
     });
-    const address = dataStep1.address;
     const data = {
       products: products,
       totalPrice:
         dataStep2.estimatePrice + dataStep2.shipPrice - dataStep2.discount,
-      coupon: "123",
       receiveInfo: {
         receiver: dataStep1.name,
         phone: dataStep1.phone,
-        address:
-          address.detail +
-          ", " +
-          address.village +
-          ", " +
-          address.district +
-          ", " +
-          address.province,
         receiveAt: dataStep1.receiveType,
         timeReceive: dataStep1.timeDelivery,
         message: dataStep1.message,
       },
     };
 
+    if (dataStep1.receiveType === "at home") {
+      const address = dataStep1.address;
+      data.receiveInfo.address =
+        address.detail +
+        ", " +
+        address.village +
+        ", " +
+        address.district +
+        ", " +
+        address.province;
+    } else {
+      data.idBranch = dataStep1.idBranch;
+    }
+
     if (dataStep1.paymentType === "cod") {
-      if (coupon) await dispatch(applyCouponAction({ id: coupon._id }));
+      if (coupon._id) {
+        await dispatch(applyCouponAction({ id: coupon._id }));
+        data.coupon = coupon._id;
+      }
       if (!isLogin) {
         const res = await dispatch(createOrderForGuestAction(data));
         if (res) {
           Cookie.remove("cart");
           await dispatch(getCartGuestAction());
-          resetDataPayment();
+          // resetDataPayment();
           history.push("/");
         }
         return;
@@ -94,7 +102,7 @@ const Complete = (props) => {
       const res = await dispatch(createOrderAction(data));
       if (res) {
         await dispatch(getCartAction());
-        resetDataPayment();
+        // resetDataPayment();
         history.push("/");
       }
       return;

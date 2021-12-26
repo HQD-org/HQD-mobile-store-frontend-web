@@ -1,6 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { numberWithCommas } from "../../../../../common/utils/helper";
+import {
+  numberWithCommas,
+  formatDate,
+} from "../../../../../common/utils/helper";
 import { changeStatusOrderAction } from "../../../../../redux/actions/Order/orderAction";
 
 const TableInvoice = (props) => {
@@ -52,7 +55,9 @@ const TableInvoice = (props) => {
               <td onClick={() => toggle(index)}>
                 {numberWithCommas(item.totalPrice)} ₫
               </td>
-              <td onClick={() => toggle(index)}>{item.createdAt}</td>
+              <td onClick={() => toggle(index)}>
+                {formatDate(item.createdAt)}
+              </td>
               <td style={{ textAlign: "center" }}>
                 {item.status === "cancel" || item.status === "delivered" ? (
                   <> </>

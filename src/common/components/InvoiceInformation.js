@@ -14,6 +14,7 @@ const InvoiceInformation = (props) => {
   const [receiveInfo, setReceiveInfo] = useState("");
   const [estimatePrice, setEstimatePrice] = useState("0");
   const [discount, setDiscount] = useState("0");
+  const [address, setAddress] = useState("");
   const toggle = () => {
     setModal(false);
     setCurrentItem(-1);
@@ -43,6 +44,25 @@ const InvoiceInformation = (props) => {
     }
   }, [estimatePrice]);
 
+  useEffect(() => {
+    if (receiveInfo) {
+      if (receiveInfo.receiveAt === "at store") {
+        const addr = order.branch.address;
+        setAddress(
+          addr.detail +
+            ", " +
+            addr.village +
+            ", " +
+            addr.district +
+            ", " +
+            addr.province
+        );
+      } else {
+        setAddress(receiveInfo.address);
+      }
+    }
+  }, [receiveInfo]);
+
   return (
     <Modal isOpen={modal} toggle={toggle} className="modal-invoice">
       <ModalHeader className="close-x" toggle={toggle}>
@@ -67,14 +87,25 @@ const InvoiceInformation = (props) => {
               <p>{receiveInfo ? receiveInfo.phone : ""}</p>
             </div>
           </div>
-          <div className="row">
-            <div className="col-6">
-              <h6>Địa chỉ nhận hàng</h6>
+          {receiveInfo.receiveAt === "at store" ? (
+            <div className="row">
+              <div className="col-6">
+                <h6>Chi nhánh nhận hàng</h6>
+              </div>
+              <div className="col-6">
+                <p>{address}</p>
+              </div>
             </div>
-            <div className="col-6">
-              <p>{receiveInfo ? receiveInfo.address : ""}</p>
+          ) : (
+            <div className="row">
+              <div className="col-6">
+                <h6>Địa chỉ nhận hàng</h6>
+              </div>
+              <div className="col-6">
+                <p>{address}</p>
+              </div>
             </div>
-          </div>
+          )}
           <div className="row">
             <div className="col-6">
               <h6>Đơn hàng</h6>

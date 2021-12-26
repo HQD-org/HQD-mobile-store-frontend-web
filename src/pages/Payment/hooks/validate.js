@@ -20,29 +20,36 @@ const validateStep1 = (data) => {
     return false;
   }
 
-  const address = data.address;
-  const isEmptyDetail = validator.isEmpty(address.detail);
-  if (isEmptyDetail) {
-    toastNotify("Địa chỉ không được bỏ trống");
-    return false;
-  }
+  if (data.receiveType === "at home") {
+    const address = data.address;
+    const isEmptyDetail = validator.isEmpty(address.detail);
+    if (isEmptyDetail) {
+      toastNotify("Địa chỉ không được bỏ trống");
+      return false;
+    }
 
-  const isEmptyProvince = validator.isEmpty(address.province);
-  if (isEmptyProvince) {
-    toastNotify("Tỉnh/Thành phố không được bỏ trống");
-    return false;
-  }
+    const isEmptyProvince = validator.isEmpty(address.province);
+    if (isEmptyProvince) {
+      toastNotify("Tỉnh/Thành phố không được bỏ trống");
+      return false;
+    }
 
-  const isEmptyDistrict = validator.isEmpty(address.district);
-  if (isEmptyDistrict) {
-    toastNotify("Quận/Huyện không được bỏ trống");
-    return false;
-  }
+    const isEmptyDistrict = validator.isEmpty(address.district);
+    if (isEmptyDistrict) {
+      toastNotify("Quận/Huyện không được bỏ trống");
+      return false;
+    }
 
-  const isEmptyVillage = validator.isEmpty(address.village);
-  if (isEmptyVillage) {
-    toastNotify("Xã/Phường không được bỏ trống");
-    return false;
+    const isEmptyVillage = validator.isEmpty(address.village);
+    if (isEmptyVillage) {
+      toastNotify("Xã/Phường không được bỏ trống");
+      return false;
+    }
+  } else {
+    if (data.idBranch === "1") {
+      toastNotify("Chọn chi nhánh giao hàng");
+      return false;
+    }
   }
 
   return data;

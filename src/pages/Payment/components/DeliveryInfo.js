@@ -1,14 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "../../../common/css/Payment.Style.css";
 import { validateStep1 } from "../hooks/validate";
-import { getAllBranchAction } from "../../../redux/actions/Branch/branchAction";
 
 const DeliveryInfo = (props) => {
-  const { setShowStep2, setDataStep1, dataStep1 } = props;
+  const { setShowStep2, setDataStep1, dataStep1, showStep1 } = props;
   const firstInitRef = useRef("");
-  const dispatch = useDispatch();
   const [province, setProvince] = useState(-1);
   const [district, setDistrict] = useState(-1);
   const [village, setVillage] = useState(-1);
@@ -20,6 +18,7 @@ const DeliveryInfo = (props) => {
   const listBranch = useSelector((state) => state.branch.list);
 
   useEffect(() => {
+    if (!showStep1) return;
     if (authInfo.user)
       setDataStep1({
         ...dataStep1,
@@ -31,13 +30,7 @@ const DeliveryInfo = (props) => {
   }, [authInfo]);
 
   useEffect(() => {
-    const getAllBranch = async () => {
-      await dispatch(getAllBranchAction());
-    };
-    getAllBranch();
-  }, []);
-
-  useEffect(() => {
+    if (!showStep1) return;
     setDistrict(-1);
     const index = parseInt(province);
     if (index >= 0) {
@@ -63,6 +56,7 @@ const DeliveryInfo = (props) => {
   }, [province]);
 
   useEffect(() => {
+    if (!showStep1) return;
     setVillage(-1);
     const index = parseInt(district);
     if (index >= 0) {
@@ -87,6 +81,7 @@ const DeliveryInfo = (props) => {
   }, [district]);
 
   useEffect(() => {
+    if (!showStep1) return;
     const index = parseInt(district);
     if (index >= 0) {
       setDataStep1({
@@ -100,6 +95,7 @@ const DeliveryInfo = (props) => {
   }, [village]);
 
   useEffect(() => {
+    if (!showStep1) return;
     if (authInfo.user && !firstInitRef.current && provinceList.length > 0) {
       const provinceIndex = provinceList.findIndex(
         (item) => item.name_with_type === authInfo.user.address.province
@@ -109,6 +105,7 @@ const DeliveryInfo = (props) => {
   }, [provinceList]);
 
   useEffect(() => {
+    if (!showStep1) return;
     if (authInfo.user && !firstInitRef.current && districtList.length > 0) {
       const districtIndex = districtList.findIndex(
         (item) => item.name_with_type === authInfo.user.address.district
@@ -118,6 +115,7 @@ const DeliveryInfo = (props) => {
   }, [districtList]);
 
   useEffect(() => {
+    if (!showStep1) return;
     if (authInfo.user && !firstInitRef.current && villageList.length > 0) {
       const villageIndex = villageList.findIndex(
         (item) => item.name_with_type === authInfo.user.address.village
@@ -135,8 +133,18 @@ const DeliveryInfo = (props) => {
       case "paymentType":
       case "timeDelivery":
       case "receiveType":
+        if (e.target.value === "at home") {
+          setDataStep1({
+            ...dataStep1,
+            idBranch: "1",
+            [e.target.name]: e.target.value,
+          });
+          break;
+        }
+        setDataStep1({ ...dataStep1, [e.target.name]: e.target.value });
+        break;
       case "message":
-      case "branch":
+      case "idBranch":
         setDataStep1({ ...dataStep1, [e.target.name]: e.target.value });
         break;
       case "detail":
@@ -229,116 +237,124 @@ const DeliveryInfo = (props) => {
           </div>
           {dataStep1.receiveType === "at store" ? (
             <select
-              value={dataStep1.branch}
-              name="branch"
+              value={dataStep1.idBranch}
+              name="idBranch"
               className="form-select mb-3"
               onChange={onChangeState}
             >
-              <option selected disabled>
-                Chọn chi nhánh đặt hàng
-              </option>
-              {listBranch.map((branch) => (
-                <option value={branch._id} key={branch._id}>
-                  {branch.name}
-                </option>
-              ))}
+              <option value="1">Chọn chi nhánh đặt hàng</option>
+              {listBranch.map((branch) => {
+                const address = branch.address;
+                return (
+                  <option value={branch._id} key={branch._id}>
+                    {address.detail +
+                      ", " +
+                      address.village +
+                      ", " +
+                      address.district +
+                      ", " +
+                      address.province}
+                  </option>
+                );
+              })}
             </select>
           ) : (
-            <></>
-          )}
-          <input
-            type="text"
-            name="detail"
-            className="form-control mb-3"
-            placeholder="Địa chỉ nhận hàng"
-            onChange={onChangeState}
-            value={dataStep1.address.detail}
-          />
-          <div className="row ">
-            <div className="col-4 mb-3">
-              <select
-                name="province"
-                className="form-select"
+            <>
+              <input
+                type="text"
+                name="detail"
+                className="form-control mb-3"
+                placeholder="Địa chỉ nhận hàng"
                 onChange={onChangeState}
-                value={province}
-              >
-                <option disabled value={-1}>
-                  Tỉnh/Thành phố
-                </option>
-                {provinceList.map((province, index) => (
-                  <option key={province.code} value={index}>
-                    {province.name_with_type}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="col-4 ">
-              <select
-                name="district"
-                className="form-select"
-                onChange={onChangeState}
-                value={district}
-              >
-                <option disabled value={-1}>
-                  Quận/Huyện
-                </option>
-                {districtList.map((district, index) => (
-                  <option key={district.code} value={index}>
-                    {district.name_with_type}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="col-4 mb-3">
-              <select
-                name="village"
-                className="form-select"
-                onChange={onChangeState}
-                value={village}
-              >
-                <option disabled value={-1}>
-                  Phường/Xã
-                </option>
-                {villageList.map((village, index) => (
-                  <option key={village.code} value={index}>
-                    {village.name_with_type}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
+                value={dataStep1.address.detail}
+              />
+              <div className="row ">
+                <div className="col-4 mb-3">
+                  <select
+                    name="province"
+                    className="form-select"
+                    onChange={onChangeState}
+                    value={province}
+                  >
+                    <option disabled value={-1}>
+                      Tỉnh/Thành phố
+                    </option>
+                    {provinceList.map((province, index) => (
+                      <option key={province.code} value={index}>
+                        {province.name_with_type}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="col-4 ">
+                  <select
+                    name="district"
+                    className="form-select"
+                    onChange={onChangeState}
+                    value={district}
+                  >
+                    <option disabled value={-1}>
+                      Quận/Huyện
+                    </option>
+                    {districtList.map((district, index) => (
+                      <option key={district.code} value={index}>
+                        {district.name_with_type}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="col-4 mb-3">
+                  <select
+                    name="village"
+                    className="form-select"
+                    onChange={onChangeState}
+                    value={village}
+                  >
+                    <option disabled value={-1}>
+                      Phường/Xã
+                    </option>
+                    {villageList.map((village, index) => (
+                      <option key={village.code} value={index}>
+                        {village.name_with_type}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
 
-          <p>Thời gian giao hàng</p>
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <div className="form-check mb-3">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="timeDelivery"
-                id="time-delivery1"
-                value="all day"
-                onChange={onChangeState}
-                checked={dataStep1.timeDelivery === "all day"}
-              />
-              <label className="form-check-label" htmlFor="time-delivery1">
-                Các ngày trong tuần
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="timeDelivery"
-                id="time-delivery2"
-                value="office day"
-                onChange={onChangeState}
-                checked={dataStep1.timeDelivery === "office day"}
-              />
-              <label className="form-check-label" htmlFor="time-delivery2">
-                Giờ hành chính
-              </label>
-            </div>
-          </div>
+              <p>Thời gian giao hàng</p>
+              <div style={{ display: "flex", justifyContent: "space-around" }}>
+                <div className="form-check mb-3">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="timeDelivery"
+                    id="time-delivery1"
+                    value="all day"
+                    onChange={onChangeState}
+                    checked={dataStep1.timeDelivery === "all day"}
+                  />
+                  <label className="form-check-label" htmlFor="time-delivery1">
+                    Các ngày trong tuần
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="timeDelivery"
+                    id="time-delivery2"
+                    value="office day"
+                    onChange={onChangeState}
+                    checked={dataStep1.timeDelivery === "office day"}
+                  />
+                  <label className="form-check-label" htmlFor="time-delivery2">
+                    Giờ hành chính
+                  </label>
+                </div>
+              </div>
+            </>
+          )}
 
           <p>Phương thức thanh toán</p>
           <div style={{ display: "flex", justifyContent: "space-around" }}>

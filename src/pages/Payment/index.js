@@ -12,6 +12,7 @@ import Confirm from "./components/Confirm";
 import DeliveryInfo from "./components/DeliveryInfo";
 import { useHistory } from "react-router-dom";
 import toastNotify from "../../common/toastify";
+import { getAllBranchAction } from "../../redux/actions/Branch/branchAction";
 
 const PaymentPage = (props) => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const PaymentPage = (props) => {
     paymentType: "cod",
     timeDelivery: "all day",
     message: " ",
+    idBranch: "1",
   });
 
   const [dataStep2, setDataStep2] = useState({
@@ -58,6 +60,10 @@ const PaymentPage = (props) => {
       };
       getCart();
     }
+    const getAllBranch = async () => {
+      await dispatch(getAllBranchAction());
+    };
+    getAllBranch();
 
     dispatch(showHeaderAndFooter(true));
     dispatch(getAllProvince());
@@ -110,6 +116,7 @@ const PaymentPage = (props) => {
 
           {showStep1 && (
             <DeliveryInfo
+              showStep1={showStep1}
               dataStep1={dataStep1}
               setShowStep2={setShowStep2}
               setDataStep1={setDataStep1}
@@ -119,6 +126,7 @@ const PaymentPage = (props) => {
             <Confirm
               dataStep1={dataStep1}
               dataStep2={dataStep2}
+              showStep2={showStep2}
               setShowStep1={setShowStep1}
               setShowStep3={setShowStep3}
               setDataStep2={setDataStep2}

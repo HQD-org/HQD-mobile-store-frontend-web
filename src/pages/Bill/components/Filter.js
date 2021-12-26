@@ -7,9 +7,9 @@ const Filter = (props) => {
   };
   return (
     <div className="row">
-      <div className="col-3">
+      {/* <div className="col-3">
         <input className="form-control" type="search" placeholder="Search" />
-      </div>
+      </div> */}
       <div className="col-3">
         <select
           className="form-select"

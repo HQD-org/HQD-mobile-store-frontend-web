@@ -196,7 +196,7 @@ const DeliveryInfo = (props) => {
             value={dataStep1.name}
           />
           <input
-            type="number"
+            type="phone"
             name="phone"
             className="form-control mb-3"
             placeholder="Số điện thoại"

@@ -1,13 +1,151 @@
-import React, { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from "react";
 import "../../../common/css/Profile.Style.css";
 import imgXinh from "../../../common/images/changeinfo.png";
 import ChangePassword from "./ChangePassword";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllProvince } from "../../../redux/actions/Location/locationAction";
+import { updateProfileAction } from "../../../redux/actions/User/userAction";
+import { validateUpdateProfile } from "../hooks/validate";
 
-const Profile = (props) => {
+const Profile = () => {
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState(0);
   const [modal, setModal] = useState(false);
+  const [detail, setDetail] = useState("");
+  const [province, setProvince] = useState(-1);
+  const [district, setDistrict] = useState(-1);
+  const [village, setVillage] = useState(-1);
+  const [districtList, setDistrictList] = useState([]);
+  const [villageList, setVillageList] = useState([]);
+  const provinceList = useSelector((state) => state.location.provinces);
+  const authInfo = useSelector((state) => state.auth.user);
+
   const toggle = () => {
     setModal(!modal);
   };
+
+  const onChangeState = (e) => {
+    switch (e.target.name) {
+      case "province":
+        setProvince(e.target.value);
+        break;
+      case "district":
+        setDistrict(e.target.value);
+        break;
+      case "village":
+        setVillage(e.target.value);
+        break;
+      case "name":
+        setName(e.target.value);
+        break;
+      case "phone":
+        setPhone(e.target.value);
+        break;
+      case "detail":
+        setDetail(e.target.value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const updateProfile = async () => {
+    const data = {
+      address: {
+        province: provinceList[province].name_with_type,
+        district: districtList[district].name_with_type,
+        village: villageList[village].name_with_type,
+        detail,
+      },
+      name,
+      phone,
+    };
+    const isValidData = validateUpdateProfile(data);
+    if (!isValidData) return;
+    await dispatch(updateProfileAction(data));
+  };
+
+  useEffect(() => {
+    dispatch(getAllProvince());
+  }, []);
+
+  useEffect(() => {
+    if (authInfo.user) {
+      setName(authInfo.user.name);
+      setPhone(authInfo.user.phone);
+      if (authInfo.user.address) {
+        setDetail(authInfo.user.address.detail);
+      }
+    }
+  }, [authInfo]);
+
+  useEffect(() => {
+    setDistrict(-1);
+    const index = parseInt(province);
+    if (index >= 0) {
+      const districtJSON = provinceList[index]["quan-huyen"];
+      const getDistrictList = async () => {
+        return await Promise.all(
+          Object.keys(districtJSON).map((key) => districtJSON[key])
+        );
+      };
+      getDistrictList().then((data) => {
+        setDistrictList(data);
+      });
+    }
+  }, [province]);
+
+  useEffect(() => {
+    setVillage(-1);
+    const index = parseInt(district);
+    if (index >= 0) {
+      const villageJSON = districtList[index]["xa-phuong"];
+      const getVillageList = async () => {
+        return await Promise.all(
+          Object.keys(villageJSON).map((key) => villageJSON[key])
+        );
+      };
+      getVillageList().then((data) => {
+        setVillageList(data);
+      });
+    }
+  }, [district]);
+
+  useEffect(() => {
+    const index = parseInt(district);
+    if (index >= 0) {
+    }
+  }, [village]);
+
+  useEffect(() => {
+    if (authInfo.user && provinceList.length > 0) {
+      const provinceIndex = provinceList.findIndex(
+        (item) => item.name_with_type === authInfo.user.address.province
+      );
+      setProvince(provinceIndex);
+    }
+  }, [provinceList]);
+
+  useEffect(() => {
+    if (authInfo.user && districtList.length > 0) {
+      const districtIndex = districtList.findIndex(
+        (item) => item.name_with_type === authInfo.user.address.district
+      );
+      setDistrict(districtIndex);
+    }
+  }, [districtList]);
+
+  useEffect(() => {
+    if (authInfo.user && villageList.length > 0) {
+      const villageIndex = villageList.findIndex(
+        (item) => item.name_with_type === authInfo.user.address.village
+      );
+      setVillage(villageIndex);
+    }
+  }, [villageList]);
+
   return (
     <div
       className="row"
@@ -22,60 +160,95 @@ const Profile = (props) => {
           <div className="form-Infor">
             <input
               type="text"
-              class="form-control mb-3"
-              placeholder="Chỗ này update tên nè"
+              className="form-control mb-3"
+              placeholder="Tên"
+              value={name}
+              onChange={onChangeState}
+              name="name"
             />
             <input
+              onWheel={(e) => e.target.blur()}
               type="number"
-              class="form-control mb-3"
-              placeholder="Chỗ này update Số điện thoại nè"
+              name="phone"
+              className="form-control mb-3"
+              placeholder="Số điện thoại"
+              value={phone}
+              onChange={onChangeState}
             />
             <input
               readOnly
               type="email"
-              class="form-control mb-3"
-              placeholder="Email không được update nè"
+              className="form-control mb-3"
+              defaultValue={authInfo.user.email}
             />
             <input
               type="text"
-              class="form-control mb-3"
-              placeholder="Địa chỉ update ở đây nha"
+              className="form-control mb-3"
+              placeholder="Đường, số nhà"
+              value={detail}
+              onChange={onChangeState}
+              name="detail"
             />
             <div className="row ">
               <div className="col-4 mb-3">
-                <select class="form-select">
-                  <option selected disabled>
+                <select
+                  name="province"
+                  className="form-select"
+                  onChange={onChangeState}
+                  value={province}
+                >
+                  <option disabled value={-1}>
                     Tỉnh/Thành phố
                   </option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  {provinceList.map((province, index) => (
+                    <option key={province.code} value={index}>
+                      {province.name_with_type}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="col-4 ">
-                <select class="form-select">
-                  <option selected disabled>
+                <select
+                  name="district"
+                  className="form-select"
+                  onChange={onChangeState}
+                  value={district}
+                >
+                  <option disabled value={-1}>
                     Quận/Huyện
                   </option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  {districtList.map((district, index) => (
+                    <option key={district.code} value={index}>
+                      {district.name_with_type}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="col-4 mb-3">
-                <select class="form-select">
-                  <option selected disabled>
+                <select
+                  name="village"
+                  className="form-select"
+                  onChange={onChangeState}
+                  value={village}
+                >
+                  <option disabled value={-1}>
                     Phường/Xã
                   </option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  {villageList.map((village, index) => (
+                    <option key={village.code} value={index}>
+                      {village.name_with_type}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
             <div className="row" style={{ textAlign: "end" }}>
               <div className="col">
-                <button type="button" className="btnSaveInfor">
+                <button
+                  type="button"
+                  className="btnSaveInfor"
+                  onClick={updateProfile}
+                >
                   Save
                 </button>
                 <button

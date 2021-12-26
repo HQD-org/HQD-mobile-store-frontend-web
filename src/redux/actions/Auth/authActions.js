@@ -202,3 +202,16 @@ export const forgotPasswordAction = (body) => async (dispatch) => {
     return false;
   }
 };
+
+export const changePasswordAction = (body) => async (dispatch) => {
+  try {
+    dispatch(loading(true));
+    const res = await authAPI.changePassword(body);
+    dispatch(loading());
+    return res.success;
+  } catch (err) {
+    console.log(err);
+    dispatch(loading());
+    return false;
+  }
+};

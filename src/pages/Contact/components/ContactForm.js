@@ -4,16 +4,16 @@ import SendIcon from "@mui/icons-material/Send";
 import "../../../common/css/Contact.Style.css";
 import { FormControl, Button } from "@material-ui/core";
 import emailjs from "emailjs-com";
+import toastNotify from "../../../common/toastify";
 
 const ContactForm = () => {
   const [values, setValue] = useState({
-    fullname: "",
+    fullName: "",
     email: "",
     sdt: "",
     message: "",
   });
   const [status, setStatus] = useState("");
-  console.log(values);
   const handleChange = (e) => {
     setValue((values) => ({
       ...values,
@@ -33,11 +33,12 @@ const ContactForm = () => {
         (response) => {
           console.log("SUCCESS!", response);
           setValue({
-            fullname: "",
+            fullName: "",
             email: "",
             sdt: "",
             message: "",
           });
+          toastNotify("Gửi mail thành công");
           setStatus("SUCCESS!");
         },
         (error) => {
@@ -49,9 +50,10 @@ const ContactForm = () => {
     if (status === "SUCCESS!") {
       setTimeout(() => {
         setStatus("");
-      }, 3000);
+      }, 1000);
     }
   }, [status]);
+
   return (
     <div>
       <div className="form-contact">
@@ -61,8 +63,8 @@ const ContactForm = () => {
             <TextField
               id="input-with-icon-grid"
               label="Full Name"
-              name="fullname"
-              value={values.fullname}
+              name="fullName"
+              value={values.fullName}
               onChange={handleChange}
               required
             />

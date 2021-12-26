@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react";
+import CallIcon from "@mui/icons-material/Call";
+import EmailIcon from "@mui/icons-material/Email";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import bg from "../../common/images/bg-contact.png";
+import logoHQD from "../../common/images/logoHQD.png";
 import ContactForm from "./components/ContactForm";
 import Information from "./components/Information";
-import bg from "../../common/images/bg-contact.png";
-import CallIcon from "@mui/icons-material/Call";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import EmailIcon from "@mui/icons-material/Email";
-import logoHQD from "../../common/images/logoHQD.png";
 
 const ContactPage = (props) => {
   const dispatch = useDispatch();

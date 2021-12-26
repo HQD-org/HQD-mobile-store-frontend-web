@@ -1,9 +1,10 @@
 import React from "react";
-import "../../common/css/Error.Style.css";
-import { Link } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
+import { Link } from "react-router-dom";
+import "../../common/css/Error.Style.css";
 
-const ErrorPage = () => {
+const ErrorPage = (props) => {
+  const type = props.match.params.type;
   return (
     <div>
       <div
@@ -12,7 +13,7 @@ const ErrorPage = () => {
       >
         <div className="cont_error">
           <h1>Oops..!</h1>
-          <p>Page Not Found</p>
+          <p>{type === "payment" ? "Something was error" : "Page Not Found"}</p>
           <Link to="/" style={{ textDecoration: "none" }}>
             <BiArrowBack className="home" /> Back To Home
           </Link>

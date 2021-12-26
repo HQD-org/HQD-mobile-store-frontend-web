@@ -14,9 +14,7 @@ export const PATH = {
   PAYMENT: "/payment",
   PROFILE: "/profile",
   BILLS: "/bills",
-  ERROR: "/error",
+  ERROR: "/error/:type",
   CONTACT: "/contact",
   QUESTION: "/question",
 };
-
-export const PATH_API = {};

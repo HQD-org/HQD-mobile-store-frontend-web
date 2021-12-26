@@ -12,6 +12,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState(0);
+  const [email, setEmail] = useState("");
   const [modal, setModal] = useState(false);
   const [detail, setDetail] = useState("");
   const [province, setProvince] = useState(-1);
@@ -75,6 +76,7 @@ const Profile = () => {
     if (authInfo.user) {
       setName(authInfo.user.name);
       setPhone(authInfo.user.phone);
+      setEmail(authInfo.user.email);
       if (authInfo.user.address) {
         setDetail(authInfo.user.address.detail);
       }
@@ -112,12 +114,6 @@ const Profile = () => {
       });
     }
   }, [district]);
-
-  useEffect(() => {
-    const index = parseInt(district);
-    if (index >= 0) {
-    }
-  }, [village]);
 
   useEffect(() => {
     if (authInfo.user && provinceList.length > 0) {
@@ -179,7 +175,7 @@ const Profile = () => {
               readOnly
               type="email"
               className="form-control mb-3"
-              defaultValue={authInfo.user.email}
+              defaultValue={email}
             />
             <input
               type="text"

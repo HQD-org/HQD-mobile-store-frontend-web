@@ -70,8 +70,8 @@
 }
 
 .heart {
-  display: flex;
-  justify-content: flex-end;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .btnAnotherProduct {
@@ -87,4 +87,13 @@
 
 .btnAnotherProduct:hover {
     background-color: #db8400;
+}
+
+.sttCoupon {
+    padding: 5px 8px;
+    background-color: #3fa5ef;
+    color: white;
+    border-radius: 50%;
+    font-size: 13px;
+    margin-right: 5px;
 }

@@ -1,50 +1,56 @@
+import Cookie from "js-cookie";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import PaypalApi from "../../../apis/Paypal.Api";
 import complete from "../../../common/images/complete.png";
-import {
-  createOrderAction,
-  createOrderForGuestAction,
-} from "../../../redux/actions/Order/orderAction";
 import {
   getCartAction,
   getCartGuestAction,
 } from "../../../redux/actions/Cart/cartAction";
-import { useHistory } from "react-router-dom";
-import Cookie from "js-cookie";
 import { applyCouponAction } from "../../../redux/actions/Coupon/couponAction";
+import {
+  createOrderAction,
+  createOrderForGuestAction,
+} from "../../../redux/actions/Order/orderAction";
+import { changeLoading } from "../../../redux/actions/System/systemAction";
 
 const Complete = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const coupon = useSelector((state) => state.coupon.detail);
-  const { setShowStep2, dataStep1, dataStep2, setDataStep1, setDataStep2 } =
-    props;
+  const { setShowStep2, dataStep1, dataStep2 } = props;
   const itemsInCart = useSelector((state) => state.cart.items);
   const isLogin = useSelector((state) => state.auth.isLogin);
   const previousStep = () => {
     setShowStep2(true);
   };
 
-  const resetDataPayment = () => {
-    setDataStep1({
-      name: "",
-      phone: "",
-      email: "",
-      address: {
-        detail: "",
-        province: "",
-        district: "",
-        village: "",
-      },
-      receiveType: "at home",
-      paymentType: "cod",
-      timeDelivery: "all day",
-      message: " ",
-      idBranch: "1",
-    });
-    setDataStep2({ estimatePrice: 0, shipPrice: 30000, discount: 0 });
-  };
+  const loading =
+    (loading = false) =>
+    (dispatch) => {
+      dispatch(changeLoading(loading));
+    };
+
+  // const resetDataPayment = () => {
+  //   setDataStep1({
+  //     name: "",
+  //     phone: "",
+  //     email: "",
+  //     address: {
+  //       detail: "",
+  //       province: "",
+  //       district: "",
+  //       village: "",
+  //     },
+  //     receiveType: "at home",
+  //     paymentType: "cod",
+  //     timeDelivery: "all day",
+  //     message: " ",
+  //     idBranch: "1",
+  //   });
+  //   setDataStep2({ estimatePrice: 0, shipPrice: 30000, discount: 0 });
+  // };
 
   const confirmOrder = async () => {
     const products = itemsInCart.map((item) => {
@@ -84,11 +90,12 @@ const Complete = (props) => {
       data.idBranch = dataStep1.idBranch;
     }
 
+    if (coupon._id) {
+      await dispatch(applyCouponAction({ id: coupon._id }));
+      data.coupon = coupon._id;
+    }
+
     if (dataStep1.paymentType === "cod") {
-      if (coupon._id) {
-        await dispatch(applyCouponAction({ id: coupon._id }));
-        data.coupon = coupon._id;
-      }
       if (!isLogin) {
         const res = await dispatch(createOrderForGuestAction(data));
         if (res) {
@@ -106,6 +113,18 @@ const Complete = (props) => {
         history.push("/");
       }
       return;
+    } else {
+      data.price = data.totalPrice;
+      data.from = "web";
+      dispatch(loading(true));
+      const res = await PaypalApi.pay(data);
+      console.log("log at ==> Complete payment ==> res: ", res);
+      if (res.success) {
+        dispatch(loading());
+        window.location.href = res.data;
+        return;
+      }
+      dispatch(loading());
     }
   };
 

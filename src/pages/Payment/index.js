@@ -1,7 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "../../common/css/Form.Style.css";
+import toastNotify from "../../common/toastify";
+import { getAllBranchAction } from "../../redux/actions/Branch/branchAction";
 import {
   getCartAction,
   getCartGuestAction,
@@ -10,9 +13,6 @@ import { getAllProvince } from "../../redux/actions/Location/locationAction";
 import Complete from "./components/Complete";
 import Confirm from "./components/Confirm";
 import DeliveryInfo from "./components/DeliveryInfo";
-import { useHistory } from "react-router-dom";
-import toastNotify from "../../common/toastify";
-import { getAllBranchAction } from "../../redux/actions/Branch/branchAction";
 
 const PaymentPage = (props) => {
   const dispatch = useDispatch();
@@ -137,8 +137,6 @@ const PaymentPage = (props) => {
               dataStep1={dataStep1}
               dataStep2={dataStep2}
               setShowStep2={setShowStep2}
-              setDataStep1={setDataStep1}
-              setDataStep2={setDataStep2}
             />
           )}
         </div>

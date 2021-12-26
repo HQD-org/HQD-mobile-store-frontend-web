@@ -128,7 +128,7 @@ const InvoiceInformation = (props) => {
               <h6>Mã khuyến mãi</h6>
             </div>
             <div className="col-5">
-              <p style={{ color: "#3FA5EF" }}>MKM27112021</p>
+              <p style={{ color: "#3FA5EF" }}>{order.coupon || ""}</p>
             </div>
           </div>
           <div className="row">

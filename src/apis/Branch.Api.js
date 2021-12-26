@@ -19,10 +19,9 @@ const insert = async (body) => {
   }
 };
 
-const getAll = async (queryParams) => {
+const getAll = async () => {
   try {
-    const query = queryString.stringify(queryParams);
-    const res = await axiosClient.get(`${url}/get-all?${query}`);
+    const res = await axiosClient.get(`${url}/get-all`);
     // toastNotify(res ? res.message.VN : "Lấy chi nhánh thất bại");
     return res && res.data
       ? { data: res.data || {}, success: true }
@@ -84,6 +83,21 @@ const getByListId = async (queryParams) => {
   }
 };
 
-const Branch = { insert, filter, getAll, update, getByListId };
+const getAllOpen = async () => {
+  try {
+    const res = await axiosClient.get(`${url}/get-all-open`);
+    // toastNotify(res ? res.message.VN : "Lấy chi nhánh thất bại");
+    return res && res.data
+      ? { data: res.data || {}, success: true }
+      : { success: false };
+  } catch (error) {
+    // toastNotify("Lấy chi nhánh thất bại");
+    return {
+      success: false,
+    };
+  }
+};
+
+const Branch = { insert, filter, getAll, update, getByListId, getAllOpen };
 
 export default Branch;

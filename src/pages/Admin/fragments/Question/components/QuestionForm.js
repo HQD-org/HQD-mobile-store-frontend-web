@@ -115,6 +115,7 @@ const QuestionForm = (props) => {
             className="form-control-coupon"
           >
             <TextField
+              required
               // id="outlined-basic"
               variant="outlined"
               label="Câu hỏi"
@@ -133,6 +134,7 @@ const QuestionForm = (props) => {
             className="form-control-coupon"
           >
             <TextField
+              required
               // id="outlined-basic"
               variant="outlined"
               label="Câu trả lời"
@@ -148,6 +150,7 @@ const QuestionForm = (props) => {
           <FormControl fullWidth sx={{ m: 1 }} className="form-control-coupon">
             <InputLabel>Trạng thái</InputLabel>
             <Select
+              required
               label="Trạng thái"
               value={status}
               name="status"

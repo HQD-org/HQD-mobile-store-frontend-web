@@ -20,7 +20,7 @@ const Pagination = (props) => {
     const buttonPNumberPage = [];
     for (let i = 1; i <= totalPage; i++) {
       buttonPNumberPage.push(
-        <div className="col-1" key={`pagination-${i}`}>
+        <div className="number-page col-1" key={`pagination-${i}`}>
           <button className="btn-Prev" onClick={() => handleOnPageChange(i)}>
             {i}
           </button>

@@ -11,6 +11,7 @@ import BranchFragment from "./fragments/Branch";
 import CouponFragment from "./fragments/Coupon";
 import InvoiceFragment from "./fragments/Invoice";
 import StatisticalFragment from "./fragments/Statistical";
+import QuestionFragment from "./fragments/Question";
 
 const AdminPage = (props) => {
   const dispatch = useDispatch();
@@ -19,13 +20,14 @@ const AdminPage = (props) => {
   const [toggleBrand, setToggleBrand] = useState(false);
   const [toggleModel, setToggleModel] = useState(false);
   const [toggleAddProduct, setToggleAddProduct] = useState(false);
-  const [toggleProduct, setToggleProduct] = useState(true);
+  const [toggleProduct, setToggleProduct] = useState(false);
   const [toggleUser, setToggleUser] = useState(false);
   const [toggleBranch, setToggleBranch] = useState(false);
-  const [toggleCoupon, setToggleCoupon] = useState(false);
+  const [toggleCoupon, setToggleCoupon] = useState(true);
   const [toggleInvoice, setToggleInvoice] = useState(false);
   const [toggleStatistical, setToggleStatistical] = useState(false);
-  const toggleRef = useRef("product");
+  const [toggleQuestion, setToggleQuestion] = useState(false);
+  const toggleRef = useRef("coupon");
 
   const disabledToggle = (ref) => {
     switch (ref) {
@@ -55,6 +57,9 @@ const AdminPage = (props) => {
         break;
       case "statistical":
         setToggleStatistical(false);
+        break;
+      case "question":
+        setToggleQuestion(false);
         break;
       default:
         break;
@@ -101,6 +106,10 @@ const AdminPage = (props) => {
         setToggleStatistical(true);
         toggleRef.current = "statistical";
         break;
+      case "question":
+        setToggleQuestion(true);
+        toggleRef.current = "question";
+        break;
       default:
         break;
     }
@@ -130,6 +139,7 @@ const AdminPage = (props) => {
               {toggleCoupon && <CouponFragment />}
               {toggleInvoice && <InvoiceFragment />}
               {toggleStatistical && <StatisticalFragment />}
+              {toggleQuestion && <QuestionFragment />}
             </div>
           </div>
         </div>

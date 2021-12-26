@@ -41,6 +41,10 @@ export const translateStatusToVietnamese = (status) => {
       return "Chưa thanh toán";
     case "wait":
       return "Chờ xử lý";
+    case "true":
+      return "Mở";
+    case "false":
+      return "Tắt";
     default:
       return "Tất cả";
   }

@@ -187,3 +187,24 @@ export function getAllManagerBranchAction() {
     }
   };
 }
+
+export function updateProfileAction(dataSubmit) {
+  return async (dispatch) => {
+    try {
+      dispatch(loading(true));
+      const res = await userAPI.updateProfile(dataSubmit);
+      if (res.success) {
+        dispatch(loading());
+        // dispatch(updatePrifleSuccess(res.data));
+        return true;
+      }
+      dispatch(loading());
+      // dispatch(updatePrifleFail());
+      return false;
+    } catch {
+      dispatch(loading());
+      // dispatch(updatePrifleFail());
+      return false;
+    }
+  };
+}

@@ -189,3 +189,24 @@ export function getByListIdAction(queryParams) {
     }
   };
 }
+
+export function getAllBranchOpenAction() {
+  return async (dispatch) => {
+    try {
+      dispatch(loading(true));
+      const res = await branchAPI.getAllOpen();
+      if (res.success) {
+        dispatch(loading());
+        dispatch(getAllBranchSuccess(res.data));
+        return true;
+      }
+      dispatch(loading());
+      dispatch(getAllBranchFail());
+      return false;
+    } catch {
+      dispatch(loading());
+      dispatch(getAllBranchFail());
+      return false;
+    }
+  };
+}

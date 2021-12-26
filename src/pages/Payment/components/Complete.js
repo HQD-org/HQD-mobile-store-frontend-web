@@ -92,7 +92,7 @@ const Complete = (props) => {
 
     if (coupon._id) {
       await dispatch(applyCouponAction({ id: coupon._id }));
-      data.coupon = coupon._id;
+      data.coupon = coupon.name;
     }
 
     if (dataStep1.paymentType === "cod") {

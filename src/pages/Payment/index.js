@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "../../common/css/Form.Style.css";
 import toastNotify from "../../common/toastify";
-import { getAllBranchAction } from "../../redux/actions/Branch/branchAction";
+import { getAllBranchOpenAction } from "../../redux/actions/Branch/branchAction";
 import {
   getCartAction,
   getCartGuestAction,
@@ -60,10 +60,10 @@ const PaymentPage = (props) => {
       };
       getCart();
     }
-    const getAllBranch = async () => {
-      await dispatch(getAllBranchAction());
+    const getAllBranchOpen = async () => {
+      await dispatch(getAllBranchOpenAction());
     };
-    getAllBranch();
+    getAllBranchOpen();
 
     dispatch(showHeaderAndFooter(true));
     dispatch(getAllProvince());

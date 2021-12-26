@@ -173,7 +173,6 @@ const BasicInfo = () => {
       });
       switch (product.status) {
         case "active":
-          console.log(" log at ==?> Bassic info count: ", count);
           setTextBtn(
             currentColor.quantityInfo.length > count
               ? "THÊM VÀO GIỎ HÀNG"
@@ -229,6 +228,12 @@ const BasicInfo = () => {
     }
     fetchListBranch();
   }, [listBranches]);
+
+  useEffect(() => {
+    if (branches.length === 0) {
+      setTextBtn("HẾT HÀNG");
+    }
+  }, [branches]);
 
   return (
     <div className="row mt-3">

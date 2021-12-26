@@ -108,6 +108,14 @@ const InvoiceInformation = (props) => {
           )}
           <div className="row">
             <div className="col-6">
+              <h6>Hình thức thanh toán</h6>
+            </div>
+            <div className="col-6">
+              <p>{receiveInfo.status === "cod" ? "COD" : "PayPal"}</p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-6">
               <h6>Đơn hàng</h6>
             </div>
           </div>
@@ -120,7 +128,7 @@ const InvoiceInformation = (props) => {
               <h6>Mã khuyến mãi</h6>
             </div>
             <div className="col-5">
-              <p style={{ color: "#3FA5EF" }}>MKM27112021</p>
+              <p style={{ color: "#3FA5EF" }}>{order.coupon || ""}</p>
             </div>
           </div>
           <div className="row">

@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import "../../../common/css/Payment.Style.css";
 import { validateStep1 } from "../hooks/validate";
+import toastNotify from "../../../common/toastify";
 
 const DeliveryInfo = (props) => {
   const { setShowStep2, setDataStep1, dataStep1, showStep1 } = props;
@@ -16,6 +17,7 @@ const DeliveryInfo = (props) => {
   const authInfo = useSelector((state) => state.auth.user);
   const provinceList = useSelector((state) => state.location.provinces);
   const listBranch = useSelector((state) => state.branch.list);
+  const isLogin = useSelector((state) => state.auth.isLogin);
 
   useEffect(() => {
     if (!showStep1) return;
@@ -131,6 +133,12 @@ const DeliveryInfo = (props) => {
       case "phone":
       case "email":
       case "paymentType":
+        if (e.target.value === "online" && !isLogin) {
+          toastNotify("Vui lòng đăng nhập để thực hiện thanh toán qua Paypal");
+        } else {
+          setDataStep1({ ...dataStep1, [e.target.name]: e.target.value });
+        }
+        break;
       case "timeDelivery":
       case "receiveType":
         if (e.target.value === "at home") {
@@ -188,7 +196,7 @@ const DeliveryInfo = (props) => {
             value={dataStep1.name}
           />
           <input
-            type="number"
+            type="phone"
             name="phone"
             className="form-control mb-3"
             placeholder="Số điện thoại"

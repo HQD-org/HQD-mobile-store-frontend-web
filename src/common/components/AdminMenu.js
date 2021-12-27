@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import "../../common/css/AdminMenu.Style.css";
 import { logoutAction } from "../../redux/actions/Auth/authActions";
+import HelpCenterIcon from "@mui/icons-material/HelpCenter";
 
 const AdminMenu = (props) => {
   const dispatch = useDispatch();
@@ -119,11 +120,16 @@ const AdminMenu = (props) => {
           <hr style={{ color: "#C4C4C4" }} />
           <div className="txtheader">Other</div>
           <ul className="list-menu">
-            <li>
-              <div>
-                <i className="bi bi-gear-fill icon-admin"></i>Setting
-              </div>
-            </li>
+            {role === "admin" ? (
+              <li onClick={() => toggle("question")} tabIndex="1">
+                <div>
+                  <HelpCenterIcon className="icon-admin" />
+                  Question
+                </div>
+              </li>
+            ) : (
+              <></>
+            )}
             <li onClick={handleLogout}>
               <div>
                 <i className="bi bi-box-arrow-left icon-admin"></i>

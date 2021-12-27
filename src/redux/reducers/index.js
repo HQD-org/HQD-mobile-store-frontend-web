@@ -7,6 +7,7 @@ import locationReducer from "./Location/locationReducers";
 import modelReducer from "./Model/modelReducers";
 import orderReducer from "./Order/orderReducers";
 import productReducer from "./Product/productReducers";
+import questionReducers from "./Question/questionReducers";
 import systemReducer from "./System/systemReducers";
 import userReducer from "./User/userReducers";
 
@@ -22,5 +23,6 @@ const rootReducers = {
   product: productReducer,
   system: systemReducer,
   user: userReducer,
+  question: questionReducers,
 };
 export default rootReducers;

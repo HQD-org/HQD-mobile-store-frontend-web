@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { numberWithCommas } from "../../../common/utils/helper";
@@ -21,7 +21,7 @@ const Product = () => {
               const price = product.color.find(
                 (item) => item.name === color.name
               ).price;
-              return (
+              return product.status === "active" ? (
                 <Link
                   key={`productByBrand${product._id}`}
                   to={`/detail/${product._id}`}
@@ -49,6 +49,8 @@ const Product = () => {
                     </div>
                   </div>
                 </Link>
+              ) : (
+                <></>
               );
             })}
           </div>

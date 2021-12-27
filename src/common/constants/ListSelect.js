@@ -91,6 +91,17 @@ const statusCoupon = [
   },
 ];
 
+const statusQuestion = [
+  {
+    _id: "true",
+    name: "Mở",
+  },
+  {
+    _id: "false",
+    name: "Tắt",
+  },
+];
+
 export {
   capacityList,
   ramList,
@@ -102,4 +113,5 @@ export {
   timeDebutList,
   priceList,
   statusCoupon,
+  statusQuestion,
 };

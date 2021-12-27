@@ -15,9 +15,9 @@ const validateAddUser = (data) => {
     return false;
   }
 
-  const isEmptyPhone = validator.isEmpty(data.phone);
-  if (isEmptyPhone) {
-    toastNotify("Số điện thoại không được để trống");
+  const isPhone = validator.matches(data.phone, REGEX.PHONE_VN);
+  if (!isPhone) {
+    toastNotify("Vui lòng nhập lại số điện thoại");
     return false;
   }
 
@@ -45,9 +45,9 @@ const validateUpdateUser = (data) => {
     return false;
   }
 
-  const isEmptyPhone = validator.isEmpty(data.phone);
-  if (isEmptyPhone) {
-    toastNotify("Số điện thoại không được để trống");
+  const isPhone = validator.matches(data.phone, REGEX.PHONE_VN);
+  if (!isPhone) {
+    toastNotify("Vui lòng nhập lại số điện thoại");
     return false;
   }
 

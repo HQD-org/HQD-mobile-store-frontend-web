@@ -1,5 +1,6 @@
 import validator from "validator";
 import toastNotify from "../../../common/toastify";
+import { REGEX } from "../../../common/constants/Regex";
 
 const validateStep1 = (data) => {
   const isEmptyName = validator.isEmpty(data.name);
@@ -8,15 +9,15 @@ const validateStep1 = (data) => {
     return false;
   }
 
-  const isEmail = validator.isEmail(data.email);
-  if (!isEmail) {
-    toastNotify("Email không hợp lệ");
+  const isPhone = validator.matches(data.phone, REGEX.PHONE_VN);
+  if (!isPhone) {
+    toastNotify("Vui lòng nhập lại số điện thoại");
     return false;
   }
 
-  const isEmptyPhone = validator.isEmpty(data.phone);
-  if (isEmptyPhone) {
-    toastNotify("Số điện thoại không được bỏ trống");
+  const isEmail = validator.isEmail(data.email);
+  if (!isEmail) {
+    toastNotify("Email không hợp lệ");
     return false;
   }
 

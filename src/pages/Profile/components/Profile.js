@@ -116,7 +116,7 @@ const Profile = () => {
   }, [district]);
 
   useEffect(() => {
-    if (authInfo.user && provinceList.length > 0) {
+    if (authInfo.user && provinceList.length > 0 && authInfo.user.address) {
       const provinceIndex = provinceList.findIndex(
         (item) => item.name_with_type === authInfo.user.address.province
       );
@@ -125,7 +125,7 @@ const Profile = () => {
   }, [provinceList]);
 
   useEffect(() => {
-    if (authInfo.user && districtList.length > 0) {
+    if (authInfo.user && districtList.length > 0 && authInfo.user.address) {
       const districtIndex = districtList.findIndex(
         (item) => item.name_with_type === authInfo.user.address.district
       );
@@ -134,7 +134,7 @@ const Profile = () => {
   }, [districtList]);
 
   useEffect(() => {
-    if (authInfo.user && villageList.length > 0) {
+    if (authInfo.user && villageList.length > 0 && authInfo.user.address) {
       const villageIndex = villageList.findIndex(
         (item) => item.name_with_type === authInfo.user.address.village
       );

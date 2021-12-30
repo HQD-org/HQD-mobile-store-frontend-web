@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { numberWithCommas, formatDate } from "../../../common/utils/helper";
 import { removeOrderAction } from "../../../redux/actions/Order/orderAction";
+import paypalAPI from "../../../apis/Paypal.Api.js";
 
 const OrderList = (props) => {
   const { filterOrder, setModal, setCurrentItem } = props;
@@ -13,9 +14,15 @@ const OrderList = (props) => {
     setCurrentItem(index);
   };
 
-  const cancelOrder = async (id) => {
+  const cancelOrder = async (id, index) => {
     const res = await dispatch(removeOrderAction({ idOrder: id }));
-    if (res) filterOrder(pagination.page, pagination.itemPerPage);
+    if (res) {
+      // paypalAPI.refund({
+      //   idPayment: invoices[index].idPayment,
+      //   transaction: invoices[index].totalPrice,
+      // });
+      filterOrder(pagination.page, pagination.itemPerPage);
+    }
   };
   return (
     <div>
@@ -49,7 +56,7 @@ const OrderList = (props) => {
                 <td style={{ textAlign: "center" }}>
                   {item.status === "wait" ? (
                     <button
-                      onClick={() => cancelOrder(item._id)}
+                      onClick={() => cancelOrder(item._id, index)}
                       className="btnCancel"
                     >
                       Cancel

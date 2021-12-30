@@ -6,11 +6,13 @@ import { getAllBrandAction } from "../../redux/actions/Brand/brandAction";
 import { filterProductAction } from "../../redux/actions/Product/productAction";
 import ProductCard from "./components/ProductCard";
 import ProductFilter from "./components/ProductFilter";
+import queryString from "query-string";
 
 const ProductPage = (props) => {
   const { showHeaderAndFooter } = props;
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.list);
+  const loading = useSelector((state) => state.system.loading);
   const pagination = useSelector((state) => state.product.pagination);
   const [brand, setBrand] = useState("all");
   const [capacity, setCapacity] = useState("all");
@@ -19,8 +21,13 @@ const ProductPage = (props) => {
   const [price, setPrice] = useState("all");
   const [sort, setSort] = useState("all");
   const [sortNew, setSortNew] = useState(true);
+  const [searchTerm, setSearchTerm] = useState(undefined);
 
-  const filterProduct = async (page, itemPerPage) => {
+  const filterProduct = async (
+    page = 1,
+    itemPerPage = 16,
+    name = undefined
+  ) => {
     const priceSplit = price.split("-");
     const query = {
       page,
@@ -33,12 +40,15 @@ const ProductPage = (props) => {
       // operating: operating === "all" ? undefined : operating,
       sortNew: sortNew || undefined,
       sortPrice: sort === "all" ? undefined : sort,
+      name: name ? name : searchTerm,
     };
     await dispatch(filterProductAction(query));
   };
 
   useEffect(() => {
-    filterProduct(1, 16);
+    const qs = queryString.parse(props.location.search);
+    setSearchTerm(qs.name || undefined);
+    filterProduct(qs.page, qs.itemPerPage, qs.name);
     const getAllBrand = async () => {
       await dispatch(getAllBrandAction(false));
     };
@@ -105,11 +115,23 @@ const ProductPage = (props) => {
 
         <div style={{ marginTop: "20px" }}>
           <div className="row" style={{ justifyContent: "center" }}>
-            <div className="row row-cols-1 row-cols-md-5 g-1 group-promotion">
-              {products.map((product) => (
-                <ProductCard product={product} key={product._id} />
-              ))}
-            </div>
+            {products.length > 0 ? (
+              <div className="row row-cols-1 row-cols-md-5 g-1 group-promotion">
+                {products.map((product) => (
+                  <ProductCard product={product} key={product._id} />
+                ))}
+              </div>
+            ) : (
+              <div
+                style={{
+                  textAlign: "center",
+                  fontSize: "30px",
+                  fontWeight: "bold",
+                }}
+              >
+                Không tìm thấy sản phẩm phù hợp
+              </div>
+            )}
           </div>
         </div>
       </div>

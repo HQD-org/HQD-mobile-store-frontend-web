@@ -232,6 +232,21 @@ const BasicInfo = () => {
   useEffect(() => {
     if (branches.length === 0) {
       setTextBtn("HẾT HÀNG");
+    } else {
+      switch (product.status) {
+        case "active":
+          setTextBtn("THÊM VÀO GIỎ HÀNG");
+          break;
+        case "out of stock":
+          setTextBtn("HẾT HÀNG");
+          break;
+        case "stop selling":
+          setTextBtn("NGỪNG KINH DOANH");
+          break;
+        default:
+          setTextBtn("THÊM VÀO GIỎ HÀNG");
+          break;
+      }
     }
   }, [branches]);
 

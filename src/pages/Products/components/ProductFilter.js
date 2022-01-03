@@ -125,7 +125,7 @@ const ProductFilter = (props) => {
             <div className="col-3"></div>
           </div>
         </div>
-        <div className="col">
+        {/* <div className="col">
           <div className="row" style={{ justifyContent: "flex-start" }}>
             <div className="col-8"></div>
             <div className="col-3 sort-list">
@@ -141,7 +141,7 @@ const ProductFilter = (props) => {
               </select>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -27,7 +27,12 @@ const DeliveryInfo = (props) => {
         name: authInfo.user.name,
         phone: authInfo.user.phone,
         email: authInfo.user.email,
-        address: authInfo.user.address,
+        address: authInfo.user.address || {
+          detail: "",
+          province: "",
+          district: "",
+          village: "",
+        },
       });
   }, [authInfo]);
 
@@ -98,7 +103,12 @@ const DeliveryInfo = (props) => {
 
   useEffect(() => {
     if (!showStep1) return;
-    if (authInfo.user && !firstInitRef.current && provinceList.length > 0) {
+    if (
+      authInfo.user &&
+      !firstInitRef.current &&
+      provinceList.length > 0 &&
+      authInfo.user.address
+    ) {
       const provinceIndex = provinceList.findIndex(
         (item) => item.name_with_type === authInfo.user.address.province
       );
@@ -108,7 +118,12 @@ const DeliveryInfo = (props) => {
 
   useEffect(() => {
     if (!showStep1) return;
-    if (authInfo.user && !firstInitRef.current && districtList.length > 0) {
+    if (
+      authInfo.user &&
+      !firstInitRef.current &&
+      districtList.length > 0 &&
+      authInfo.user.address
+    ) {
       const districtIndex = districtList.findIndex(
         (item) => item.name_with_type === authInfo.user.address.district
       );
@@ -118,7 +133,12 @@ const DeliveryInfo = (props) => {
 
   useEffect(() => {
     if (!showStep1) return;
-    if (authInfo.user && !firstInitRef.current && villageList.length > 0) {
+    if (
+      authInfo.user &&
+      !firstInitRef.current &&
+      villageList.length > 0 &&
+      authInfo.user.address
+    ) {
       const villageIndex = villageList.findIndex(
         (item) => item.name_with_type === authInfo.user.address.village
       );

@@ -15,19 +15,37 @@ import {
 } from "../../redux/actions/Cart/cartAction";
 import "../css/AdminHeader.Style.css";
 import imgBackground from "../images/background-header-1.jpg";
+import { useLocation } from "react-router-dom";
 
 const AppHeader = () => {
   const show = useSelector((state) => state.system.showHeaderAndFooter);
   const itemsInCart = useSelector((state) => state.cart.items);
+  const location = useLocation();
   const dispatch = useDispatch();
   const history = useHistory();
   const isLogin = useSelector((state) => state.auth.isLogin);
   const user = useSelector((state) => state.auth.user);
   const [totalQuantity, setTotalQuantity] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
   const handleLogout = async () => {
     await dispatch(logoutAction());
     history.push("/login");
   };
+
+  const onChangeSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  useEffect(() => {
+    setSearchTerm("");
+    if (location.pathname === "/product") {
+      const urlSearchParams = new URLSearchParams(window.location.search);
+      const params = Object.fromEntries(urlSearchParams.entries());
+      if (params.name) {
+        setSearchTerm(params.name);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (isLogin) {
@@ -81,8 +99,23 @@ const AppHeader = () => {
     history.push("/cart");
   };
   const onClickSearch = () => {
-    console.log("log at ==> AppHeader.js ==> line 27 ==> search");
+    let url = `/product?itemPerPage=16&page=1`;
+    if (searchTerm) {
+      url += `&name=${searchTerm}`;
+    }
+    history.push(url);
+
+    if (location.pathname === "/product") {
+      history.go(0);
+    }
   };
+
+  const onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onClickSearch();
+    }
+  };
+
   return show ? (
     <nav>
       <div className="navbar navbar-light">
@@ -124,6 +157,9 @@ const AppHeader = () => {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                value={searchTerm}
+                onChange={onChangeSearch}
+                onKeyPress={onKeyPress}
               />
             </div>
 

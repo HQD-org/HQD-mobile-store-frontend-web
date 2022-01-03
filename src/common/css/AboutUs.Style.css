@@ -1,0 +1,57 @@
+.txtAboutUs {
+    font-size: 50px;
+}
+
+.ngang {
+    width: 100px;
+    height: 4px;
+    background-color: #3fa5ef;
+}
+
+.flag {
+    box-sizing: content-box;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: relative;
+    background: #3fa5ef;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
+.flag:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-bottom: 13px solid #eee;
+    border-left: 55px solid transparent;
+    border-right: 55px solid transparent;
+}
+
+.columnLocation {
+    position: relative;
+    border-radius: 50%;
+    padding: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #3fa5ef;
+}
+
+.columnLocation:after {
+    position: absolute;
+    content: "";
+    width: 4px;
+    right: 3px;
+    height: 30px;
+    background-color: #3fa5ef;
+}
+
+.location {
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 5px dotted orange;
+}

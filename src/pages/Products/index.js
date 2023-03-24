@@ -12,7 +12,6 @@ const ProductPage = (props) => {
   const { showHeaderAndFooter } = props;
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.list);
-  const loading = useSelector((state) => state.system.loading);
   const pagination = useSelector((state) => state.product.pagination);
   const [brand, setBrand] = useState("all");
   const [capacity, setCapacity] = useState("all");

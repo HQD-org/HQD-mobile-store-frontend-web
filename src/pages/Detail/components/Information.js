@@ -69,9 +69,7 @@ const Information = () => {
           </TabPanel>
           <TabPanel value="3">
             {list.map((c) => {
-              const today = new Date();
-              const expiredDay = new Date(c.expiredDate);
-              return c.status === "active" && today < expiredDay ? (
+              return c.status === "active" ? (
                 <div>
                   <p>
                     <CheckCircleIcon style={{ color: "#3FA5EF" }} />{" "}

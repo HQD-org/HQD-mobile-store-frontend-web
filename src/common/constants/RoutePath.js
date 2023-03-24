@@ -17,5 +17,4 @@ export const PATH = {
   ERROR: "/error/:type",
   CONTACT: "/contact",
   QUESTION: "/question",
-  ABOUTUS: "/about-us",
 };

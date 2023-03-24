@@ -1,22 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import imgXiaomi from "../../../common/images/xiaomi-redmi-note-9.png";
+import imgVivo from "../../../common/images/vivo-y20s.png";
 import starTrending from "../../../common/images/Star1.png";
 import backgroundTrending from "../../../common/images/halloween.jpg";
 import imgWait from "../../../common/images/wait.png";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
 const Trending = () => {
-  const products = useSelector((state) => state.product.list);
-  const [firstList, setFirstList] = useState([]);
-  const [secondList, setSecondList] = useState([]);
-
-  useEffect(() => {
-    if (products.length > 0) {
-      console.log(products.length);
-      setFirstList(products.slice(0, 1));
-      setSecondList(products.slice(1, 2));
-    }
-  }, [products]);
   return (
     <div style={{ marginTop: "60px" }}>
       <div className="row" style={{ textAlign: "center" }}>
@@ -52,98 +41,83 @@ const Trending = () => {
           </div>
           <div className="carousel-inner">
             <div className="carousel-item active">
-              {firstList.map((item) => {
-                const color = item.model.color[0];
-                return (
-                  <div className="row">
-                    <div className="col-2"></div>
-                    <div className="col-4">
-                      <div className="box-trending">
-                        <img
-                          src={color.images[0]}
-                          className="d-block img-trending"
-                          alt="..."
-                        />
-                      </div>
-                      <div className="star-trending">
-                        <img src={starTrending} alt="" width="65%"></img>
-                      </div>
-                    </div>
-                    <div className="col" style={{ padding: "20px" }}>
-                      <div className="row txtNameTrending">
-                        <p>{item.name}</p>
-                      </div>
-                      <div className="row txtTrending">
-                        <p>{item.description}</p>
-                      </div>
-                      <div className="row">
-                        <div className="col-8"></div>
-                        <div className="col-4">
-                          <Link
-                            className="col"
-                            key={`new-product${item._id}`}
-                            to={`/detail/${item._id}`}
-                            style={{ textDecoration: "none" }}
-                          >
-                            <button className="btnBuy">
-                              Buy Now
-                              <i className="bi bi-arrow-right-short"></i>
-                            </button>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-2"></div>
+              <div className="row">
+                <div className="col-2"></div>
+                <div className="col-4">
+                  <div className="box-trending">
+                    <img
+                      src={imgXiaomi}
+                      className="d-block img-trending"
+                      alt="..."
+                    />
                   </div>
-                );
-              })}
+                  <div className="star-trending">
+                    <img src={starTrending} alt="" width="65%"></img>
+                  </div>
+                </div>
+                <div className="col" style={{ padding: "20px" }}>
+                  <div className="row txtTrending">
+                    <p>
+                      Xiaomi Redmi Note 9 viết tiếp câu chuyện thành công của
+                      Redmi series, dòng điện thoại bán chạy nhất từ trước đến
+                      nay của Xiaomi. Với sức mạnh đáng kinh ngạc, thời lượng
+                      pin vượt trội và 4 camera AI chuyên nghiệp, Redmi Note 9
+                      sẽ mang đến những trải nghiệm chưa từng có cho người dùng
+                      smartphone giá rẻ.
+                    </p>
+                  </div>
+                  <div className="row">
+                    <div className="col-8"></div>
+                    <div className="col-4">
+                      <button className="btnBuy">
+                        Buy Now
+                        <i className="bi bi-arrow-right-short"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-2"></div>
+              </div>
             </div>
             <div className="carousel-item">
-              {secondList.map((item) => {
-                const color = item.model.color[0];
-                return (
-                  <div className="row">
-                    <div className="col-2"></div>
-                    <div className="col-4">
-                      <div className="box-trending">
-                        <img
-                          src={color.images[0]}
-                          className="d-block img-trending"
-                          alt="..."
-                        />
-                      </div>
-                      <div className="star-trending">
-                        <img src={starTrending} alt="" width="65%"></img>
-                      </div>
-                    </div>
-                    <div className="col" style={{ padding: "20px" }}>
-                      <div className="row txtNameTrending">
-                        <p>{item.name}</p>
-                      </div>
-                      <div className="row txtTrending">
-                        <p>{item.description}</p>
-                      </div>
-                      <div className="row">
-                        <div className="col-8"></div>
-                        <div className="col-4">
-                          <Link
-                            className="col"
-                            key={`new-product${item._id}`}
-                            to={`/detail/${item._id}`}
-                            style={{ textDecoration: "none" }}
-                          >
-                            <button className="btnBuy">
-                              Buy Now
-                              <i className="bi bi-arrow-right-short"></i>
-                            </button>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-2"></div>
+              <div className="row">
+                <div className="col-2"></div>
+                <div className="col-4">
+                  <div className="box-trending">
+                    <img
+                      src={imgVivo}
+                      className="d-block img-trending"
+                      alt="..."
+                    />
                   </div>
-                );
-              })}
+                  <div className="star-trending">
+                    <img src={starTrending} alt="" width="65%"></img>
+                  </div>
+                </div>
+                <div className="col" style={{ padding: "20px" }}>
+                  <div className="row txtTrending">
+                    <p>
+                      Vivo Y20s sở hữu kiểu dáng rất bắt mắt với thân máy thanh
+                      mảnh, mặt lưng phẳng, cụm camera hình chữ nhật thời
+                      thượng. Không chỉ đẹp, cảm giác cầm nắm Y20s còn rất thoải
+                      mái khi các phần viền cạnh được làm cong 2,5D tinh tế. Mặt
+                      trước chiếc Vivo này là màn hình viền siêu mỏng hấp dẫn,
+                      trong khi điểm nhấn mặt sau nằm ở cụm camera lớn, đồng
+                      thời là tâm của họa tiết tỏa sáng lấp lánh đầy nổi bật.
+                    </p>
+                  </div>
+                  <div className="row">
+                    <div className="col-8"></div>
+                    <div className="col-4">
+                      <button className="btnBuy">
+                        Buy Now
+                        <i className="bi bi-arrow-right-short"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-2"></div>
+              </div>
             </div>
           </div>
         </div>

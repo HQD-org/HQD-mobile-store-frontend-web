@@ -1,7 +1,7 @@
 import React from "react";
 import "../../../common/css/Home.Style.css";
 import imgIntro from "../../../common/images/home-intro.jpg";
-import { Link } from "react-router-dom";
+
 const Introduction = () => {
   return (
     <div style={{ marginTop: "20px" }}>
@@ -38,9 +38,7 @@ const Introduction = () => {
           </div>
           <div className="row">
             <div className="col-4">
-              <Link to="/about-us" alt="">
-                <button className="btnMoreInfor">More Information</button>
-              </Link>
+              <button className="btnMoreInfor">More Information</button>
             </div>
           </div>
         </div>

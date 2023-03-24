@@ -2,7 +2,7 @@ import Cookie from "js-cookie";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import paypalAPI from "../../../apis/Paypal.Api";
+import PaypalApi from "../../../apis/Paypal.Api";
 import complete from "../../../common/images/complete.png";
 import {
   getCartAction,
@@ -117,7 +117,8 @@ const Complete = (props) => {
       data.price = data.totalPrice;
       data.from = "web";
       dispatch(loading(true));
-      const res = await paypalAPI.pay(data);
+      const res = await PaypalApi.pay(data);
+      console.log("log at ==> Complete payment ==> res: ", res);
       if (res.success) {
         dispatch(loading());
         window.location.href = res.data;

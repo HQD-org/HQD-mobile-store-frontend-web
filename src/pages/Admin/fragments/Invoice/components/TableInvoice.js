@@ -5,7 +5,6 @@ import {
   formatDate,
 } from "../../../../../common/utils/helper";
 import { changeStatusOrderAction } from "../../../../../redux/actions/Order/orderAction";
-import paypalAPI from "../../../../../apis/Paypal.Api.js";
 
 const TableInvoice = (props) => {
   const dispatch = useDispatch();
@@ -24,19 +23,11 @@ const TableInvoice = (props) => {
     if (res) getInvoiceByStatus(pagination.page, pagination.itemPerPage);
   };
 
-  const cancelOrder = async (id, index) => {
+  const cancelOrder = async (id) => {
     const res = await dispatch(
       changeStatusOrderAction({ idOrder: id, status: "cancel" })
     );
-    if (res) {
-      if (invoices[index].receiveInfo.status === "online") {
-        paypalAPI.refund({
-          saleId: invoices[index].saleId,
-          totalPrice: invoices[index].totalPrice,
-        });
-      }
-      getInvoiceByStatus(pagination.page, pagination.itemPerPage);
-    }
+    if (res) getInvoiceByStatus(pagination.page, pagination.itemPerPage);
   };
 
   return (
@@ -82,7 +73,7 @@ const TableInvoice = (props) => {
               <td style={{ textAlign: "center" }}>
                 {item.status === "wait" ? (
                   <button
-                    onClick={() => cancelOrder(item._id, index)}
+                    onClick={() => cancelOrder(item._id)}
                     className="btnCancel"
                   >
                     Cancel

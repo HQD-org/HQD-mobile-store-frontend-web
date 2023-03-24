@@ -17,12 +17,10 @@ const OrderList = (props) => {
   const cancelOrder = async (id, index) => {
     const res = await dispatch(removeOrderAction({ idOrder: id }));
     if (res) {
-      if (invoices[index].receiveInfo.status === "online") {
-        paypalAPI.refund({
-          saleId: invoices[index].saleId,
-          totalPrice: invoices[index].totalPrice,
-        });
-      }
+      // paypalAPI.refund({
+      //   idPayment: invoices[index].idPayment,
+      //   transaction: invoices[index].totalPrice,
+      // });
       filterOrder(pagination.page, pagination.itemPerPage);
     }
   };
